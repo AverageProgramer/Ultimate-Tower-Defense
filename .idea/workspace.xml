@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file.">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/design/LargeRock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/design/MediumRock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/design/OakTree.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/design/PineTree.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/design/SmallRock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/campaign/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/campaign/Normal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Fast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Fast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Normal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Slow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Slow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/tools/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/tools/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/build/Builder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/util/Builder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/data/Enemies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/data/Enemies.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/development/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/development/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/scenes/TestScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/scenes/TestScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animation/RotationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animations/RotationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animations/TranslationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animation/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/audio/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/GameElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/GameElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/GreaterThan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/GreaterThan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/LessThan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/LessThan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/NotInstantiable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/NotInstantiable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/Prohibited.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/Prohibited.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/Specific.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/Specific.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/package-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/verification/GreaterThanAnnotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/verification/GreaterThanAnnotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/verification/LessThanAnnotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/verification/LessThanAnnotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/verification/ProhibitedAnnotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/verification/ProhibitedAnnotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/verification/SpecificAnnotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/verification/SpecificAnnotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/verification/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/exceptions/uncaught/NumberAboveMaximumException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/exceptions/NumberAboveMaximumException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/exceptions/uncaught/NumberBelowMinimumException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/exceptions/NumberBelowMinimumException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/exceptions/uncaught/ProhibitedAccessException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/exceptions/ProhibitedAccessException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/exceptions/uncaught/UnspecifiedAccessException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/exceptions/UnspecifiedAccessException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/classes/exceptions/uncaught/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/images/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/management/StrictHashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/util/StrictHashMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/.cmake/api/v1/query/client-vscode/query.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/.cmake/api/v1/reply/cache-v2-1fba39986a79d9207c1d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/.cmake/api/v1/reply/cmakeFiles-v1-7fd1de3d4ed42a46b060.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/.cmake/api/v1/reply/codemodel-v2-8b3fc30062f158b0110f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/.cmake/api/v1/reply/index-2024-04-02T15-52-15-0862.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/.cmake/api/v1/reply/target-native-Debug-68e29bb9318c81df24e7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/.cmake/api/v1/reply/toolchains-v1-82387daa300789db1e78.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/3.28.0-msvc1/CompilerIdCXX/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/Makefile.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/Makefile2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/compiler_depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/compiler_depend.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/includes_CXX.rsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/linkLibs.rsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/objects1.rsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/native.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/CMakeFiles/progress.marks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/build/compile_commands.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/com_averagegames_ultimatetowerdefense_elements_enemies_Enemy.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/native/com_averagegames_ultimatetowerdefense_elements_enemies_Enemy.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/averagegames/ultimatetowerdefense/elements/enemies/EnemyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/averagegames/ultimatetowerdefense/elements/enemies/EnemyTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="JavaFXApplication" />
+        <option value="AnnotationType" />
+        <option value="JUnit5 Test Class" />
+        <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AverageProgramer&quot;
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{}</component>
+  <component name="GithubPullRequestsUISettings">{}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/native/com_averagegames_ultimatetowerdefense_elements_enemies_Enemy.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/native/com_averagegames_ultimatetowerdefense_elements_enemies_Enemy.h" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2crR6OXvC08ba6wocGrcwFEBlpE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.EnemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.enemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/IdeaProjects/Ultimate-Tower-Defense&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\java\com\averagegames\ultimatetowerdefense\enemies\normal" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\resources" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\resources\com\averagegames\ultimatetowerdefense" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\resources\com\averagegames\ultimatetowerdefense\logging" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\.idea" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\.mvn" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.averagegames.ultimatetowerdefense.tools.classes" />
+      <recent name="com.averagegames.ultimatetowerdefense.tools.classes.annotations" />
+      <recent name="com.averagegames.ultimatetowerdefense.tools" />
+      <recent name="com.averagegames.ultimatetowerdefense" />
+      <recent name="com.averagegames" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.averagegames.ultimatetowerdefense.tools.classes.annotations.verification" />
+      <recent name="com.averagegames.ultimatetowerdefense.elements.enemies" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="EnemyTest.enemySpawnShouldNotThrowAnException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UltimateTowerDefense" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.elements.enemies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies" />
+      <option name="MAIN_CLASS_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies.EnemyTest" />
+      <option name="METHOD_NAME" value="enemySpawnShouldNotThrowAnException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EnemyTest.enemySpawnShouldThrowAnException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UltimateTowerDefense" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.elements.enemies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies" />
+      <option name="MAIN_CLASS_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies.EnemyTest" />
+      <option name="METHOD_NAME" value="enemySpawnShouldThrowAnException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EnemyTest.invalidDamageShouldThrowAnException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UltimateTowerDefense" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.elements.enemies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies" />
+      <option name="MAIN_CLASS_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies.EnemyTest" />
+      <option name="METHOD_NAME" value="invalidDamageShouldThrowAnException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EnemyTest.invalidParametersShouldThrowAnException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UltimateTowerDefense" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.elements.enemies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies" />
+      <option name="MAIN_CLASS_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies.EnemyTest" />
+      <option name="METHOD_NAME" value="invalidParametersShouldThrowAnException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EnemyTest.invokingEnemyActionMethodsShouldThrowAnException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UltimateTowerDefense" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.elements.enemies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies" />
+      <option name="MAIN_CLASS_NAME" value="com.averagegames.ultimatetowerdefense.elements.enemies.EnemyTest" />
+      <option name="METHOD_NAME" value="invokingEnemyActionMethodsShouldThrowAnException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="" />
+      <created>1708867536745</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1708867536745</updated>
+      <workItem from="1711464318356" duration="926000" />
+      <workItem from="1711768622183" duration="331000" />
+      <workItem from="1711768971541" duration="448000" />
+      <workItem from="1711770479595" duration="24000" />
+    </task>
+    <task id="LOCAL-00001" summary="Created a class that makes it easier to add images to a scene and also created a class that allows for animations using a speed based system instead of a time based one.">
+      <option name="closed" value="true" />
+      <created>1708867747826</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708867747826</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updated project.">
+      <option name="closed" value="true" />
+      <created>1708868178195</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708868178195</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updated project.">
+      <option name="closed" value="true" />
+      <created>1708869613105</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708869613105</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated the TranslationHandler class so that movements are to specific locations are as precise as possible.">
+      <option name="closed" value="true" />
+      <created>1708874331660</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708874331660</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated the TranslationHandler class so that storing the current thread is no longer needed.">
+      <option name="closed" value="true" />
+      <created>1708875055505</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708875055505</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Finished the Enemy class. Enemy's can now be added to scenes and can also move along given paths. The Spawner class has also been finished, which can basically spawn groups of Enemies automatically.">
+      <option name="closed" value="true" />
+      <created>1708907239578</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708907239578</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added comments and java documentation to the Enemy, Spawner, TranslationHandler, and ImageLoader classes.">
+      <option name="closed" value="true" />
+      <created>1708919922988</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708919922988</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changed certain fields in the Enemy class to be protected so that inheriting enemies can directly access those fields.">
+      <option name="closed" value="true" />
+      <created>1708969613900</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708969613900</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Made the Enemy class's image field private and created a setter method for it. Going forwards, any object fields must be private however primitive fields can be protected. Any public field should be final.">
+      <option name="closed" value="true" />
+      <created>1708976864304</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708976864304</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added the Type enum which will be used to determine what enemies certain towers can attack. Null safety was also added to the Spawner class.">
+      <option name="closed" value="true" />
+      <created>1708997601433</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1708997601433</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added audio files and background music to the project. Other than that, not much has changed.">
+      <option name="closed" value="true" />
+      <created>1709043091476</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1709043091476</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Removed the position field inside the Enemy class as it was essentially useless. Now the method of retrieving and enemy's position involves getting the current x and y values of the given enemy using the loaded enemy field.">
+      <option name="closed" value="true" />
+      <created>1709055292459</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709055292459</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Object fields of a super class are now allowed to be protected. The @NotNull annotation makes it so that they cant be set to null, meaning that there is inherently nothing wrong with making them protected now.">
+      <option name="closed" value="true" />
+      <created>1709305537868</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709305537868</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Changed the way certain enemy and tower &quot;action&quot; methods are inherited. For enemies, the only abstract method is no the &quot;attack&quot; method. The other three methods, &quot;onSpawn&quot;, &quot;onDeath&quot;, and &quot;special&quot; are all optional. Same thing with towers. The only abstract methods are the &quot;attack&quot; and &quot;upgrade&quot; methods while the &quot;onPlace&quot;, &quot;onDeath&quot;, and &quot;special&quot; methods are optional.">
+      <option name="closed" value="true" />
+      <created>1709347490712</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1709347490712</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Implemented an annotation that allows for only specific class to access certain methods within another class. Any validation for the annotation will have to be done manually inside the method.">
+      <option name="closed" value="true" />
+      <created>1709440146262</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709440146262</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added two classes, the SpecificCheck class and the ProhibitedCheck class, that are meant to help verify if a method's calling class was either specified or prohibited by the method's annotation.">
+      <option name="closed" value="true" />
+      <created>1709511057256</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1709511057256</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Added a new GameElement annotation that allows people viewing the code to know that the annotated variable is a Node that will be added to a Scene. This annotation is only for readability and does not do anything else.">
+      <option name="closed" value="true" />
+      <created>1709567748412</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1709567748412</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Replaced the Map class with a Map interface. The reason for this switch is that maps each have a unique design, therefore it is simply better to use overridden methods from an interface to load and unload it since loading and unloading the map should not require any additional pre-built methods that a class would be able to provide.">
+      <option name="closed" value="true" />
+      <created>1709687592527</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1709687592527</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Added the NotInstantiable annotation. This annotation is meant to be an indication that the annotated class can not be instantiated. The annotation is only for readability and does not actually do anything. The Tower class is also being working on.">
+      <option name="closed" value="true" />
+      <created>1709902742104</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1709902742104</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Made the abstract &quot;attack&quot; method in the Enemy class not abstract. It is now no longer a requirement for enemies to have some sort of attack. In addition to this, the &quot;setHealth&quot; method has been replaced with the &quot;heal&quot; and &quot;damage&quot; methods to avoid any unwanted modifications to the enemy's health. The new methods also allow for the enemy to properly have an &quot;onHeal&quot; and an &quot;onDamaged&quot; event.">
+      <option name="closed" value="true" />
+      <created>1710101167141</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1710101167141</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Updated certain segments of code that used boolean expressions to either throw or not throw an exception. These code segments now use assertions. The reason this switch won't cause problems is that the expressions will always evaluate to true while the program is running. If they do not and an exception is thrown, then that means there is an error with the code. Assertions should only be used when the condition is guaranteed to be true so that missing them will not cause problems.">
+      <option name="closed" value="true" />
+      <created>1710115826757</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1710115826757</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Changed the way assertions are being used in the program. Going forwards, assertions should only be used when it is a developer problem only. For example, code that determines something about a method's behavior such as checking if the Specific annotation is present on the method asking for verification should use assertions because it will always be present. If it isn't, then that is a developer problem only. On the other hand, assertions should not be used for validating method calls, parameters, etc. Long story short, assertions should only be used for development related problems and nothing else.">
+      <option name="closed" value="true" />
+      <created>1710120194695</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1710120194695</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Added the GreaterThan and LessThan annotations. These annotations serve as a way to make a sure a Number value given to a method is either greater than or less than a specified value. In addition to the annotations, two classes, the GreaterThanAnnotation and LessThanAnnotation classes, were added as a way to verify if the number is a valid input to a method.">
+      <option name="closed" value="true" />
+      <created>1710206103786</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1710206103786</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Added a new &quot;exceptions&quot; package. This package contains various classes that, as of right now, extend the RuntimeException class. All the current exceptions that have been made are meant to be thrown when any of the custom-built annotations' contracts are violated. For example, if a method annotated with the Specific annotation is called by an unspecified calling class, then an UnspecifiedAccessException will be thrown.">
+      <option name="closed" value="true" />
+      <created>1710555519209</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1710555519209</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Files have now been organized in a slightly different way. Anything that will be added to a scene during game runtime has now been placed in its own package. Certain packages like the enemies and towers packages were placed into the elements package. Anything meant to assist in game development such as annotations and exceptions were placed into the tools package. Both of these package can be found in the main package.">
+      <option name="closed" value="true" />
+      <created>1710717805361</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1710717805361</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added static imports to certain classes. Going forwards, anything directly related to game management such as lists containing active enemies and towers should simply be imported using static imports. If the constant does not meet these criteria, then static imports should not be used and the constant should simply be referenced using its parent class.">
+      <option name="closed" value="true" />
+      <created>1710720916189</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1710720916189</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Certain classes now implement the Serializable interface and have their own serial version UIDs. These classes include each of the custom-made exceptions as well as the Enemy class and its subclasses. A static global logger has also been implemented for use. It should only be used to describe the actions of any class annotated with the GameElement annotation. Building off of that, any static constants or methods in the new com.averagegames.ultimatetowerdefense.game package should be statically imported. Enabling and disabling subclass specification for the Specific and Prohibited annotations has also implemented. Lastly, the Builder interface has been added. This interface provides various methods that allow any class implementing it to build custom Scenes that can be added to a Stage.">
+      <option name="closed" value="true" />
+      <created>1711216151159</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1711216151160</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Updated the GameElement annotation so that only certain strings can be provided as a parameter. These strings must be equal to either &quot;character&quot;, &quot;component&quot;, or &quot;graphic&quot;. Characters are any moving features of the game. For example, an Enemy would be a character. Components are features on a map that do some sort of action. For example, a Spawner spawns enemies. Graphics are any features that are for purely design.">
+      <option name="closed" value="true" />
+      <created>1711227036592</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1711227036592</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Updated the GameElement annotation so that only certain strings can be provided as a parameter. These strings must be equal to either &quot;character&quot;, &quot;component&quot;, or &quot;graphic&quot;. Characters are any moving features of the game. For example, an Enemy would be a character. Components are features on a map that do some sort of action. For example, a Spawner spawns enemies. Graphics are any features that are for purely design.">
+      <option name="closed" value="true" />
+      <created>1711227041186</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1711227041186</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Fixed several issues regarding the TranslationHandler class. It is now possible for the node and the destination to be provided as null. In addition to this, the duration can no longer be calculated if the speed is equal to 0. The animation's speed can also no longer be less than 0 because of the GreaterThan annotation.">
+      <option name="closed" value="true" />
+      <created>1711228267888</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1711228267888</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Changed various features of the program. Logging is now disabled by default and must be manually activated using the &quot;enableLogging&quot; method in the Manager class. In addition to this, a new method was added to the Enemy class. This method is an overloaded version of the Enemy class' &quot;spawn&quot; method. The new method takes a Group to add the Enemy to as a parameter.">
+      <option name="closed" value="true" />
+      <created>1711248609323</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1711248609323</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Added a static HashMap in the Builder interface. This HashMap can be used to easily manage custom-built Scenes. When Scenes are added to the HashMap, they should be paired with a unique ID, this way they can be easily found and identified. It is not a requirement for Scenes to be added to this HashMap, but it is heavily recommended.">
+      <option name="closed" value="true" />
+      <created>1711250798537</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1711250798537</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Added the StrictHashMap class. This class functions almost identically to a HashMap but there is one key difference. The StrictHashMap does not allow for any identical keys or values to passed in. If the StrictHashMap already contains, for example, the key &quot;1&quot;, no other pairs may use that key. The same rule applies to the values. If there is a value, for example, &quot;Value&quot;, no other pairs may use that value. The SCENE_MANAGER constant in the Builder interface will use the StrictHashMap going forwards.">
+      <option name="closed" value="true" />
+      <created>1711303028427</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1711303028427</updated>
+    </task>
+    <task id="LOCAL-00034" summary="This commit is merely a test. The project faced several errors and a complete reset was necessary. Basically the project needed to be deleted and re-cloned from GitHub.">
+      <option name="closed" value="true" />
+      <created>1711763122831</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1711763122831</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Added a &quot;native&quot; folder to the project. This is where all native C\C++ code will be located. Currently, there is only one C++ source file in this folder. This source file contains the native code for the &quot;getTarget&quot; method in the Enemy class.">
+      <option name="closed" value="true" />
+      <created>1711765655493</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1711765655493</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file.">
+      <option name="closed" value="true" />
+      <created>1711776725278</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1711776725278</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Added audio files and background music to the project. Other than that, not much has changed." />
+    <MESSAGE value="Removed the position field inside the Enemy class as it was essentially useless. Now the method of retrieving and enemy's position involves getting the current x and y values of the given enemy using the loaded enemy field." />
+    <MESSAGE value="Object fields of a super class are now allowed to be protected. The @NotNull annotation makes it so that they cant be set to null, meaning that there is inherently nothing wrong with making them protected now." />
+    <MESSAGE value="Changed the way certain enemy and tower &quot;action&quot; methods are inherited. For enemies, the only abstract method is no the &quot;attack&quot; method. The other three methods, &quot;onSpawn&quot;, &quot;onDeath&quot;, and &quot;special&quot; are all optional. Same thing with towers. The only abstract methods are the &quot;attack&quot; and &quot;upgrade&quot; methods while the &quot;onPlace&quot;, &quot;onDeath&quot;, and &quot;special&quot; methods are optional." />
+    <MESSAGE value="Implemented an annotation that allows for only specific class to access certain methods within another class. Any validation for the annotation will have to be done manually inside the method." />
+    <MESSAGE value="Added two classes, the SpecificCheck class and the ProhibitedCheck class, that are meant to help verify if a method's calling class was either specified or prohibited by the method's annotation." />
+    <MESSAGE value="Added a new GameElement annotation that allows people viewing the code to know that the annotated variable is a Node that will be added to a Scene. This annotation is only for readability and does not do anything else." />
+    <MESSAGE value="Replaced the Map class with a Map interface. The reason for this switch is that maps each have a unique design, therefore it is simply better to use overridden methods from an interface to load and unload it since loading and unloading the map should not require any additional pre-built methods that a class would be able to provide." />
+    <MESSAGE value="Added the NotInstantiable annotation. This annotation is meant to be an indication that the annotated class can not be instantiated. The annotation is only for readability and does not actually do anything. The Tower class is also being working on." />
+    <MESSAGE value="Made the abstract &quot;attack&quot; method in the Enemy class not abstract. It is now no longer a requirement for enemies to have some sort of attack. In addition to this, the &quot;setHealth&quot; method has been replaced with the &quot;heal&quot; and &quot;damage&quot; methods to avoid any unwanted modifications to the enemy's health. The new methods also allow for the enemy to properly have an &quot;onHeal&quot; and an &quot;onDamaged&quot; event." />
+    <MESSAGE value="Updated certain segments of code that used boolean expressions to either throw or not throw an exception. These code segments now use assertions. The reason this switch won't cause problems is that the expressions will always evaluate to true while the program is running. If they do not and an exception is thrown, then that means there is an error with the code. Assertions should only be used when the condition is guaranteed to be true so that missing them will not cause problems." />
+    <MESSAGE value="Changed the way assertions are being used in the program. Going forwards, assertions should only be used when it is a developer problem only. For example, code that determines something about a method's behavior such as checking if the Specific annotation is present on the method asking for verification should use assertions because it will always be present. If it isn't, then that is a developer problem only. On the other hand, assertions should not be used for validating method calls, parameters, etc. Long story short, assertions should only be used for development related problems and nothing else." />
+    <MESSAGE value="Added the GreaterThan and LessThan annotations. These annotations serve as a way to make a sure a Number value given to a method is either greater than or less than a specified value. In addition to the annotations, two classes, the GreaterThanAnnotation and LessThanAnnotation classes, were added as a way to verify if the number is a valid input to a method." />
+    <MESSAGE value="Added a new &quot;exceptions&quot; package. This package contains various classes that, as of right now, extend the RuntimeException class. All the current exceptions that have been made are meant to be thrown when any of the custom-built annotations' contracts are violated. For example, if a method annotated with the Specific annotation is called by an unspecified calling class, then an UnspecifiedAccessException will be thrown." />
+    <MESSAGE value="Files have now been organized in a slightly different way. Anything that will be added to a scene during game runtime has now been placed in its own package. Certain packages like the enemies and towers packages were placed into the elements package. Anything meant to assist in game development such as annotations and exceptions were placed into the tools package. Both of these package can be found in the main package." />
+    <MESSAGE value="Added static imports to certain classes. Going forwards, anything directly related to game management such as lists containing active enemies and towers should simply be imported using static imports. If the constant does not meet these criteria, then static imports should not be used and the constant should simply be referenced using its parent class." />
+    <MESSAGE value="Certain classes now implement the Serializable interface and have their own serial version UIDs. These classes include each of the custom-made exceptions as well as the Enemy class and its subclasses. A static global logger has also been implemented for use. It should only be used to describe the actions of any class annotated with the GameElement annotation. Building off of that, any static constants or methods in the new com.averagegames.ultimatetowerdefense.game package should be statically imported. Enabling and disabling subclass specification for the Specific and Prohibited annotations has also implemented. Lastly, the Builder interface has been added. This interface provides various methods that allow any class implementing it to build custom Scenes that can be added to a Stage." />
+    <MESSAGE value="Updated the GameElement annotation so that only certain strings can be provided as a parameter. These strings must be equal to either &quot;character&quot;, &quot;component&quot;, or &quot;graphic&quot;. Characters are any moving features of the game. For example, an Enemy would be a character. Components are features on a map that do some sort of action. For example, a Spawner spawns enemies. Graphics are any features that are for purely design." />
+    <MESSAGE value="Fixed several issues regarding the TranslationHandler class. It is now possible for the node and the destination to be provided as null. In addition to this, the duration can no longer be calculated if the speed is equal to 0. The animation's speed can also no longer be less than 0 because of the GreaterThan annotation." />
+    <MESSAGE value="Changed various features of the program. Logging is now disabled by default and must be manually activated using the &quot;enableLogging&quot; method in the Manager class. In addition to this, a new method was added to the Enemy class. This method is an overloaded version of the Enemy class' &quot;spawn&quot; method. The new method takes a Group to add the Enemy to as a parameter." />
+    <MESSAGE value="Added a static HashMap in the Builder interface. This HashMap can be used to easily manage custom-built Scenes. When Scenes are added to the HashMap, they should be paired with a unique ID, this way they can be easily found and identified. It is not a requirement for Scenes to be added to this HashMap, but it is heavily recommended." />
+    <MESSAGE value="Added the StrictHashMap class. This class functions almost identically to a HashMap but there is one key difference. The StrictHashMap does not allow for any identical keys or values to passed in. If the StrictHashMap already contains, for example, the key &quot;1&quot;, no other pairs may use that key. The same rule applies to the values. If there is a value, for example, &quot;Value&quot;, no other pairs may use that value. The SCENE_MANAGER constant in the Builder interface will use the StrictHashMap going forwards." />
+    <MESSAGE value="This commit is merely a test. The project faced several errors and a complete reset was necessary. Basically the project needed to be deleted and re-cloned from GitHub." />
+    <MESSAGE value="Added a &quot;native&quot; folder to the project. This is where all native C\C++ code will be located. Currently, there is only one C++ source file in this folder. This source file contains the native code for the &quot;getTarget&quot; method in the Enemy class." />
+    <MESSAGE value="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file." />
+  </component>
+</project>

@@ -1,0 +1,10 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="JavadocDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ADDITIONAL_TAGS" value="defaultValue,gamemode,access" />
+    </inspection_tool>
+    <inspection_tool class="SerializableHasSerialVersionUIDField" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryModifier" enabled="true" level="INFORMATION" enabled_by_default="true" />
+  </profile>
+</component>
