@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.elements.enemies.tools;
+package com.averagegames.ultimatetowerdefense.elements.enemies.util;
 
 import java.lang.annotation.*;
 

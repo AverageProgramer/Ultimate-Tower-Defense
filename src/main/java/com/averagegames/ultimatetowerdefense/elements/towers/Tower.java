@@ -2,13 +2,13 @@ package com.averagegames.ultimatetowerdefense.elements.towers;
 
 import com.averagegames.ultimatetowerdefense.Main;
 import com.averagegames.ultimatetowerdefense.elements.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.elements.maps.tools.Position;
+import com.averagegames.ultimatetowerdefense.elements.maps.util.Position;
 import com.averagegames.ultimatetowerdefense.tools.annotations.GameElement;
 import com.averagegames.ultimatetowerdefense.tools.annotations.NotInstantiable;
 import com.averagegames.ultimatetowerdefense.tools.annotations.Specific;
 import com.averagegames.ultimatetowerdefense.tools.annotations.verification.SpecificAnnotation;
 import com.averagegames.ultimatetowerdefense.tools.images.ImageLoader;
-import com.averagegames.ultimatetowerdefense.elements.towers.tools.Targeting;
+import com.averagegames.ultimatetowerdefense.elements.towers.util.Targeting;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;

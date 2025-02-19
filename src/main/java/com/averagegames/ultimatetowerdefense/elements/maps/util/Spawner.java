@@ -1,11 +1,11 @@
-package com.averagegames.ultimatetowerdefense.elements.maps.tools;
+package com.averagegames.ultimatetowerdefense.elements.maps.util;
 
 import com.averagegames.ultimatetowerdefense.tools.annotations.GameElement;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import com.averagegames.ultimatetowerdefense.elements.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.elements.enemies.tools.Wave;
+import com.averagegames.ultimatetowerdefense.elements.enemies.util.Wave;
 import com.averagegames.ultimatetowerdefense.tools.annotations.GreaterThan;
 import com.averagegames.ultimatetowerdefense.tools.annotations.verification.GreaterThanAnnotation;
 

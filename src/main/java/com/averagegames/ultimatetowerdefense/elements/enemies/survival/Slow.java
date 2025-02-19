@@ -1,8 +1,8 @@
 package com.averagegames.ultimatetowerdefense.elements.enemies.survival;
 
 import com.averagegames.ultimatetowerdefense.elements.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.elements.enemies.tools.Survival;
-import com.averagegames.ultimatetowerdefense.elements.enemies.tools.Type;
+import com.averagegames.ultimatetowerdefense.elements.enemies.util.Survival;
+import com.averagegames.ultimatetowerdefense.elements.enemies.util.Type;
 import javafx.scene.image.Image;
 
 @Survival

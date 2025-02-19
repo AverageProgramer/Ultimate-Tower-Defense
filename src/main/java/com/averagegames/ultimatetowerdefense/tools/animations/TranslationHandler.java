@@ -5,7 +5,7 @@ import com.averagegames.ultimatetowerdefense.tools.annotations.verification.Grea
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Nullable;
 
-import com.averagegames.ultimatetowerdefense.elements.maps.tools.Position;
+import com.averagegames.ultimatetowerdefense.elements.maps.util.Position;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;

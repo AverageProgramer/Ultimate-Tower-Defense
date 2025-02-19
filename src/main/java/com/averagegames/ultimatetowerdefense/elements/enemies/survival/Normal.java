@@ -2,9 +2,9 @@ package com.averagegames.ultimatetowerdefense.elements.enemies.survival;
 
 import com.averagegames.ultimatetowerdefense.elements.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.elements.enemies.Zombie;
-import com.averagegames.ultimatetowerdefense.elements.enemies.tools.Survival;
-import com.averagegames.ultimatetowerdefense.elements.enemies.tools.Type;
-import com.averagegames.ultimatetowerdefense.elements.maps.tools.Position;
+import com.averagegames.ultimatetowerdefense.elements.enemies.util.Survival;
+import com.averagegames.ultimatetowerdefense.elements.enemies.util.Type;
+import com.averagegames.ultimatetowerdefense.elements.maps.util.Position;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 

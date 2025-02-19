@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.elements.maps.tools;
+package com.averagegames.ultimatetowerdefense.elements.maps.util;
 
 /**
  * The {@link Position} record serves as a specific and set location on a {@link javafx.stage.Stage}.

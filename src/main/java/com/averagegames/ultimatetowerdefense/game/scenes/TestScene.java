@@ -4,10 +4,10 @@ import com.averagegames.ultimatetowerdefense.elements.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.elements.enemies.survival.Fast;
 import com.averagegames.ultimatetowerdefense.elements.enemies.survival.Normal;
 import com.averagegames.ultimatetowerdefense.elements.enemies.survival.Slow;
-import com.averagegames.ultimatetowerdefense.elements.enemies.tools.Wave;
-import com.averagegames.ultimatetowerdefense.elements.maps.tools.Path;
-import com.averagegames.ultimatetowerdefense.elements.maps.tools.Position;
-import com.averagegames.ultimatetowerdefense.elements.maps.tools.Spawner;
+import com.averagegames.ultimatetowerdefense.elements.enemies.util.Wave;
+import com.averagegames.ultimatetowerdefense.elements.maps.util.Path;
+import com.averagegames.ultimatetowerdefense.elements.maps.util.Position;
+import com.averagegames.ultimatetowerdefense.elements.maps.util.Spawner;
 import com.averagegames.ultimatetowerdefense.tools.util.Builder;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -23,7 +23,7 @@ import java.io.IOException;
 public final class TestScene implements Builder {
     @Override
     public void pre_build(@SuppressWarnings("exports") @NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/Tower Defense Simulator OST - Hardcore Wave 45.wav");
+        File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav");
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
         Clip clip = AudioSystem.getClip();
         clip.open(audioIn);

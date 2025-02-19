@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.elements.towers.tools;
+package com.averagegames.ultimatetowerdefense.elements.towers.util;
 
 public enum Targeting {
     FIRST,

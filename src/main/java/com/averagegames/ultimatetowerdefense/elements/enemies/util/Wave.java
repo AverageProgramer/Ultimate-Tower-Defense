@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.elements.enemies.tools;
+package com.averagegames.ultimatetowerdefense.elements.enemies.util;
 
 import lombok.Getter;
 import lombok.experimental.Accessors;
@@ -10,7 +10,7 @@ import com.averagegames.ultimatetowerdefense.elements.enemies.Enemy;
  * The {@link Wave} record serves as a way to easily store and manage an {@link Enemy} array.
  * @since Ultimate Tower Defense 1.0
  * @see Enemy
- * @see com.averagegames.ultimatetowerdefense.elements.maps.tools.Spawner
+ * @see com.averagegames.ultimatetowerdefense.elements.maps.util.Spawner
  * @author AverageProgramer
  */
 @Accessors(fluent = true) @Getter

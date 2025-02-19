@@ -5,19 +5,19 @@ import static com.averagegames.ultimatetowerdefense.game.data.Towers.LIST_OF_ACT
 import static com.averagegames.ultimatetowerdefense.game.development.Manager.LOGGER;
 
 import java.io.InputStream;
+import java.util.Objects;
 
 import com.averagegames.ultimatetowerdefense.tools.exceptions.NumberBelowMinimumException;
 import com.averagegames.ultimatetowerdefense.tools.exceptions.ProhibitedAccessException;
 import com.averagegames.ultimatetowerdefense.tools.exceptions.UnspecifiedAccessException;
-import org.jetbrains.annotations.ApiStatus.OverrideOnly;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonBlocking;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
-import com.averagegames.ultimatetowerdefense.elements.enemies.tools.Type;
-import com.averagegames.ultimatetowerdefense.elements.maps.tools.Path;
-import com.averagegames.ultimatetowerdefense.elements.maps.tools.Position;
+import com.averagegames.ultimatetowerdefense.elements.enemies.util.Type;
+import com.averagegames.ultimatetowerdefense.elements.maps.util.Path;
+import com.averagegames.ultimatetowerdefense.elements.maps.util.Position;
 import com.averagegames.ultimatetowerdefense.elements.towers.Tower;
 import com.averagegames.ultimatetowerdefense.tools.animations.TranslationHandler;
 import com.averagegames.ultimatetowerdefense.tools.annotations.GameElement;
@@ -54,68 +54,85 @@ public abstract class Enemy {
      * The {@link Enemy}'s parent {@link Group}.
      */
     @Accessors(makeFinal = true) @Setter
-    private Group parent = new Group();
+    private Group parent;
 
     /**
      * The {@link Enemy}'s {@link Image} loaded using an {@link ImageLoader}.
      */
-    private final ImageLoader loadedEnemy = new ImageLoader();
-
-    /**
-     * The {@link Enemy}'s range.
-     */
-    private final Circle range = new Circle(50);
+    private final ImageLoader loadedEnemy;
 
     /**
      * The {@link Enemy}'s {@link Image}.
      */
     @NotNull
     @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED, onMethod_= @Specific(value = Enemy.class, subclasses = true))
-    protected Image image = new Image(InputStream.nullInputStream());
+    protected Image image;
 
     /**
      * The {@link Enemy}'s {@link Type}.
      */
     @NotNull
     @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED, onMethod_= @Specific(value = Enemy.class, subclasses = true)) @Getter
-    protected Type type = Type.REGULAR;
+    protected Type type;
 
     /**
      * The {@link Enemy}'s current {@code health}.
      */
     @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED, onMethod_= @Specific(value = Enemy.class, subclasses = true)) @Getter
-    protected int health = 0;
+    protected int health;
 
     /**
      * The {@code damage} the {@link Enemy} can do during an {@code attack}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
     @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED, onMethod_= @Specific(value = Enemy.class, subclasses = true))
-    protected int damage = 0;
+    protected int damage;
 
     /**
      * The {@link Enemy}'s speed in pixels per second.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
     @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED, onMethod_= @Specific(value = Enemy.class, subclasses = true))
-    protected int speed = 0;
+    protected int speed;
 
     /**
      * The {@link Path} the {@link Enemy} will follow.
      */
     @NotNull
     @Accessors(makeFinal = true) @Setter
-    private Path pathing = new Path(new Position[0]);
+    private Path pathing;
 
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} movement.
      */
-    private Thread movementThread = new Thread();
+    private Thread movementThread;
 
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} attacks.
      */
     private Thread attackThread = new Thread();
+
+    {
+
+        // Initializes the enemy's parent to a default group.
+        this.parent = new Group();
+
+        // Initializes the enemy's image to a default, null image.
+
+        this.loadedEnemy = new ImageLoader();
+        this.image = new Image(InputStream.nullInputStream());
+
+        // Initializes the enemy's type to regular by default.
+        this.type = Type.REGULAR;
+
+        // Initializes the enemy's pathing to a path with 0 positions.
+        this.pathing = new Path(new Position[0]);
+
+        // Initializes the threads that the enemy will use to move and attack.
+
+        this.movementThread = new Thread();
+        this.attackThread = new Thread();
+    }
 
     /**
      * Adds a given amount to the {@link Enemy}'s current {@code health}.
@@ -178,11 +195,6 @@ public abstract class Enemy {
 
         this.loadedEnemy.setX(position.x());
         this.loadedEnemy.setY(position.y());
-
-        // Updates the circle representing the enemy's range's position on the stage it is currently on, if any.
-
-        this.range.setCenterX(position.x());
-        this.range.setCenterY(position.y());
 
         // Logs information regarding the enemy.
         LOGGER.info(STR."\{this} has been moved to \{position}");
@@ -361,7 +373,7 @@ public abstract class Enemy {
      * @param tower the {@link Tower} to {@code attack}.
      * @since Ultimate Tower Defense 1.0
      */
-    private <T extends Tower> boolean canAttack(@NotNull final T tower) {
+    private boolean canAttack(@NotNull final Tower tower) {
 
         // Returns whether the given tower is within the enemy's range.
         return tower.intersects(this.loadedEnemy);
@@ -396,7 +408,7 @@ public abstract class Enemy {
         (this.attackThread = new Thread(() -> {
 
             // Determines if the enemy can attack a specific tower.
-            if (this.canAttack(this.getTarget(LIST_OF_ACTIVE_TOWERS.toArray(new Tower[0])))) {
+            if (this.canAttack(Objects.requireNonNull(this.getTarget(LIST_OF_ACTIVE_TOWERS.toArray(new Tower[0]))))) {
 
                 // Logs information regarding the enemy's attacks.
                 LOGGER.fine(STR."\{this} does not have attacks implemented yet");
@@ -437,7 +449,6 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @OverrideOnly
     @Specific(value = {Enemy.class, Zombie.class}, subclasses = true)
     protected void onSpawn() {
 
@@ -454,7 +465,6 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @OverrideOnly
     @Specific(value = {Enemy.class, Zombie.class}, subclasses = true)
     protected void onHeal() {
 
@@ -471,7 +481,6 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @OverrideOnly
     @Specific(value = {Enemy.class, Zombie.class}, subclasses = true)
     protected void onDamaged() {
 
@@ -488,7 +497,6 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @OverrideOnly
     @Specific(value = {Enemy.class, Zombie.class}, subclasses = true)
     protected void onDeath() {
 
