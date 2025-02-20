@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.game.maps.elements;
+package com.averagegames.ultimatetowerdefense.world.maps.elements;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * The {@link Spawner} class serves as a way to automatically and easily {@code spawn} an individual {@link Enemy} or a {@link Enemy} {@link Wave}.
- * @see com.averagegames.ultimatetowerdefense.game.maps.Map
+ * @see com.averagegames.ultimatetowerdefense.world.maps.Map
  * @see Enemy
  * @see Wave
  * @author AverageProgramer
@@ -59,15 +59,11 @@ public sealed class Spawner permits Base {
      */
     public Spawner(@NotNull final Position spawnPosition) {
 
+        // Calls the spawner's default no-args constructor.
+        this();
+
         // Sets the spawner's spawn position to the provided position.
         this.spawnPosition = spawnPosition;
-
-        // Initializes the spawning enemies' pathing using a path with 0 positions.
-        this.enemyPathing = new Path(new Position[0]);
-
-        // Initializes the thread responsible for spawning enemies to null.
-        // This thread will be updated when the 'spawn' method is called.
-        this.spawnThread = null;
     }
 
     /**

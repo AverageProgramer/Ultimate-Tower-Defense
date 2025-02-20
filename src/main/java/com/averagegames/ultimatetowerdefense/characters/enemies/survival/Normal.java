@@ -1,9 +1,9 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.util.Zombie;
 import com.averagegames.ultimatetowerdefense.characters.enemies.util.Type;
-import com.averagegames.ultimatetowerdefense.game.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
+
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,10 +12,9 @@ import org.jetbrains.annotations.NotNull;
  * This {@link Enemy} is {@code universal} and can be found across each {@code survival difficulty} and in {@code campaign mode}.
  * @gamemode this version of the {@link Normal} class is to be used in {@code survival} mode.
  * @see Enemy
- * @see Zombie
  * @author AverageProgramer
  */
-public final class Normal extends Enemy implements Zombie {
+public final class Normal extends Enemy {
 
     /**
      * The {@link Normal}'s {@link Image}.
@@ -74,5 +73,10 @@ public final class Normal extends Enemy implements Zombie {
 
         // Sets the normal's position to the newly given position.
         super.setPosition(position);
+    }
+
+    @Override
+    public void onDeath() {
+
     }
 }

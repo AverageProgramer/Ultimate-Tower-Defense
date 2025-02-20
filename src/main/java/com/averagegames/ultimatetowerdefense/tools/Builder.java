@@ -1,11 +1,8 @@
-package com.averagegames.ultimatetowerdefense.tools.development;
+package com.averagegames.ultimatetowerdefense.tools;
 
-import com.averagegames.ultimatetowerdefense.tools.util.StrictHashMap;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.ApiStatus.Internal;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -18,8 +15,6 @@ import java.util.Collections;
  * @see Scene
  * @author AverageProgramer
  */
-@Internal
-@FunctionalInterface
 public interface Builder {
 
     /**

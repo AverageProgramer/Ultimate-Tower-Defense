@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools.development;
+package com.averagegames.ultimatetowerdefense.tools;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
  */
 @DefaultProperty("image")
 @NoArgsConstructor
-public final class ImageLoader extends ImageView {
+public class ImageLoader extends ImageView {
 
     /**
      * A constructor that loads an {@link Image} found at a given URL.
@@ -29,6 +29,7 @@ public final class ImageLoader extends ImageView {
      * @throws FileNotFoundException if the URL does not lead to a file.
      * @since Ultimate Tower Defense 1.0
      */
+    @SuppressWarnings("unused")
     public ImageLoader(@NotNull final String uri) throws FileNotFoundException {
         
         // Initializes the image using a constructor that takes an image object as a parameter from the inherited super class.

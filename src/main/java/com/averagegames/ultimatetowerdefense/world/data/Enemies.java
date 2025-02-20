@@ -1,8 +1,10 @@
-package com.averagegames.ultimatetowerdefense.game.data;
+package com.averagegames.ultimatetowerdefense.world.data;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

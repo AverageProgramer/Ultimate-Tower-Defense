@@ -1,15 +1,17 @@
-package com.averagegames.ultimatetowerdefense.game.scenes;
+package com.averagegames.ultimatetowerdefense.world.scenes;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Fast;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Normal;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
 import com.averagegames.ultimatetowerdefense.characters.enemies.util.Wave;
-import com.averagegames.ultimatetowerdefense.game.maps.elements.Path;
-import com.averagegames.ultimatetowerdefense.game.maps.elements.Position;
-import com.averagegames.ultimatetowerdefense.game.maps.elements.Spawner;
-import com.averagegames.ultimatetowerdefense.tools.development.Builder;
+import com.averagegames.ultimatetowerdefense.world.maps.elements.Path;
+import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.world.maps.elements.Spawner;
+import com.averagegames.ultimatetowerdefense.tools.Builder;
+
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.ApiStatus.Internal;
@@ -20,7 +22,11 @@ import java.io.File;
 import java.io.IOException;
 
 @Internal
-public final class TestScene implements Builder {
+public final class GameScene extends Scene implements Builder {
+    public GameScene(@NotNull final Parent root) {
+        super(root);
+    }
+
     @Override
     public void pre_build(@SuppressWarnings("exports") @NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/(Official) Tower Defense Simulator OST - Grave Buster.wav");
@@ -55,8 +61,6 @@ public final class TestScene implements Builder {
 
     @Override
     public void build(@SuppressWarnings("exports") @NotNull final Stage stage) {
-        Group root = new Group();
-
         Spawner spawner = getTestSpawner();
 
         spawner.spawn(new Wave(new Enemy[] {
@@ -77,13 +81,11 @@ public final class TestScene implements Builder {
                 new Slow(),
                 new Slow(),
                 new Slow()
-        }), root);
+        }), (Group) super.getRoot());
 
-        Scene build = new Scene(root);
+        SCENE_MANAGER.put(0, this);
 
-        SCENE_MANAGER.put(0, build);
-
-        stage.setScene(build);
+        stage.setScene(this);
     }
 
     @Override

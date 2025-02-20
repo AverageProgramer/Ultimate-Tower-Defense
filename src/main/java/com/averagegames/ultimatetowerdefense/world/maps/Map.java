@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.game.maps;
+package com.averagegames.ultimatetowerdefense.world.maps;
 
 import javafx.scene.Scene;
 import org.jetbrains.annotations.NotNull;

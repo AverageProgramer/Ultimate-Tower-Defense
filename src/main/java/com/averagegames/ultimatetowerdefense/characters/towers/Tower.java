@@ -1,8 +1,8 @@
 package com.averagegames.ultimatetowerdefense.characters.towers;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.game.maps.elements.Position;
-import com.averagegames.ultimatetowerdefense.tools.development.ImageLoader;
+import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.tools.ImageLoader;
 import com.averagegames.ultimatetowerdefense.characters.towers.util.Targeting;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 
-import static com.averagegames.ultimatetowerdefense.game.data.Towers.LIST_OF_ACTIVE_TOWERS;
+import static com.averagegames.ultimatetowerdefense.world.data.Towers.LIST_OF_ACTIVE_TOWERS;
 
 public abstract class Tower {
 

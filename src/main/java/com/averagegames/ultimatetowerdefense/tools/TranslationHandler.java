@@ -1,9 +1,9 @@
-package com.averagegames.ultimatetowerdefense.tools.development;
+package com.averagegames.ultimatetowerdefense.tools;
 
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Nullable;
 
-import com.averagegames.ultimatetowerdefense.game.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -20,7 +20,7 @@ import lombok.Setter;
  * @see TranslateTransition
  * @author AverageProgramer
  */
-public final class TranslationHandler {
+public class TranslationHandler {
 
     /**
      * The {@link Node}'s animation.
@@ -77,7 +77,7 @@ public final class TranslationHandler {
      * Begins moving the given {@link Node} to the given {@code destination} at the given {@code speed}.
      * @since Ultimate Tower Defense 1.0
      */
-    public void start() {
+    public final void start() {
 
         // Sets the duration of the animation to a calculated amount of seconds.
         // The duration is based on the speed and will update accordingly based on the distance to the given destination so that the node will always be moving its given speed.
@@ -118,7 +118,7 @@ public final class TranslationHandler {
      * Pauses the animation, causing the {@link Node} to stop at its current {@link Position}.
      * @since Ultimate Tower Defense 1.0
      */
-    public void pause() {
+    public final void pause() {
 
         // Pauses the node's animation.
         this.animation.pause();
@@ -128,7 +128,7 @@ public final class TranslationHandler {
      * Resumes the animation, causing the {@link Node} to continue moving from its current {@link Position}.
      * @since Ultimate Tower Defense 1.0
      */
-    public void resume() {
+    public final void resume() {
 
         // Resumes the node's animation.
         this.animation.play();
@@ -140,7 +140,7 @@ public final class TranslationHandler {
      * @since Ultimate Tower Defense 1.0
      */
     @Blocking
-    public void waitForFinish() throws InterruptedException {
+    public final void waitForFinish() throws InterruptedException {
 
         // Synchronizes the animation so that it can properly wait.
         synchronized (this) {
@@ -155,7 +155,7 @@ public final class TranslationHandler {
      * @return the animation's current {@code state}.
      * @since Ultimate Tower Defense 1.0
      */
-    public boolean isFinished() {
+    public final boolean isFinished() {
 
         // Returns whether the animation is finished.
         return this.node == null || this.destination == null || this.node.getLayoutX() + this.node.getTranslateX() == this.destination.x() && this.node.getLayoutY() + this.node.getTranslateY() == this.destination.y();
@@ -165,7 +165,7 @@ public final class TranslationHandler {
      * Stops the {@link Node}'s movement.
      * @since Ultimate Tower Defense 1.0
      */
-    public void stop() {
+    public final void stop() {
 
         // Stops the node's animation.
         this.animation.stop();

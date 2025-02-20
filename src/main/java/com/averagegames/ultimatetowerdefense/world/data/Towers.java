@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.game.data;
+package com.averagegames.ultimatetowerdefense.world.data;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import org.jetbrains.annotations.NotNull;

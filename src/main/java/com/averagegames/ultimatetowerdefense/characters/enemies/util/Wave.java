@@ -10,7 +10,7 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
  * The {@link Wave} record serves as a way to easily store and manage an {@link Enemy} array.
  * @since Ultimate Tower Defense 1.0
  * @see Enemy
- * @see com.averagegames.ultimatetowerdefense.game.maps.elements.Spawner
+ * @see com.averagegames.ultimatetowerdefense.world.maps.elements.Spawner
  * @author AverageProgramer
  */
 @Accessors(fluent = true) @Getter

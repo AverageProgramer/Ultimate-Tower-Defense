@@ -1,18 +1,25 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.util;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+
 import org.intellij.lang.annotations.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@link Boss} interface is a {@code marker} interface.
  * Any {@link Enemy} implementing this interface is considered a {@link Boss} and should be treated as such.
  * {@link Boss}es can perform {@code attacks} as well as {@code specials}.
  * @since Ultimate Tower Defense
- * @see Zombie
- * @see Titan
  * @author AverageProgramer
  */
 @Identifier
-public interface Boss extends Titan {
-    // The interface has no need for any abstract methods when a class implements it.
+public interface Boss {
+    /**
+     * An action performed whenever an {@link Enemy} is using a {@code special ability}.
+     * By default, this method does nothing.`
+     * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    void special(@NotNull final Tower tower) throws InterruptedException;
 }

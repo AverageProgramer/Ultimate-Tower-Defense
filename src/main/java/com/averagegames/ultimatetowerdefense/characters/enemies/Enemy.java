@@ -1,20 +1,17 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import static com.averagegames.ultimatetowerdefense.game.data.Enemies.LIST_OF_ACTIVE_ENEMIES;
+import static com.averagegames.ultimatetowerdefense.world.data.Enemies.LIST_OF_ACTIVE_ENEMIES;
 
 import java.io.InputStream;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NonBlocking;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.*;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.util.Type;
-import com.averagegames.ultimatetowerdefense.game.maps.elements.Path;
-import com.averagegames.ultimatetowerdefense.game.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.world.maps.elements.Path;
+import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.tools.development.TranslationHandler;
-import com.averagegames.ultimatetowerdefense.tools.development.ImageLoader;
+import com.averagegames.ultimatetowerdefense.tools.TranslationHandler;
+import com.averagegames.ultimatetowerdefense.tools.ImageLoader;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -36,18 +33,20 @@ public abstract class Enemy {
     /**
      * The {@link Enemy}'s parent {@link Group}.
      */
+    @Nullable
     @Accessors(makeFinal = true) @Setter
     private Group parent;
 
     /**
      * The {@link Enemy}'s {@link Image} loaded using an {@link ImageLoader}.
      */
+    @Nullable
     private final ImageLoader loadedEnemy;
 
     /**
      * The {@link Enemy}'s {@link Image}.
      */
-    @NotNull
+    @Nullable
     @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED)
     protected Image image;
 
@@ -88,11 +87,13 @@ public abstract class Enemy {
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} movement.
      */
+    @NotNull
     private Thread movementThread;
 
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} attacks.
      */
+    @NotNull
     private Thread attackThread;
 
     {
@@ -113,8 +114,12 @@ public abstract class Enemy {
 
         // Initializes the threads that the enemy will use to move and attack.
 
-        this.movementThread = new Thread();
-        this.attackThread = new Thread();
+        this.movementThread = new Thread(() -> {
+            // This thread does nothing by default.
+        });
+        this.attackThread = new Thread(() -> {
+            // This thread does nothing by default.
+        });
     }
 
     /**
@@ -122,7 +127,7 @@ public abstract class Enemy {
      * @param amount damage the amount to add to the {@link Enemy}'s {@code health}.
      * @since Ultimate Tower Defense 1.0
      */
-    public final void heal(final int amount) {
+    public final void heal(@Range(from = 0, to = Integer.MAX_VALUE) final int amount) {
 
         // Performs the enemy's on healed action.
         // This method is unique to each individual inheritor of the enemy class.
@@ -137,7 +142,7 @@ public abstract class Enemy {
      * @param damage the amount to remove from the {@link Enemy}'s {@code health}.
      * @since Ultimate Tower Defense 1.0
      */
-    public final void dealDamage(final int damage) {
+    public final void dealDamage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
 
         // Performs the enemy's on damaged action.
         // This method is unique to each individual inheritor of the enemy class.
@@ -237,6 +242,8 @@ public abstract class Enemy {
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
+    @NonBlocking
+    @SuppressWarnings("all")
     public final void startMoving() {
 
         // Interrupts the thread controlling enemy movement so that the new animation can override the old animation if there was one.
@@ -254,7 +261,7 @@ public abstract class Enemy {
             animation.setSpeed(this.speed);
 
             // A loop that will iterate through every position on the given path.
-            for (var position : this.pathing.positions()) {
+            for (Position position : this.pathing.positions()) {
 
                 // Sets the animation's destination to the current position in the loop.
                 animation.setDestination(position);
@@ -294,12 +301,12 @@ public abstract class Enemy {
 
     /**
      * Gets the {@link Tower} that the {@link Enemy} is most likely to {@code attack}.
-     * This method requires complex validation and is written in {@code C++} as it is a much faster language.
      * @param towers an array of {@link Tower}s to choose from.
      * @return the {@link Tower} to {@code attack}.
      * @since Ultimate Tower Defense 1.0
      */
-    private Tower getTarget(@NotNull final Tower[] towers) {
+    @Contract(pure = true)
+    private @Nullable Tower getTarget(@NotNull final Tower[] towers) {
         return null;
     }
 
@@ -385,15 +392,5 @@ public abstract class Enemy {
      */
     protected void attack(@NotNull final Tower tower) throws InterruptedException {
         // This method can be overridden by a subclass so that each individual enemy can have a unique attack.
-    }
-
-    /**
-     * An action performed whenever an {@link Enemy} is using a {@code special ability}.
-     * By default, this method does nothing.`
-     * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
-     * @since Ultimate Tower Defense 1.0
-     */
-    protected void special(@NotNull final Tower tower) throws InterruptedException {
-        // This method can be overridden by a subclass so that each individual enemy can have a unique special ability.
     }
 }

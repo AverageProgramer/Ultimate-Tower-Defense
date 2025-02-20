@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.game.maps.elements;
+package com.averagegames.ultimatetowerdefense.world.maps.elements;
 
 import org.jetbrains.annotations.NotNull;
 

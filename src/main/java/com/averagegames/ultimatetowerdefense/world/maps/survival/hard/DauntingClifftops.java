@@ -1,6 +1,6 @@
-package com.averagegames.ultimatetowerdefense.game.maps.survival.hard;
+package com.averagegames.ultimatetowerdefense.world.maps.survival.hard;
 
-import com.averagegames.ultimatetowerdefense.game.maps.Map;
+import com.averagegames.ultimatetowerdefense.world.maps.Map;
 import javafx.scene.Scene;
 import org.jetbrains.annotations.NotNull;
 
