@@ -1,17 +1,17 @@
-package com.averagegames.ultimatetowerdefense.characters.enemies;
+package com.averagegames.ultimatetowerdefense.characters;
 
-import static com.averagegames.ultimatetowerdefense.world.data.Enemies.LIST_OF_ACTIVE_ENEMIES;
+import static com.averagegames.ultimatetowerdefense.world.Enemies.LIST_OF_ACTIVE_ENEMIES;
+import static com.averagegames.ultimatetowerdefense.world.Towers.LIST_OF_ACTIVE_TOWERS;
 
 import java.io.InputStream;
 
+import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.characters.util.ImageLoader;
+import com.averagegames.ultimatetowerdefense.characters.util.TranslationHandler;
 import org.jetbrains.annotations.*;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.util.Type;
 import com.averagegames.ultimatetowerdefense.world.maps.elements.Path;
 import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
-import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.tools.TranslationHandler;
-import com.averagegames.ultimatetowerdefense.tools.ImageLoader;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -33,20 +33,20 @@ public abstract class Enemy {
     /**
      * The {@link Enemy}'s parent {@link Group}.
      */
-    @Nullable
+    @NotNull
     @Accessors(makeFinal = true) @Setter
     private Group parent;
 
     /**
      * The {@link Enemy}'s {@link Image} loaded using an {@link ImageLoader}.
      */
-    @Nullable
+    @NotNull
     private final ImageLoader loadedEnemy;
 
     /**
      * The {@link Enemy}'s {@link Image}.
      */
-    @Nullable
+    @NotNull
     @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED)
     protected Image image;
 
@@ -142,7 +142,7 @@ public abstract class Enemy {
      * @param damage the amount to remove from the {@link Enemy}'s {@code health}.
      * @since Ultimate Tower Defense 1.0
      */
-    public final void dealDamage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
+    public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
 
         // Performs the enemy's on damaged action.
         // This method is unique to each individual inheritor of the enemy class.
@@ -159,7 +159,7 @@ public abstract class Enemy {
      */
     public final void setPosition(@NotNull final Position position) {
 
-        // Updates the image representing the enemy's position on the stage it is currently on, if any.
+        // Updates the enemy's x and y coordinates to the given position's x and y coordinates.
 
         this.loadedEnemy.setX(position.x());
         this.loadedEnemy.setY(position.y());
@@ -306,8 +306,8 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     @Contract(pure = true)
-    private @Nullable Tower getTarget(@NotNull final Tower[] towers) {
-        return null;
+    private @NotNull Tower getTarget(@NotNull final Tower[] towers) {
+        return LIST_OF_ACTIVE_TOWERS.getFirst();
     }
 
     /**

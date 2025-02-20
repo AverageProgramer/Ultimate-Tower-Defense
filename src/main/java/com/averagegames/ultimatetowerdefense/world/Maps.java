@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.world.data;
+package com.averagegames.ultimatetowerdefense.world;
 
 import com.averagegames.ultimatetowerdefense.world.maps.survival.easy.GrassyPlains;
 

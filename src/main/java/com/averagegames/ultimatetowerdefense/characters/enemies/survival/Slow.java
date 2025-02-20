@@ -1,7 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.util.Type;
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import javafx.scene.image.Image;
 
 public final class Slow extends Enemy {

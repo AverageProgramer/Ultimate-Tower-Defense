@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools;
+package com.averagegames.ultimatetowerdefense.characters.util;
 
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Nullable;

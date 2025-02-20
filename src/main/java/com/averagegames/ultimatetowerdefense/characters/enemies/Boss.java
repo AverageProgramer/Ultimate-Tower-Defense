@@ -1,7 +1,7 @@
-package com.averagegames.ultimatetowerdefense.characters.enemies.util;
+package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.Tower;
 
 import org.intellij.lang.annotations.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
  * @author AverageProgramer
  */
 @Identifier
+@FunctionalInterface
 public interface Boss {
     /**
      * An action performed whenever an {@link Enemy} is using a {@code special ability}.

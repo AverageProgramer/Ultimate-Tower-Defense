@@ -1,6 +1,6 @@
-package com.averagegames.ultimatetowerdefense.world.data;
+package com.averagegames.ultimatetowerdefense.world;
 
-import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.characters.Tower;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

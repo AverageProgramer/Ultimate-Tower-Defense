@@ -3,19 +3,20 @@ package com.averagegames.ultimatetowerdefense.tools;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
 /**
- * The {@link Builder} interface should be implemented by all classes involved in the {@code JavaFX} start up process.
+ * The {@link SceneBuilder} interface should be implemented by all custom-made {@code JavaFX} scenes.
  * Classes implementing can easily build and create their own unique {@link Scene} to be added to a {@link Stage}.
  * @since Ultimate Tower Defense 1.0
  * @see Stage
  * @see Scene
  * @author AverageProgramer
  */
-public interface Builder {
+public interface SceneBuilder {
 
     /**
      * A {@link StrictHashMap} that custom-made {@link Scene}s can be added to alongside unique {@link Integer} identifiers.
@@ -24,10 +25,10 @@ public interface Builder {
     StrictHashMap<@NotNull Integer, @NotNull Scene> SCENE_MANAGER = new StrictHashMap<>(Collections.synchronizedMap(new StrictHashMap<>()));
 
     /**
-     * Builds a new {@code JavaFX} {@link Scene}, unique to each implementation of the {@link Builder} interface, on a given {@link Stage}.
+     * Builds a new {@code JavaFX} {@link Scene}, unique to each implementation of the {@link SceneBuilder} interface, on a given {@link Stage}.
      * @param stage the {@link Stage} to add the {@link Scene} to.
      * @throws Exception when an {@link Exception} occurs.
-     * @implSpec Any class implementing the {@link Builder} interface is required to {@code override} this method.
+     * @implSpec Any class implementing the {@link SceneBuilder} interface is required to {@code override} this method.
      * @implNote Whenever the {@link Scene} is built, it should be added to the given {@link Stage}.
      */
     void build(@NotNull final Stage stage) throws Exception;
@@ -37,8 +38,8 @@ public interface Builder {
      * By default, this method does nothing.
      * @param stage a {@link Stage} to use.
      * @throws Exception when an {@link Exception} occurs.
-     * @apiNote This method is only called automatically when the static {@link Builder#loadBuild(Builder, Stage)} method is called.
-     * @implSpec This method does not need to be overridden in implementations of the {@link Builder} interface.
+     * @apiNote This method is only called automatically when the static {@link SceneBuilder#loadBuild(SceneBuilder, Stage)} method is called.
+     * @implSpec This method does not need to be overridden in implementations of the {@link SceneBuilder} interface.
      */
     default void pre_build(@NotNull final Stage stage) throws Exception {
         // This method does nothing but can be optionally overridden in implementations to have a custom set of actions.
@@ -49,8 +50,8 @@ public interface Builder {
      * By default, this method does nothing.
      * @param stage a {@link Stage} to use.
      * @throws Exception when an {@link Exception} occurs.
-     * @apiNote This method is only called automatically when the static {@link Builder#loadBuild(Builder, Stage)} method is called.
-     * @implSpec This method does not need to be overridden in implementations of the {@link Builder} interface.
+     * @apiNote This method is only called automatically when the static {@link SceneBuilder#loadBuild(SceneBuilder, Stage)} method is called.
+     * @implSpec This method does not need to be overridden in implementations of the {@link SceneBuilder} interface.
      */
     default void post_build(@NotNull final Stage stage) throws Exception {
         // This method does nothing but can be optionally overridden in implementations to have a custom set of actions.
@@ -74,13 +75,13 @@ public interface Builder {
     }
 
     /**
-     * Finishes the build process by adding the {@link Builder}'s uniquely designed {@link Scene} to a given {@link Stage}.
-     * The {@link Builder#pre_build(Stage)} and {@link Builder#post_build(Stage)} methods are also called when this method is invoked.
-     * @param toolkit the {@link Builder} responsible for building the {@link Scene}.
+     * Finishes the build process by adding the {@link SceneBuilder}'s uniquely designed {@link Scene} to a given {@link Stage}.
+     * The {@link SceneBuilder#pre_build(Stage)} and {@link SceneBuilder#post_build(Stage)} methods are also called when this method is invoked.
+     * @param toolkit the {@link SceneBuilder} responsible for building the {@link Scene}.
      * @param stage the {@link Stage} to add the custom {@link Scene} to.
      * @throws Exception when an {@link Exception} occurs.
      */
-    static void loadBuild(@NotNull final Builder toolkit, @NotNull final Stage stage) throws Exception {
+    static void loadBuild(@NotNull final SceneBuilder toolkit, @NotNull final Stage stage) throws Exception {
 
         // Performs the implementation's pre-build action.
         toolkit.pre_build(stage);

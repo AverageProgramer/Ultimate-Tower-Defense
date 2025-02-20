@@ -1,6 +1,6 @@
-package com.averagegames.ultimatetowerdefense.world.data;
+package com.averagegames.ultimatetowerdefense.world;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

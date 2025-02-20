@@ -1,6 +1,6 @@
 package com.averagegames.ultimatetowerdefense.tools;
 
-public class ClickReader implements EventHandler {
+public class ButtonReader implements EventHandler {
     @Override
     public void onEvent() {
 

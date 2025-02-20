@@ -1,10 +1,9 @@
-package com.averagegames.ultimatetowerdefense.characters.enemies.util;
+package com.averagegames.ultimatetowerdefense.characters.enemies;
 
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
-
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 
 /**
  * The {@link Wave} record serves as a way to easily store and manage an {@link Enemy} array.

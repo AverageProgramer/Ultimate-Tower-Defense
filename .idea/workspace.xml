@@ -9,39 +9,39 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/ClickReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/DirectionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/data/Maps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/scenes/MenuScene.java" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Removed a few additional classes that were deemed inherently useless. These classes include the two interfaces Zombie, and Titan. The Boss interface has also been updated to include the 'special' method. This method can be implemented by certain enemies to use a special attack.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/units/Tank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Inventory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/ButtonReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/EventHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Fast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Quick.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Normal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Boss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Titan.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Wave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Wave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Zombie.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/data/Enemies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/data/Enemies.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/data/Maps.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/data/Towers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/data/Towers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/elements/Base.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/elements/Base.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/elements/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/elements/Path.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/elements/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/elements/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/elements/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/elements/Spawner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/survival/easy/GrassyPlains.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/survival/easy/GrassyPlains.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/survival/easy/SandyArchipelago.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/survival/easy/SandyArchipelago.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/survival/hard/DauntingClifftops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/survival/hard/DauntingClifftops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/maps/survival/hard/VolcanicTomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/survival/hard/VolcanicTomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/scenes/TestScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/scenes/GameScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/development/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/AudioPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/development/Builder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/Builder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/development/DirectionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/development/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/ImageLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/development/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/TranslationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/util/StrictHashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/StrictHashMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Slow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Slow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Boss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Type.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/util/Wave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Wave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/powerful/Eraser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/powerful/Eraser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/util/Inventory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/util/Targeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Targeting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/units/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/Unit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/AudioPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/Builder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/SceneBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/ClickReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/ClickReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/DirectionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/util/ImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/util/TranslationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/data/Enemies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/Enemies.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/data/Maps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/Maps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/data/Towers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/Towers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/elements/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/maps/elements/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/scenes/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/scenes/MenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/world/scenes/MenuScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,9 +56,9 @@
       <list>
         <option value="Enum" />
         <option value="JavaFXApplication" />
-        <option value="AnnotationType" />
         <option value="JUnit5 Test Class" />
         <option value="package-info" />
+        <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -178,7 +178,7 @@
       <module name="UltimateTowerDefense" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.enemies.util.*" />
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -194,7 +194,7 @@
       <module name="UltimateTowerDefense" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.enemies.util.*" />
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -210,7 +210,7 @@
       <module name="UltimateTowerDefense" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.enemies.util.*" />
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -226,7 +226,7 @@
       <module name="UltimateTowerDefense" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.enemies.util.*" />
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -242,7 +242,7 @@
       <module name="UltimateTowerDefense" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.enemies.util.*" />
+          <option name="PATTERN" value="com.averagegames.ultimatetowerdefense.characters.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -587,7 +587,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740021447390</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Removed a few additional classes that were deemed inherently useless. These classes include the two interfaces Zombie, and Titan. The Boss interface has also been updated to include the 'special' method. This method can be implemented by certain enemies to use a special attack.">
+      <option name="closed" value="true" />
+      <created>1740072096770</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1740072096770</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,7 +603,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Changed the way certain enemy and tower &quot;action&quot; methods are inherited. For enemies, the only abstract method is no the &quot;attack&quot; method. The other three methods, &quot;onSpawn&quot;, &quot;onDeath&quot;, and &quot;special&quot; are all optional. Same thing with towers. The only abstract methods are the &quot;attack&quot; and &quot;upgrade&quot; methods while the &quot;onPlace&quot;, &quot;onDeath&quot;, and &quot;special&quot; methods are optional." />
     <MESSAGE value="Implemented an annotation that allows for only specific class to access certain methods within another class. Any validation for the annotation will have to be done manually inside the method." />
     <MESSAGE value="Added two classes, the SpecificCheck class and the ProhibitedCheck class, that are meant to help verify if a method's calling class was either specified or prohibited by the method's annotation." />
     <MESSAGE value="Added a new GameElement annotation that allows people viewing the code to know that the annotated variable is a Node that will be added to a Scene. This annotation is only for readability and does not do anything else." />
@@ -620,6 +627,7 @@
     <MESSAGE value="Added numerous classes to the project. These classes include the &quot;Enemy&quot; class, &quot;Tower Class&quot;, and a whole variety of other classes. Each new file was previously used in an old Ultimate Tower Defense project and will now be used here. The structure of the folders and packages has been updated and cleaned up. Other features deemed to be useless or ineffective will also be removed in the future." />
     <MESSAGE value="Made a few additional changes to the structure of the various packages within the project. The GreaterThan and LessThan annotations along with their respective exceptions and verifiers have been removed. More classes will likely be cleaned up or removed in the future." />
     <MESSAGE value="Made a few more changes to the structure of the project. Several maven dependencies were removed as they were not actually doing anything useful. The rest of the custom annotation interfaces were also removed as they to were doing nothing. These should be the last of the changes made for the sole purpose of cleaning up the project." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made a few more changes to the structure of the project. Several maven dependencies were removed as they were not actually doing anything useful. The rest of the custom annotation interfaces were also removed as they to were doing nothing. These should be the last of the changes made for the sole purpose of cleaning up the project." />
+    <MESSAGE value="Removed a few additional classes that were deemed inherently useless. These classes include the two interfaces Zombie, and Titan. The Boss interface has also been updated to include the 'special' method. This method can be implemented by certain enemies to use a special attack." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed a few additional classes that were deemed inherently useless. These classes include the two interfaces Zombie, and Titan. The Boss interface has also been updated to include the 'special' method. This method can be implemented by certain enemies to use a special attack." />
   </component>
 </project>

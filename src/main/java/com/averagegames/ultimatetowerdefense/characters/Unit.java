@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.characters.units;
+package com.averagegames.ultimatetowerdefense.characters;
 
 public abstract class Unit {
     protected abstract void onSpawn();

@@ -1,10 +1,11 @@
-package com.averagegames.ultimatetowerdefense.characters.enemies.util;
+package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.Tower;
 
 /**
- * The {@link Type} enum provides several different {@link Enemy} types that can allow for varied attacks from a {@link com.averagegames.ultimatetowerdefense.characters.towers.Tower}.
- * Depending on what {@link Type} an {@link Enemy} is, certain {@link com.averagegames.ultimatetowerdefense.characters.towers.Tower}s may be able to {@code attack} it while others may not.
+ * The {@link Type} enum provides several different {@link Enemy} types that can allow for varied attacks from a {@link Tower}.
+ * Depending on what {@link Type} an {@link Enemy} is, certain {@link Tower}s may be able to {@code attack} it while others may not.
  * @since Ultimate Tower Defense 1.0
  * @see Enum
  * @see Enemy

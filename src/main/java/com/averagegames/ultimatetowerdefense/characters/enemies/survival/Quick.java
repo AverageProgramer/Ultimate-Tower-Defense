@@ -1,10 +1,10 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.util.Type;
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import javafx.scene.image.Image;
 
-public final class Fast extends Enemy {
+public final class Quick extends Enemy {
 
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/FastZombie.gif");
 
@@ -16,7 +16,7 @@ public final class Fast extends Enemy {
 
     private final int speed = 50;
 
-    public Fast() {
+    public Quick() {
         super.image = this.image;
 
         super.type = this.type;

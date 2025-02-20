@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools;
+package com.averagegames.ultimatetowerdefense.characters.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

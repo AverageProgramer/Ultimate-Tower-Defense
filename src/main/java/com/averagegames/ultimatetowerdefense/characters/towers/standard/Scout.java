@@ -1,7 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.Tower;
 
 import org.jetbrains.annotations.NotNull;
 

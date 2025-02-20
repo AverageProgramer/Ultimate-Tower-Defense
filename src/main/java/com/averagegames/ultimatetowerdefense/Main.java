@@ -1,12 +1,14 @@
 package com.averagegames.ultimatetowerdefense;
 
+import static com.averagegames.ultimatetowerdefense.tools.SceneBuilder.loadBuild;
+
 import com.averagegames.ultimatetowerdefense.world.scenes.GameScene;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
 
-import static com.averagegames.ultimatetowerdefense.tools.Builder.loadBuild;
+import org.jetbrains.annotations.NotNull;
 
 public class Main extends Application {
     @Override

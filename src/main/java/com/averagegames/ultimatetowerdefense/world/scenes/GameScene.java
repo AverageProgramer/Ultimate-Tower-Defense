@@ -1,14 +1,14 @@
 package com.averagegames.ultimatetowerdefense.world.scenes;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Fast;
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Quick;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Normal;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
-import com.averagegames.ultimatetowerdefense.characters.enemies.util.Wave;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
+import com.averagegames.ultimatetowerdefense.tools.SceneBuilder;
 import com.averagegames.ultimatetowerdefense.world.maps.elements.Path;
 import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
 import com.averagegames.ultimatetowerdefense.world.maps.elements.Spawner;
-import com.averagegames.ultimatetowerdefense.tools.Builder;
 
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Internal
-public final class GameScene extends Scene implements Builder {
+public final class GameScene extends Scene implements SceneBuilder {
     public GameScene(@NotNull final Parent root) {
         super(root);
     }
@@ -70,11 +70,11 @@ public final class GameScene extends Scene implements Builder {
                 new Normal(),
                 new Normal(),
 
-                new Fast(),
-                new Fast(),
-                new Fast(),
-                new Fast(),
-                new Fast(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
 
                 new Slow(),
                 new Slow(),
