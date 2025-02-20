@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 import static com.averagegames.ultimatetowerdefense.tools.util.Builder.loadBuild;
-import static com.averagegames.ultimatetowerdefense.game.development.Manager.enableLogging;
+import static com.averagegames.ultimatetowerdefense.control.LogController.enableLogging;
 
 public class Main extends Application {
     @Override

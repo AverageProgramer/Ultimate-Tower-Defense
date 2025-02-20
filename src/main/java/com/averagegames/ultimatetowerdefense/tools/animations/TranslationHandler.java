@@ -1,7 +1,5 @@
 package com.averagegames.ultimatetowerdefense.tools.animations;
 
-import com.averagegames.ultimatetowerdefense.tools.annotations.GreaterThan;
-import com.averagegames.ultimatetowerdefense.tools.annotations.verification.GreaterThanAnnotation;
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,50 +25,38 @@ public final class TranslationHandler {
     /**
      * The {@link Node}'s animation.
      */
-    private TranslateTransition animation = new TranslateTransition();
+    private TranslateTransition animation;
 
     /**
      * The {@link Node} that is to be moved during animation.
      */
     @Nullable
     @Setter
-    private Node node = null;
+    private Node node;
 
     /**
      * The {@code speed} in pixels per second that the given {@link Node} should travel at.
      */
-    private int speed = 0;
+    @Setter
+    private int speed;
 
     /**
      * The {@code destination} of the animation.
      */
     @Nullable
     @Setter
-    private Position destination = null;
+    private Position destination;
 
-    {
+    public TranslationHandler() {
 
-        // Sets the animation's node to the default node.
-        this.setNode(this.node);
+        // Initializes the animation's translator.
+        this.animation = new TranslateTransition();
 
-        // Sets the animation's speed in pixels per second to the default speed.
-        this.setSpeed(this.speed);
+        // Initializes the animation's node to a default, null node.
+        this.node = null;
 
-        // Sets the animation's destination to the default destination.
-        this.setDestination(this.destination);
-    }
-
-    /**
-     * Sets the {@code speed} in pixels per second of the animation to a newly given value.
-     * @param speed the animation's speed.
-     */
-    public void setSpeed(@GreaterThan(-1) final int speed) {
-
-        // Verifies that the given amount is greater than the value that the annotation specifies.
-        GreaterThanAnnotation.verify(new Object() {}.getClass().getEnclosingMethod().getParameters()[0], speed);
-
-        // Sets the animation's speed to the newly given value.
-        this.speed = speed;
+        // Initializes the animation's destination to a default, null destination.
+        this.destination = null;
     }
 
     /**
@@ -81,7 +67,7 @@ public final class TranslationHandler {
      * @since Ultimate Tower Defense 1.0
      * @see Duration
      */
-    private strictfp double calculateDuration() {
+    private double calculateDuration() {
 
         // Calculates the amount of seconds the animation's duration should last and returns the value.
         return speed > 0 && this.node != null && this.destination != null ? Math.abs(Math.sqrt(Math.pow(this.destination.x() - (this.node.getTranslateX() + this.node.getLayoutBounds().getMinX()), 2) + Math.pow(this.destination.y() - (this.node.getTranslateY() + this.node.getLayoutBounds().getMinY()), 2)) / this.speed) : 0;

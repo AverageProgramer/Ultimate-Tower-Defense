@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.game.development;
+package com.averagegames.ultimatetowerdefense.control;
 
 import com.averagegames.ultimatetowerdefense.Main;
 import com.averagegames.ultimatetowerdefense.tools.annotations.NotInstantiable;
@@ -12,17 +12,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The {@link Manager} class provides several useful tools for development and testing of game aspects.
+ * The {@link LogController} class provides several useful tools for development and testing of game aspects.
  * @since Ultimate Tower Defense 1.0
  * @author AverageProgramer
  */
 @NotInstantiable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class Manager {
+public final class LogController {
 
     /**
      * A global {@link Logger} that can be used for debugging.
-     * By default, logging is disabled but can be enabled using the {@link Manager#enableLogging(boolean)} method.
+     * By default, logging is disabled but can be enabled using the {@link LogController#enableLogging(boolean)} method.
      */
     public static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -38,7 +38,7 @@ public final class Manager {
      * @throws UnspecifiedAccessException if the method is invoked in a prohibited class.
      * @access This method can only be accessed in the {@link Main} class.
      */
-    @Specific({Manager.class, Main.class})
+    @Specific({LogController.class, Main.class})
     public static void enableLogging(final boolean enabled) {
 
         // Verifies that the calling class of the method was specified by the method's annotation.

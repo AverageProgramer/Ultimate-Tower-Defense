@@ -9,31 +9,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/powerful/Eraser.java" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added numerous classes to the project. These classes include the &quot;Enemy&quot; class, &quot;Tower Class&quot;, and a whole variety of other classes. Each new file was previously used in an old Ultimate Tower Defense project and will now be used here. The structure of the folders and packages has been updated and cleaned up. Other features deemed to be useless or ineffective will also be removed in the future.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/campaign/Normal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Fast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Fast.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Normal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Slow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/survival/Slow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/tools/Campaign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/util/Campaign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/tools/Survival.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/util/Survival.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/tools/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/util/Type.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/tools/Wave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/enemies/util/Wave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/tools/Base.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/util/Base.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/tools/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/util/Path.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/tools/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/util/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/tools/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/util/Spawner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/tools/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/util/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/tools/Targeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/towers/util/Targeting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/scenes/TestScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/scenes/TestScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animations/RotationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animations/DirectionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/util/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/elements/maps/util/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/game/development/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/control/LogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animations/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animations/TranslationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/averagegames/ultimatetowerdefense/elements/enemies/EnemyTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/averagegames/ultimatetowerdefense/tools/classes/annotations/verification/SpecificAnnotationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/GameElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/GameElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/GreaterThan.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/LessThan.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/NotInstantiable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/NotInstantiable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/Prohibited.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/Prohibited.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/Specific.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/Specific.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/verification/GreaterThanAnnotation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/annotations/verification/LessThanAnnotation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/exceptions/NumberAboveMaximumException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/exceptions/NumberBelowMinimumException.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,48 +88,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.EnemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/IdeaProjects/Ultimate-Tower-Defense&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "JUnit.EnemyTest.EnemySpawnShouldFail.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldFail.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.executor": "Run",
+    "JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "main",
+    "ignore.preview.features.used": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/Desktop/Ultimate Tower Defense",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\java\com\averagegames\ultimatetowerdefense\enemies\normal" />
@@ -555,7 +547,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711776725278</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Added numerous classes to the project. These classes include the &quot;Enemy&quot; class, &quot;Tower Class&quot;, and a whole variety of other classes. Each new file was previously used in an old Ultimate Tower Defense project and will now be used here. The structure of the folders and packages has been updated and cleaned up. Other features deemed to be useless or ineffective will also be removed in the future.">
+      <option name="closed" value="true" />
+      <created>1740005633382</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1740005633382</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +563,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added audio files and background music to the project. Other than that, not much has changed." />
     <MESSAGE value="Removed the position field inside the Enemy class as it was essentially useless. Now the method of retrieving and enemy's position involves getting the current x and y values of the given enemy using the loaded enemy field." />
     <MESSAGE value="Object fields of a super class are now allowed to be protected. The @NotNull annotation makes it so that they cant be set to null, meaning that there is inherently nothing wrong with making them protected now." />
     <MESSAGE value="Changed the way certain enemy and tower &quot;action&quot; methods are inherited. For enemies, the only abstract method is no the &quot;attack&quot; method. The other three methods, &quot;onSpawn&quot;, &quot;onDeath&quot;, and &quot;special&quot; are all optional. Same thing with towers. The only abstract methods are the &quot;attack&quot; and &quot;upgrade&quot; methods while the &quot;onPlace&quot;, &quot;onDeath&quot;, and &quot;special&quot; methods are optional." />
@@ -588,6 +587,7 @@
     <MESSAGE value="This commit is merely a test. The project faced several errors and a complete reset was necessary. Basically the project needed to be deleted and re-cloned from GitHub." />
     <MESSAGE value="Added a &quot;native&quot; folder to the project. This is where all native C\C++ code will be located. Currently, there is only one C++ source file in this folder. This source file contains the native code for the &quot;getTarget&quot; method in the Enemy class." />
     <MESSAGE value="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file." />
+    <MESSAGE value="Added numerous classes to the project. These classes include the &quot;Enemy&quot; class, &quot;Tower Class&quot;, and a whole variety of other classes. Each new file was previously used in an old Ultimate Tower Defense project and will now be used here. The structure of the folders and packages has been updated and cleaned up. Other features deemed to be useless or ineffective will also be removed in the future." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added numerous classes to the project. These classes include the &quot;Enemy&quot; class, &quot;Tower Class&quot;, and a whole variety of other classes. Each new file was previously used in an old Ultimate Tower Defense project and will now be used here. The structure of the folders and packages has been updated and cleaned up. Other features deemed to be useless or ineffective will also be removed in the future." />
   </component>
 </project>

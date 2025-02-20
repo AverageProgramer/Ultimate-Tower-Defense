@@ -15,10 +15,8 @@ import java.lang.annotation.*;
  * @see UnspecifiedAccessException
  * @author AverageProgramer
  */
-@Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.CONSTRUCTOR, ElementType.METHOD})
-@Inherited
 public @interface Specific {
 
     /**

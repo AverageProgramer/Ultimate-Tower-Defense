@@ -15,10 +15,8 @@ import java.lang.annotation.*;
  * @see ProhibitedAccessException
  * @author AverageProgramer
  */
-@Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.CONSTRUCTOR, ElementType.METHOD})
-@Inherited
 public @interface Prohibited {
 
     /**

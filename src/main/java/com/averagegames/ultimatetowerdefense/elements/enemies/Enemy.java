@@ -2,12 +2,11 @@ package com.averagegames.ultimatetowerdefense.elements.enemies;
 
 import static com.averagegames.ultimatetowerdefense.game.data.Enemies.LIST_OF_ACTIVE_ENEMIES;
 import static com.averagegames.ultimatetowerdefense.game.data.Towers.LIST_OF_ACTIVE_TOWERS;
-import static com.averagegames.ultimatetowerdefense.game.development.Manager.LOGGER;
+import static com.averagegames.ultimatetowerdefense.control.LogController.LOGGER;
 
 import java.io.InputStream;
 import java.util.Objects;
 
-import com.averagegames.ultimatetowerdefense.tools.exceptions.NumberBelowMinimumException;
 import com.averagegames.ultimatetowerdefense.tools.exceptions.ProhibitedAccessException;
 import com.averagegames.ultimatetowerdefense.tools.exceptions.UnspecifiedAccessException;
 import org.jetbrains.annotations.Contract;
@@ -21,11 +20,9 @@ import com.averagegames.ultimatetowerdefense.elements.maps.util.Position;
 import com.averagegames.ultimatetowerdefense.elements.towers.Tower;
 import com.averagegames.ultimatetowerdefense.tools.animations.TranslationHandler;
 import com.averagegames.ultimatetowerdefense.tools.annotations.GameElement;
-import com.averagegames.ultimatetowerdefense.tools.annotations.GreaterThan;
 import com.averagegames.ultimatetowerdefense.tools.annotations.NotInstantiable;
 import com.averagegames.ultimatetowerdefense.tools.annotations.Prohibited;
 import com.averagegames.ultimatetowerdefense.tools.annotations.Specific;
-import com.averagegames.ultimatetowerdefense.tools.annotations.verification.GreaterThanAnnotation;
 import com.averagegames.ultimatetowerdefense.tools.annotations.verification.ProhibitedAnnotation;
 import com.averagegames.ultimatetowerdefense.tools.annotations.verification.SpecificAnnotation;
 import com.averagegames.ultimatetowerdefense.tools.images.ImageLoader;
@@ -33,7 +30,6 @@ import com.averagegames.ultimatetowerdefense.tools.images.ImageLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.shape.Circle;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -137,13 +133,9 @@ public abstract class Enemy {
     /**
      * Adds a given amount to the {@link Enemy}'s current {@code health}.
      * @param amount damage the amount to add to the {@link Enemy}'s {@code health}.
-     * @throws NumberBelowMinimumException if the amount provided is below 0.
      * @since Ultimate Tower Defense 1.0
      */
-    public final void heal(@GreaterThan(-1) final int amount) {
-
-        // Verifies that the given amount is greater than the value that the annotation specifies.
-        GreaterThanAnnotation.verify(new Object() {}.getClass().getEnclosingMethod().getParameters()[0], amount);
+    public final void heal(final int amount) {
 
         // Performs the enemy's on healed action.
         // This method is unique to each individual inheritor of the enemy class.
@@ -159,13 +151,9 @@ public abstract class Enemy {
     /**
      * Removes a given amount from the {@link Enemy}'s current {@code health}.
      * @param damage the amount to remove from the {@link Enemy}'s {@code health}.
-     * @throws NumberBelowMinimumException if the amount provided is below 0.
      * @since Ultimate Tower Defense 1.0
      */
-    public final void dealDamage(@GreaterThan(-1) final int damage) {
-
-        // Verifies that the given amount is greater than the value that the annotation specifies.
-        GreaterThanAnnotation.verify(new Object() {}.getClass().getEnclosingMethod().getParameters()[0], damage);
+    public final void dealDamage(final int damage) {
 
         // Performs the enemy's on damaged action.
         // This method is unique to each individual inheritor of the enemy class.
@@ -449,7 +437,7 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = {Enemy.class, Zombie.class}, subclasses = true)
+    @Specific(value = Enemy.class, subclasses = true)
     protected void onSpawn() {
 
         // Verifies that the calling class of the method was specified by the method's annotation.
@@ -465,7 +453,7 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = {Enemy.class, Zombie.class}, subclasses = true)
+    @Specific(value = Enemy.class, subclasses = true)
     protected void onHeal() {
 
         // Verifies that the calling class of the method was specified by the method's annotation.
@@ -481,7 +469,7 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = {Enemy.class, Zombie.class}, subclasses = true)
+    @Specific(value = Enemy.class, subclasses = true)
     protected void onDamaged() {
 
         // Verifies that the calling class of the method was specified by the method's annotation.
@@ -497,7 +485,7 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = {Enemy.class, Zombie.class}, subclasses = true)
+    @Specific(value = Enemy.class, subclasses = true)
     protected void onDeath() {
 
         // Verifies that the calling class of the method was specified by the method's annotation.
@@ -515,7 +503,7 @@ public abstract class Enemy {
      * @access this method can only be called in the {@link Enemy} class but is intended to be overridden in the {@link Enemy} class' subclasses.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = {Enemy.class, Titan.class}, subclasses = true)
+    @Specific(value = {Enemy.class, Titan.class, Boss.class}, subclasses = true)
     protected void attack(@NotNull final Tower tower) throws InterruptedException {
 
         // Verifies that the calling class of the method was specified by the method's annotation.

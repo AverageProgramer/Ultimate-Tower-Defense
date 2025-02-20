@@ -10,7 +10,6 @@ import java.lang.annotation.*;
  * @since Ultimate Tower Defense 1.0
  * @author AverageProgramer
  */
-@Documented
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 @Identifier

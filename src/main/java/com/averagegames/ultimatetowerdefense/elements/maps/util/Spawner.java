@@ -1,20 +1,17 @@
 package com.averagegames.ultimatetowerdefense.elements.maps.util;
 
 import com.averagegames.ultimatetowerdefense.tools.annotations.GameElement;
-import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import com.averagegames.ultimatetowerdefense.elements.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.elements.enemies.util.Wave;
-import com.averagegames.ultimatetowerdefense.tools.annotations.GreaterThan;
-import com.averagegames.ultimatetowerdefense.tools.annotations.verification.GreaterThanAnnotation;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import static com.averagegames.ultimatetowerdefense.game.development.Manager.LOGGER;
+import static com.averagegames.ultimatetowerdefense.control.LogController.LOGGER;
 
 /**
  * The {@link Spawner} class serves as a way to automatically and easily {@code spawn} an individual {@link Enemy} or a {@link Enemy} {@link Wave}.
@@ -24,7 +21,6 @@ import static com.averagegames.ultimatetowerdefense.game.development.Manager.LOG
  * @author AverageProgramer
  */
 @GameElement(type = "component")
-@NoArgsConstructor
 public sealed class Spawner permits Base {
 
     /**
@@ -32,35 +28,33 @@ public sealed class Spawner permits Base {
      */
     @NotNull
     @Accessors(makeFinal = true) @Setter
-    private Position spawnPosition = new Position(0, 0);
+    private Position spawnPosition;
 
-    /**
-     * The time delay in milliseconds between individual {@link Enemy} {@code spawns}.
-     */
-    private int spawnDelay = 0;
+    private int spawnDelay;
 
     /**
      * The {@link Path} that any {@link Enemy} {@code spawned} by the {@link Spawner} will follow.
      */
     @NotNull
     @Accessors(makeFinal = true) @Setter
-    private Path enemyPathing = new Path(new Position[0]);
+    private Path enemyPathing;
 
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} {@code spawns}.
      */
-    private Thread spawnThread = new Thread();
+    private Thread spawnThread;
 
-    {
+    public Spawner() {
 
-        // Sets the spawner's spawn position to the default position.
-        this.setSpawnPosition(this.spawnPosition);
+        // Initializes the spawner's spawning position to a default positions at x = 0 and y = 0.
+        this.spawnPosition = new Position(0, 0);
 
-        // Sets the spawner's time delay between enemy spawns in milliseconds to the default time delay.
-        this.setSpawnDelay(this.spawnDelay);
+        // Initializes the spawning enemies' pathing using a path with 0 positions.
+        this.enemyPathing = new Path(new Position[0]);
 
-        // Sets the enemy's pathing to the default path.
-        this.setEnemyPathing(this.enemyPathing);
+        // Initializes the thread responsible for spawning enemies to null.
+        // This thread will be updated when the 'spawn' method is called.
+        this.spawnThread = null;
     }
 
     /**
@@ -71,16 +65,20 @@ public sealed class Spawner permits Base {
 
         // Sets the spawner's spawn position to the provided position.
         this.spawnPosition = spawnPosition;
+
+        // Initializes the spawning enemies' pathing using a path with 0 positions.
+        this.enemyPathing = new Path(new Position[0]);
+
+        // Initializes the thread responsible for spawning enemies to null.
+        // This thread will be updated when the 'spawn' method is called.
+        this.spawnThread = null;
     }
 
     /**
      * Sets the {@link Spawner}'s delay in milliseconds between individual {@link Enemy} {@code spawns}.
      * @param spawnDelay the time between {@link Enemy} {@code spawns}.
      */
-    public final void setSpawnDelay(@GreaterThan(-1) final int spawnDelay) {
-
-        // Verifies that the given amount is greater than the value that the annotation specifies.
-        GreaterThanAnnotation.verify(new Object() {}.getClass().getEnclosingMethod().getParameters()[0], spawnDelay);
+    public final void setSpawnDelay(final int spawnDelay) {
 
         // Sets the spawner's spawn delay to the newly given value.
         this.spawnDelay = spawnDelay;
@@ -93,7 +91,7 @@ public sealed class Spawner permits Base {
      * @param group the {@link Group} the {@link Enemy} should be added to.
      * @see Enemy
      */
-    public final <T extends Enemy> void spawn(@NotNull final T enemy, @NotNull final Group group) {
+    public final void spawn(@NotNull final Enemy enemy, @NotNull final Group group) {
 
         // Sets the enemy's parent group to the given group and the enemy's position to the spawner's spawn position.
 
