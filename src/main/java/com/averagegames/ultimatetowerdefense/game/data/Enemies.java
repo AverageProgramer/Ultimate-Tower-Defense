@@ -1,7 +1,6 @@
 package com.averagegames.ultimatetowerdefense.game.data;
 
-import com.averagegames.ultimatetowerdefense.elements.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.tools.annotations.NotInstantiable;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +15,6 @@ import java.util.List;
  * @see Enemy
  * @author AverageProgramer
  */
-@NotInstantiable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Enemies {
 

@@ -5,14 +5,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
-import static com.averagegames.ultimatetowerdefense.tools.util.Builder.loadBuild;
-import static com.averagegames.ultimatetowerdefense.control.LogController.enableLogging;
+import static com.averagegames.ultimatetowerdefense.tools.development.Builder.loadBuild;
 
 public class Main extends Application {
     @Override
     public void start(@SuppressWarnings("exports") @NotNull final Stage stage) throws Exception {
-        enableLogging(true);
-
         loadBuild(new TestScene(), stage);
     }
 

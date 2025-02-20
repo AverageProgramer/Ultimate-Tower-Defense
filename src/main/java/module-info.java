@@ -6,7 +6,6 @@ module com.averagegames.ultimatetowerdefense {
     requires org.jetbrains.annotations;
     requires java.desktop;
     requires static lombok;
-    requires org.reflections;
     requires java.validation;
     requires java.logging;
 
