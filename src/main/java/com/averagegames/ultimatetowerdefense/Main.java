@@ -1,8 +1,8 @@
 package com.averagegames.ultimatetowerdefense;
 
-import static com.averagegames.ultimatetowerdefense.tools.SceneBuilder.loadBuild;
+import static com.averagegames.ultimatetowerdefense.scenes.SceneBuilder.loadBuild;
 
-import com.averagegames.ultimatetowerdefense.world.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 
 import javafx.application.Application;
 import javafx.scene.Group;

@@ -1,6 +1,5 @@
-package com.averagegames.ultimatetowerdefense.world.scenes;
+package com.averagegames.ultimatetowerdefense.scenes;
 
-import com.averagegames.ultimatetowerdefense.tools.SceneBuilder;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

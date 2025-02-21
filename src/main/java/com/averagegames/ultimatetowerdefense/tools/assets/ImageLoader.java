@@ -1,8 +1,10 @@
-package com.averagegames.ultimatetowerdefense.characters.util;
+package com.averagegames.ultimatetowerdefense.tools.assets;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javafx.beans.DefaultProperty;
@@ -34,5 +36,31 @@ public class ImageLoader extends ImageView {
         
         // Initializes the image using a constructor that takes an image object as a parameter from the inherited super class.
         super(new Image(new FileInputStream(uri)));
+    }
+
+    /**
+     * Gets the {@link ImageLoader}'s current {@code x} coordinate.
+     * @return the {@link ImageLoader}'s current {@code x}.
+     * @since Ultimate Tower Defense 1.0
+     * @see Enemy
+     * @see TranslationHandler
+     */
+    public final double getCurrentX() {
+
+        // Returns the image's current x coordinate.
+        return super.getX() + super.getTranslateX();
+    }
+
+    /**
+     * Gets the {@link ImageLoader}'s current {@code y} coordinate.
+     * @return the {@link ImageLoader}'s current {@code y}.
+     * @since Ultimate Tower Defense 1.0
+     * @see Enemy
+     * @see TranslationHandler
+     */
+    public final double getCurrentY() {
+
+        // Returns the image's current y coordinate.
+        return super.getY() + super.getTranslateY();
     }
 }

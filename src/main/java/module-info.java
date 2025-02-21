@@ -11,4 +11,6 @@ module com.averagegames.ultimatetowerdefense {
 
     opens com.averagegames.ultimatetowerdefense to javafx.fxml;
     exports com.averagegames.ultimatetowerdefense;
+    exports com.averagegames.ultimatetowerdefense.scenes;
+    opens com.averagegames.ultimatetowerdefense.scenes to javafx.fxml;
 }

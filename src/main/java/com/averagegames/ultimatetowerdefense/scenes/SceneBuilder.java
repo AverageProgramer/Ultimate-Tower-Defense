@@ -1,12 +1,10 @@
-package com.averagegames.ultimatetowerdefense.tools;
+package com.averagegames.ultimatetowerdefense.scenes;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
 
 /**
  * The {@link SceneBuilder} interface should be implemented by all custom-made {@code JavaFX} scenes.
@@ -17,12 +15,6 @@ import java.util.Collections;
  * @author AverageProgramer
  */
 public interface SceneBuilder {
-
-    /**
-     * A {@link StrictHashMap} that custom-made {@link Scene}s can be added to alongside unique {@link Integer} identifiers.
-     * It is not a requirement for {@link Scene}s to be added to this {@link StrictHashMap} but it is a useful tool for managing available and already built {@link Scene}s.
-     */
-    StrictHashMap<@NotNull Integer, @NotNull Scene> SCENE_MANAGER = new StrictHashMap<>(Collections.synchronizedMap(new StrictHashMap<>()));
 
     /**
      * Builds a new {@code JavaFX} {@link Scene}, unique to each implementation of the {@link SceneBuilder} interface, on a given {@link Stage}.
@@ -66,9 +58,6 @@ public interface SceneBuilder {
 
         // The default scene.
         Scene defaultScene = new Scene(new Group());
-
-        // Adds the scene to the hashmap meant to contain custom-made scenes with the integer ID of -1.
-        SCENE_MANAGER.put("default".hashCode(), defaultScene);
 
         // Sets the scene of the given stage to a scene containing an empty group.
         stage.setScene(defaultScene);

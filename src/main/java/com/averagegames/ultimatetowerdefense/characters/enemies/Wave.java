@@ -1,6 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
 import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.maps.Spawner;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  * The {@link Wave} record serves as a way to easily store and manage an {@link Enemy} array.
  * @since Ultimate Tower Defense 1.0
  * @see Enemy
- * @see com.averagegames.ultimatetowerdefense.world.maps.elements.Spawner
+ * @see Spawner
  * @author AverageProgramer
  */
 @Accessors(fluent = true) @Getter

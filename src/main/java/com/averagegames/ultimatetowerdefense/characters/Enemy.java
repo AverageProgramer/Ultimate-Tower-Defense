@@ -1,17 +1,19 @@
 package com.averagegames.ultimatetowerdefense.characters;
 
-import static com.averagegames.ultimatetowerdefense.world.Enemies.LIST_OF_ACTIVE_ENEMIES;
-import static com.averagegames.ultimatetowerdefense.world.Towers.LIST_OF_ACTIVE_TOWERS;
+import static com.averagegames.ultimatetowerdefense.characters.Tower.LIST_OF_ACTIVE_TOWERS;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.characters.util.ImageLoader;
-import com.averagegames.ultimatetowerdefense.characters.util.TranslationHandler;
+import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
+import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
 import org.jetbrains.annotations.*;
 
-import com.averagegames.ultimatetowerdefense.world.maps.elements.Path;
-import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.maps.Path;
+import com.averagegames.ultimatetowerdefense.maps.Position;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -29,6 +31,11 @@ import lombok.experimental.Accessors;
  * @author AverageProgramer
  */
 public abstract class Enemy {
+
+    /**
+     * A {@link List} containing every active {@link Enemy} in a game.
+     */
+    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The {@link Enemy}'s parent {@link Group}.
@@ -174,7 +181,7 @@ public abstract class Enemy {
     public final @NotNull Position getPosition() {
 
         // Returns the enemy's current position.
-        return new Position(this.loadedEnemy.getX() + this.loadedEnemy.getTranslateX(), this.loadedEnemy.getY() + this.loadedEnemy.getTranslateY());
+        return new Position(this.loadedEnemy.getCurrentX(), this.loadedEnemy.getCurrentX());
     }
 
     /**
@@ -261,7 +268,7 @@ public abstract class Enemy {
             animation.setSpeed(this.speed);
 
             // A loop that will iterate through every position on the given path.
-            for (Position position : this.pathing.positions()) {
+            for (var position : this.pathing.positions()) {
 
                 // Sets the animation's destination to the current position in the loop.
                 animation.setDestination(position);

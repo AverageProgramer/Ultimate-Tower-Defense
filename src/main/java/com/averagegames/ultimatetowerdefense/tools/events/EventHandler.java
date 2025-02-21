@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools;
+package com.averagegames.ultimatetowerdefense.tools.events;
 
 /**
  * The {@link EventHandler} interface is meant to be implemented by all classes responsible for reading {@code events}.
@@ -14,7 +14,6 @@ public interface EventHandler {
      * @since Ultimate Tower Defense 1.0
      * @see ClickReader
      * @see ButtonReader
-     * @author AverageProgramer
      */
     void onEvent() throws Exception;
 }

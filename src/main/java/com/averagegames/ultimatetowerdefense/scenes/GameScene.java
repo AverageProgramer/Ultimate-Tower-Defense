@@ -1,14 +1,14 @@
-package com.averagegames.ultimatetowerdefense.world.scenes;
+package com.averagegames.ultimatetowerdefense.scenes;
 
 import com.averagegames.ultimatetowerdefense.characters.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Quick;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Normal;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
-import com.averagegames.ultimatetowerdefense.tools.SceneBuilder;
-import com.averagegames.ultimatetowerdefense.world.maps.elements.Path;
-import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
-import com.averagegames.ultimatetowerdefense.world.maps.elements.Spawner;
+import com.averagegames.ultimatetowerdefense.maps.Map;
+import com.averagegames.ultimatetowerdefense.maps.Path;
+import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.maps.Spawner;
 
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -25,6 +26,10 @@ import java.io.IOException;
 public final class GameScene extends Scene implements SceneBuilder {
     public GameScene(@NotNull final Parent root) {
         super(root);
+    }
+
+    public void setMap(@Nullable final Map map) {
+
     }
 
     @Override
@@ -82,8 +87,6 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Slow(),
                 new Slow()
         }), (Group) super.getRoot());
-
-        SCENE_MANAGER.put(0, this);
 
         stage.setScene(this);
     }

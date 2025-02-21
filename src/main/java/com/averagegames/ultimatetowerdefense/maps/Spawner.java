@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.world.maps.elements;
+package com.averagegames.ultimatetowerdefense.maps;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +12,6 @@ import lombok.experimental.Accessors;
 
 /**
  * The {@link Spawner} class serves as a way to automatically and easily {@code spawn} an individual {@link Enemy} or a {@link Enemy} {@link Wave}.
- * @see com.averagegames.ultimatetowerdefense.world.maps.Map
  * @see Enemy
  * @see Wave
  * @author AverageProgramer

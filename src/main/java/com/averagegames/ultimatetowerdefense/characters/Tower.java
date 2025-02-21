@@ -1,11 +1,9 @@
 package com.averagegames.ultimatetowerdefense.characters;
 
-import static com.averagegames.ultimatetowerdefense.world.Towers.LIST_OF_ACTIVE_TOWERS;
-
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.towers.Targeting;
-import com.averagegames.ultimatetowerdefense.characters.util.ImageLoader;
-import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
+import com.averagegames.ultimatetowerdefense.maps.Position;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -20,6 +18,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The {@link Tower} class serves as a {@code super} class to all in-game enemies.
@@ -29,6 +30,11 @@ import java.io.InputStream;
  * @author AverageProgramer
  */
 public abstract class Tower {
+
+    /**
+     * A {@link List} containing every active {@link Tower} in a game.
+     */
+    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The {@link Tower}'s parent {@link Group}.
@@ -179,14 +185,17 @@ public abstract class Tower {
         return this.loadedTower.intersects(node.getLayoutBounds());
     }
 
-    public final void place(@NotNull final Group parent) {
+    public final void place(@NotNull final Position position) {
         this.onPlace();
 
         LIST_OF_ACTIVE_TOWERS.add(this);
 
+        this.loadedTower.setImage(this.image);
+
         parent.getChildren().add(this.loadedTower);
 
-        this.parent = parent;
+        this.loadedTower.setX(position.x());
+        this.loadedTower.setY(position.y());
     }
 
     @Contract(pure = true)

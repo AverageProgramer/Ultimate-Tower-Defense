@@ -2,7 +2,7 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
 
 import com.averagegames.ultimatetowerdefense.characters.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.maps.Position;
 
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;

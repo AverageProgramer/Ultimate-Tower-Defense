@@ -1,9 +1,9 @@
-package com.averagegames.ultimatetowerdefense.characters.util;
+package com.averagegames.ultimatetowerdefense.tools.animation;
 
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Nullable;
 
-import com.averagegames.ultimatetowerdefense.world.maps.elements.Position;
+import com.averagegames.ultimatetowerdefense.maps.Position;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;

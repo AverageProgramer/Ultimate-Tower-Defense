@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools;
+package com.averagegames.ultimatetowerdefense.tools.assets;
 
 import org.jetbrains.annotations.NotNull;
 
