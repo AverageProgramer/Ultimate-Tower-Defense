@@ -1,7 +1,6 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.Tower;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 
 /**
  * The {@link Type} enum provides several different {@link Enemy} types that can allow for varied attacks from a {@link Tower}.

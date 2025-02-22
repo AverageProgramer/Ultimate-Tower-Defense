@@ -3,7 +3,7 @@ package com.averagegames.ultimatetowerdefense.tools.assets;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
 import org.jetbrains.annotations.NotNull;
 

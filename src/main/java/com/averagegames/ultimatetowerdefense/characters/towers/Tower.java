@@ -1,7 +1,9 @@
-package com.averagegames.ultimatetowerdefense.characters;
+package com.averagegames.ultimatetowerdefense.characters.towers;
 
+import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
+
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.characters.towers.Targeting;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 
@@ -15,6 +17,7 @@ import lombok.experimental.Accessors;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
 import java.io.InputStream;
@@ -170,7 +173,7 @@ public abstract class Tower {
     public final @NotNull Position getPosition() {
 
         // Returns the tower's current position.
-        return new Position(this.loadedTower.getX() + this.loadedTower.getTranslateX(), this.loadedTower.getY() + this.loadedTower.getTranslateY());
+        return new Position(this.loadedTower.getCurrentX(), this.loadedTower.getCurrentY());
     }
 
     /**
@@ -185,52 +188,98 @@ public abstract class Tower {
         return this.loadedTower.intersects(node.getLayoutBounds());
     }
 
+    /**
+     * Adds the {@link Tower} onto its parent {@link Group} at a given {@link Position}.
+     * @param position the {@link Position} to place the {@link Tower} at.
+     * @since Ultimate Tower Defense 1.0
+     */
     public final void place(@NotNull final Position position) {
+
+        // Performs the tower's spawn action.
+        // This method is unique to each individual inheritor of the tower class.
         this.onPlace();
 
+        // Adds the tower to the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.add(this);
 
+        // Loads the tower's image.
         this.loadedTower.setImage(this.image);
 
-        parent.getChildren().add(this.loadedTower);
+        // Sets the tower's x and y coordinates to the given position's x and y coordinates.
 
         this.loadedTower.setX(position.x());
         this.loadedTower.setY(position.y());
+
+        // Adds the tower to the tower's parent group.
+        parent.getChildren().add(this.loadedTower);
     }
 
-    @Contract(pure = true)
-    private boolean canAttack(@NotNull final Enemy enemy) {
-        boolean allowed = false;
+    /**
+     * Gets the {@link Tower}'s target {@link Enemy} based on which {@link Targeting} mode is active.
+     * @return the {@link Tower}'s target {@link Enemy}.
+     */
+    private @Nullable Enemy getTarget() {
 
-        switch (enemy.getType()) {
-            case Type.REGULAR:
-                allowed = true;
+        // TODO: Implement targeting
 
-            case Type.HIDDEN:
-                if (this.hiddenDetection) {
-                    allowed = true;
-                }
+        // Determines whether the list containing every active enemy contains any elements.
+        if (!LIST_OF_ACTIVE_ENEMIES.isEmpty()) {
 
-            case Type.FLYING:
-                if (this.flyingDetection) {
-                    allowed = true;
-                }
-
-            default:
-                break;
+            // Returns the tower's current target.
+            return LIST_OF_ACTIVE_ENEMIES.getFirst();
         }
 
-        return allowed;
+        // Returns a null value if no target enemy is found.
+        return null;
     }
 
-    protected final void startAttacking() {
-        this.attackThread = new Thread(() -> {
-            if (this.canAttack(null)) {
-                // TODO: Implement attacks
-            }
-        });
+    /**
+     * Gets whether the {@link Tower} can {@code attack} a given {@link Enemy}.
+     * @param enemy the {@link Enemy} being {@code attacked}.
+     * @return {@code true} if the {@link Tower} can {@code attack} the {@link Enemy}, {@code false} otherwise.
+     * @since Ultimate Tower Defense 1.0
+     */
+    @Contract(pure = true)
+    private boolean canAttack(@NotNull final Enemy enemy) {
+        switch (enemy.getType()) {
+            case Type.REGULAR:
+                return true;
+            case Type.HIDDEN:
+                if (this.hiddenDetection) {
+                    return true;
+                }
+            case Type.FLYING:
+                if (this.flyingDetection) {
+                    return true;
+                }
+            default:
+                return false;
+        }
+    }
 
-        this.attackThread.start();
+    public final void startAttacking() {
+        (this.attackThread = new Thread(() -> {
+            while (true) {
+                Enemy target = this.getTarget();
+
+                if (target == null) {
+                    continue;
+                }
+
+                if (this.canAttack(target)) {
+                    try {
+                        this.attack(target);
+                        Thread.sleep(this.coolDown);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        })).start();
+    }
+
+    public final void stopAttacking() {
+
     }
 
     public synchronized final void eliminate() {

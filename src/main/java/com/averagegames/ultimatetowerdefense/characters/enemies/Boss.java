@@ -1,7 +1,6 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.Tower;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 
 import org.intellij.lang.annotations.Identifier;
 import org.jetbrains.annotations.NotNull;

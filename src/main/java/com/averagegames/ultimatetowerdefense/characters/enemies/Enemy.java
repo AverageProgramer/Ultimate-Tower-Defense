@@ -1,15 +1,16 @@
-package com.averagegames.ultimatetowerdefense.characters;
+package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import static com.averagegames.ultimatetowerdefense.characters.Tower.LIST_OF_ACTIVE_TOWERS;
+import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
+import javafx.application.Platform;
 import org.jetbrains.annotations.*;
 
 import com.averagegames.ultimatetowerdefense.maps.Path;
@@ -157,6 +158,13 @@ public abstract class Enemy {
 
         // Removes the given amount from the enemy's health.
         this.health -= damage;
+
+        // Determines whether the enemy has any health remaining.
+        if (this.health <= 0) {
+
+            // Removes the enemy from its parent group.
+            Platform.runLater(this::eliminate);
+        }
     }
 
     /**

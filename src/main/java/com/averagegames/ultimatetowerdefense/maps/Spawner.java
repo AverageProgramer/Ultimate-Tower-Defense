@@ -2,7 +2,7 @@ package com.averagegames.ultimatetowerdefense.maps;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 
 import javafx.application.Platform;

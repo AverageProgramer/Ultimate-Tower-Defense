@@ -1,6 +1,5 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.Enemy;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
 import lombok.Getter;
 import lombok.experimental.Accessors;

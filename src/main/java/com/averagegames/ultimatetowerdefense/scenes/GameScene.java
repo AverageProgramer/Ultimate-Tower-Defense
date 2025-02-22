@@ -1,10 +1,11 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
-import com.averagegames.ultimatetowerdefense.characters.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Quick;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Normal;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
 import com.averagegames.ultimatetowerdefense.maps.Map;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
@@ -34,7 +35,7 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@SuppressWarnings("exports") @NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/(Official) Tower Defense Simulator OST - Grave Buster.wav");
+        File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav");
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
         Clip clip = AudioSystem.getClip();
         clip.open(audioIn);
@@ -66,6 +67,8 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void build(@SuppressWarnings("exports") @NotNull final Stage stage) {
+        Group root = (Group) super.getRoot();
+
         Spawner spawner = getTestSpawner();
 
         spawner.spawn(new Wave(new Enemy[] {
@@ -86,7 +89,16 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Slow(),
                 new Slow(),
                 new Slow()
-        }), (Group) super.getRoot());
+        }), root);
+
+        this.setOnMouseClicked(event -> {
+            Scout scout = new Scout();
+
+            scout.setParent(root);
+            scout.place(new Position(event.getX(), event.getY()));
+
+            scout.startAttacking();
+        });
 
         stage.setScene(this);
     }

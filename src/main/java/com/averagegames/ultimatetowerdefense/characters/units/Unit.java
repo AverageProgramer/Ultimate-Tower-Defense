@@ -1,5 +1,6 @@
-package com.averagegames.ultimatetowerdefense.characters;
+package com.averagegames.ultimatetowerdefense.characters.units;
 
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

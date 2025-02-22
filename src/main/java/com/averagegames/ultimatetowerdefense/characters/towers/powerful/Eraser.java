@@ -1,7 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.towers.powerful;
 
-import com.averagegames.ultimatetowerdefense.characters.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.Tower;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import org.jetbrains.annotations.NotNull;
 
 public class Eraser extends Tower {
