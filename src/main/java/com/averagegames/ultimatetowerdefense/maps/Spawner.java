@@ -37,6 +37,7 @@ public sealed class Spawner permits Base {
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} {@code spawns}.
      */
+    @NotNull
     private Thread spawnThread;
 
     public Spawner() {
@@ -47,9 +48,8 @@ public sealed class Spawner permits Base {
         // Initializes the spawning enemies' pathing using a path with 0 positions.
         this.enemyPathing = new Path(new Position[0]);
 
-        // Initializes the thread responsible for spawning enemies to null.
-        // This thread will be updated when the 'spawn' method is called.
-        this.spawnThread = null;
+        // Initializes the thread responsible for spawning enemies.
+        this.spawnThread = new Thread();
     }
 
     /**

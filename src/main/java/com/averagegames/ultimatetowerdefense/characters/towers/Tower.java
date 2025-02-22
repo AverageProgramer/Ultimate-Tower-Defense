@@ -182,7 +182,7 @@ public abstract class Tower {
      * @return {@code true} if the {@link Tower} intersects the {@link Node}, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
-    public final boolean intersects(@NotNull final Node node) {
+    public final boolean isInRange(@NotNull final Node node) {
 
         // Returns whether the tower intersects the given node.
         return this.loadedTower.intersects(node.getLayoutBounds());
@@ -226,6 +226,7 @@ public abstract class Tower {
         if (!LIST_OF_ACTIVE_ENEMIES.isEmpty()) {
 
             // Returns the tower's current target.
+            // This is a temporary targeting method.
             return LIST_OF_ACTIVE_ENEMIES.getFirst();
         }
 
@@ -241,78 +242,187 @@ public abstract class Tower {
      */
     @Contract(pure = true)
     private boolean canAttack(@NotNull final Enemy enemy) {
+
+        // A switch case that determines what type of enemy the given enemy is.
+        // Possible types are regular, hidden, and flying.
         switch (enemy.getType()) {
+
+            // The switch case for the regular enemy type.
             case Type.REGULAR:
+
+                // Returns true because all towers can attack regular enemies by default.
                 return true;
+
+            // The switch case for the hidden enemy type.
             case Type.HIDDEN:
+
+                // Determines whether the tower has hidden detection capabilities.
                 if (this.hiddenDetection) {
+
+                    // Returns true if the tower has hidden detection.
                     return true;
                 }
+
+            // The switch case for the flying enemy type.
             case Type.FLYING:
+
+                // Determines whether the tower has flying detection capabilities.
                 if (this.flyingDetection) {
+
+                    // Returns true if the tower has flying detection.
                     return true;
                 }
+
+            // The default switch case.
             default:
-                return false;
+
+                // Breaks out of the switch case.
+                break;
         }
+
+        // Returns false if the tower is not able to attack the given enemy.
+        return false;
     }
 
+    /**
+     * Allows the {@link Tower} to attack an {@link Enemy} that is in {@code range}.
+     * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
+     * @since Ultimate Tower Defense 1.0
+     */
     public final void startAttacking() {
-        (this.attackThread = new Thread(() -> {
-            while (true) {
-                Enemy target = this.getTarget();
 
-                if (target == null) {
+        // Creates a new thread that will handle tower attacks.
+        this.attackThread = new Thread(() -> {
+
+            // A loop that will continuously run until the tower is eliminated.
+            while (true) {
+
+                // Creates an object using the tower's current target enemy.
+                var target = this.getTarget();
+
+                // Determines whether the tower's target is either alive or null.
+                if (target == null || !target.isAlive()) {
+
+                    // Jumps to the next iteration of the loop preventing any exceptions from occurring.
                     continue;
                 }
 
+                // Determines whether the tower can attack the current target.
+                // Whether the tower can attack an enemy is based on the enemy's type and the tower's enemy detection capabilities.
                 if (this.canAttack(target)) {
+
+                    // Allows the attack the loop to be broken out of if the tower is eliminated.
                     try {
+
+                        // Attacks the tower's current target enemy.
                         this.attack(target);
+
+                        // Causes the current thread to wait for the tower's cool down to end.
                         Thread.sleep(this.coolDown);
                     } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+
+                        // Breaks out of the loop if the current thread is forcefully interrupted.
+                        break;
                     }
                 }
             }
-        })).start();
+        });
+
+        // Starts the thread so that the Tower can attack enemies.
+        this.attackThread.start();
     }
 
+    /**
+     * Stops all attacks the {@link Tower} may be performing.
+     * The {@link Tower}'s attacking {@link Thread} will be interrupted when calling this method.
+     * @since Ultimate Tower Defense 1.0
+     */
     public final void stopAttacking() {
 
+        // Interrupts the thread responsible for all tower attacks.
+        this.attackThread.interrupt();
     }
 
+    /**
+     * Removes the {@link Tower} from its parent {@link Group}.
+     * @since Ultimate Tower Defense 1.0
+     */
     public synchronized final void eliminate() {
 
+        // Performs the tower's death action.
+        // This method is unique to each individual inheritor of the tower class.
         this.onDeath();
 
+        // Removes the tower from its parent group.
         this.parent.getChildren().remove(this.loadedTower);
 
-        this.attackThread.interrupt();
+        // Interrupts the thread controlling tower attacks.
+        // This will cause an exception to be thrown in the thread which will break out of the loop controlling the tower.
+        this.stopAttacking();
 
+        // Removes the tower from the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.remove(this);
     }
 
+    /**
+     * An action performed whenever a {@link Tower} is {@code placed}.
+     * By default, this method does nothing.
+     * @since Ultimate Tower Defense 1.0
+     */
     protected void onPlace() {
         // This method can be overridden by a subclass so each individual tower can have unique action to do when placed.
     }
 
+    /**
+     * An action performed whenever a {@link Tower} is {@code healed}.
+     * By default, this method does nothing.
+     * @since Ultimate Tower Defense 1.0
+     */
     protected void onHeal() {
         // This method can be overridden by a subclass so each individual tower can have unique action to do when healed.
     }
 
+    /**
+     * An action performed whenever a {@link Tower} takes {@code damage}.
+     * By default, this method does nothing.
+     * @since Ultimate Tower Defense 1.0
+     */
     protected void onDamage() {
         // This method can be overridden by a subclass so each individual tower can have unique action to do when damaged.
     }
 
+    /**
+     * An action performed whenever a {@link Tower} is {@code eliminated}.
+     * By default, this method does nothing.
+     * @since Ultimate Tower Defense 1.0
+     */
     protected void onDeath() {
         // This method can be overridden by a subclass so each individual tower can have unique action to do when eliminated.
     }
 
-    public abstract void upgrade() throws InterruptedException;
-
+    /**
+     * An action performed whenever a {@link Tower} is {@code attacking}.
+     * By default, this method does nothing.
+     * @param enemy the {@link Enemy} to attack.
+     * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
+     * @since Ultimate Tower Defense 1.0
+     */
     protected abstract void attack(@NotNull final Enemy enemy) throws InterruptedException;
 
+    /**
+     * An action performed whenever a {@link Tower} is {@code upgraded}.
+     * By default, this method does nothing.
+     * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public abstract void upgrade() throws InterruptedException;
+
+    /**
+     * An action performed whenever a {@link Tower} is using a {@code special ability}.
+     * By default, this method does nothing.
+     * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
+     * @since Ultimate Tower Defense 1.0
+     */
     public void special() throws InterruptedException {
         // This method can be overridden by a subclass so that each individual tower can have a unique special ability.
     }

@@ -198,7 +198,7 @@ public abstract class Enemy {
      * @return {@code true} if the {@link Enemy} intersects the {@link Node}, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
-    public final boolean intersects(@NotNull final Node node) {
+    public final boolean isInRange(@NotNull final Node node) {
 
         // Returns whether the enemy intersects the given node.
         return this.loadedEnemy.intersects(node.getLayoutBounds());
@@ -264,8 +264,8 @@ public abstract class Enemy {
         // Interrupts the thread controlling enemy movement so that the new animation can override the old animation if there was one.
         this.movementThread.interrupt();
 
-        // Creates a new thread that will handle enemy movement and starts it.
-        (this.movementThread = new Thread(() -> {
+        // Creates a new thread that will handle enemy movement.
+        this.movementThread = new Thread(() -> {
 
             // Creates a new animation that will control the enemy's movement along a given path.
             var animation = new TranslationHandler();
@@ -299,19 +299,21 @@ public abstract class Enemy {
                     return;
                 }
             }
-        })).start();
+        });
+
+        // Starts the thread so that the enemy can move along its set path.
+        this.movementThread.start();
     }
 
     /**
-     * Determines whether the {@link Enemy} can {@code attack} the given {@link Tower}.
-     * This is a helper method.
-     * @param tower the {@link Tower} to {@code attack}.
+     * Stops moving the {@link Enemy} on its current {@link Path}.
+     * The {@link Enemy}'s movement {@link Thread} will be interrupted when calling this method.
      * @since Ultimate Tower Defense 1.0
      */
-    private boolean canAttack(@NotNull final Tower tower) {
+    public final void stopMoving() {
 
-        // Returns whether the given tower is within the enemy's range.
-        return tower.intersects(this.loadedEnemy);
+        // Interrupts the thread responsible for all enemy movement.
+        this.movementThread.interrupt();
     }
 
     /**
@@ -326,17 +328,43 @@ public abstract class Enemy {
     }
 
     /**
-     * Allows the {@link Enemy} to {@code attack} {@link Tower}s that it encounters.
+     * Determines whether the {@link Enemy} can {@code attack} the given {@link Tower}.
+     * This is a helper method.
+     * @param tower the {@link Tower} to {@code attack}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    private boolean canAttack(@NotNull final Tower tower) {
+
+        // Returns whether the given tower is within the enemy's range.
+        return tower.isInRange(this.loadedEnemy);
+    }
+
+    /**
+     * Allows the {@link Enemy} to attack a {@link Tower} that is in {@code range}.
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
     @NonBlocking
     public final void startAttacking() {
 
-        // Creates a new thread that will handle enemy attacks and starts it.
-        (this.attackThread = new Thread(() -> {
+        // Creates a new thread that will handle enemy attacks.
+        this.attackThread = new Thread(() -> {
             // Enemy attacking has not yet been implemented.
-        })).start();
+        });
+
+        // Starts the thread so that the enemy can attack towers.
+        this.attackThread.start();
+    }
+
+    /**
+     * Stops all attacks the {@link Enemy} may be performing.
+     * The {@link Enemy}'s attacking {@link Thread} will be interrupted when calling this method.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void stopAttacking() {
+
+        // Interrupts the thread responsible for all enemy attacks.
+        this.attackThread.interrupt();
     }
 
     /**
@@ -355,8 +383,8 @@ public abstract class Enemy {
         // Interrupts the threads controlling enemy actions.
         // This will cause an exception to be thrown in both threads which will break out of the loop controlling the enemy.
 
-        this.movementThread.interrupt();
-        this.attackThread.interrupt();
+        this.stopMoving();
+        this.stopAttacking();
 
         // Removes the enemy from the list containing every active enemy.
         LIST_OF_ACTIVE_ENEMIES.remove(this);
@@ -407,5 +435,15 @@ public abstract class Enemy {
      */
     protected void attack(@NotNull final Tower tower) throws InterruptedException {
         // This method can be overridden by a subclass so that each individual enemy can have a unique attack.
+    }
+
+    /**
+     * An action performed whenever an {@link Enemy} is using a {@code special ability}.
+     * By default, this method does nothing.
+     * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    protected void special(@NotNull final Tower tower) throws InterruptedException {
+        // This method can be overridden by a subclass so that each individual enemy can have a unique special ability.
     }
 }

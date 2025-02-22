@@ -16,8 +16,8 @@ public final class Scout extends Tower {
 
     public Scout() {
         super.image = this.image;
-        super.damage = damage;
-        super.coolDown = cooldown;
+        super.damage = this.damage;
+        super.coolDown = this.cooldown;
     }
 
     @Override
