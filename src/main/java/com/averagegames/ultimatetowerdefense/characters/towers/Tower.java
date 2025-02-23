@@ -15,10 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.*;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -37,7 +34,7 @@ public abstract class Tower {
     /**
      * A {@link List} containing every active {@link Tower} in a game.
      */
-    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());
+    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS;
 
     /**
      * The {@link Tower}'s parent {@link Group}.
@@ -56,21 +53,18 @@ public abstract class Tower {
      * The {@link Tower}'s {@link Image}.
      */
     @NotNull
-    @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED)
     protected Image image;
 
     /**
      * The {@link Tower}'s current {@code health}.
      */
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
+    @Accessors(makeFinal = true) @Getter
     protected int health;
 
     /**
      * The {@code damage} the {@link Tower} can do during an {@code attack}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED)
     protected int damage;
 
     /**
@@ -82,31 +76,38 @@ public abstract class Tower {
     /**
      * Whether the {@link Tower} can detect a {@code hidden} {@link Enemy}.
      */
-    protected boolean hiddenDetection;
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
+    private boolean hiddenDetection;
 
     /**
      * Whether the {@link Tower} can detect a {@code flying} {@link Enemy}.
      */
-    protected boolean flyingDetection;
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
+    private boolean flyingDetection;
 
     /**
      * The {@link Tower}'s cool down in milliseconds between {@code attacks}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED)
     protected int coolDown;
 
     /**
      * The {@link Tower}'s {@code level}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED)
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
     private int level;
 
     /**
      * A {@link Thread} that is responsible for handling all {@link Tower} {@code attacks}.
      */
     private Thread attackThread;
+
+    static {
+
+        // Initializes the list containing every active tower.
+        LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());
+    }
     
     {
 
@@ -195,6 +196,13 @@ public abstract class Tower {
      */
     public final void place(@NotNull final Position position) {
 
+        // Determines whether the tower was already placed on to its parent group.
+        if (this.parent.getChildren().contains(this.loadedTower)) {
+
+            // Prevents the tower from being placed more than once.
+            return;
+        }
+
         // Performs the tower's spawn action.
         // This method is unique to each individual inheritor of the tower class.
         this.onPlace();
@@ -211,7 +219,7 @@ public abstract class Tower {
         this.loadedTower.setY(position.y());
 
         // Adds the tower to the tower's parent group.
-        parent.getChildren().add(this.loadedTower);
+        this.parent.getChildren().add(this.loadedTower);
     }
 
     /**
@@ -289,7 +297,11 @@ public abstract class Tower {
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
+    @SuppressWarnings("all")
     public final void startAttacking() {
+
+        // Interrupts the thread controlling tower attacks so that the new attacks can override the old attacks if there were any.
+        this.attackThread.interrupt();
 
         // Creates a new thread that will handle tower attacks.
         this.attackThread = new Thread(() -> {
@@ -348,6 +360,13 @@ public abstract class Tower {
      * @since Ultimate Tower Defense 1.0
      */
     public synchronized final void eliminate() {
+
+        // Determines whether the tower was already eliminated from its parent group.
+        if (!this.parent.getChildren().contains(this.loadedTower)) {
+
+            // Prevents the tower from being eliminated more than once.
+            return;
+        }
 
         // Performs the tower's death action.
         // This method is unique to each individual inheritor of the tower class.

@@ -49,7 +49,9 @@ public sealed class Spawner permits Base {
         this.enemyPathing = new Path(new Position[0]);
 
         // Initializes the thread responsible for spawning enemies.
-        this.spawnThread = new Thread();
+        this.spawnThread = new Thread(() -> {
+            // This thread does nothing by default.
+        });
     }
 
     /**

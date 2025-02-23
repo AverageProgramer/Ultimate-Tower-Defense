@@ -9,14 +9,25 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Began implementing Tower attacks. Towers, specifically the Scout, can now be placed wherever the user clicks the screen. Currently, the implemented attack and placement methods are very primitive and will likely be updated continuously in the future.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added JAVADOC and code comments to the remaining methods within the Tower class.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 3.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Boss.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Normal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Quick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Quick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Slow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Slow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/(Official) Tower Defense Simulator OST - Grave Buster.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Grave Buster.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/(Official) Tower Defense Simulator OST - Nuclear Fallen King.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Nuclear Fallen King.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/(Official) Tower Defense Simulator OST - Totality (Umbra's Theme).wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Totality (Umbra's Theme).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/Tower Defense Simulator OST - Hardcore Wave 45.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/Tower Defense Simulator OST - Hardcore Wave 45.wav" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,11 +138,11 @@
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\resources" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\resources\com\averagegames\ultimatetowerdefense" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\resources\com\averagegames\ultimatetowerdefense\logging" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\.idea" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\.mvn" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\music" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\java\com\averagegames\ultimatetowerdefense\characters\towers\standard" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\java\com\averagegames\ultimatetowerdefense\characters\towers" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -594,7 +605,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740190084971</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Added JAVADOC and code comments to the remaining methods within the Tower class.">
+      <option name="closed" value="true" />
+      <created>1740259053463</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1740259053463</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -602,7 +621,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Replaced the Map class with a Map interface. The reason for this switch is that maps each have a unique design, therefore it is simply better to use overridden methods from an interface to load and unload it since loading and unloading the map should not require any additional pre-built methods that a class would be able to provide." />
     <MESSAGE value="Added the NotInstantiable annotation. This annotation is meant to be an indication that the annotated class can not be instantiated. The annotation is only for readability and does not actually do anything. The Tower class is also being working on." />
     <MESSAGE value="Made the abstract &quot;attack&quot; method in the Enemy class not abstract. It is now no longer a requirement for enemies to have some sort of attack. In addition to this, the &quot;setHealth&quot; method has been replaced with the &quot;heal&quot; and &quot;damage&quot; methods to avoid any unwanted modifications to the enemy's health. The new methods also allow for the enemy to properly have an &quot;onHeal&quot; and an &quot;onDamaged&quot; event." />
     <MESSAGE value="Updated certain segments of code that used boolean expressions to either throw or not throw an exception. These code segments now use assertions. The reason this switch won't cause problems is that the expressions will always evaluate to true while the program is running. If they do not and an exception is thrown, then that means there is an error with the code. Assertions should only be used when the condition is guaranteed to be true so that missing them will not cause problems." />
@@ -627,6 +645,17 @@
     <MESSAGE value="Began working on the Tower class. The EventHandler interface was also created and is intended to help read specific events such as button presses or clicks." />
     <MESSAGE value="Updated the project structure once again. The 'world' package was removed and the 'scenes' and 'maps' packages were relocated. The Enemies, Towers, and Maps classes were all removed as well. The ArrayLists of active enemies and towers can now simply be found in the Enemy and Tower classes respectively. The MapBuilder interface was also removed because it wasn't entirely necessary." />
     <MESSAGE value="Began implementing Tower attacks. Towers, specifically the Scout, can now be placed wherever the user clicks the screen. Currently, the implemented attack and placement methods are very primitive and will likely be updated continuously in the future." />
-    <option name="LAST_COMMIT_MESSAGE" value="Began implementing Tower attacks. Towers, specifically the Scout, can now be placed wherever the user clicks the screen. Currently, the implemented attack and placement methods are very primitive and will likely be updated continuously in the future." />
+    <MESSAGE value="Added JAVADOC and code comments to the remaining methods within the Tower class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added JAVADOC and code comments to the remaining methods within the Tower class." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

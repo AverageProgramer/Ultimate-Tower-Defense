@@ -11,6 +11,7 @@ import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
 import javafx.application.Platform;
+import lombok.AccessLevel;
 import org.jetbrains.annotations.*;
 
 import com.averagegames.ultimatetowerdefense.maps.Path;
@@ -19,7 +20,6 @@ import com.averagegames.ultimatetowerdefense.maps.Position;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -36,7 +36,7 @@ public abstract class Enemy {
     /**
      * A {@link List} containing every active {@link Enemy} in a game.
      */
-    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new ArrayList<>());
+    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES;
 
     /**
      * The {@link Enemy}'s parent {@link Group}.
@@ -55,34 +55,31 @@ public abstract class Enemy {
      * The {@link Enemy}'s {@link Image}.
      */
     @NotNull
-    @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED)
     protected Image image;
 
     /**
      * The {@link Enemy}'s {@link Type}.
      */
     @NotNull
-    @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED) @Getter
+    @Accessors(makeFinal = true) @Getter
     protected Type type;
 
     /**
      * The {@link Enemy}'s current {@code health}.
      */
-    @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED) @Getter
-    protected int health;
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
+    private int health;
 
     /**
      * The {@code damage} the {@link Enemy} can do during an {@code attack}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED)
     protected int damage;
 
     /**
      * The {@link Enemy}'s speed in pixels per second.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Setter(value = AccessLevel.PROTECTED)
     protected int speed;
 
     /**
@@ -103,6 +100,12 @@ public abstract class Enemy {
      */
     @NotNull
     private Thread attackThread;
+
+    static {
+
+        // Initializes the list containing every active enemy.
+        LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new ArrayList<>());
+    }
 
     {
 
@@ -211,6 +214,13 @@ public abstract class Enemy {
      */
     public final void spawn() {
 
+        // Determines whether the enemy was already placed on to its parent group.
+        if (this.parent.getChildren().contains(this.loadedEnemy)) {
+
+            // Prevents the enemy from being spawned more than once.
+            return;
+        }
+
         // Performs the enemy's spawn action.
         // This method is unique to each individual inheritor of the enemy class.
         this.onSpawn();
@@ -223,21 +233,6 @@ public abstract class Enemy {
 
         // Adds the enemy to the enemy's parent group.
         this.parent.getChildren().add(this.loadedEnemy);
-    }
-
-    /**
-     * Adds the {@link Enemy} to its {@code parent} {@link Group} at a set {@link Position}.
-     * Any previously set parent {@link Group} will be overridden when this method is called.
-     * @param parent the {@link Group} to add the {@link Enemy} to.
-     * @since Ultimate Tower Defense 1.0
-     */
-    public final void spawn(@NotNull final Group parent) {
-
-        // Sets the enemy's parent group to the newly given group.
-        this.setParent(parent);
-
-        // Spawns the enemy.
-        this.spawn();
     }
 
     /**
@@ -257,7 +252,6 @@ public abstract class Enemy {
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
-    @NonBlocking
     @SuppressWarnings("all")
     public final void startMoving() {
 
@@ -344,7 +338,6 @@ public abstract class Enemy {
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
-    @NonBlocking
     public final void startAttacking() {
 
         // Creates a new thread that will handle enemy attacks.
@@ -372,6 +365,13 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     public synchronized final void eliminate() {
+
+        // Determines whether the enemy was already eliminated from its parent group.
+        if (!this.parent.getChildren().contains(this.loadedEnemy)) {
+
+            // Prevents the enemy from being eliminated more than once.
+            return;
+        }
 
         // Performs the enemy's death action.
         // This method is unique to each individual inheritor of the enemy class.

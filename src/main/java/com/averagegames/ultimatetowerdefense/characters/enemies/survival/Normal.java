@@ -7,6 +7,11 @@ import com.averagegames.ultimatetowerdefense.maps.Position;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+
 /**
  * The {@link Normal} class is the first {@link Enemy} that player's will encounter during a game.
  * This {@link Enemy} is {@code universal} and can be found across each {@code survival difficulty} and in {@code campaign mode}.
@@ -53,7 +58,7 @@ public final class Normal extends Enemy {
         super.type = this.type;
 
         // Properly sets the normal's health to the finalized starting health.
-        super.health = this.startHealth;
+        super.setHealth(this.startHealth);
 
         // Properly sets the normal's damage per attack to the finalized damage per attack.
         super.damage = this.damage;
@@ -62,21 +67,16 @@ public final class Normal extends Enemy {
         super.speed = this.speed;
     }
 
-    /**
-     * A constructor that properly sets the attributes of a {@link Normal} {@link Enemy} as well as its {@link Position}.
-     * @param position the {@link Position} of the {@link Normal},
-     */
-    public Normal(@NotNull final Position position) {
-
-        // Calls the normal's default no-args constructor.
-        this();
-
-        // Sets the normal's position to the newly given position.
-        super.setPosition(position);
-    }
-
     @Override
     public void onDeath() {
-
+        try {
+            File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (Exception e) {
+            System.out.println("Exception occurred");
+        }
     }
 }
