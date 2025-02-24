@@ -1,6 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.towers.Targeting;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 
 import javafx.scene.image.Image;
@@ -27,7 +28,11 @@ public final class Scout extends Tower {
 
     @Override
     public void upgrade() {
-        // TODO: Add upgrades
+        super.setLevel(super.getLevel() + 1);
+
+        if (super.getLevel() >= 3) {
+            super.setHiddenDetection(true);
+        }
     }
 
     @Override

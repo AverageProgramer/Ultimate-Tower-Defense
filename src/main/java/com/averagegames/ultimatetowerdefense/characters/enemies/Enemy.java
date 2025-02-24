@@ -2,7 +2,6 @@ package com.averagegames.ultimatetowerdefense.characters.enemies;
 
 import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,13 +35,14 @@ public abstract class Enemy {
     /**
      * A {@link List} containing every active {@link Enemy} in a game.
      */
+    @NotNull
     public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES;
 
     /**
      * The {@link Enemy}'s parent {@link Group}.
      */
-    @NotNull
-    @Accessors(makeFinal = true) @Setter
+    @Nullable
+    @Accessors(makeFinal = true) @Setter @Getter
     private Group parent;
 
     /**
@@ -54,7 +54,7 @@ public abstract class Enemy {
     /**
      * The {@link Enemy}'s {@link Image}.
      */
-    @NotNull
+    @Nullable
     protected Image image;
 
     /**
@@ -85,9 +85,15 @@ public abstract class Enemy {
     /**
      * The {@link Path} the {@link Enemy} will follow.
      */
-    @NotNull
-    @Accessors(makeFinal = true) @Setter
+    @Nullable
+    @Accessors(makeFinal = true) @Setter @Getter
     private Path pathing;
+
+    /**
+     * The current {@link Position} the {@link Enemy} is at along its {@link Path}.
+     */
+    @Accessors(makeFinal = true) @Getter
+    private int positionIndex;
 
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} movement.
@@ -109,19 +115,19 @@ public abstract class Enemy {
 
     {
 
-        // Initializes the enemy's parent to a default group.
-        this.parent = new Group();
+        // Initializes the enemy's parent to a default, null group.
+        this.parent = null;
 
         // Initializes the enemy's image to a default, null image.
 
         this.loadedEnemy = new ImageLoader();
-        this.image = new Image(InputStream.nullInputStream());
+        this.image = null;
 
         // Initializes the enemy's type to regular by default.
         this.type = Type.REGULAR;
 
-        // Initializes the enemy's pathing to a path with 0 positions.
-        this.pathing = new Path(new Position[0]);
+        // Initializes the enemy's pathing to a default, null path.
+        this.pathing = null;
 
         // Initializes the threads that the enemy will use to move and attack.
 
@@ -192,7 +198,7 @@ public abstract class Enemy {
     public final @NotNull Position getPosition() {
 
         // Returns the enemy's current position.
-        return new Position(this.loadedEnemy.getCurrentX(), this.loadedEnemy.getCurrentX());
+        return new Position(this.loadedEnemy.getCurrentX(), this.loadedEnemy.getCurrentY());
     }
 
     /**
@@ -214,10 +220,10 @@ public abstract class Enemy {
      */
     public final void spawn() {
 
-        // Determines whether the enemy was already placed on to its parent group.
-        if (this.parent.getChildren().contains(this.loadedEnemy)) {
+        // Determines whether the enemy's parent group is null or if the enemy was already placed on to its parent group.
+        if (this.parent == null || this.parent.getChildren().contains(this.loadedEnemy)) {
 
-            // Prevents the enemy from being spawned more than once.
+            // Prevents the enemy from being added to a null group or spawned more than once.
             return;
         }
 
@@ -228,8 +234,12 @@ public abstract class Enemy {
         // Adds the enemy to the list containing every active enemy.
         LIST_OF_ACTIVE_ENEMIES.add(this);
 
-        // Loads the enemy's image.
-        this.loadedEnemy.setImage(this.image);
+        // Determines whether the enemy's image is null.
+        if (this.image != null) {
+
+            // Loads the enemy's image.
+            this.loadedEnemy.setImage(this.image);
+        }
 
         // Adds the enemy to the enemy's parent group.
         this.parent.getChildren().add(this.loadedEnemy);
@@ -243,7 +253,7 @@ public abstract class Enemy {
     public final boolean isAlive() {
 
         // Returns whether the enemy is alive or not.
-        return this.parent.getChildren().contains(this.loadedEnemy);
+        return this.parent != null && this.parent.getChildren().contains(this.loadedEnemy);
     }
 
     /**
@@ -269,8 +279,15 @@ public abstract class Enemy {
             animation.setNode(this.loadedEnemy);
             animation.setSpeed(this.speed);
 
+            // Determines whether the enemy's pathing is null.
+            if (this.pathing == null) {
+
+                // Prevents the enemy from moving along a null path.
+                return;
+            }
+
             // A loop that will iterate through every position on the given path.
-            for (var position : this.pathing.positions()) {
+            for (Position position : this.pathing.positions()) {
 
                 // Sets the animation's destination to the current position in the loop.
                 animation.setDestination(position);
@@ -292,6 +309,9 @@ public abstract class Enemy {
                     // This will most likely only happen when the enemy despawns.
                     return;
                 }
+
+                // Increases the position index to represent the position the enemy is at.
+                this.positionIndex++;
             }
         });
 
@@ -307,6 +327,7 @@ public abstract class Enemy {
     public final void stopMoving() {
 
         // Interrupts the thread responsible for all enemy movement.
+        // This will cause an exception to be thrown which will break out of the loop managing enemy movement.
         this.movementThread.interrupt();
     }
 
@@ -357,6 +378,7 @@ public abstract class Enemy {
     public final void stopAttacking() {
 
         // Interrupts the thread responsible for all enemy attacks.
+        // This will cause an exception to be thrown which will break out of the loop managing enemy attacks.
         this.attackThread.interrupt();
     }
 
@@ -365,6 +387,13 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     public synchronized final void eliminate() {
+
+        // Determines whether the enemy's parent group is null.
+        if (this.parent == null) {
+
+            // Prevents the enemy from being removed from a null group.
+            return;
+        }
 
         // Determines whether the enemy was already eliminated from its parent group.
         if (!this.parent.getChildren().contains(this.loadedEnemy)) {

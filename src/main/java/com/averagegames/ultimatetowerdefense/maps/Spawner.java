@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.scene.Group;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The {@link Spawner} class serves as a way to automatically and easily {@code spawn} an individual {@link Enemy} or a {@link Enemy} {@link Wave}.
@@ -21,16 +22,19 @@ public sealed class Spawner permits Base {
     /**
      * The {@link Position} that a {@code spawned} {@link Enemy} will be placed at.
      */
-    @NotNull
+    @Nullable
     @Accessors(makeFinal = true) @Setter
     private Position spawnPosition;
 
+    /**
+     * The time between {@link Enemy} {@code spawns}.
+     */
     private int spawnDelay;
 
     /**
      * The {@link Path} that any {@link Enemy} {@code spawned} by the {@link Spawner} will follow.
      */
-    @NotNull
+    @Nullable
     @Accessors(makeFinal = true) @Setter
     private Path enemyPathing;
 
@@ -40,13 +44,17 @@ public sealed class Spawner permits Base {
     @NotNull
     private Thread spawnThread;
 
+    /**
+     * A default, no args constructor for the {@link Spawner} class.
+     * @since Ultimate Tower Defense 1.0
+     */
     public Spawner() {
 
-        // Initializes the spawner's spawning position to a default positions at x = 0 and y = 0.
-        this.spawnPosition = new Position(0, 0);
+        // Initializes the spawner's spawning position to a default, null position.
+        this.spawnPosition = null;
 
-        // Initializes the spawning enemies' pathing using a path with 0 positions.
-        this.enemyPathing = new Path(new Position[0]);
+        // Initializes the spawning enemies' pathing to a default, null path.
+        this.enemyPathing = null;
 
         // Initializes the thread responsible for spawning enemies.
         this.spawnThread = new Thread(() -> {
@@ -57,6 +65,7 @@ public sealed class Spawner permits Base {
     /**
      * A constructor that creates a new {@link Spawner} object with a {@code spawn} {@link Position} at a given {@link Position}.
      * @param spawnPosition the {@link Spawner}'s {@code spawn} {@link Position}.
+     * @since Ultimate Tower Defense 1.0
      */
     public Spawner(@NotNull final Position spawnPosition) {
 
@@ -86,17 +95,26 @@ public sealed class Spawner permits Base {
      */
     public final void spawn(@NotNull final Enemy enemy, @NotNull final Group group) {
 
-        // Sets the enemy's parent group to the given group and the enemy's position to the spawner's spawn position.
-
+        // Sets the enemy's parent group to the given group.
         enemy.setParent(group);
-        enemy.setPosition(this.spawnPosition);
+
+        // Determines whether the spawner's spawn position is null.
+        if (this.spawnPosition != null) {
+
+            // Sets the enemy's position to a previously given position.
+            enemy.setPosition(this.spawnPosition);
+        }
 
         // Allows for nodes to be added to the group despite the current thread possible not being the JavaFX application thread.
         // Adds the enemy to the previously set group at the previously set position.
         Platform.runLater(enemy::spawn);
 
-        // Sets the enemy's pathing to the previously set path.
-        enemy.setPathing(enemyPathing);
+        // Determines whether the previously given enemy pathing is null.
+        if (this.enemyPathing != null) {
+
+            // Sets the enemy's pathing to the previously set path.
+            enemy.setPathing(enemyPathing);
+        }
 
         // Begins moving the enemy.
         enemy.startMoving();

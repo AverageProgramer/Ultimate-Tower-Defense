@@ -4,6 +4,7 @@ import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIS
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 
@@ -17,9 +18,9 @@ import lombok.experimental.Accessors;
 
 import org.jetbrains.annotations.*;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,12 +35,13 @@ public abstract class Tower {
     /**
      * A {@link List} containing every active {@link Tower} in a game.
      */
+    @NotNull
     public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS;
 
     /**
      * The {@link Tower}'s parent {@link Group}.
      */
-    @NotNull
+    @Nullable
     @Accessors(makeFinal = true) @Setter
     private Group parent;
 
@@ -52,7 +54,7 @@ public abstract class Tower {
     /**
      * The {@link Tower}'s {@link Image}.
      */
-    @NotNull
+    @Nullable
     protected Image image;
 
     /**
@@ -76,13 +78,13 @@ public abstract class Tower {
     /**
      * Whether the {@link Tower} can detect a {@code hidden} {@link Enemy}.
      */
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter(AccessLevel.PROTECTED)
     private boolean hiddenDetection;
 
     /**
      * Whether the {@link Tower} can detect a {@code flying} {@link Enemy}.
      */
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter(AccessLevel.PROTECTED)
     private boolean flyingDetection;
 
     /**
@@ -111,13 +113,13 @@ public abstract class Tower {
     
     {
 
-        // Initializes the tower's parent to a default group.
-        this.parent = new Group();
+        // Initializes the tower's parent to a default, null group.
+        this.parent = null;
 
         // Initializes the tower's image to a default, null image.
 
         this.loadedTower = new ImageLoader();
-        this.image = new Image(InputStream.nullInputStream());
+        this.image = null;
 
         // Initializes the tower's targeting to 'first' by default.
         this.targeting = Targeting.FIRST;
@@ -196,6 +198,13 @@ public abstract class Tower {
      */
     public final void place(@NotNull final Position position) {
 
+        // Determines whether the tower's parent group is null.
+        if (this.parent == null) {
+
+            // Prevents the tower from being added to a null group.
+            return;
+        }
+
         // Determines whether the tower was already placed on to its parent group.
         if (this.parent.getChildren().contains(this.loadedTower)) {
 
@@ -210,8 +219,12 @@ public abstract class Tower {
         // Adds the tower to the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.add(this);
 
-        // Loads the tower's image.
-        this.loadedTower.setImage(this.image);
+        // Determines whether the tower's image is null.
+        if (this.image != null) {
+
+            // Loads the tower's image.
+            this.loadedTower.setImage(this.image);
+        }
 
         // Sets the tower's x and y coordinates to the given position's x and y coordinates.
 
@@ -228,17 +241,74 @@ public abstract class Tower {
      */
     private @Nullable Enemy getTarget() {
 
-        // TODO: Implement targeting
+        // Sorts the list containing every active enemy so that the enemies with the greatest position index are at the end of the list.
+        LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getPositionIndex));
 
-        // Determines whether the list containing every active enemy contains any elements.
-        if (!LIST_OF_ACTIVE_ENEMIES.isEmpty()) {
+        // The object that will be returned as the target enemy.
+        Enemy target = null;
 
-            // Returns the tower's current target.
-            // This is a temporary targeting method.
-            return LIST_OF_ACTIVE_ENEMIES.getFirst();
+        // Determines whether the list of every active enemy is empty and whether the tower's targeting is on first or last.
+        if (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && (this.targeting == Targeting.FIRST || this.targeting == Targeting.LAST)) {
+
+            // An index that will be used to determine which enemy has passed the most positions on a set path.
+            int currentPos = this.targeting == Targeting.FIRST ? LIST_OF_ACTIVE_ENEMIES.getLast().getPositionIndex() : Integer.MAX_VALUE;
+
+            // A double that will be used to determine which enemy is closest to the next position on a set path.
+            double distance = this.targeting == Targeting.FIRST ? Integer.MAX_VALUE : 0;
+
+            // A loop that will iterate through every enemy within the list of active enemies.
+            for (Enemy enemy : LIST_OF_ACTIVE_ENEMIES) {
+
+                // The enemy's current position index.
+                // The position index represents what position along a path the enemy is at.
+                int posIndex = enemy.getPositionIndex();
+
+                // Determines whether the enemy is a valid target based on the tower's targeting.
+                if (this.targeting == Targeting.FIRST ? posIndex < currentPos : posIndex > currentPos) {
+
+                    // Jumps to the next iteration of the loop.
+                    continue;
+                }
+
+                // The enemy's current pathing.
+                var path = enemy.getPathing();
+
+                // Determines whether the path is null and whether the position index is within the bounds of the enemy's path.
+                if (path != null && posIndex < path.positions().length - 1) {
+
+                    // Gets the enemy's current position as well as the enemy's target destination.
+
+                    var enemyPos = enemy.getPosition();
+                    var second = path.positions()[posIndex + 1];
+
+                    // The distance remaining to the enemy's target destination.
+                    double enemyDistance = Math.sqrt(Math.pow(second.x() - enemyPos.x(), 2) + Math.pow(second.y() - enemyPos.y(), 2));
+
+                    // Determines whether the enemy is closest to or farthest from its destination depending on the tower's targeting.
+                    if (this.targeting == Targeting.FIRST ? enemyDistance < distance : enemyDistance > distance) {
+
+                        // Sets the original position index to the enemy's.
+                        currentPos = posIndex;
+
+                        // Sets the original distance remaining to the enemy's current distance remaining.
+                        distance = enemyDistance;
+
+                        // Sets the target enemy to the current enemy within the loop.
+                        target = enemy;
+                    }
+                } else if (path != null && posIndex == path.positions().length - 1) {
+
+                    // Sets the target enemy to the current enemy within the loop.
+                    // This enemy will always be the enemy at the very end of the path.
+                    target = enemy;
+                }
+            }
+
+            // Returns the target enemy.
+            return target;
         }
 
-        // Returns a null value if no target enemy is found.
+        // Returns null if no target enemy is found.
         return null;
     }
 
@@ -352,6 +422,7 @@ public abstract class Tower {
     public final void stopAttacking() {
 
         // Interrupts the thread responsible for all tower attacks.
+        // This will cause an exception to be thrown which will break out of the loop managing tower attacks.
         this.attackThread.interrupt();
     }
 
@@ -360,6 +431,13 @@ public abstract class Tower {
      * @since Ultimate Tower Defense 1.0
      */
     public synchronized final void eliminate() {
+
+        // Determines whether the tower's parent group is null.
+        if (this.parent == null) {
+
+            // Prevents the tower from being removed from a null group.
+            return;
+        }
 
         // Determines whether the tower was already eliminated from its parent group.
         if (!this.parent.getChildren().contains(this.loadedTower)) {

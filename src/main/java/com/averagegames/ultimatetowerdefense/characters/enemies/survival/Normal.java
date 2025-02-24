@@ -32,11 +32,6 @@ public final class Normal extends Enemy {
     private final Type type = Type.REGULAR;
 
     /**
-     * The {@link Normal}'s starting {@code health}.
-     */
-    private final int startHealth = 5;
-
-    /**
      * The {@code damage} the {@link Normal} can do during an {@code attack}.
      */
     private final int damage = 0;
@@ -45,6 +40,11 @@ public final class Normal extends Enemy {
      * The {@link Normal}'s speed in pixels per second.
      */
     private final int speed = 25;
+
+    /**
+     * The {@link Normal}'s starting {@code health}.
+     */
+    private final int startHealth = 5;
 
     /**
      * A constructor that properly sets the attributes of a {@link Normal} {@link Enemy}.
@@ -57,18 +57,18 @@ public final class Normal extends Enemy {
         // Properly sets the normal's type to the finalized type.
         super.type = this.type;
 
-        // Properly sets the normal's health to the finalized starting health.
-        super.setHealth(this.startHealth);
-
         // Properly sets the normal's damage per attack to the finalized damage per attack.
         super.damage = this.damage;
 
         // Properly sets the normal's speed in pixels per second to the finalized speed in pixels per second.
         super.speed = this.speed;
+
+        // Properly sets the normal's health to the finalized starting health.
+        super.setHealth(this.startHealth);
     }
 
     @Override
-    public void onDeath() {
+    protected void onDeath() {
         try {
             File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());

@@ -1,6 +1,5 @@
 package com.averagegames.ultimatetowerdefense.tools.animation;
 
-import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Nullable;
 
 import com.averagegames.ultimatetowerdefense.maps.Position;
@@ -47,6 +46,10 @@ public class TranslationHandler {
     @Setter
     private Position destination;
 
+    /**
+     * A default, no args constructor for the {@link TranslationHandler} class.
+     * @since Ultimate Tower Defense 1.0
+     */
     public TranslationHandler() {
 
         // Initializes the animation's translator.
@@ -77,6 +80,7 @@ public class TranslationHandler {
      * Begins moving the given {@link Node} to the given {@code destination} at the given {@code speed}.
      * @since Ultimate Tower Defense 1.0
      */
+    @SuppressWarnings("all")
     public final void start() {
 
         // Sets the duration of the animation to a calculated amount of seconds.
@@ -139,7 +143,6 @@ public class TranslationHandler {
      * @throws InterruptedException when the animation is forcefully stopped.
      * @since Ultimate Tower Defense 1.0
      */
-    @Blocking
     public final void waitForFinish() throws InterruptedException {
 
         // Synchronizes the animation so that it can properly wait.
@@ -155,6 +158,7 @@ public class TranslationHandler {
      * @return the animation's current {@code state}.
      * @since Ultimate Tower Defense 1.0
      */
+    @SuppressWarnings("unused")
     public final boolean isFinished() {
 
         // Returns whether the animation is finished.

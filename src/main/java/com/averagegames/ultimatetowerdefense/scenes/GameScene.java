@@ -6,7 +6,6 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Normal;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
-import com.averagegames.ultimatetowerdefense.maps.Map;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
@@ -17,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -27,10 +25,6 @@ import java.io.IOException;
 public final class GameScene extends Scene implements SceneBuilder {
     public GameScene(@NotNull final Parent root) {
         super(root);
-    }
-
-    public void setMap(@Nullable final Map map) {
-
     }
 
     @Override
@@ -72,6 +66,12 @@ public final class GameScene extends Scene implements SceneBuilder {
         Spawner spawner = getTestSpawner();
 
         spawner.spawn(new Wave(new Enemy[] {
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+
                 new Normal(),
                 new Normal(),
                 new Normal(),
@@ -88,7 +88,19 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Slow(),
                 new Slow(),
                 new Slow(),
-                new Slow()
+                new Slow(),
+
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick()
         }), root);
 
         this.setOnMouseClicked(event -> {
