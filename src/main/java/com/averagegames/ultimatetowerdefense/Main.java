@@ -1,6 +1,5 @@
 package com.averagegames.ultimatetowerdefense;
 
-import static com.averagegames.ultimatetowerdefense.Manager.LOGGER;
 import static com.averagegames.ultimatetowerdefense.scenes.SceneBuilder.loadBuild;
 
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
