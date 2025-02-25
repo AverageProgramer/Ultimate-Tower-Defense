@@ -1,4 +1,10 @@
 package com.averagegames.ultimatetowerdefense.player;
 
-public class Bank {
+import lombok.Getter;
+import lombok.Setter;
+
+public final class Bank {
+
+    @Setter @Getter
+    private static int cash = 500;
 }

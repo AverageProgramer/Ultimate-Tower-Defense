@@ -4,6 +4,7 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Targeting;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 
+import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,6 +20,8 @@ public final class Scout extends Tower {
     private final int damage = 1;
 
     private final int cooldown = 2000;
+
+    public static final int COST = 200;
 
     public Scout() {
         super.image = this.image;
@@ -38,11 +41,8 @@ public final class Scout extends Tower {
     @Override
     protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
         try {
-            File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
+            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
+            player.play();
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }

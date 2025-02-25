@@ -2,6 +2,7 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 
 import javax.sound.sampled.AudioInputStream;
@@ -21,6 +22,8 @@ public final class Slow extends Enemy {
 
     private final int speed = 15;
 
+    private final int income = 1;
+
     public Slow() {
         super.image = this.image;
 
@@ -30,16 +33,15 @@ public final class Slow extends Enemy {
         super.damage = this.damage;
 
         super.speed = this.speed;
+
+        super.income = this.income;
     }
 
     @Override
     public void onDeath() {
         try {
-            File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 3.wav");
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
+            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 3.wav");
+            player.play();
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }

@@ -1,18 +1,25 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.NormalTitan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Quick;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Normal;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Gunner;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Marksman;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
 
+import com.averagegames.ultimatetowerdefense.player.Bank;
+import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.NotNull;
@@ -23,17 +30,16 @@ import java.io.IOException;
 
 @Internal
 public final class GameScene extends Scene implements SceneBuilder {
+    private int tower = 0;
+
     public GameScene(@NotNull final Parent root) {
         super(root);
     }
 
     @Override
     public void pre_build(@SuppressWarnings("exports") @NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Nuclear Fallen King.wav");
-        AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioIn);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav");
+        player.loop(AudioPlayer.LOOP_CONTINUOUSLY);
 
         stage.setMaximized(true);
     }
@@ -66,6 +72,26 @@ public final class GameScene extends Scene implements SceneBuilder {
         Spawner spawner = getTestSpawner();
 
         spawner.spawn(new Wave(new Enemy[] {
+                new NormalTitan(),
+
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+
                 new Slow(),
                 new Slow(),
                 new Slow(),
@@ -84,32 +110,42 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Quick(),
                 new Quick(),
 
-                new Slow(),
-                new Slow(),
-                new Slow(),
-                new Slow(),
-                new Slow(),
-
-                new Normal(),
-                new Normal(),
-                new Normal(),
-                new Normal(),
-                new Normal(),
-
-                new Quick(),
-                new Quick(),
-                new Quick(),
-                new Quick(),
-                new Quick()
+                new NormalTitan()
         }), root);
 
         this.setOnMouseClicked(event -> {
-            Scout scout = new Scout();
+            if (this.tower == 0) {
+                Scout scout = new Scout();
 
-            scout.setParent(root);
-            scout.place(new Position(event.getX(), event.getY()));
+                scout.setParent(root);
+                scout.place(new Position(event.getX(), event.getY()));
 
-            scout.startAttacking();
+                scout.startAttacking();
+            } else if (this.tower == 1) {
+                Marksman marksman = new Marksman();
+
+                marksman.setParent(root);
+                marksman.place(new Position(event.getX(), event.getY()));
+
+                marksman.startAttacking();
+            } else if (this.tower == 2) {
+                Gunner gunner = new Gunner();
+
+                gunner.setParent(root);
+                gunner.place(new Position(event.getX(), event.getY()));
+
+                gunner.startAttacking();
+            }
+        });
+
+        this.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.DIGIT1)) {
+                this.tower = 0;
+            } else if (event.getCode().equals(KeyCode.DIGIT2)) {
+                this.tower = 1;
+            } else if (event.getCode().equals(KeyCode.DIGIT3)) {
+                this.tower = 2;
+            }
         });
 
         stage.setScene(this);

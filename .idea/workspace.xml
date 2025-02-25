@@ -9,20 +9,31 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added a variety of sound effects to the game. A few methods and constructors have also been removed from the Enemy and Tower classes as well as a few of the inheritors.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/CharacterBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/MapBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/assets/AssetBuilder.java" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented the targeting for the Tower class. Currently, the Tower can either target the first Enemy along a given Path or the last Enemy. In the future, there will be more targeting modes that the Tower can use. These modes will include the 'strongest' and 'weakest' targeting modes. In addition to this, a variety of other classes that will be implemented in the future have been added to the project. These classes include new Towers, the MapBuilder, and the CharacterBuilder class.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Manager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/NormalTitan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalTitan.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/MarksmanTower.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Normal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Quick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Quick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Slow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Slow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Bank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animation/TranslationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/assets/AudioPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/FastZombie.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/FastZombie.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalZombie.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalZombie.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/SlowZombie.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/SlowZombie.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ScoutTower.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ScoutTower.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +51,8 @@
         <option value="package-info" />
         <option value="AnnotationType" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -133,11 +144,11 @@
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\enemies" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\music" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\java\com\averagegames\ultimatetowerdefense\characters\towers\standard" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\java\com\averagegames\ultimatetowerdefense\characters\towers" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -616,7 +627,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740274541216</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Implemented the targeting for the Tower class. Currently, the Tower can either target the first Enemy along a given Path or the last Enemy. In the future, there will be more targeting modes that the Tower can use. These modes will include the 'strongest' and 'weakest' targeting modes. In addition to this, a variety of other classes that will be implemented in the future have been added to the project. These classes include new Towers, the MapBuilder, and the CharacterBuilder class.">
+      <option name="closed" value="true" />
+      <created>1740441009770</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1740441009770</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +643,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Made the abstract &quot;attack&quot; method in the Enemy class not abstract. It is now no longer a requirement for enemies to have some sort of attack. In addition to this, the &quot;setHealth&quot; method has been replaced with the &quot;heal&quot; and &quot;damage&quot; methods to avoid any unwanted modifications to the enemy's health. The new methods also allow for the enemy to properly have an &quot;onHeal&quot; and an &quot;onDamaged&quot; event." />
     <MESSAGE value="Updated certain segments of code that used boolean expressions to either throw or not throw an exception. These code segments now use assertions. The reason this switch won't cause problems is that the expressions will always evaluate to true while the program is running. If they do not and an exception is thrown, then that means there is an error with the code. Assertions should only be used when the condition is guaranteed to be true so that missing them will not cause problems." />
     <MESSAGE value="Changed the way assertions are being used in the program. Going forwards, assertions should only be used when it is a developer problem only. For example, code that determines something about a method's behavior such as checking if the Specific annotation is present on the method asking for verification should use assertions because it will always be present. If it isn't, then that is a developer problem only. On the other hand, assertions should not be used for validating method calls, parameters, etc. Long story short, assertions should only be used for development related problems and nothing else." />
     <MESSAGE value="Added the GreaterThan and LessThan annotations. These annotations serve as a way to make a sure a Number value given to a method is either greater than or less than a specified value. In addition to the annotations, two classes, the GreaterThanAnnotation and LessThanAnnotation classes, were added as a way to verify if the number is a valid input to a method." />
@@ -649,7 +667,8 @@
     <MESSAGE value="Began implementing Tower attacks. Towers, specifically the Scout, can now be placed wherever the user clicks the screen. Currently, the implemented attack and placement methods are very primitive and will likely be updated continuously in the future." />
     <MESSAGE value="Added JAVADOC and code comments to the remaining methods within the Tower class." />
     <MESSAGE value="Added a variety of sound effects to the game. A few methods and constructors have also been removed from the Enemy and Tower classes as well as a few of the inheritors." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a variety of sound effects to the game. A few methods and constructors have also been removed from the Enemy and Tower classes as well as a few of the inheritors." />
+    <MESSAGE value="Implemented the targeting for the Tower class. Currently, the Tower can either target the first Enemy along a given Path or the last Enemy. In the future, there will be more targeting modes that the Tower can use. These modes will include the 'strongest' and 'weakest' targeting modes. In addition to this, a variety of other classes that will be implemented in the future have been added to the project. These classes include new Towers, the MapBuilder, and the CharacterBuilder class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented the targeting for the Tower class. Currently, the Tower can either target the first Enemy along a given Path or the last Enemy. In the future, there will be more targeting modes that the Tower can use. These modes will include the 'strongest' and 'weakest' targeting modes. In addition to this, a variety of other classes that will be implemented in the future have been added to the project. These classes include new Towers, the MapBuilder, and the CharacterBuilder class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

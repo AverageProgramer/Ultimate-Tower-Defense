@@ -4,6 +4,7 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 
+import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,6 +43,11 @@ public final class Normal extends Enemy {
     private final int speed = 25;
 
     /**
+     * The money earned each time the {@link Normal} is damaged.
+     */
+    private final int income = 1;
+
+    /**
      * The {@link Normal}'s starting {@code health}.
      */
     private final int startHealth = 5;
@@ -63,6 +69,9 @@ public final class Normal extends Enemy {
         // Properly sets the normal's speed in pixels per second to the finalized speed in pixels per second.
         super.speed = this.speed;
 
+        // Properly sets the normal's income to the finalized income.
+        super.income = this.income;
+
         // Properly sets the normal's health to the finalized starting health.
         super.setHealth(this.startHealth);
     }
@@ -70,11 +79,8 @@ public final class Normal extends Enemy {
     @Override
     protected void onDeath() {
         try {
-            File f = new File("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav");
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
+            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav");
+            player.play();
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }

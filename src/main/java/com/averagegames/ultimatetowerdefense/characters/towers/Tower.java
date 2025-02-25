@@ -4,10 +4,12 @@ import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIS
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.maps.Path;
+import com.averagegames.ultimatetowerdefense.player.Bank;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -18,10 +20,7 @@ import lombok.experimental.Accessors;
 
 import org.jetbrains.annotations.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * The {@link Tower} class serves as a {@code super} class to all in-game enemies.
@@ -198,17 +197,10 @@ public abstract class Tower {
      */
     public final void place(@NotNull final Position position) {
 
-        // Determines whether the tower's parent group is null.
-        if (this.parent == null) {
+        // Determines whether the tower's parent group is null and whether the tower was already placed on to its parent group.
+        if (this.parent == null || this.parent.getChildren().contains(this.loadedTower)) {
 
-            // Prevents the tower from being added to a null group.
-            return;
-        }
-
-        // Determines whether the tower was already placed on to its parent group.
-        if (this.parent.getChildren().contains(this.loadedTower)) {
-
-            // Prevents the tower from being placed more than once.
+            // Prevents the tower from being added to a null group and from being placed more than once.
             return;
         }
 
@@ -228,8 +220,8 @@ public abstract class Tower {
 
         // Sets the tower's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedTower.setX(position.x());
-        this.loadedTower.setY(position.y());
+        this.loadedTower.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
+        this.loadedTower.setY(position.y() - (this.image != null ? this.image.getHeight() / 2 : 0));
 
         // Adds the tower to the tower's parent group.
         this.parent.getChildren().add(this.loadedTower);
@@ -239,16 +231,23 @@ public abstract class Tower {
      * Gets the {@link Tower}'s target {@link Enemy} based on which {@link Targeting} mode is active.
      * @return the {@link Tower}'s target {@link Enemy}.
      */
-    private @Nullable Enemy getTarget() {
-
-        // Sorts the list containing every active enemy so that the enemies with the greatest position index are at the end of the list.
-        LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getPositionIndex));
+    private @Nullable Enemy getTarget() throws ConcurrentModificationException {
 
         // The object that will be returned as the target enemy.
         Enemy target = null;
 
-        // Determines whether the list of every active enemy is empty and whether the tower's targeting is on first or last.
-        if (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && (this.targeting == Targeting.FIRST || this.targeting == Targeting.LAST)) {
+        // Determines whether the list containing every active enemy is empty.
+        if (LIST_OF_ACTIVE_ENEMIES.isEmpty()) {
+
+            // Returns null because there are no active enemies.
+            return null;
+        }
+
+        // Determines whether the tower's targeting is on first or last.
+        if (this.targeting == Targeting.FIRST || this.targeting == Targeting.LAST) {
+
+            // Sorts the list containing every active enemy so that the enemies with the greatest position index are at the end of the list.
+            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getPositionIndex));
 
             // An index that will be used to determine which enemy has passed the most positions on a set path.
             int currentPos = this.targeting == Targeting.FIRST ? LIST_OF_ACTIVE_ENEMIES.getLast().getPositionIndex() : Integer.MAX_VALUE;
@@ -306,10 +305,14 @@ public abstract class Tower {
 
             // Returns the target enemy.
             return target;
-        }
+        } else {
 
-        // Returns null if no target enemy is found.
-        return null;
+            // Sorts the list containing every active enemy so that the enemies with the greatest health are at the end of the list.
+            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getHealth));
+
+            // Returns either the strongest or weakest active enemy depending on the tower's targeting.
+            return this.targeting == Targeting.STRONGEST ? LIST_OF_ACTIVE_ENEMIES.getLast() : LIST_OF_ACTIVE_ENEMIES.getFirst();
+        }
     }
 
     /**
@@ -379,8 +382,24 @@ public abstract class Tower {
             // A loop that will continuously run until the tower is eliminated.
             while (true) {
 
-                // Creates an object using the tower's current target enemy.
-                var target = this.getTarget();
+                // An object that will be the tower's target enemy.
+                Enemy target = null;
+
+                // A loop that will iterate until the tower successfully gets a target.
+                while (true) {
+
+                    // A try-catch that will prevent any exceptions while the tower gets its target.
+                    try {
+
+                        // Gets the tower's current target enemy.
+                        target = this.getTarget();
+
+                        // Breaks out of the loop.
+                        break;
+                    } catch (ConcurrentModificationException e) {
+                        // No action is needed when an exception occurs.
+                    }
+                }
 
                 // Determines whether the tower's target is either alive or null.
                 if (target == null || !target.isAlive()) {

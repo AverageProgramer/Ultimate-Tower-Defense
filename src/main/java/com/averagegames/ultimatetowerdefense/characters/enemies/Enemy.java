@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.player.Bank;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
 import javafx.application.Platform;
@@ -94,6 +95,10 @@ public abstract class Enemy {
      */
     @Accessors(makeFinal = true) @Getter
     private int positionIndex;
+
+    @Range(from = 0L, to = Long.MAX_VALUE)
+    @Accessors(makeFinal = true) @Getter
+    protected int income;
 
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} movement.
@@ -185,8 +190,8 @@ public abstract class Enemy {
 
         // Updates the enemy's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedEnemy.setX(position.x());
-        this.loadedEnemy.setY(position.y());
+        this.loadedEnemy.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
+        this.loadedEnemy.setY(position.y() - (this.image != null ? this.image.getHeight() : 0));
     }
 
     /**
@@ -290,7 +295,7 @@ public abstract class Enemy {
             for (Position position : this.pathing.positions()) {
 
                 // Sets the animation's destination to the current position in the loop.
-                animation.setDestination(position);
+                animation.setDestination(new Position(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0), position.y() - (this.image != null ? this.image.getHeight() : 0)));
 
                 // Starts the animation.
                 animation.start();
