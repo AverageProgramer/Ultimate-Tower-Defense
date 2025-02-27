@@ -98,16 +98,17 @@ public sealed class Spawner permits Base {
         // Sets the enemy's parent group to the given group.
         enemy.setParent(group);
 
-        // Determines whether the spawner's spawn position is null.
-        if (this.spawnPosition != null) {
-
-            // Sets the enemy's position to a previously given position.
-            enemy.setPosition(this.spawnPosition);
-        }
-
         // Allows for nodes to be added to the group despite the current thread possible not being the JavaFX application thread.
         // Adds the enemy to the previously set group at the previously set position.
-        Platform.runLater(enemy::spawn);
+        Platform.runLater(() -> {
+
+            // Determines whether the spawner's spawn position is null or not.
+            if (this.spawnPosition != null) {
+
+                // Spawns the enemy at the spawner's spawn position.
+                enemy.spawn(this.spawnPosition);
+            }
+        });
 
         // Determines whether the previously given enemy pathing is null.
         if (this.enemyPathing != null) {
@@ -134,7 +135,7 @@ public sealed class Spawner permits Base {
         this.spawnThread = new Thread(() -> {
 
             // A loop that will iterate through every enemy in the given wave.
-            for (Enemy enemy : wave.enemies()) {
+            for (final Enemy enemy : wave.enemies()) {
 
                 // Spawns the individual enemy.
                 this.spawn(enemy, group);

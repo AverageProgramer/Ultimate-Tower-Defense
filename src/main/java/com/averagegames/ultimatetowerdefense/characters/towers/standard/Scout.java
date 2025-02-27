@@ -1,17 +1,11 @@
 package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.towers.Targeting;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
 
 public final class Scout extends Tower {
 

@@ -5,21 +5,20 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 
-public final class Quick extends Enemy {
+public class Stealthy extends Enemy {
+    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/StealthyZombie.gif");
 
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/FastZombie.gif");
+    private final Type type = Type.HIDDEN;
 
-    private final Type type = Type.REGULAR;
-
-    private final int startHealth = 3;
+    private final int startHealth = 25;
 
     private final int damage = 1;
 
-    private final int speed = 50;
+    private final int speed = 25;
 
     private final int income = 1;
 
-    public Quick() {
+    public Stealthy() {
         super.image = this.image;
 
         super.type = this.type;
@@ -34,11 +33,6 @@ public final class Quick extends Enemy {
 
     @Override
     public void onDeath() {
-        try {
-            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 2.wav");
-            player.play();
-        } catch (Exception e) {
-            System.out.println("Exception occurred");
-        }
+
     }
 }

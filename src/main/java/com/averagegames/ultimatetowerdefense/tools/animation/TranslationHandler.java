@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.tools.animation;
 
+import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Nullable;
 
 import com.averagegames.ultimatetowerdefense.maps.Position;
@@ -96,6 +97,23 @@ public class TranslationHandler {
         // Determines if the destination's position is null.
         if (this.node != null &&  this.destination != null) {
 
+            // A loop that will iterate until the node has been properly loaded.
+            while (true) {
+
+                // Temporary variables that will be used the determine whether or not the node is fully loaded.
+
+                double x = this.node.getLayoutBounds().getMinX();
+                double y = this.node.getLayoutBounds().getMinY();
+
+                // Determines whether the x and y variables are not equal to 0.
+                // When the x and y variables are not equal to 0, the node is loaded.
+                if (x != 0 && y != 0) {
+
+                    // Breaks out of the loop as the node has now loaded.
+                    break;
+                }
+            }
+
             // Sets the x and y coordinates that the node should travel to using the given destination.
             // The coordinates are relative to the window, not the node.
 
@@ -143,6 +161,7 @@ public class TranslationHandler {
      * @throws InterruptedException when the animation is forcefully stopped.
      * @since Ultimate Tower Defense 1.0
      */
+    @Blocking
     public final void waitForFinish() throws InterruptedException {
 
         // Synchronizes the animation so that it can properly wait.

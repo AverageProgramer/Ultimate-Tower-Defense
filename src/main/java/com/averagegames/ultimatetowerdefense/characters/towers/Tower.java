@@ -4,12 +4,11 @@ import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIS
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.player.Bank;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
+import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -158,6 +157,7 @@ public abstract class Tower {
      * @param position the new {@link Position}.
      * @since Ultimate Tower Defense 1.0
      */
+    @SuppressWarnings("unused")
     public final void setPosition(@NotNull final Position position) {
 
         // Updates the tower's x and y coordinates to the given position's x and y coordinates.
@@ -228,94 +228,6 @@ public abstract class Tower {
     }
 
     /**
-     * Gets the {@link Tower}'s target {@link Enemy} based on which {@link Targeting} mode is active.
-     * @return the {@link Tower}'s target {@link Enemy}.
-     */
-    private @Nullable Enemy getTarget() throws ConcurrentModificationException {
-
-        // The object that will be returned as the target enemy.
-        Enemy target = null;
-
-        // Determines whether the list containing every active enemy is empty.
-        if (LIST_OF_ACTIVE_ENEMIES.isEmpty()) {
-
-            // Returns null because there are no active enemies.
-            return null;
-        }
-
-        // Determines whether the tower's targeting is on first or last.
-        if (this.targeting == Targeting.FIRST || this.targeting == Targeting.LAST) {
-
-            // Sorts the list containing every active enemy so that the enemies with the greatest position index are at the end of the list.
-            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getPositionIndex));
-
-            // An index that will be used to determine which enemy has passed the most positions on a set path.
-            int currentPos = this.targeting == Targeting.FIRST ? LIST_OF_ACTIVE_ENEMIES.getLast().getPositionIndex() : Integer.MAX_VALUE;
-
-            // A double that will be used to determine which enemy is closest to the next position on a set path.
-            double distance = this.targeting == Targeting.FIRST ? Integer.MAX_VALUE : 0;
-
-            // A loop that will iterate through every enemy within the list of active enemies.
-            for (Enemy enemy : LIST_OF_ACTIVE_ENEMIES) {
-
-                // The enemy's current position index.
-                // The position index represents what position along a path the enemy is at.
-                int posIndex = enemy.getPositionIndex();
-
-                // Determines whether the enemy is a valid target based on the tower's targeting.
-                if (this.targeting == Targeting.FIRST ? posIndex < currentPos : posIndex > currentPos) {
-
-                    // Jumps to the next iteration of the loop.
-                    continue;
-                }
-
-                // The enemy's current pathing.
-                var path = enemy.getPathing();
-
-                // Determines whether the path is null and whether the position index is within the bounds of the enemy's path.
-                if (path != null && posIndex < path.positions().length - 1) {
-
-                    // Gets the enemy's current position as well as the enemy's target destination.
-
-                    var enemyPos = enemy.getPosition();
-                    var second = path.positions()[posIndex + 1];
-
-                    // The distance remaining to the enemy's target destination.
-                    double enemyDistance = Math.sqrt(Math.pow(second.x() - enemyPos.x(), 2) + Math.pow(second.y() - enemyPos.y(), 2));
-
-                    // Determines whether the enemy is closest to or farthest from its destination depending on the tower's targeting.
-                    if (this.targeting == Targeting.FIRST ? enemyDistance < distance : enemyDistance > distance) {
-
-                        // Sets the original position index to the enemy's.
-                        currentPos = posIndex;
-
-                        // Sets the original distance remaining to the enemy's current distance remaining.
-                        distance = enemyDistance;
-
-                        // Sets the target enemy to the current enemy within the loop.
-                        target = enemy;
-                    }
-                } else if (path != null && posIndex == path.positions().length - 1) {
-
-                    // Sets the target enemy to the current enemy within the loop.
-                    // This enemy will always be the enemy at the very end of the path.
-                    target = enemy;
-                }
-            }
-
-            // Returns the target enemy.
-            return target;
-        } else {
-
-            // Sorts the list containing every active enemy so that the enemies with the greatest health are at the end of the list.
-            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getHealth));
-
-            // Returns either the strongest or weakest active enemy depending on the tower's targeting.
-            return this.targeting == Targeting.STRONGEST ? LIST_OF_ACTIVE_ENEMIES.getLast() : LIST_OF_ACTIVE_ENEMIES.getFirst();
-        }
-    }
-
-    /**
      * Gets whether the {@link Tower} can {@code attack} a given {@link Enemy}.
      * @param enemy the {@link Enemy} being {@code attacked}.
      * @return {@code true} if the {@link Tower} can {@code attack} the {@link Enemy}, {@code false} otherwise.
@@ -344,6 +256,9 @@ public abstract class Tower {
                     return true;
                 }
 
+                // Breaks out of the switch case.
+                break;
+
             // The switch case for the flying enemy type.
             case Type.FLYING:
 
@@ -354,6 +269,9 @@ public abstract class Tower {
                     return true;
                 }
 
+                // Breaks out of the switch case.
+                break;
+
             // The default switch case.
             default:
 
@@ -363,6 +281,109 @@ public abstract class Tower {
 
         // Returns false if the tower is not able to attack the given enemy.
         return false;
+    }
+
+    /**
+     * Gets the {@link Tower}'s target {@link Enemy} based on which {@link Targeting} mode is active.
+     * @return the {@link Tower}'s target {@link Enemy}.
+     */
+    private @Nullable Enemy getTarget() throws ConcurrentModificationException {
+
+        // The object that will be returned as the target enemy.
+        Enemy target = null;
+
+        // Determines whether the list containing every active enemy is empty.
+        if (LIST_OF_ACTIVE_ENEMIES.isEmpty()) {
+
+            // Returns null because there are no active enemies.
+            return null;
+        }
+
+        // Determines whether the tower's targeting is on first or last.
+        if (this.targeting == Targeting.FIRST || this.targeting == Targeting.LAST) {
+
+            // Sorts the list containing every active enemy so that the enemies with the greatest position index are at the end of the list.
+            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getPositionIndex));
+
+            // Creates a new list of enemies that will not contain any enemies the tower can't attack.
+            // This will prevent targeting issues when the tower is trying to find a target enemy.
+
+            List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
+            fixedList.removeIf(enemy -> !this.canAttack(enemy));
+
+            // Puts the current active enemies into an array to avoid exceptions.
+            Enemy[] enemies = fixedList.toArray(new Enemy[0]);
+
+            // An index that will be used to determine which enemy has passed the most positions on a set path.
+            int currentPos = this.targeting == Targeting.FIRST ? enemies[enemies.length - 1].getPositionIndex() : Integer.MAX_VALUE;
+
+            // A double that will be used to determine which enemy is closest to the next position on a set path.
+            double distance = this.targeting == Targeting.FIRST ? Integer.MAX_VALUE : 0;
+
+            // A loop that will iterate through every enemy within the new array of active enemies.
+            for (final Enemy enemy : enemies) {
+
+                // The enemy's current position index.
+                // The position index represents what position along a path the enemy is at.
+                int posIndex = enemy.getPositionIndex();
+
+                // Determines whether the enemy is a valid target based on the tower's targeting.
+                if (this.targeting == Targeting.FIRST ? posIndex < currentPos : posIndex > currentPos) {
+
+                    // Jumps to the next iteration of the loop.
+                    continue;
+                }
+
+                // The enemy's current pathing.
+                Path path = enemy.getPathing();
+
+                // Determines whether the path is null and whether the position index is within the bounds of the enemy's path.
+                if (path != null && posIndex < path.positions().length - 1) {
+
+                    // Gets the enemy's current position as well as the enemy's target destination.
+
+                    Position enemyPos = enemy.getPosition();
+                    Position second = path.positions()[posIndex + 1];
+
+                    // The distance remaining to the enemy's target destination.
+                    double enemyDistance = Math.sqrt(Math.pow(second.x() - enemyPos.x(), 2) + Math.pow(second.y() - enemyPos.y(), 2));
+
+                    // Determines whether the enemy is closest to or farthest from its destination depending on the tower's targeting and whether the tower can attack the enemy.
+                    if (this.targeting == Targeting.FIRST ? enemyDistance < distance : enemyDistance > distance) {
+
+                        // Sets the original position index to the enemy's.
+                        currentPos = posIndex;
+
+                        // Sets the original distance remaining to the enemy's current distance remaining.
+                        distance = enemyDistance;
+
+                        // Sets the target enemy to the current enemy within the loop.
+                        target = enemy;
+                    }
+                } else if (path != null && posIndex == path.positions().length - 1) {
+
+                    // Sets the target enemy to the current enemy within the loop.
+                    // This enemy will always be the enemy at the very end of the path.
+                    target = enemy;
+                }
+            }
+
+            // Returns the target enemy.
+            return target;
+        } else {
+
+            // Sorts the list containing every active enemy so that the enemies with the greatest health are at the end of the list.
+            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getHealth));
+
+            // Creates a new list of enemies that will not contain any enemies the tower can't attack.
+            // This will prevent targeting issues when the tower is trying to find a target enemy.
+
+            List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
+            fixedList.removeIf(enemy -> !this.canAttack(enemy));
+
+            // Returns either the strongest or weakest active enemy depending on the tower's targeting.
+            return this.targeting == Targeting.STRONGEST ? fixedList.getLast() : fixedList.getFirst();
+        }
     }
 
     /**
@@ -382,24 +403,8 @@ public abstract class Tower {
             // A loop that will continuously run until the tower is eliminated.
             while (true) {
 
-                // An object that will be the tower's target enemy.
-                Enemy target = null;
-
-                // A loop that will iterate until the tower successfully gets a target.
-                while (true) {
-
-                    // A try-catch that will prevent any exceptions while the tower gets its target.
-                    try {
-
-                        // Gets the tower's current target enemy.
-                        target = this.getTarget();
-
-                        // Breaks out of the loop.
-                        break;
-                    } catch (ConcurrentModificationException e) {
-                        // No action is needed when an exception occurs.
-                    }
-                }
+                // Gets the tower's current target enemy.
+                var target = this.getTarget();
 
                 // Determines whether the tower's target is either alive or null.
                 if (target == null || !target.isAlive()) {
@@ -408,23 +413,18 @@ public abstract class Tower {
                     continue;
                 }
 
-                // Determines whether the tower can attack the current target.
-                // Whether the tower can attack an enemy is based on the enemy's type and the tower's enemy detection capabilities.
-                if (this.canAttack(target)) {
+                // Allows the attack the loop to be broken out of if the tower is eliminated.
+                try {
 
-                    // Allows the attack the loop to be broken out of if the tower is eliminated.
-                    try {
+                    // Attacks the tower's current target enemy.
+                    this.attack(target);
 
-                        // Attacks the tower's current target enemy.
-                        this.attack(target);
+                    // Causes the current thread to wait for the tower's cool down to end.
+                    Thread.sleep(this.coolDown);
+                } catch (InterruptedException e) {
 
-                        // Causes the current thread to wait for the tower's cool down to end.
-                        Thread.sleep(this.coolDown);
-                    } catch (InterruptedException e) {
-
-                        // Breaks out of the loop if the current thread is forcefully interrupted.
-                        break;
-                    }
+                    // Breaks out of the loop if the current thread is forcefully interrupted.
+                    break;
                 }
             }
         });

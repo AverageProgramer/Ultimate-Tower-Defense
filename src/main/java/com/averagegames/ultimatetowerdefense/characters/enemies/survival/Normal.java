@@ -2,16 +2,9 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.maps.Position;
 
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
-import org.jetbrains.annotations.NotNull;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
 
 /**
  * The {@link Normal} class is the first {@link Enemy} that player's will encounter during a game.

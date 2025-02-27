@@ -5,11 +5,6 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
-
 public class NormalTitan extends Enemy {
 
     /**

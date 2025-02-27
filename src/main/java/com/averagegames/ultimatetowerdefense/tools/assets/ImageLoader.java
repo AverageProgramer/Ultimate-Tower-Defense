@@ -43,7 +43,6 @@ public class ImageLoader extends ImageView {
      * @return the {@link ImageLoader}'s current {@code x}.
      * @since Ultimate Tower Defense 1.0
      * @see Enemy
-     * @see TranslationHandler
      */
     public final double getCurrentX() {
 
@@ -56,7 +55,6 @@ public class ImageLoader extends ImageView {
      * @return the {@link ImageLoader}'s current {@code y}.
      * @since Ultimate Tower Defense 1.0
      * @see Enemy
-     * @see TranslationHandler
      */
     public final double getCurrentY() {
 

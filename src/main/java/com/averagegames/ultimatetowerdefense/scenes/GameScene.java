@@ -1,10 +1,7 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.NormalTitan;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Quick;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Normal;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.*;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Gunner;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Marksman;
@@ -13,19 +10,16 @@ import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
 
-import com.averagegames.ultimatetowerdefense.player.Bank;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.NotNull;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 
 @Internal
@@ -38,8 +32,8 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@SuppressWarnings("exports") @NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav");
-        player.loop(AudioPlayer.LOOP_CONTINUOUSLY);
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Totality (Umbra's Theme).wav");
+        player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
     }
@@ -110,7 +104,13 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Quick(),
                 new Quick(),
 
-                new NormalTitan()
+                new NormalTitan(),
+
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy()
         }), root);
 
         this.setOnMouseClicked(event -> {

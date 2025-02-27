@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.player.Bank;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
 import javafx.application.Platform;
@@ -190,8 +189,8 @@ public abstract class Enemy {
 
         // Updates the enemy's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedEnemy.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
-        this.loadedEnemy.setY(position.y() - (this.image != null ? this.image.getHeight() : 0));
+        this.loadedEnemy.setX(position.x());
+        this.loadedEnemy.setY(position.y());
     }
 
     /**
@@ -251,6 +250,22 @@ public abstract class Enemy {
     }
 
     /**
+     * Adds the {@link Enemy} to its {@code parent} {@link Group} at a newly given {@link Position}.
+     * The {@code parent} {@link Group} and spawn {@link Position} will need to be set prior to calling this method.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void spawn(@NotNull final Position position) {
+
+        // Sets the enemy's position using the enemy image's middle bottom as a reference.
+
+        this.loadedEnemy.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
+        this.loadedEnemy.setY(position.y() - (this.image != null ? this.image.getHeight() : 0));
+
+        // Spawns the enemy using the default spawn method.
+        this.spawn();
+    }
+
+    /**
      * Gets whether the {@link Enemy} is alive and still a member of its parent {@link Group}.
      * @return {@code true} if the {@link Enemy} is alive, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
@@ -292,7 +307,7 @@ public abstract class Enemy {
             }
 
             // A loop that will iterate through every position on the given path.
-            for (Position position : this.pathing.positions()) {
+            for (final Position position : this.pathing.positions()) {
 
                 // Sets the animation's destination to the current position in the loop.
                 animation.setDestination(new Position(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0), position.y() - (this.image != null ? this.image.getHeight() : 0)));
@@ -305,7 +320,7 @@ public abstract class Enemy {
 
                     // Causes the current thread to wait until the enemy's animation is finished.
                     animation.waitForFinish();
-                } catch (InterruptedException ex) {
+                } catch (InterruptedException e) {
 
                     // Stops the enemy's animation.
                     animation.stop();
@@ -318,6 +333,9 @@ public abstract class Enemy {
                 // Increases the position index to represent the position the enemy is at.
                 this.positionIndex++;
             }
+
+            // Removes the enemy from its parent group now that it has finished its path.
+            Platform.runLater(this::eliminate);
         });
 
         // Starts the thread so that the enemy can move along its set path.
@@ -393,17 +411,10 @@ public abstract class Enemy {
      */
     public synchronized final void eliminate() {
 
-        // Determines whether the enemy's parent group is null.
-        if (this.parent == null) {
+        // Determines whether the enemy's parent group is null and whether the enemy was already eliminated from its parent group.
+        if (this.parent == null || !this.parent.getChildren().contains(this.loadedEnemy)) {
 
-            // Prevents the enemy from being removed from a null group.
-            return;
-        }
-
-        // Determines whether the enemy was already eliminated from its parent group.
-        if (!this.parent.getChildren().contains(this.loadedEnemy)) {
-
-            // Prevents the enemy from being eliminated more than once.
+            // Prevents the enemy from being removed from a null group and being eliminated more than once.
             return;
         }
 
