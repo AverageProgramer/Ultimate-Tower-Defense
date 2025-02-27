@@ -1,7 +1,6 @@
 package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.towers.Targeting;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
@@ -37,7 +36,7 @@ public class Gunner extends Tower {
             try {
                 AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
                 player.play();
-            } catch (Exception e) {
+            } catch (Exception ex) {
                 System.out.println("Exception occurred");
             }
 

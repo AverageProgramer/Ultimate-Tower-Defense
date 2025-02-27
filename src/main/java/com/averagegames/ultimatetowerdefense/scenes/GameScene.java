@@ -24,7 +24,7 @@ import java.io.IOException;
 
 @Internal
 public final class GameScene extends Scene implements SceneBuilder {
-    private int tower = 0;
+    private int tower = -1;
 
     public GameScene(@NotNull final Parent root) {
         super(root);
@@ -32,7 +32,7 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@SuppressWarnings("exports") @NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Totality (Umbra's Theme).wav");
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/Tower Defense Simulator OST - Hardcore Wave 45.wav");
         player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
@@ -145,6 +145,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                 this.tower = 1;
             } else if (event.getCode().equals(KeyCode.DIGIT3)) {
                 this.tower = 2;
+            } else if (event.getCode().equals(KeyCode.DIGIT0)) {
+                this.tower = -1;
             }
         });
 

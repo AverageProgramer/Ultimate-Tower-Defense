@@ -9,29 +9,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="There was a missed compiler error in the previous commit. That is the only change that has been made.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Stealthy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/multiplayer/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/StealthyZombie.gif" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug regarding the 'getTarget' method in the Tower class. Previously, the tower would attempt to target hidden and flying enemies even without having hidden and flying detection capabilities. This would ultimately cause the Tower to get stuck and unable to attack other enemies. The Stealthy zombie has also now been added. It is the first zombie to properly use the hidden Type.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Normal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/NormalTitan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/NormalTitan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Quick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Quick.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Slow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Slow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Stealthy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/Stealthy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/animation/TranslationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/assets/AudioPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/assets/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/tools/assets/ImageLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/FastZombie.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/FastZombie.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalTitan.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalTitan.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalZombie.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalZombie.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/SlowZombie.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/SlowZombie.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -649,7 +640,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740522737545</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Fixed a bug regarding the 'getTarget' method in the Tower class. Previously, the tower would attempt to target hidden and flying enemies even without having hidden and flying detection capabilities. This would ultimately cause the Tower to get stuck and unable to attack other enemies. The Stealthy zombie has also now been added. It is the first zombie to properly use the hidden Type.">
+      <option name="closed" value="true" />
+      <created>1740621801373</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1740621801373</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -657,7 +656,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added the GreaterThan and LessThan annotations. These annotations serve as a way to make a sure a Number value given to a method is either greater than or less than a specified value. In addition to the annotations, two classes, the GreaterThanAnnotation and LessThanAnnotation classes, were added as a way to verify if the number is a valid input to a method." />
     <MESSAGE value="Added a new &quot;exceptions&quot; package. This package contains various classes that, as of right now, extend the RuntimeException class. All the current exceptions that have been made are meant to be thrown when any of the custom-built annotations' contracts are violated. For example, if a method annotated with the Specific annotation is called by an unspecified calling class, then an UnspecifiedAccessException will be thrown." />
     <MESSAGE value="Files have now been organized in a slightly different way. Anything that will be added to a scene during game runtime has now been placed in its own package. Certain packages like the enemies and towers packages were placed into the elements package. Anything meant to assist in game development such as annotations and exceptions were placed into the tools package. Both of these package can be found in the main package." />
     <MESSAGE value="Added static imports to certain classes. Going forwards, anything directly related to game management such as lists containing active enemies and towers should simply be imported using static imports. If the constant does not meet these criteria, then static imports should not be used and the constant should simply be referenced using its parent class." />
@@ -682,7 +680,8 @@
     <MESSAGE value="Implemented the targeting for the Tower class. Currently, the Tower can either target the first Enemy along a given Path or the last Enemy. In the future, there will be more targeting modes that the Tower can use. These modes will include the 'strongest' and 'weakest' targeting modes. In addition to this, a variety of other classes that will be implemented in the future have been added to the project. These classes include new Towers, the MapBuilder, and the CharacterBuilder class." />
     <MESSAGE value="Fully implemented the Marksman and Gunner towers, each being equipped with their own methods of attack. The 'strongest' and 'weakest' targeting modes for towers have also been fully implemented. The AudioPlayer class has also been added, making it much easier to play both sound effects and music." />
     <MESSAGE value="There was a missed compiler error in the previous commit. That is the only change that has been made." />
-    <option name="LAST_COMMIT_MESSAGE" value="There was a missed compiler error in the previous commit. That is the only change that has been made." />
+    <MESSAGE value="Fixed a bug regarding the 'getTarget' method in the Tower class. Previously, the tower would attempt to target hidden and flying enemies even without having hidden and flying detection capabilities. This would ultimately cause the Tower to get stuck and unable to attack other enemies. The Stealthy zombie has also now been added. It is the first zombie to properly use the hidden Type." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug regarding the 'getTarget' method in the Tower class. Previously, the tower would attempt to target hidden and flying enemies even without having hidden and flying detection capabilities. This would ultimately cause the Tower to get stuck and unable to attack other enemies. The Stealthy zombie has also now been added. It is the first zombie to properly use the hidden Type." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

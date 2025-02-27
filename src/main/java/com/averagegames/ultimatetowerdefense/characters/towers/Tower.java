@@ -4,7 +4,7 @@ import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIS
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Slow;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Stealthy;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.maps.Position;
@@ -186,16 +186,17 @@ public abstract class Tower {
      */
     public final boolean isInRange(@NotNull final Node node) {
 
-        // Returns whether the tower intersects the given node.
-        return this.loadedTower.intersects(node.getLayoutBounds());
+        // TODO: Implement tower ranges
+
+        return false;
     }
 
     /**
-     * Adds the {@link Tower} onto its parent {@link Group} at a given {@link Position}.
-     * @param position the {@link Position} to place the {@link Tower} at.
+     * Adds the {@link Tower} to its {@code parent} {@link Group} at a set {@link Position}.
+     * The {@code parent} {@link Group} and placement {@link Position} will need to be set prior to calling this method.
      * @since Ultimate Tower Defense 1.0
      */
-    public final void place(@NotNull final Position position) {
+    public final void place() {
 
         // Determines whether the tower's parent group is null and whether the tower was already placed on to its parent group.
         if (this.parent == null || this.parent.getChildren().contains(this.loadedTower)) {
@@ -218,13 +219,24 @@ public abstract class Tower {
             this.loadedTower.setImage(this.image);
         }
 
+        // Adds the tower to the tower's parent group.
+        this.parent.getChildren().add(this.loadedTower);
+    }
+
+    /**
+     * Adds the {@link Tower} onto its parent {@link Group} at a given {@link Position}.
+     * @param position the {@link Position} to place the {@link Tower} at.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void place(@NotNull final Position position) {
+
         // Sets the tower's x and y coordinates to the given position's x and y coordinates.
 
         this.loadedTower.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
         this.loadedTower.setY(position.y() - (this.image != null ? this.image.getHeight() / 2 : 0));
 
-        // Adds the tower to the tower's parent group.
-        this.parent.getChildren().add(this.loadedTower);
+        // Places the tower using the default placement method.
+        this.place();
     }
 
     /**
@@ -234,53 +246,31 @@ public abstract class Tower {
      * @since Ultimate Tower Defense 1.0
      */
     @Contract(pure = true)
+    @SuppressWarnings("all")
     private boolean canAttack(@NotNull final Enemy enemy) {
 
         // A switch case that determines what type of enemy the given enemy is.
         // Possible types are regular, hidden, and flying.
-        switch (enemy.getType()) {
+        return switch (enemy.getType()) {
 
             // The switch case for the regular enemy type.
-            case Type.REGULAR:
+            case Type.REGULAR ->
 
-                // Returns true because all towers can attack regular enemies by default.
-                return true;
+                    // Returns true because all towers can attack regular enemies by default.
+                    true;
 
             // The switch case for the hidden enemy type.
-            case Type.HIDDEN:
+            case Type.HIDDEN ->
 
-                // Determines whether the tower has hidden detection capabilities.
-                if (this.hiddenDetection) {
-
-                    // Returns true if the tower has hidden detection.
-                    return true;
-                }
-
-                // Breaks out of the switch case.
-                break;
+                    // Returns whether the tower has hidden detection and can detect hidden enemies.
+                    this.hiddenDetection;
 
             // The switch case for the flying enemy type.
-            case Type.FLYING:
+            case Type.FLYING ->
 
-                // Determines whether the tower has flying detection capabilities.
-                if (this.flyingDetection) {
-
-                    // Returns true if the tower has flying detection.
-                    return true;
-                }
-
-                // Breaks out of the switch case.
-                break;
-
-            // The default switch case.
-            default:
-
-                // Breaks out of the switch case.
-                break;
-        }
-
-        // Returns false if the tower is not able to attack the given enemy.
-        return false;
+                    // Returns whether the tower has flying detection and can detect flying enemies.
+                    this.flyingDetection;
+        };
     }
 
     /**
@@ -311,17 +301,14 @@ public abstract class Tower {
             List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
             fixedList.removeIf(enemy -> !this.canAttack(enemy));
 
-            // Puts the current active enemies into an array to avoid exceptions.
-            Enemy[] enemies = fixedList.toArray(new Enemy[0]);
-
             // An index that will be used to determine which enemy has passed the most positions on a set path.
-            int currentPos = this.targeting == Targeting.FIRST ? enemies[enemies.length - 1].getPositionIndex() : Integer.MAX_VALUE;
+            int currentPos = this.targeting == Targeting.FIRST ? fixedList.getLast().getPositionIndex() : Integer.MAX_VALUE;
 
             // A double that will be used to determine which enemy is closest to the next position on a set path.
             double distance = this.targeting == Targeting.FIRST ? Integer.MAX_VALUE : 0;
 
             // A loop that will iterate through every enemy within the new array of active enemies.
-            for (final Enemy enemy : enemies) {
+            for (final Enemy enemy : fixedList) {
 
                 // The enemy's current position index.
                 // The position index represents what position along a path the enemy is at.
@@ -404,7 +391,24 @@ public abstract class Tower {
             while (true) {
 
                 // Gets the tower's current target enemy.
-                var target = this.getTarget();
+                Enemy target = null;
+
+                // A loop that will iterate until the enemy gets a valid target.
+                while (true) {
+
+                    // A try-catch statement that will prevent any exceptions from occuring while the enemy is getting a target.
+                    try {
+
+                        // Gets the tower's current target.
+                        // A concurrent modification exception may be thrown while finding a target.
+                        target = this.getTarget();
+
+                        // Breaks out of the loop since the enemy would have gotten a valid target.
+                        break;
+                    } catch (ConcurrentModificationException ex) {
+                        // The exception does not need to be handled.
+                    }
+                }
 
                 // Determines whether the tower's target is either alive or null.
                 if (target == null || !target.isAlive()) {
@@ -421,7 +425,7 @@ public abstract class Tower {
 
                     // Causes the current thread to wait for the tower's cool down to end.
                     Thread.sleep(this.coolDown);
-                } catch (InterruptedException e) {
+                } catch (InterruptedException ex) {
 
                     // Breaks out of the loop if the current thread is forcefully interrupted.
                     break;

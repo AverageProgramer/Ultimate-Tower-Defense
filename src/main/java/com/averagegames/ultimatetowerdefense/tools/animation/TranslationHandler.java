@@ -81,7 +81,6 @@ public class TranslationHandler {
      * Begins moving the given {@link Node} to the given {@code destination} at the given {@code speed}.
      * @since Ultimate Tower Defense 1.0
      */
-    @SuppressWarnings("all")
     public final void start() {
 
         // Sets the duration of the animation to a calculated amount of seconds.
@@ -100,14 +99,9 @@ public class TranslationHandler {
             // A loop that will iterate until the node has been properly loaded.
             while (true) {
 
-                // Temporary variables that will be used the determine whether or not the node is fully loaded.
-
-                double x = this.node.getLayoutBounds().getMinX();
-                double y = this.node.getLayoutBounds().getMinY();
-
                 // Determines whether the x and y variables are not equal to 0.
                 // When the x and y variables are not equal to 0, the node is loaded.
-                if (x != 0 && y != 0) {
+                if (this.node.getLayoutBounds().getMinX() != 0 && this.node.getLayoutBounds().getMinY() != 0) {
 
                     // Breaks out of the loop as the node has now loaded.
                     break;

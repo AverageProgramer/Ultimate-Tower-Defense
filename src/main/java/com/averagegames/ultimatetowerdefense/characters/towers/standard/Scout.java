@@ -37,7 +37,7 @@ public final class Scout extends Tower {
         try {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
             player.play();
-        } catch (Exception e) {
+        } catch (Exception ex) {
             System.out.println("Exception occurred");
         }
 
