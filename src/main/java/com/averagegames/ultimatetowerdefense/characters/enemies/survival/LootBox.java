@@ -1,0 +1,112 @@
+package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
+
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.maps.Path;
+import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
+import javafx.scene.image.Image;
+
+import java.util.ArrayList;
+
+public class LootBox extends Enemy {
+    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/LootBoxZombie.gif");
+
+    private final Type type = Type.REGULAR;
+
+    private final int startHealth = 30;
+
+    private final int damage = 1;
+
+    private final int speed = 30;
+
+    private final int income = 1;
+
+    public LootBox() {
+        super.image = this.image;
+
+        super.type = this.type;
+
+        super.setHealth(this.startHealth);
+        super.damage = this.damage;
+
+        super.speed = this.speed;
+
+        super.income = this.income;
+    }
+
+    @Override
+    @SuppressWarnings("all")
+    public void onDeath() {
+        try {
+            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 4.wav");
+            player.play();
+        } catch (Exception ex) {
+            System.out.println("Exception occurred");
+        }
+
+        ArrayList<Position> positions = new ArrayList<>();
+
+        for (int i = 0; i < this.getPathing().positions().length; i++) {
+            if (i < this.getPositionIndex()) {
+                continue;
+            }
+
+            positions.add(this.getPathing().positions()[i]);
+        }
+
+        Path path = new Path(positions.toArray(Position[]::new));
+
+        int enemy = (int) (Math.random() * (5 - 1)) + 1;
+
+        switch (enemy) {
+            case 1:
+                Normal normal = new Normal();
+
+                normal.setParent(this.getParent());
+                normal.setPathing(path);
+                normal.setReferencePathing(this.getPathing());
+                normal.setPositionIndex(this.getPositionIndex());
+                normal.spawn(new Position(this.getPosition().x() + this.image.getWidth() / 2, this.getPosition().y() + this.image.getHeight()));
+                normal.startMoving();
+
+                break;
+            case 2:
+                Quick quick = new Quick();
+
+                quick.setParent(this.getParent());
+                quick.setPathing(path);
+                quick.setReferencePathing(this.getPathing());
+                quick.setPositionIndex(this.getPositionIndex());
+                quick.spawn(new Position(this.getPosition().x() + this.image.getWidth() / 2, this.getPosition().y() + this.image.getHeight()));
+                quick.startMoving();
+
+                break;
+            case 3:
+                Slow slow = new Slow();
+
+                slow.setParent(this.getParent());
+                slow.setPathing(path);
+                slow.setReferencePathing(this.getPathing());
+                slow.setPositionIndex(this.getPositionIndex());
+                slow.spawn(new Position(this.getPosition().x() + this.image.getWidth() / 2, this.getPosition().y() + this.image.getHeight()));
+                slow.startMoving();
+
+                break;
+            case 4:
+                Stealthy stealthy = new Stealthy();
+
+                stealthy.setParent(this.getParent());
+                stealthy.setPathing(path);
+                stealthy.setReferencePathing(this.getPathing());
+                stealthy.setPositionIndex(this.getPositionIndex());
+                stealthy.spawn(new Position(this.getPosition().x() + this.image.getWidth() / 2, this.getPosition().y() + this.image.getHeight()));
+                stealthy.startMoving();
+
+                break;
+            default:
+                break;
+        }
+    }
+}

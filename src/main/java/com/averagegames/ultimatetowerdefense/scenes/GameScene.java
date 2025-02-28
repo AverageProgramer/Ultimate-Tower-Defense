@@ -31,7 +31,7 @@ public final class GameScene extends Scene implements SceneBuilder {
     }
 
     @Override
-    public void pre_build(@SuppressWarnings("exports") @NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/Tower Defense Simulator OST - Hardcore Wave 45.wav");
         player.loop(AudioPlayer.INDEFINITELY);
 
@@ -60,7 +60,7 @@ public final class GameScene extends Scene implements SceneBuilder {
     }
 
     @Override
-    public void build(@SuppressWarnings("exports") @NotNull final Stage stage) {
+    public void build(@NotNull final Stage stage) {
         Group root = (Group) super.getRoot();
 
         Spawner spawner = getTestSpawner();
@@ -110,7 +110,65 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Stealthy(),
                 new Stealthy(),
                 new Stealthy(),
-                new Stealthy()
+                new Stealthy(),
+
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+
+                new NormalTitan(),
+
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+
+                new NormalTitan(),
+
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy(),
+
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+                new LootBox()
         }), root);
 
         this.setOnMouseClicked(event -> {
@@ -154,7 +212,7 @@ public final class GameScene extends Scene implements SceneBuilder {
     }
 
     @Override
-    public void post_build(@SuppressWarnings("exports") @NotNull final Stage stage) {
+    public void post_build(@NotNull final Stage stage) {
         stage.show();
     }
 }

@@ -1,10 +1,22 @@
 package com.averagegames.ultimatetowerdefense.maps;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public non-sealed class Base extends Spawner {
+@NoArgsConstructor @Getter
+public final class Base {
 
-    public Base(@NotNull Position spawnPosition) {
-        super(spawnPosition);
+    @Nullable
+    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
+    private Position basePosition;
+
+    @Getter
+    private int health;
+
+    public Base(@NotNull final Position basePosition) {
+        this.basePosition = basePosition;
     }
 }

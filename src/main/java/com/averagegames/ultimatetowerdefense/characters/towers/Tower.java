@@ -4,6 +4,7 @@ import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIS
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.LootBox;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Stealthy;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
@@ -34,7 +35,7 @@ public abstract class Tower {
      * A {@link List} containing every active {@link Tower} in a game.
      */
     @NotNull
-    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS;
+    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());;
 
     /**
      * The {@link Tower}'s parent {@link Group}.
@@ -103,12 +104,6 @@ public abstract class Tower {
      */
     private Thread attackThread;
 
-    static {
-
-        // Initializes the list containing every active tower.
-        LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());
-    }
-    
     {
 
         // Initializes the tower's parent to a default, null group.
@@ -145,6 +140,7 @@ public abstract class Tower {
     /**
      * Removes a given amount from the {@code health} of the {@link Tower}.
      * @param amount the amount to {@code damage} the {@link Tower} by.
+     * @since Ultimate Tower Defense 1.0
      */
     public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int amount) {
 
@@ -308,7 +304,7 @@ public abstract class Tower {
             double distance = this.targeting == Targeting.FIRST ? Integer.MAX_VALUE : 0;
 
             // A loop that will iterate through every enemy within the new array of active enemies.
-            for (final Enemy enemy : fixedList) {
+            for (Enemy enemy : fixedList) {
 
                 // The enemy's current position index.
                 // The position index represents what position along a path the enemy is at.
@@ -322,7 +318,7 @@ public abstract class Tower {
                 }
 
                 // The enemy's current pathing.
-                Path path = enemy.getPathing();
+                Path path = enemy.getReferencePathing();
 
                 // Determines whether the path is null and whether the position index is within the bounds of the enemy's path.
                 if (path != null && posIndex < path.positions().length - 1) {

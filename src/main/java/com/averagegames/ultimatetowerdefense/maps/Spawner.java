@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.maps;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
@@ -17,25 +18,26 @@ import org.jetbrains.annotations.Nullable;
  * @see Wave
  * @author AverageProgramer
  */
-public sealed class Spawner permits Base {
+public final class Spawner {
 
     /**
      * The {@link Position} that a {@code spawned} {@link Enemy} will be placed at.
      */
     @Nullable
-    @Accessors(makeFinal = true) @Setter
+    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
     private Position spawnPosition;
 
     /**
      * The time between {@link Enemy} {@code spawns}.
      */
+    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
     private int spawnDelay;
 
     /**
      * The {@link Path} that any {@link Enemy} {@code spawned} by the {@link Spawner} will follow.
      */
     @Nullable
-    @Accessors(makeFinal = true) @Setter
+    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
     private Path enemyPathing;
 
     /**
@@ -77,23 +79,13 @@ public sealed class Spawner permits Base {
     }
 
     /**
-     * Sets the {@link Spawner}'s delay in milliseconds between individual {@link Enemy} {@code spawns}.
-     * @param spawnDelay the time between {@link Enemy} {@code spawns}.
-     */
-    public final void setSpawnDelay(final int spawnDelay) {
-
-        // Sets the spawner's spawn delay to the newly given value.
-        this.spawnDelay = spawnDelay;
-    }
-
-    /**
      * Adds an individual {@link Enemy} to a given {@link Group}.
      * If the {@link Enemy}'s {@link Position} was set prior to calling this method, then that {@link Position} will be replaced with the {@link Spawner}'s {@code spawn} {@link Position}.
      * @param enemy the {@link Enemy} to be spawned.
      * @param group the {@link Group} the {@link Enemy} should be added to.
      * @see Enemy
      */
-    public final void spawn(@NotNull final Enemy enemy, @NotNull final Group group) {
+    public void spawn(@NotNull final Enemy enemy, @NotNull final Group group) {
 
         // Sets the enemy's parent group to the given group.
         enemy.setParent(group);
@@ -129,13 +121,13 @@ public sealed class Spawner permits Base {
      * @param group the {@link Group} the {@link Enemy} {@link Wave} should be added to.
      * @see Wave
      */
-    public final void spawn(@NotNull final Wave wave, @NotNull final Group group) {
+    public void spawn(@NotNull final Wave wave, @NotNull final Group group) {
 
         // Creates a new thread that will handle enemy spawns.
         this.spawnThread = new Thread(() -> {
 
             // A loop that will iterate through every enemy in the given wave.
-            for (final Enemy enemy : wave.enemies()) {
+            for (Enemy enemy : wave.enemies()) {
 
                 // Spawns the individual enemy.
                 this.spawn(enemy, group);
@@ -160,7 +152,7 @@ public sealed class Spawner permits Base {
     /**
      * Stops the {@link Spawner} from {@code spawning}.
      */
-    public final void stopSpawning() {
+    public void stopSpawning() {
 
         // Interrupts the thread controlling enemy spawns.
         // This will cause an exception to be thrown which will break out of the loop spawning the enemies.

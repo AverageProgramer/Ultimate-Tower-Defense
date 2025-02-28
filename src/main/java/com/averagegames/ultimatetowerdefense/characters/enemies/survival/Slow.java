@@ -2,9 +2,11 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 
+@Zombie
 public final class Slow extends Enemy {
     
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/SlowZombie.gif");

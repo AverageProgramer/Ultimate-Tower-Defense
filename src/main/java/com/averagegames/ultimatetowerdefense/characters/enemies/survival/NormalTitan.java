@@ -1,10 +1,12 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Titan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 
+@Titan
 public class NormalTitan extends Enemy {
 
     /**

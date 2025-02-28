@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.LootBox;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.LootBoxTitan;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
@@ -36,7 +38,7 @@ public abstract class Enemy {
      * A {@link List} containing every active {@link Enemy} in a game.
      */
     @NotNull
-    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES;
+    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The {@link Enemy}'s parent {@link Group}.
@@ -83,18 +85,28 @@ public abstract class Enemy {
     protected int speed;
 
     /**
-     * The {@link Path} the {@link Enemy} will follow.
+     * The current {@link Path} the {@link Enemy} will follow.
+     */
+    @Nullable
+    @Accessors(makeFinal = true) @Getter
+    private Path pathing;
+
+    /**
+     * The entire {@link Path} and {@link Enemy} will follow.
      */
     @Nullable
     @Accessors(makeFinal = true) @Setter @Getter
-    private Path pathing;
+    private Path referencePathing;
 
     /**
      * The current {@link Position} the {@link Enemy} is at along its {@link Path}.
      */
-    @Accessors(makeFinal = true) @Getter
+    @Accessors(makeFinal = true) @Setter @Getter
     private int positionIndex;
 
+    /**
+     * The money the {@code player} will receive when damaging the {@link Enemy}.
+     */
     @Range(from = 0L, to = Long.MAX_VALUE)
     @Accessors(makeFinal = true) @Getter
     protected int income;
@@ -110,12 +122,6 @@ public abstract class Enemy {
      */
     @NotNull
     private Thread attackThread;
-
-    static {
-
-        // Initializes the list containing every active enemy.
-        LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new ArrayList<>());
-    }
 
     {
 
@@ -206,6 +212,20 @@ public abstract class Enemy {
     }
 
     /**
+     * Sets the {@link Enemy}'s {@link Path} to a newly given {@link Path}
+     * @param pathing the {@link Enemy}'s {@link Path} to follow.
+     */
+    public final void setPathing(@Nullable final Path pathing) {
+
+        // Sets the enemy's pathing to the given pathing.
+        this.pathing = pathing;
+
+        // Sets the enemy's pathing to the reference pathing so that towers can properly target the enemy.
+        // The reference pathing allows enemies spawned by loot box zombies or loot box titans to be targeted.
+        this.referencePathing = pathing;
+    }
+
+    /**
      * Determines whether the {@link Enemy} intersects the given {@link Node} at any point.
      * @param node the {@link Node} to be checked.
      * @return {@code true} if the {@link Enemy} intersects the {@link Node}, {@code false} otherwise.
@@ -292,7 +312,7 @@ public abstract class Enemy {
         this.movementThread = new Thread(() -> {
 
             // Creates a new animation that will control the enemy's movement along a given path.
-            var animation = new TranslationHandler();
+            TranslationHandler animation = new TranslationHandler();
 
             // Sets up the animation, setting the node to control to the enemy's image, and setting the speed to use to the enemy's speed.
 
@@ -307,7 +327,7 @@ public abstract class Enemy {
             }
 
             // A loop that will iterate through every position on the given path.
-            for (final Position position : this.pathing.positions()) {
+            for (Position position : this.pathing.positions()) {
 
                 // Sets the animation's destination to the current position in the loop.
                 animation.setDestination(new Position(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0), position.y() - (this.image != null ? this.image.getHeight() : 0)));

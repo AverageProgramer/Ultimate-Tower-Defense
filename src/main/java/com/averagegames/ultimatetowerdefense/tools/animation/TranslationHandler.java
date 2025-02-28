@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.tools.animation;
 
+import lombok.Getter;
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,20 +32,20 @@ public class TranslationHandler {
      * The {@link Node} that is to be moved during animation.
      */
     @Nullable
-    @Setter
+    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
     private Node node;
 
     /**
      * The {@code speed} in pixels per second that the given {@link Node} should travel at.
      */
-    @Setter
+    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
     private int speed;
 
     /**
      * The {@code destination} of the animation.
      */
     @Nullable
-    @Setter
+    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
     private Position destination;
 
     /**
