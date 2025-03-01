@@ -1,29 +1,25 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.maps.Path;
+import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
+import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
+import javafx.application.Platform;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.jetbrains.annotations.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.LootBox;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.LootBoxTitan;
-import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
-import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
-import javafx.application.Platform;
-import lombok.AccessLevel;
-import org.jetbrains.annotations.*;
-
-import com.averagegames.ultimatetowerdefense.maps.Path;
-import com.averagegames.ultimatetowerdefense.maps.Position;
-
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
 
 /**
  * The {@link Enemy} class serves as a {@code super} class to all in-game enemies.
@@ -44,7 +40,8 @@ public abstract class Enemy {
      * The {@link Enemy}'s parent {@link Group}.
      */
     @Nullable
-    @Accessors(makeFinal = true) @Setter @Getter
+    @Accessors(makeFinal = true) @Setter
+    @Getter
     private Group parent;
 
     /**
@@ -195,8 +192,8 @@ public abstract class Enemy {
 
         // Updates the enemy's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedEnemy.setX(position.x());
-        this.loadedEnemy.setY(position.y());
+        this.loadedEnemy.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
+        this.loadedEnemy.setY(position.y() - (this.image != null ? this.image.getHeight() : 0));
     }
 
     /**
@@ -208,7 +205,7 @@ public abstract class Enemy {
     public final @NotNull Position getPosition() {
 
         // Returns the enemy's current position.
-        return new Position(this.loadedEnemy.getCurrentX(), this.loadedEnemy.getCurrentY());
+        return new Position(this.loadedEnemy.getCurrentX() + (this.image != null ? this.image.getWidth() / 2 : 0), this.loadedEnemy.getCurrentY() + (this.image != null ? this.image.getHeight() : 0));
     }
 
     /**
@@ -276,10 +273,8 @@ public abstract class Enemy {
      */
     public final void spawn(@NotNull final Position position) {
 
-        // Sets the enemy's position using the enemy image's middle bottom as a reference.
-
-        this.loadedEnemy.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
-        this.loadedEnemy.setY(position.y() - (this.image != null ? this.image.getHeight() : 0));
+        // Sets the enemy's position to the given position.
+        this.setPosition(position);
 
         // Spawns the enemy using the default spawn method.
         this.spawn();
@@ -302,6 +297,7 @@ public abstract class Enemy {
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
+    @NonBlocking
     @SuppressWarnings("all")
     public final void startMoving() {
 
@@ -340,7 +336,7 @@ public abstract class Enemy {
 
                     // Causes the current thread to wait until the enemy's animation is finished.
                     animation.waitForFinish();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException ex) {
 
                     // Stops the enemy's animation.
                     animation.stop();
@@ -403,6 +399,7 @@ public abstract class Enemy {
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
+    @NonBlocking
     public final void startAttacking() {
 
         // Creates a new thread that will handle enemy attacks.

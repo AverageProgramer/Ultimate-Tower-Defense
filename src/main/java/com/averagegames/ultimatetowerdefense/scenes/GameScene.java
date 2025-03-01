@@ -1,29 +1,31 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.*;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.GiantTitan;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.LootBoxTitan;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.NormalTitan;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.*;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Gunner;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Marksman;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
-
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.NotNull;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
-@Internal
 public final class GameScene extends Scene implements SceneBuilder {
+
     private int tower = -1;
 
     public GameScene(@NotNull final Parent root) {
@@ -32,7 +34,7 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/Tower Defense Simulator OST - Hardcore Wave 45.wav");
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/Daybreak OST - SCP Roleplay.wav");
         player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
@@ -104,7 +106,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Quick(),
                 new Quick(),
 
-                new NormalTitan(),
+                new GiantTitan(),
 
                 new Stealthy(),
                 new Stealthy(),
@@ -118,7 +120,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new LootBox(),
                 new LootBox(),
 
-                new NormalTitan(),
+                new LootBoxTitan(),
 
                 new Slow(),
                 new Slow(),
@@ -156,7 +158,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Quick(),
                 new Quick(),
 
-                new NormalTitan(),
+                new LootBoxTitan(),
 
                 new Stealthy(),
                 new Stealthy(),

@@ -1,16 +1,14 @@
 package com.averagegames.ultimatetowerdefense.tools.animation;
 
-import lombok.Getter;
-import org.jetbrains.annotations.Blocking;
-import org.jetbrains.annotations.Nullable;
-
 import com.averagegames.ultimatetowerdefense.maps.Position;
-
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
+import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.Blocking;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The {@link TranslationHandler} class serves as a way to move a given {@link Node}.
@@ -32,20 +30,21 @@ public class TranslationHandler {
      * The {@link Node} that is to be moved during animation.
      */
     @Nullable
-    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
+    @Setter
+    @Getter
     private Node node;
 
     /**
      * The {@code speed} in pixels per second that the given {@link Node} should travel at.
      */
-    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
+    @Setter @Getter
     private int speed;
 
     /**
      * The {@code destination} of the animation.
      */
     @Nullable
-    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
+    @Setter @Getter
     private Position destination;
 
     /**
@@ -82,6 +81,7 @@ public class TranslationHandler {
      * Begins moving the given {@link Node} to the given {@code destination} at the given {@code speed}.
      * @since Ultimate Tower Defense 1.0
      */
+    @SuppressWarnings("unused")
     public final void start() {
 
         // Sets the duration of the animation to a calculated amount of seconds.

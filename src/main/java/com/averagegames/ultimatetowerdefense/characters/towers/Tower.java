@@ -1,15 +1,10 @@
 package com.averagegames.ultimatetowerdefense.characters.towers;
 
-import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
-
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.LootBox;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.Stealthy;
 import com.averagegames.ultimatetowerdefense.maps.Path;
-import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.maps.Position;
-
+import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -17,10 +12,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
 import org.jetbrains.annotations.*;
 
 import java.util.*;
+
+import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
 
 /**
  * The {@link Tower} class serves as a {@code super} class to all in-game enemies.
@@ -158,8 +154,8 @@ public abstract class Tower {
 
         // Updates the tower's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedTower.setX(position.x());
-        this.loadedTower.setY(position.y());
+        this.loadedTower.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
+        this.loadedTower.setY(position.y() - (this.image != null ? this.image.getHeight() / 2 : 0));
     }
 
     /**
@@ -171,7 +167,7 @@ public abstract class Tower {
     public final @NotNull Position getPosition() {
 
         // Returns the tower's current position.
-        return new Position(this.loadedTower.getCurrentX(), this.loadedTower.getCurrentY());
+        return new Position(this.loadedTower.getCurrentX() + (this.image != null ? this.image.getWidth() / 2 : 0), this.loadedTower.getCurrentY() + (this.image != null ? this.image.getHeight() / 2 : 0));
     }
 
     /**
@@ -226,10 +222,8 @@ public abstract class Tower {
      */
     public final void place(@NotNull final Position position) {
 
-        // Sets the tower's x and y coordinates to the given position's x and y coordinates.
-
-        this.loadedTower.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
-        this.loadedTower.setY(position.y() - (this.image != null ? this.image.getHeight() / 2 : 0));
+        // Sets the tower's position to the given position.
+        this.setPosition(position);
 
         // Places the tower using the default placement method.
         this.place();
@@ -252,19 +246,19 @@ public abstract class Tower {
             // The switch case for the regular enemy type.
             case Type.REGULAR ->
 
-                    // Returns true because all towers can attack regular enemies by default.
+                // Returns true because all towers can attack regular enemies by default.
                     true;
 
             // The switch case for the hidden enemy type.
             case Type.HIDDEN ->
 
-                    // Returns whether the tower has hidden detection and can detect hidden enemies.
+                // Returns whether the tower has hidden detection and can detect hidden enemies.
                     this.hiddenDetection;
 
             // The switch case for the flying enemy type.
             case Type.FLYING ->
 
-                    // Returns whether the tower has flying detection and can detect flying enemies.
+                // Returns whether the tower has flying detection and can detect flying enemies.
                     this.flyingDetection;
         };
     }
@@ -294,7 +288,7 @@ public abstract class Tower {
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.
 
-            List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
+            @Unmodifiable List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
             fixedList.removeIf(enemy -> !this.canAttack(enemy));
 
             // An index that will be used to determine which enemy has passed the most positions on a set path.
@@ -361,7 +355,7 @@ public abstract class Tower {
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.
 
-            List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
+            @Unmodifiable List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
             fixedList.removeIf(enemy -> !this.canAttack(enemy));
 
             // Returns either the strongest or weakest active enemy depending on the tower's targeting.
@@ -374,6 +368,7 @@ public abstract class Tower {
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
+    @NonBlocking
     @SuppressWarnings("all")
     public final void startAttacking() {
 
@@ -451,17 +446,10 @@ public abstract class Tower {
      */
     public synchronized final void eliminate() {
 
-        // Determines whether the tower's parent group is null.
-        if (this.parent == null) {
+        // Determines whether the tower's parent group is null and whether the tower's parent group contains the tower.
+        if (this.parent == null || !this.parent.getChildren().contains(this.loadedTower)) {
 
-            // Prevents the tower from being removed from a null group.
-            return;
-        }
-
-        // Determines whether the tower was already eliminated from its parent group.
-        if (!this.parent.getChildren().contains(this.loadedTower)) {
-
-            // Prevents the tower from being eliminated more than once.
+            // Prevents the tower from being removed from a null group and from being eliminated more than once.
             return;
         }
 
@@ -472,8 +460,7 @@ public abstract class Tower {
         // Removes the tower from its parent group.
         this.parent.getChildren().remove(this.loadedTower);
 
-        // Interrupts the thread controlling tower attacks.
-        // This will cause an exception to be thrown in the thread which will break out of the loop controlling the tower.
+        // Stops all attacks the tower may be performing.
         this.stopAttacking();
 
         // Removes the tower from the list containing every active tower.

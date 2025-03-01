@@ -1,7 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.LootBox;
 import org.intellij.lang.annotations.Identifier;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.LootBox;
 
 /**
  * The {@link Zombie} annotation is meant to annotate classes extending the {@link Enemy} class.

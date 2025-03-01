@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Main extends Application {
     @Override
-    public void start(@SuppressWarnings("exports") @NotNull final Stage stage) throws Exception {
+    public void start(@NotNull final Stage stage) throws Exception {
         loadBuild(new GameScene(new Group()), stage);
     }
 

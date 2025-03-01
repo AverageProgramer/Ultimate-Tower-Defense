@@ -1,6 +1,6 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.LootBoxTitan;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.LootBoxTitan;
 import org.intellij.lang.annotations.Identifier;
 
 /**

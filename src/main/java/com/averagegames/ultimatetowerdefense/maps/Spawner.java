@@ -1,15 +1,12 @@
 package com.averagegames.ultimatetowerdefense.maps;
 
-import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
-
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
-
 import javafx.application.Platform;
 import javafx.scene.Group;
+import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -24,20 +21,20 @@ public final class Spawner {
      * The {@link Position} that a {@code spawned} {@link Enemy} will be placed at.
      */
     @Nullable
-    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
+    @Setter @Getter
     private Position spawnPosition;
 
     /**
      * The time between {@link Enemy} {@code spawns}.
      */
-    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
+    @Setter @Getter
     private int spawnDelay;
 
     /**
      * The {@link Path} that any {@link Enemy} {@code spawned} by the {@link Spawner} will follow.
      */
     @Nullable
-    @Setter @Getter(onMethod_={@SuppressWarnings("unused")})
+    @Setter @Getter
     private Path enemyPathing;
 
     /**

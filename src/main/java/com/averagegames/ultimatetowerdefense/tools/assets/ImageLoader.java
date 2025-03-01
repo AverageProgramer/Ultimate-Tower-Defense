@@ -1,17 +1,16 @@
 package com.averagegames.ultimatetowerdefense.tools.assets;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import org.jetbrains.annotations.NotNull;
-
 import javafx.beans.DefaultProperty;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * The {@link ImageLoader} class is meant to be an easy way to load and add any {@link Image} to a {@link Group} or {@link Scene}.
@@ -32,7 +31,7 @@ public class ImageLoader extends ImageView {
      */
     @SuppressWarnings("unused")
     public ImageLoader(@NotNull final String uri) throws FileNotFoundException {
-        
+
         // Initializes the image using a constructor that takes an image object as a parameter from the inherited super class.
         super(new Image(new FileInputStream(uri)));
     }

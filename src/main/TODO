@@ -1,7 +1,0 @@
-- Implement Basic Towers
-    - Read Clicks
-    - Handle Tower Targeting
-
-- Art For Assets
-    - Towers and Enemies should have gif files for every 15 degrees (each direction).
-    - Cliffs should be split into to separate assets (cliff and clifftop) to handle cliff-based towers.

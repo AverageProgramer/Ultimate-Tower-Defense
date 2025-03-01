@@ -2,7 +2,6 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
