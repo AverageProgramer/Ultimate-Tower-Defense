@@ -5,6 +5,7 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Titan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.Normal;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.tools.development.Property;
 import javafx.scene.image.Image;
 
 @Titan
@@ -13,31 +14,37 @@ public class NormalTitan extends Enemy {
     /**
      * The {@link NormalTitan}'s {@link Image}.
      */
+    @Property
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalTitan.gif");
 
     /**
      * The {@link NormalTitan}'s {@link Type}.
      */
+    @Property
     private final Type type = Type.REGULAR;
 
     /**
      * The {@code damage} the {@link NormalTitan} can do during an {@code attack}.
      */
+    @Property
     private final int damage = 0;
 
     /**
      * The {@link NormalTitan}'s speed in pixels per second.
      */
+    @Property
     private final int speed = 10;
 
     /**
      * The money earned each time the {@link NormalTitan} is damaged.
      */
+    @Property
     private final int income = 3;
 
     /**
      * The {@link NormalTitan}'s starting {@code health}.
      */
+    @Property
     private final int startHealth = 250;
 
     /**

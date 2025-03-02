@@ -5,6 +5,10 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
+import com.averagegames.ultimatetowerdefense.tools.development.Prohibited;
+import com.averagegames.ultimatetowerdefense.tools.development.ProhibitedAnnotation;
+import com.averagegames.ultimatetowerdefense.tools.development.Specific;
+import com.averagegames.ultimatetowerdefense.tools.development.SpecificAnnotation;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -472,7 +476,12 @@ public abstract class Tower {
      * By default, this method does nothing.
      * @since Ultimate Tower Defense 1.0
      */
+    @Specific(value = Tower.class, subclasses = true)
     protected void onPlace() {
+
+        // Verifies that the calling class of the method was specified by the method's annotation.
+        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
         // This method can be overridden by a subclass so each individual tower can have unique action to do when placed.
     }
 
@@ -481,7 +490,12 @@ public abstract class Tower {
      * By default, this method does nothing.
      * @since Ultimate Tower Defense 1.0
      */
+    @Specific(value = Tower.class, subclasses = true)
     protected void onHeal() {
+
+        // Verifies that the calling class of the method was specified by the method's annotation.
+        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
         // This method can be overridden by a subclass so each individual tower can have unique action to do when healed.
     }
 
@@ -490,7 +504,12 @@ public abstract class Tower {
      * By default, this method does nothing.
      * @since Ultimate Tower Defense 1.0
      */
-    protected void onDamage() {
+    @Specific(value = Tower.class, subclasses = true)
+    protected void onDamaged() {
+
+        // Verifies that the calling class of the method was specified by the method's annotation.
+        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
         // This method can be overridden by a subclass so each individual tower can have unique action to do when damaged.
     }
 
@@ -499,7 +518,12 @@ public abstract class Tower {
      * By default, this method does nothing.
      * @since Ultimate Tower Defense 1.0
      */
+    @Specific(value = Tower.class, subclasses = true)
     protected void onDeath() {
+
+        // Verifies that the calling class of the method was specified by the method's annotation.
+        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
         // This method can be overridden by a subclass so each individual tower can have unique action to do when eliminated.
     }
 
@@ -510,7 +534,14 @@ public abstract class Tower {
      * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
-    protected abstract void attack(@NotNull final Enemy enemy) throws InterruptedException;
+    @Specific(value = Tower.class, subclasses = true)
+    protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
+
+        // Verifies that the calling class of the method was specified by the method's annotation.
+        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
+        // This method can be overridden by a subclass so each individual tower can have unique action to do when attacking.
+    }
 
     /**
      * An action performed whenever a {@link Tower} is {@code upgraded}.
@@ -518,7 +549,14 @@ public abstract class Tower {
      * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
-    public abstract void upgrade() throws InterruptedException;
+    @Prohibited(value = Enemy.class, subclasses = true)
+    public void upgrade() throws InterruptedException {
+
+        // Verifies that the calling class of the method was specified by the method's annotation.
+        ProhibitedAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
+        // This method can be overridden by a subclass so that each individual tower can have a unique upgrading action.
+    }
 
     /**
      * An action performed whenever a {@link Tower} is using a {@code special ability}.
@@ -526,7 +564,12 @@ public abstract class Tower {
      * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
+    @Prohibited(value = Enemy.class, subclasses = true)
     public void special() throws InterruptedException {
+
+        // Verifies that the calling class of the method was specified by the method's annotation.
+        ProhibitedAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
         // This method can be overridden by a subclass so that each individual tower can have a unique special ability.
     }
 }

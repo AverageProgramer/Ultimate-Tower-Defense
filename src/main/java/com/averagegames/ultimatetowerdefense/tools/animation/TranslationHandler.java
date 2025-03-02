@@ -30,8 +30,7 @@ public class TranslationHandler {
      * The {@link Node} that is to be moved during animation.
      */
     @Nullable
-    @Setter
-    @Getter
+    @Setter @Getter
     private Node node;
 
     /**
@@ -128,7 +127,7 @@ public class TranslationHandler {
         });
 
         // Starts the node's animation.
-        this.animation.play();
+        this.animation.playFromStart();
     }
 
     /**

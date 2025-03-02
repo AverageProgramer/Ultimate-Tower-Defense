@@ -3,6 +3,8 @@ package com.averagegames.ultimatetowerdefense.characters.enemies;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.LootBoxTitan;
 import org.intellij.lang.annotations.Identifier;
 
+import java.lang.annotation.*;
+
 /**
  * The {@link Titan} annotation is meant to annotate classes extending the {@link Enemy} class.
  * Any {@link Enemy} annotated with the {@link Titan} annotation can be considered that type.
@@ -13,7 +15,10 @@ import org.intellij.lang.annotations.Identifier;
  * @see LootBoxTitan
  * @author AverageProgramer
  */
+@Documented
 @Identifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 public @interface Titan {
     // This annotation does nothing by default.
 }

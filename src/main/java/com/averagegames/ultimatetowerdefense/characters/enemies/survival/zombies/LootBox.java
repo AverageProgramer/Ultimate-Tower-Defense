@@ -6,23 +6,30 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.tools.development.Property;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 @Zombie
-@SuppressWarnings("all")
 public class LootBox extends Enemy {
+
+    @Property
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/LootBoxZombie.gif");
 
+    @Property
     private final Type type = Type.REGULAR;
 
+    @Property
     private final int startHealth = 30;
 
+    @Property
     private final int damage = 1;
 
+    @Property
     private final int speed = 30;
 
+    @Property
     private final int income = 1;
 
     public LootBox() {
@@ -39,7 +46,7 @@ public class LootBox extends Enemy {
     }
 
     @Override
-    public void onDeath() {
+    protected void onDeath() {
         try {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 4.wav");
             player.play();

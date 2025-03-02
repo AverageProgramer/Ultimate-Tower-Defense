@@ -88,6 +88,22 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new Quick(),
                 new Quick(),
 
+                new NormalTitan(),
+
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy(),
+                new Stealthy(),
+
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+
+                new GiantTitan(),
+
                 new Slow(),
                 new Slow(),
                 new Slow(),
@@ -121,56 +137,40 @@ public final class GameScene extends Scene implements SceneBuilder {
                 new LootBox(),
 
                 new LootBoxTitan(),
-
-                new Slow(),
-                new Slow(),
-                new Slow(),
-                new Slow(),
-                new Slow(),
-
-                new Normal(),
-                new Normal(),
-                new Normal(),
-                new Normal(),
-                new Normal(),
-
-                new Quick(),
-                new Quick(),
-                new Quick(),
-                new Quick(),
-                new Quick(),
-
-                new Slow(),
-                new Slow(),
-                new Slow(),
-                new Slow(),
-                new Slow(),
-
-                new Normal(),
-                new Normal(),
-                new Normal(),
-                new Normal(),
-                new Normal(),
-
-                new Quick(),
-                new Quick(),
-                new Quick(),
-                new Quick(),
-                new Quick(),
-
+                new LootBoxTitan(),
+                new LootBoxTitan(),
+                new LootBoxTitan(),
                 new LootBoxTitan(),
 
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+                new LootBox(),
+
                 new Stealthy(),
                 new Stealthy(),
                 new Stealthy(),
                 new Stealthy(),
                 new Stealthy(),
 
-                new LootBox(),
-                new LootBox(),
-                new LootBox(),
-                new LootBox(),
-                new LootBox()
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+                new Normal(),
+
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+                new Quick(),
+
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
+                new Slow(),
         }), root);
 
         this.setOnMouseClicked(event -> {

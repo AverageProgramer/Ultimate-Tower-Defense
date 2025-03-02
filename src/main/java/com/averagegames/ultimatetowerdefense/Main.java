@@ -1,6 +1,7 @@
 package com.averagegames.ultimatetowerdefense;
 
 import static com.averagegames.ultimatetowerdefense.scenes.SceneBuilder.loadBuild;
+import static com.averagegames.ultimatetowerdefense.tools.Manager.enableLogging;
 
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 
@@ -11,8 +12,11 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 public class Main extends Application {
+
     @Override
     public void start(@NotNull final Stage stage) throws Exception {
+        enableLogging(true);
+
         loadBuild(new GameScene(new Group()), stage);
     }
 

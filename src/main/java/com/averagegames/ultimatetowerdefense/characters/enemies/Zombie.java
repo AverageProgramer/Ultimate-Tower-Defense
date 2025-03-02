@@ -3,6 +3,8 @@ package com.averagegames.ultimatetowerdefense.characters.enemies;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.LootBox;
 import org.intellij.lang.annotations.Identifier;
 
+import java.lang.annotation.*;
+
 /**
  * The {@link Zombie} annotation is meant to annotate classes extending the {@link Enemy} class.
  * Any {@link Enemy} annotated with the {@link Zombie} annotation can be considered that type.
@@ -13,7 +15,10 @@ import org.intellij.lang.annotations.Identifier;
  * @see LootBox
  * @author AverageProgramer
  */
+@Documented
 @Identifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 public @interface Zombie {
     // This annotation does nothing by default.
 }

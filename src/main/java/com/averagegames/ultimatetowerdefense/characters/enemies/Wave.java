@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * The {@link Wave} record serves as a way to easily store and manage an {@link Enemy} array.
- *
  * @param enemies An array of each {@link Enemy} in the {@link Wave}.
  * @author AverageProgramer
  * @see Enemy

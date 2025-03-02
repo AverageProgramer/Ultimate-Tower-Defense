@@ -2,6 +2,8 @@ package com.averagegames.ultimatetowerdefense.characters.enemies;
 
 import org.intellij.lang.annotations.Identifier;
 
+import java.lang.annotation.*;
+
 /**
  * The {@link Boss} annotation is meant to annotate classes extending the {@link Boss} class.
  * Any {@link Enemy} annotated with the {@link Titan} annotation can be considered that type.
@@ -10,7 +12,10 @@ import org.intellij.lang.annotations.Identifier;
  * @see Enemy
  * @author AverageProgramer
  */
+@Documented
 @Identifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 public @interface Boss {
     // This annotation does nothing by default.
 }

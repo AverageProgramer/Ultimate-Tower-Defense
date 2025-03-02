@@ -6,23 +6,30 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.tools.development.Property;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 @Titan
-@SuppressWarnings("all")
 public class LootBoxTitan extends Enemy {
+
+    @Property
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/LootBoxTitan.gif");
 
+    @Property
     private final Type type = Type.REGULAR;
 
+    @Property
     private final int startHealth = 500;
 
+    @Property
     private final int damage = 1;
 
+    @Property
     private final int speed = 20;
 
+    @Property
     private final int income = 1;
 
     public LootBoxTitan() {

@@ -4,21 +4,28 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.tools.development.Property;
 import javafx.scene.image.Image;
 
 @Zombie
 public final class Quick extends Enemy {
 
+    @Property
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/QuickZombie.gif");
 
+    @Property
     private final Type type = Type.REGULAR;
 
+    @Property
     private final int startHealth = 3;
 
+    @Property
     private final int damage = 1;
 
+    @Property
     private final int speed = 50;
 
+    @Property
     private final int income = 1;
 
     public Quick() {

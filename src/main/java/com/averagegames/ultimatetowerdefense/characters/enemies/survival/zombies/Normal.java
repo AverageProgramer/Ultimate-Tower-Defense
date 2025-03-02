@@ -4,6 +4,7 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.tools.development.Property;
 import javafx.scene.image.Image;
 
 /**
@@ -19,31 +20,37 @@ public final class Normal extends Enemy {
     /**
      * The {@link Normal}'s {@link Image}.
      */
+    @Property
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/NormalZombie.gif");
 
     /**
      * The {@link Normal}'s {@link Type}.
      */
+    @Property
     private final Type type = Type.REGULAR;
 
     /**
      * The {@code damage} the {@link Normal} can do during an {@code attack}.
      */
+    @Property
     private final int damage = 0;
 
     /**
      * The {@link Normal}'s speed in pixels per second.
      */
+    @Property
     private final int speed = 25;
 
     /**
      * The money earned each time the {@link Normal} is damaged.
      */
+    @Property
     private final int income = 1;
 
     /**
      * The {@link Normal}'s starting {@code health}.
      */
+    @Property
     private final int startHealth = 5;
 
     /**
