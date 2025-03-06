@@ -3,8 +3,10 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombie
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
-import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.tools.development.Property;
+import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.development.Specific;
+import com.averagegames.ultimatetowerdefense.util.development.SpecificAnnotation;
 import javafx.scene.image.Image;
 
 /**
@@ -77,13 +79,27 @@ public final class Normal extends Enemy {
         super.setHealth(this.startHealth);
     }
 
+    /**
+     * The {@link Normal}'s uniquely implemented {@code death} event.
+     * @since Ultimate Tower Defense 1.0
+     */
     @Override
+    @Specific(value = Enemy.class, subclasses = true)
     protected void onDeath() {
+
+        // Verifies that the calling class of the method was specified by the method's annotation.
+        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
+        // A try-catch statement that will catch any exceptions that occur when playing an audio file.
         try {
+
+            // Creates a new audio player that will play an audio file.
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav");
+
+            // Plays the previously given audio file.
             player.play();
         } catch (Exception ex) {
-            System.out.println("Exception occurred");
+            // The exception does not need to be handled.
         }
     }
 }

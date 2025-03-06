@@ -1,5 +1,6 @@
-package com.averagegames.ultimatetowerdefense.tools.development;
+package com.averagegames.ultimatetowerdefense.util.development;
 
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import org.intellij.lang.annotations.Identifier;
 
 import java.lang.annotation.ElementType;

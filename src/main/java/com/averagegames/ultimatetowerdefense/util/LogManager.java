@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools;
+package com.averagegames.ultimatetowerdefense.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -7,25 +7,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The {@link Manager} class provides several useful tools for development and testing of game aspects.
+ * The {@link LogManager} class provides several useful tools for logging and debugging game aspects.
  * @since Ultimate Tower Defense 1.0
  * @author AverageProgramer
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class Manager {
+public final class LogManager {
 
     /**
      * A global {@link Logger} that can be used for debugging.
-     * By default, logging is disabled but can be enabled using the {@link Manager#enableLogging(boolean)} method.
      * @since Ultimate Tower Defense 1.0
      */
     public static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
-    static {
-
-        // Disables logging by default.
-        enableLogging(false);
-    }
 
     /**
      * Enables or disables the global {@link Logger} based on the boolean value provided.

@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools.assets;
+package com.averagegames.ultimatetowerdefense.util.assets;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

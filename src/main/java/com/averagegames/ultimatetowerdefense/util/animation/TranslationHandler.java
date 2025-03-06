@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools.animation;
+package com.averagegames.ultimatetowerdefense.util.animation;
 
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import javafx.animation.Interpolator;

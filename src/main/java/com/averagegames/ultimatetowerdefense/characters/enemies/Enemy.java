@@ -3,10 +3,10 @@ package com.averagegames.ultimatetowerdefense.characters.enemies;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
-import com.averagegames.ultimatetowerdefense.tools.animation.TranslationHandler;
-import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
-import com.averagegames.ultimatetowerdefense.tools.development.Specific;
-import com.averagegames.ultimatetowerdefense.tools.development.SpecificAnnotation;
+import com.averagegames.ultimatetowerdefense.util.animation.TranslationHandler;
+import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
+import com.averagegames.ultimatetowerdefense.util.development.Specific;
+import com.averagegames.ultimatetowerdefense.util.development.SpecificAnnotation;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
+import static com.averagegames.ultimatetowerdefense.util.LogManager.LOGGER;
 
 /**
  * The {@link Enemy} class serves as a {@code super} class to all in-game enemies.
@@ -161,6 +162,9 @@ public abstract class Enemy {
 
         // Adds the given amount to the enemy's health.
         this.health += amount;
+
+        // Logs that the enemy has been healed by a given amount.
+        LOGGER.info(STR."Enemy \{this} health has been increased by \{amount}.");
     }
 
     /**
@@ -176,6 +180,9 @@ public abstract class Enemy {
 
         // Removes the given amount from the enemy's health.
         this.health -= damage;
+
+        // Logs that the enemy has been damaged by a given amount.
+        LOGGER.info(STR."Enemy \{this} health has been decreased by \{damage}.");
 
         // Determines whether the enemy has any health remaining.
         if (this.health <= 0) {
@@ -254,9 +261,6 @@ public abstract class Enemy {
         // This method is unique to each individual inheritor of the enemy class.
         this.onSpawn();
 
-        // Adds the enemy to the list containing every active enemy.
-        LIST_OF_ACTIVE_ENEMIES.add(this);
-
         // Determines whether the enemy's image is null.
         if (this.image != null) {
 
@@ -266,6 +270,12 @@ public abstract class Enemy {
 
         // Adds the enemy to the enemy's parent group.
         this.parent.getChildren().add(this.loadedEnemy);
+
+        // Adds the enemy to the list containing every active enemy.
+        LIST_OF_ACTIVE_ENEMIES.add(this);
+
+        // Logs that the enemy has been spawned.
+        LOGGER.info(STR."Enemy \{this} spawned.");
     }
 
     /**
@@ -309,6 +319,9 @@ public abstract class Enemy {
         // Creates a new thread that will handle enemy movement.
         this.movementThread = new Thread(() -> {
 
+            // Logs that the enemy has begun moving along its set path.
+            LOGGER.info(STR."Enemy \{this} has begun moving along path \{this.pathing}.");
+
             // Creates a new animation that will control the enemy's movement along a given path.
             TranslationHandler animation = new TranslationHandler();
 
@@ -333,6 +346,9 @@ public abstract class Enemy {
                 // Starts the animation.
                 animation.start();
 
+                // Logs that the enemy has begun moving to its target destination.
+                LOGGER.info(STR."Enemy \{this} moving to position \{position}.");
+
                 // Allows the loop to be broken out of if the animation is interrupted.
                 try {
 
@@ -343,6 +359,9 @@ public abstract class Enemy {
                     // Stops the enemy's animation.
                     animation.stop();
 
+                    // Logs that the enemy's movement has been interrupted and ended.
+                    LOGGER.info(STR."Enemy \{this} has stopped moving along path \{this.pathing}.");
+
                     // Finishes the method if the animation is forcefully interrupted.
                     // This will most likely only happen when the enemy despawns.
                     return;
@@ -350,6 +369,9 @@ public abstract class Enemy {
 
                 // Increases the position index to represent the position the enemy is at.
                 this.positionIndex++;
+
+                // Logs that the enemy has reached its target destination.
+                LOGGER.info(STR."Enemy \{this} has successfully reached position \{position}.");
             }
 
             // Removes the enemy from its parent group now that it has finished its path.
@@ -453,6 +475,9 @@ public abstract class Enemy {
 
         // Removes the enemy from the list containing every active enemy.
         LIST_OF_ACTIVE_ENEMIES.remove(this);
+
+        // Logs that the enemy has been eliminated.
+        LOGGER.info(STR."Enemy \{this} eliminated.");
     }
 
     /**

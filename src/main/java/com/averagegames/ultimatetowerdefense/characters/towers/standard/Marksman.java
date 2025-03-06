@@ -2,8 +2,10 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.tools.development.Property;
+import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.development.Specific;
+import com.averagegames.ultimatetowerdefense.util.development.SpecificAnnotation;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,16 +29,10 @@ public class Marksman extends Tower {
     }
 
     @Override
-    public void upgrade() throws InterruptedException {
-        super.setLevel(super.getLevel() + 1);
-
-        if (super.getLevel() >= 3) {
-            super.setHiddenDetection(true);
-        }
-    }
-
-    @Override
+    @Specific(value = Tower.class, subclasses = true)
     protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
+        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
         try {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 2.wav");
             player.play();

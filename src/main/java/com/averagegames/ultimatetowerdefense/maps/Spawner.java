@@ -9,6 +9,8 @@ import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.averagegames.ultimatetowerdefense.util.LogManager.LOGGER;
+
 /**
  * The {@link Spawner} class serves as a way to automatically and easily {@code spawn} an individual {@link Enemy} or a {@link Enemy} {@link Wave}.
  * @see Enemy
@@ -108,6 +110,9 @@ public final class Spawner {
 
         // Begins moving the enemy.
         enemy.startMoving();
+
+        // Logs that the spawner has spawned the given enemy.
+        LOGGER.info(STR."Spawner \{this} has successfully spawned enemy \{enemy}.");
     }
 
     /**
@@ -123,6 +128,9 @@ public final class Spawner {
         // Creates a new thread that will handle enemy spawns.
         this.spawnThread = new Thread(() -> {
 
+            // Logs that the spawner has begun spawning the given wave.
+            LOGGER.info(STR."Spawner \{this} has begun spawning wave \{wave}.");
+
             // A loop that will iterate through every enemy in the given wave.
             for (Enemy enemy : wave.enemies()) {
 
@@ -136,10 +144,16 @@ public final class Spawner {
                     Thread.sleep(this.spawnDelay);
                 } catch (InterruptedException ex) {
 
+                    // Logs that the spawner has stopped spawning the given wave.
+                    LOGGER.info(STR."Spawner \{this} has stopped spawning wave \{wave}.");
+
                     // Breaks out of the loop if the spawner is forcefully interrupted.
                     break;
                 }
             }
+
+            // Logs that the spawner has finished spawning the given wave.
+            LOGGER.info(STR."Spawner \{this} has finished spawning wave \{wave}.");
         });
 
         // Starts the thread so that enemies can be spawned.

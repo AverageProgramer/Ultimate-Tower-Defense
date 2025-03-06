@@ -6,13 +6,14 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.LootBoxTitan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.NormalTitan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.*;
+import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Gunner;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Marksman;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
-import com.averagegames.ultimatetowerdefense.tools.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -195,6 +196,13 @@ public final class GameScene extends Scene implements SceneBuilder {
                 gunner.place(new Position(event.getX(), event.getY()));
 
                 gunner.startAttacking();
+            } else if (this.tower == 3) {
+                Energizer energizer = new Energizer();
+
+                energizer.setParent(root);
+                energizer.place(new Position(event.getX(), event.getY()));
+
+                energizer.startAttacking();
             }
         });
 
@@ -205,6 +213,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                 this.tower = 1;
             } else if (event.getCode().equals(KeyCode.DIGIT3)) {
                 this.tower = 2;
+            } else if (event.getCode().equals(KeyCode.DIGIT4)) {
+                this.tower = 3;
             } else if (event.getCode().equals(KeyCode.DIGIT0)) {
                 this.tower = -1;
             }

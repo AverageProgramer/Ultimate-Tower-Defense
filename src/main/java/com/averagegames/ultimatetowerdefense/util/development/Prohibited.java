@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools.development;
+package com.averagegames.ultimatetowerdefense.util.development;
 
 import java.lang.annotation.*;
 
@@ -18,8 +18,8 @@ import java.lang.annotation.*;
 public @interface Prohibited {
 
     /**
-     * Gets an array containing each {@link Class} prohibited from accessing the {@link java.lang.reflect.Method} by the annotation.
-     * The array must be provided when a {@link java.lang.reflect.Method} is annotated.
+     * Gets an array containing each {@link Class} prohibited from accessing the method by the annotation.
+     * The array must be provided when a method is annotated.
      * @return the array of each prohibited {@link Class}.
      * @since Ultimate Tower Defense 1.0
      */
@@ -28,7 +28,7 @@ public @interface Prohibited {
     /**
      * Gets whether the {@code subclasses} of a specified {@code superclasses} should be implicitly prohibited by the annotation.
      * By default, this property is {@code false} and {@code subclasses} will not be prohibited.
-     * @return whether inheriting {@code subclasses} of a {@code superclasses} are prohibited.
+     * @return {@code true} if {@code subclasses} of a {@code superclass} are prohibited, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
     boolean subclasses() default false;

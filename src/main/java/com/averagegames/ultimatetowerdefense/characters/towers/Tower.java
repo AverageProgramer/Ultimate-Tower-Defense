@@ -4,11 +4,12 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
-import com.averagegames.ultimatetowerdefense.tools.assets.ImageLoader;
-import com.averagegames.ultimatetowerdefense.tools.development.Prohibited;
-import com.averagegames.ultimatetowerdefense.tools.development.ProhibitedAnnotation;
-import com.averagegames.ultimatetowerdefense.tools.development.Specific;
-import com.averagegames.ultimatetowerdefense.tools.development.SpecificAnnotation;
+import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
+import com.averagegames.ultimatetowerdefense.util.development.Prohibited;
+import com.averagegames.ultimatetowerdefense.util.development.ProhibitedAnnotation;
+import com.averagegames.ultimatetowerdefense.util.development.Specific;
+import com.averagegames.ultimatetowerdefense.util.development.SpecificAnnotation;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
+import static com.averagegames.ultimatetowerdefense.util.LogManager.LOGGER;
 
 /**
  * The {@link Tower} class serves as a {@code super} class to all in-game enemies.
@@ -59,8 +61,8 @@ public abstract class Tower {
     /**
      * The {@link Tower}'s current {@code health}.
      */
-    @Accessors(makeFinal = true) @Getter
-    protected int health;
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
+    private int health;
 
     /**
      * The {@code damage} the {@link Tower} can do during an {@code attack}.
@@ -133,19 +135,40 @@ public abstract class Tower {
      */
     public final void heal(@Range(from = 0, to = Integer.MAX_VALUE) final int amount) {
 
+        // Performs the tower's on healed action.
+        // This method is unique to each individual inheritor of the tower class.
+        this.onHeal();
+
         // Adds the given amount to the tower's health.
         this.health += amount;
+
+        // Logs that the tower has been healed by a given amount.
+        LOGGER.info(STR."Tower \{this} health has been increased by \{amount}.");
     }
 
     /**
      * Removes a given amount from the {@code health} of the {@link Tower}.
-     * @param amount the amount to {@code damage} the {@link Tower} by.
+     * @param damage the amount to {@code damage} the {@link Tower} by.
      * @since Ultimate Tower Defense 1.0
      */
-    public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int amount) {
+    public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
+
+        // Performs the tower's on damaged action.
+        // This method is unique to each individual inheritor of the tower class.
+        this.onDamaged();
 
         // Removes the given amount from the tower's health.
-        this.health -= amount;
+        this.health -= damage;
+
+        // Logs that the enemy has been damaged by a given amount.
+        LOGGER.info(STR."Tower \{this} health has been decreased by \{damage}.");
+
+        // Determines whether the tower has any health remaining.
+        if (this.health <= 0) {
+
+            // Removes the tower from its parent group.
+            Platform.runLater(this::eliminate);
+        }
     }
 
     /**
@@ -205,9 +228,6 @@ public abstract class Tower {
         // This method is unique to each individual inheritor of the tower class.
         this.onPlace();
 
-        // Adds the tower to the list containing every active tower.
-        LIST_OF_ACTIVE_TOWERS.add(this);
-
         // Determines whether the tower's image is null.
         if (this.image != null) {
 
@@ -217,6 +237,12 @@ public abstract class Tower {
 
         // Adds the tower to the tower's parent group.
         this.parent.getChildren().add(this.loadedTower);
+
+        // Adds the tower to the list containing every active tower.
+        LIST_OF_ACTIVE_TOWERS.add(this);
+
+        // Logs that the tower has been placed.
+        LOGGER.info(STR."Tower \{this} placed.");
     }
 
     /**
@@ -382,6 +408,9 @@ public abstract class Tower {
         // Creates a new thread that will handle tower attacks.
         this.attackThread = new Thread(() -> {
 
+            // Logs that the tower has begun attacking.
+            LOGGER.info(STR."Tower \{this} has begun to attack.");
+
             // A loop that will continuously run until the tower is eliminated.
             while (true) {
 
@@ -398,10 +427,15 @@ public abstract class Tower {
                         // A concurrent modification exception may be thrown while finding a target.
                         target = this.getTarget();
 
+                        // Logs that the tower has found a target.
+                        LOGGER.info(STR."Tower \{this} has successfully targeted enemy \{target}.");
+
                         // Breaks out of the loop since the enemy would have gotten a valid target.
                         break;
                     } catch (ConcurrentModificationException ex) {
-                        // The exception does not need to be handled.
+
+                        // Logs that the tower has encountered an error while getting its target.
+                        LOGGER.warning(STR."Tower \{this} has encountered exception \{ex} while searching for a target.");
                     }
                 }
 
@@ -422,9 +456,15 @@ public abstract class Tower {
                     Thread.sleep(this.coolDown);
                 } catch (InterruptedException ex) {
 
+                    // Logs that the tower's attack has been interrupted and ended.
+                    LOGGER.info(STR."Tower \{this} has stopped attacking enemy \{target}.");
+
                     // Breaks out of the loop if the current thread is forcefully interrupted.
                     break;
                 }
+
+                // Logs that the tower has attacked its target.
+                LOGGER.info(STR."Tower \{this} has successfully attacked enemy \{target}.");
             }
         });
 
@@ -469,6 +509,9 @@ public abstract class Tower {
 
         // Removes the tower from the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.remove(this);
+
+        // Logs that the tower has been eliminated.
+        LOGGER.info(STR."Tower \{this} eliminated.");
     }
 
     /**

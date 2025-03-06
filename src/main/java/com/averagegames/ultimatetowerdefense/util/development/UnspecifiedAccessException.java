@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.tools.development;
+package com.averagegames.ultimatetowerdefense.util.development;
 
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NonNls;
