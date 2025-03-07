@@ -50,6 +50,12 @@ public final class Scout extends Tower {
     private final int startHealth = 100;
 
     /**
+     * The {@link Scout}'s {@code range} radius in pixels.
+     */
+    @Property
+    private final double radius = 100;
+
+    /**
      * A constructor that properly sets the attributes of the {@link Scout} {@link Tower}.
      */
     public Scout() {
@@ -65,6 +71,9 @@ public final class Scout extends Tower {
 
         // Properly sets the scout's health to the finalized starting health.
         super.setHealth(this.startHealth);
+
+        // Properly sets the scout's range to have the finalized radius.
+        super.setRadius(this.radius);
     }
 
     /**

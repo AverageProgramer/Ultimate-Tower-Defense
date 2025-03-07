@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,8 +44,7 @@ public abstract class Enemy {
      * The {@link Enemy}'s parent {@link Group}.
      */
     @Nullable
-    @Accessors(makeFinal = true) @Setter
-    @Getter
+    @Accessors(makeFinal = true) @Setter @Getter
     private Group parent;
 
     /**
@@ -232,15 +232,29 @@ public abstract class Enemy {
     }
 
     /**
-     * Determines whether the {@link Enemy} intersects the given {@link Node} at any point.
-     * @param node the {@link Node} to be checked.
-     * @return {@code true} if the {@link Enemy} intersects the {@link Node}, {@code false} otherwise.
+     * Determines whether the {@link Enemy} is within the given {@link Circle} at any point.
+     * @param range the {@link Circle} to be checked.
+     * @return {@code true} if the {@link Enemy} is within the {@link Circle}, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
-    public final boolean isInRange(@NotNull final Node node) {
+    public final boolean isInRange(@NotNull final Circle range) {
 
-        // Returns whether the enemy intersects the given node.
-        return this.loadedEnemy.intersects(node.getLayoutBounds());
+        // The enemy's current position.
+        Position currentPos = this.getPosition();
+
+        // The circle's current position.
+        Position rangePos = new Position(range.getCenterX(), range.getCenterY());
+
+        // The change in x and change in y for between the enemy and the circle.
+
+        double x = currentPos.x() - rangePos.x();
+        double y = currentPos.y() - rangePos.y();
+
+        // The circle's radius.
+        double radius = range.getRadius();
+
+        // Returns whether the enemy is within the bounds of the circle.
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= radius;
     }
 
     /**

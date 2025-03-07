@@ -13,6 +13,8 @@ import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +39,7 @@ public abstract class Tower {
      * A {@link List} containing every active {@link Tower} in a game.
      */
     @NotNull
-    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());;
+    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The {@link Tower}'s parent {@link Group}.
@@ -69,6 +71,12 @@ public abstract class Tower {
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
     protected int damage;
+
+    /**
+     * The {@link Tower}'s {@code range}.
+     */
+    @NotNull
+    private final Circle range;
 
     /**
      * The {@link Tower}'s {@link Targeting}.
@@ -115,6 +123,9 @@ public abstract class Tower {
 
         this.loadedTower = new ImageLoader();
         this.image = null;
+
+        // Initializes the tower's range to a default circle.
+        this.range = new Circle();
 
         // Initializes the tower's targeting to 'first' by default.
         this.targeting = Targeting.FIRST;
@@ -198,16 +209,51 @@ public abstract class Tower {
     }
 
     /**
-     * Determines whether the {@link Tower} intersects the given {@link Node} at any point.
-     * @param node the {@link Node} to be checked.
-     * @return {@code true} if the {@link Tower} intersects the {@link Node}, {@code false} otherwise.
+     * Sets the radius of the {@link Circle} representing the {@link Tower}'s {@code range} to a newly given value.
+     * @param radius the radius of the {@link Tower}'s {@code range}.
      * @since Ultimate Tower Defense 1.0
      */
-    public final boolean isInRange(@NotNull final Node node) {
+    protected final void setRadius(@Range(from = 0, to = Integer.MAX_VALUE) final double radius) {
 
-        // TODO: Implement tower ranges
+        // Sets the tower's range to have the given radius.
+        this.range.setRadius(radius);
+    }
 
-        return false;
+    /**
+     * Gets the radius of the {@link Circle} representing the {@link Tower}'s {@code range}.
+     * @return the radius of the {@link Tower}'s {@code range}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final double getRadius() {
+
+        // Returns the range's current radius.
+        return this.range.getRadius();
+    }
+
+    /**
+     * Determines whether the {@link Tower} is within the given {@link Circle} at any point.
+     * @param node the {@link Circle} to be checked.
+     * @return {@code true} if the {@link Tower} is within the {@link Circle}, {@code false} otherwise.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final boolean isInRange(@NotNull final Circle node) {
+
+        // The tower's current position.
+        Position currentPos = this.getPosition();
+
+        // The circle's current position.
+        Position rangePos = new Position(range.getCenterX(), range.getCenterY());
+
+        // The change in x and change in y for between the tower and the circle.
+
+        double x = currentPos.x() - rangePos.x();
+        double y = currentPos.y() - rangePos.y();
+
+        // The circle's radius.
+        double radius = range.getRadius();
+
+        // Returns whether the tower is within the bounds of the circle.
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= radius;
     }
 
     /**
@@ -234,6 +280,11 @@ public abstract class Tower {
             // Loads the tower's image.
             this.loadedTower.setImage(this.image);
         }
+
+        // Sets the range's x and y components to the position of the tower's x and y components.
+
+        this.range.setCenterX(this.getPosition().x());
+        this.range.setCenterY(this.getPosition().y());
 
         // Adds the tower to the tower's parent group.
         this.parent.getChildren().add(this.loadedTower);
@@ -276,20 +327,20 @@ public abstract class Tower {
             // The switch case for the regular enemy type.
             case Type.REGULAR ->
 
-                // Returns true because all towers can attack regular enemies by default.
-                    true;
+                // Returns true if the enemy is within the tower's range.
+                    enemy.isInRange(this.range);
 
             // The switch case for the hidden enemy type.
             case Type.HIDDEN ->
 
-                // Returns whether the tower has hidden detection and can detect hidden enemies.
-                    this.hiddenDetection;
+                // Returns whether the tower has hidden detection and can detect hidden enemies and whether the enemy is within the tower's range.
+                    this.hiddenDetection && enemy.isInRange(this.range);
 
             // The switch case for the flying enemy type.
             case Type.FLYING ->
 
-                // Returns whether the tower has flying detection and can detect flying enemies.
-                    this.flyingDetection;
+                // Returns whether the tower has flying detection and can detect flying enemies and whether the enemy is within the tower's range.
+                    this.flyingDetection && enemy.isInRange(this.range);
         };
     }
 
@@ -318,8 +369,15 @@ public abstract class Tower {
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.
 
-            @Unmodifiable List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
+            List<Enemy> fixedList = new ArrayList<>(LIST_OF_ACTIVE_ENEMIES);
             fixedList.removeIf(enemy -> !this.canAttack(enemy));
+
+            // Determines whether the fixed list containing every possible enemy target is empty.
+            if (fixedList.isEmpty()) {
+
+                // Returns null because there are no possible target enemies.
+                return null;
+            }
 
             // An index that will be used to determine which enemy has passed the most positions on a set path.
             int currentPos = this.targeting == Targeting.FIRST ? fixedList.getLast().getPositionIndex() : Integer.MAX_VALUE;
@@ -427,9 +485,6 @@ public abstract class Tower {
                         // A concurrent modification exception may be thrown while finding a target.
                         target = this.getTarget();
 
-                        // Logs that the tower has found a target.
-                        LOGGER.info(STR."Tower \{this} has successfully targeted enemy \{target}.");
-
                         // Breaks out of the loop since the enemy would have gotten a valid target.
                         break;
                     } catch (ConcurrentModificationException ex) {
@@ -445,6 +500,9 @@ public abstract class Tower {
                     // Jumps to the next iteration of the loop preventing any exceptions from occurring.
                     continue;
                 }
+
+                // Logs that the tower has found a target.
+                LOGGER.info(STR."Tower \{this} has successfully targeted enemy \{target}.");
 
                 // Allows the attack the loop to be broken out of if the tower is eliminated.
                 try {

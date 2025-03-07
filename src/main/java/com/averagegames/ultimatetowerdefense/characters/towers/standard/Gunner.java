@@ -22,10 +22,14 @@ public class Gunner extends Tower {
     @Property
     private final int coolDown = 1250;
 
+    @Property
+    private final double radius = 125;
+
     public Gunner() {
         super.image = this.image;
         super.damage = this.damage;
         super.coolDown = this.coolDown;
+        super.setRadius(this.radius);
     }
 
     @Override

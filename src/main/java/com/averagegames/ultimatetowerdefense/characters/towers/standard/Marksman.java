@@ -22,10 +22,14 @@ public class Marksman extends Tower {
     @Property
     private final int coolDown = 5000;
 
+    @Property
+    private final double radius = 175;
+
     public Marksman() {
         super.image = this.image;
         super.damage = this.damage;
         super.coolDown = this.coolDown;
+        super.setRadius(this.radius);
     }
 
     @Override
