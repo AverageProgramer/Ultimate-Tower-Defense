@@ -18,6 +18,7 @@ import org.jetbrains.annotations.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
 
@@ -69,6 +70,12 @@ public abstract class Enemy {
     private int health;
 
     /**
+     * A boolean that indicates whether the {@link Enemy} is {@code burning}.
+     */
+    @Accessors(makeFinal = true) @Getter
+    private boolean burning;
+
+    /**
      * The {@code damage} the {@link Enemy} can do during an {@code attack}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
@@ -78,7 +85,7 @@ public abstract class Enemy {
      * The {@link Enemy}'s speed in pixels per second.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    protected int speed;
+    protected double speed;
 
     /**
      * The current {@link Path} the {@link Enemy} will follow.
@@ -192,6 +199,54 @@ public abstract class Enemy {
             // Removes the enemy from its parent group.
             Platform.runLater(this::eliminate);
         }
+    }
+
+    /**
+     * Applies burn {@code damage} and effects to the {@link Enemy} for a given {@code duration}.
+     * @param damage the {@code damage} the {@link Enemy} takes every second.
+     * @param duration the {@code duration} to remain burned in seconds.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void burn(@Range(from = 0, to = Integer.MAX_VALUE) final int damage, @Range(from = 0, to = Integer.MAX_VALUE) final int duration) {
+
+        // Creates a new thread that will handle burn damage and starts it.
+        new Thread(() -> {
+
+            // A loop that will iterate the same amount of times as the given duration.
+            for (int i = 0; i < duration; i++) {
+
+                // A try-catch statement that will allow the enemy to take burn damage.
+                try {
+
+                    // Damages the enemy the given amount.
+                    this.damage(damage);
+
+                    // Pauses the thread for one second.
+                    // Once the thread resumes the enemy will be damaged again.
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    // The exception does not need to be handled.
+                }
+            }
+
+            // Returns the enemy's speed back to normal.
+            this.speed *= ((double) 4 / 3);
+
+            // Updates the enemy's movement so that it will move at its original speed.
+            this.updateMovement();
+
+            // Sets the boolean indicating that the enemy is burning to false.
+            this.burning = false;
+        }).start();
+
+        // Lowers the enemy's speed.
+        this.speed *= ((double) 3 / 4);
+
+        // Updates the enemy's movement so that it will move at the new speed.
+        this.updateMovement();
+
+        // Sets the boolean indicating that the enemy is burning to true.
+        this.burning = true;
     }
 
     /**
@@ -332,8 +387,8 @@ public abstract class Enemy {
         // Interrupts the thread controlling enemy movement so that the new animation can override the old animation if there was one.
         this.movementThread.interrupt();
 
-        // Creates a new thread that will handle enemy movement.
-        this.movementThread = new Thread(() -> {
+        // Creates a new thread that will handle enemy movement and starts it.
+        (this.movementThread = new Thread(() -> {
 
             // Logs that the enemy has begun moving along its set path.
             LOGGER.info(STR."Enemy \{this} has begun moving along path \{this.pathing}.");
@@ -392,10 +447,7 @@ public abstract class Enemy {
 
             // Removes the enemy from its parent group now that it has finished its path.
             Platform.runLater(this::eliminate);
-        });
-
-        // Starts the thread so that the enemy can move along its set path.
-        this.movementThread.start();
+        })).start();
     }
 
     /**
@@ -408,6 +460,40 @@ public abstract class Enemy {
         // Interrupts the thread responsible for all enemy movement.
         // This will cause an exception to be thrown which will break out of the loop managing enemy movement.
         this.movementThread.interrupt();
+
+        // Creates a temporary list that will contain every future position along the enemy's current pathing.
+        ArrayList<Position> positions = new ArrayList<>();
+
+        // A loop that will iterate through every position along the enemy's current path.
+        for (int i = 0; i < Objects.requireNonNull(this.getPathing()).positions().length; i++) {
+
+            // Determines whether the current position is ahead of the enemy.
+            if (i < this.getPositionIndex()) {
+
+                // Jumps to the next iteration of the loop.
+                continue;
+            }
+
+            // Adds the current position to the temporary list of positions.
+            positions.add(this.getPathing().positions()[i]);
+        }
+
+        // Sets the enemy's pathing to contain only the positions that were in the temporary list.
+        // Enemy movement can now be resumed and not just restarted.
+        this.pathing = new Path(positions.toArray(Position[]::new));
+    }
+
+    /**
+     * Updates the {@link Enemy}'s movement to reflect any {@code speed} changes that may have occurred.
+     * @since Ultimate Tower Defense 1.0
+     */
+    private void updateMovement() {
+
+        // Stops the enemy's movement.
+        this.stopMoving();
+
+        // Resumes the enemy's movement.
+        this.startMoving();
     }
 
     /**
@@ -443,13 +529,13 @@ public abstract class Enemy {
     @NonBlocking
     public final void startAttacking() {
 
-        // Creates a new thread that will handle enemy attacks.
-        this.attackThread = new Thread(() -> {
-            // Enemy attacking has not yet been implemented.
-        });
+        // Interrupts the thread controlling enemy attacks so that the new attacks can override the old attacks if there were any.
+        this.attackThread.interrupt();
 
-        // Starts the thread so that the enemy can attack towers.
-        this.attackThread.start();
+        // Creates a new thread that will handle enemy attacks and starts it.
+        (this.attackThread = new Thread(() -> {
+            // Enemy attacking has not yet been implemented.
+        })).start();
     }
 
     /**

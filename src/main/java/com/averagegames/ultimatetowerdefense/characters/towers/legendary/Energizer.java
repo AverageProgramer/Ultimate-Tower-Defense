@@ -132,6 +132,13 @@ public class Energizer extends Tower {
      */
     @Override
     protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
+        if (enemy == null) {
+            this.chargeThread.interrupt();
+            this.doCharge = true;
+
+            Thread.sleep(this.chargeCoolDown);
+        }
+
         if (enemy != null && this.doCharge && !this.chargeThread.isAlive()) {
             this.totalTime = 0;
 
@@ -146,15 +153,7 @@ public class Energizer extends Tower {
             })).start();
         }
 
-        if (enemy == null && !this.doCharge) {
-            this.chargeThread.interrupt();
-
-            this.doCharge = true;
-
-            Thread.sleep(this.chargeCoolDown);
-        }
-
-        if (!this.doCharge && enemy != null) {
+        if (enemy != null && !this.doCharge) {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Energy Gun 2.wav");
             try {
                 player.play();
@@ -172,5 +171,10 @@ public class Energizer extends Tower {
                 Thread.sleep(this.chargeCoolDown);
             }
         }
+    }
+
+    @Override
+    public void upgrade() throws InterruptedException {
+
     }
 }

@@ -1,17 +1,14 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.GiantTitan;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.NormalTitan;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.*;
 import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Gunner;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Marksman;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Pyromancer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
+import com.averagegames.ultimatetowerdefense.player.modes.Challenging;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -26,6 +23,9 @@ import java.io.IOException;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
 
+/**
+ * Everything in the {@link GameScene} class as of right now is temporary and subject to change.
+ */
 public final class GameScene extends Scene implements SceneBuilder {
 
     private int tower = -1;
@@ -36,7 +36,7 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav");
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Nuclear Fallen King.wav");
         player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
@@ -91,353 +91,58 @@ public final class GameScene extends Scene implements SceneBuilder {
         Spawner spawner = getTestSpawner();
 
         new Thread(() -> {
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_1, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_2, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_3, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_4, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_5, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_6, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_7, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_8, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_9, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-
-                    new NormalTitan(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_10, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-                    new Quick(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_11, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-
-                    new NormalTitan(),
-                    new NormalTitan(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_12, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_13, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-
-                    new NormalTitan(),
-                    new NormalTitan(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_14, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_15, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_16, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-                    new Normal(),
-
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-                    new Slow(),
-
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-                    new Stealthy(),
-
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-            }), root);
-
+            spawner.spawn(Challenging.WAVE_17, root);
             timerWait();
 
-            spawner.spawn(new Wave(new Enemy[] {
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-                    new LootBox(),
-            }), root);
+            spawner.spawn(Challenging.WAVE_18, root);
         }).start();
 
         this.setOnMouseClicked(event -> {
@@ -463,6 +168,13 @@ public final class GameScene extends Scene implements SceneBuilder {
 
                 gunner.startAttacking();
             } else if (this.tower == 3) {
+                Pyromancer pyromancer = new Pyromancer();
+
+                pyromancer.setParent(root);
+                pyromancer.place(new Position(event.getX(), event.getY()));
+
+                pyromancer.startAttacking();
+            } else if (this.tower == 4) {
                 Energizer energizer = new Energizer();
 
                 energizer.setParent(root);
@@ -481,6 +193,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                 this.tower = 2;
             } else if (event.getCode().equals(KeyCode.DIGIT4)) {
                 this.tower = 3;
+            } else if (event.getCode().equals(KeyCode.DIGIT5)) {
+                this.tower = 4;
             } else if (event.getCode().equals(KeyCode.DIGIT0)) {
                 this.tower = -1;
             }

@@ -48,4 +48,9 @@ public class Marksman extends Tower {
 
         enemy.damage(this.damage);
     }
+
+    @Override
+    public void upgrade() throws InterruptedException {
+
+    }
 }

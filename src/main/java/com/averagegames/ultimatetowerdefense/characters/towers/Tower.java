@@ -283,6 +283,7 @@ public abstract class Tower {
 
         this.range.setFill(Paint.valueOf("#3a5bb6"));
         this.range.setOpacity(0.25);
+        this.range.toBack();
         this.range.setVisible(false);
         this.loadedTower.setOnMouseClicked(e -> this.range.setVisible(!this.range.isVisible()));
         this.parent.getChildren().add(this.range);
@@ -464,8 +465,8 @@ public abstract class Tower {
         // Interrupts the thread controlling tower attacks so that the new attacks can override the old attacks if there were any.
         this.attackThread.interrupt();
 
-        // Creates a new thread that will handle tower attacks.
-        this.attackThread = new Thread(() -> {
+        // Creates a new thread that will handle tower attacks and starts it.
+        (this.attackThread = new Thread(() -> {
 
             // Logs that the tower has begun attacking.
             LOGGER.info(STR."Tower \{this} has begun to attack.");
@@ -537,10 +538,7 @@ public abstract class Tower {
                     LOGGER.info(STR."Tower \{this} has successfully attacked enemy \{target}.");
                 }
             }
-        });
-
-        // Starts the thread so that the Tower can attack enemies.
-        this.attackThread.start();
+        })).start();
     }
 
     /**
@@ -633,16 +631,6 @@ public abstract class Tower {
     }
 
     /**
-     * An action performed whenever a {@link Tower} is {@code upgraded}.
-     * By default, this method does nothing.
-     * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
-     * @since Ultimate Tower Defense 1.0
-     */
-    public void upgrade() throws InterruptedException {
-        // This method can be overridden by a subclass so that each individual tower can have a unique upgrading action.
-    }
-
-    /**
      * An action performed whenever a {@link Tower} is using a {@code special ability}.
      * By default, this method does nothing.
      * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
@@ -651,4 +639,12 @@ public abstract class Tower {
     public void special() throws InterruptedException {
         // This method can be overridden by a subclass so that each individual tower can have a unique special ability.
     }
+
+    /**
+     * An action performed whenever a {@link Tower} is {@code upgraded}.
+     * By default, this method does nothing.
+     * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public abstract void upgrade() throws InterruptedException;
 }

@@ -7,23 +7,23 @@ import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
-public class Gunner extends Tower {
+public class Pyromancer extends Tower {
 
-    public static final int COST = 500;
-
-    @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif");
+    public static final int COST = 750;
 
     @Property
-    private final int damage = 1;
+    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/PyromancerTower.gif");
 
     @Property
-    private final int coolDown = 1250;
+    private final int damage = 0;
 
     @Property
-    private final double radius = 125;
+    private final int coolDown = 350;
 
-    public Gunner() {
+    @Property
+    private final double radius = 75;
+
+    public Pyromancer() {
         super.image = this.image;
         super.damage = this.damage;
         super.coolDown = this.coolDown;
@@ -31,25 +31,19 @@ public class Gunner extends Tower {
     }
 
     @Override
-    protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
-        // Determines whether the enemy is null.
-        if (enemy == null) {
-
-            // Prevents the scout from attacking a null enemy.
-            return;
-        }
-
-        for (int i = 0; i < 3; i++) {
+    protected void attack(@Nullable final Enemy enemy) {
+        if (enemy != null) {
             try {
-                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Flamethrower 1.wav");
                 player.play();
             } catch (Exception ex) {
                 System.out.println("Exception occurred");
             }
 
-            enemy.damage(this.damage);
-
-            Thread.sleep(200);
+            // Basic burn damage.
+            if (!enemy.isBurning()) {
+                enemy.burn(1,4);
+            }
         }
     }
 

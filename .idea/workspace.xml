@@ -9,16 +9,25 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a missed compiler error in the module-info file.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Timer Sound Effect 1.wav" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Pyromancer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Challenging.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Horrific.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Insane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Flamethrower 1.flac" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/PyromancerTower.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Mode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +46,8 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="AnnotationType" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -263,14 +272,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00010" summary="Added the Type enum which will be used to determine what enemies certain towers can attack. Null safety was also added to the Spawner class.">
-      <option name="closed" value="true" />
-      <created>1708997601433</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1708997601433</updated>
     </task>
     <task id="LOCAL-00011" summary="Added audio files and background music to the project. Other than that, not much has changed.">
       <option name="closed" value="true" />
@@ -656,7 +657,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741411571819</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like.">
+      <option name="closed" value="true" />
+      <created>1741454983037</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1741454983037</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +673,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="This commit is merely a test. The project faced several errors and a complete reset was necessary. Basically the project needed to be deleted and re-cloned from GitHub." />
     <MESSAGE value="Added a &quot;native&quot; folder to the project. This is where all native C\C++ code will be located. Currently, there is only one C++ source file in this folder. This source file contains the native code for the &quot;getTarget&quot; method in the Enemy class." />
     <MESSAGE value="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file." />
     <MESSAGE value="Added numerous classes to the project. These classes include the &quot;Enemy&quot; class, &quot;Tower Class&quot;, and a whole variety of other classes. Each new file was previously used in an old Ultimate Tower Defense project and will now be used here. The structure of the folders and packages has been updated and cleaned up. Other features deemed to be useless or ineffective will also be removed in the future." />
@@ -689,7 +697,8 @@
     <MESSAGE value="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future." />
     <MESSAGE value="Once again removed a variety of tools that just wound up doing more harm than good. These tools include the Specific and Prohibited annotations as well as their verification classes, SpecificAnnotation and ProhibitedAnnotation. The verification was causing noticeable levels of lag and has thus been removed." />
     <MESSAGE value="Fixed a missed compiler error in the module-info file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a missed compiler error in the module-info file." />
+    <MESSAGE value="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

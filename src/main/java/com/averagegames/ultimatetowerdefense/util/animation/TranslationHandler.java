@@ -37,7 +37,7 @@ public class TranslationHandler {
      * The {@code speed} in pixels per second that the given {@link Node} should travel at.
      */
     @Setter @Getter
-    private int speed;
+    private double speed;
 
     /**
      * The {@code destination} of the animation.

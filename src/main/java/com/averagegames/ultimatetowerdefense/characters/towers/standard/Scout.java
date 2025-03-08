@@ -105,4 +105,9 @@ public final class Scout extends Tower {
         // Damages the given enemy.
         enemy.damage(this.damage);
     }
+
+    @Override
+    public void upgrade() throws InterruptedException {
+
+    }
 }
