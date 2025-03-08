@@ -8,7 +8,6 @@ module com.averagegames.ultimatetowerdefense {
     requires static lombok;
     requires java.validation;
     requires java.logging;
-    requires org.reflections;
 
     exports com.averagegames.ultimatetowerdefense;
     opens com.averagegames.ultimatetowerdefense to javafx.fxml;
