@@ -4,8 +4,6 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
-import com.averagegames.ultimatetowerdefense.util.development.Specific;
-import com.averagegames.ultimatetowerdefense.util.development.SpecificAnnotation;
 import javafx.scene.image.Image;
 
 @Zombie
@@ -43,8 +41,7 @@ public class Stealthy extends Enemy {
     }
 
     @Override
-    @Specific(value = Enemy.class, subclasses = true)
     public void onDeath() {
-        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
+
     }
 }

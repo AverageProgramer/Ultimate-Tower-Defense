@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.averagegames.ultimatetowerdefense.util.LogManager.LOGGER;
+import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
 
 /**
  * The {@link Spawner} class serves as a way to automatically and easily {@code spawn} an individual {@link Enemy} or a {@link Enemy} {@link Wave}.

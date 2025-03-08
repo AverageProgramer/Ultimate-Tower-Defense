@@ -2,6 +2,7 @@ package com.averagegames.ultimatetowerdefense.characters.towers.legendary;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
@@ -66,6 +67,12 @@ public class Energizer extends Tower {
     private final int startHealth = 100;
 
     /**
+     * The {@link Scout}'s {@code range} radius in pixels.
+     */
+    @Property
+    private final double radius = 125;
+
+    /**
      * A boolean that determines whether the {@link Energizer} should charge for an {@code attack}.
      */
     private boolean doCharge;
@@ -94,6 +101,9 @@ public class Energizer extends Tower {
 
         // Properly sets the energizer's health to the finalized starting health.
         super.setHealth(this.startHealth);
+
+        // Properly sets the energizer's range to have the finalized radius.
+        super.setRadius(this.radius);
 
         // Properly sets the boolean that determines whether the energizer should charge to true.
         this.doCharge = true;

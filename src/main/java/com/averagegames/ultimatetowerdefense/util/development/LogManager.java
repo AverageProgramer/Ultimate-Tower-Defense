@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.util;
+package com.averagegames.ultimatetowerdefense.util.development;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

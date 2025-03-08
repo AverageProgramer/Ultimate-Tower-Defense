@@ -5,8 +5,6 @@ import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
-import com.averagegames.ultimatetowerdefense.util.development.Specific;
-import com.averagegames.ultimatetowerdefense.util.development.SpecificAnnotation;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
@@ -83,11 +81,7 @@ public final class Scout extends Tower {
      * @since Ultimate Tower Defense 1.0
      */
     @Override
-    @Specific(value = Tower.class, subclasses = true)
     protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
-
-        // Verifies that the calling class of the method was specified by the method's annotation.
-        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
 
         // A try-catch statement that will catch any exceptions that occur when playing an audio file.
         try {

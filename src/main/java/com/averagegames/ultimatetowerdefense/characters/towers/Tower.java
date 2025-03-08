@@ -5,13 +5,8 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
-import com.averagegames.ultimatetowerdefense.util.development.Prohibited;
-import com.averagegames.ultimatetowerdefense.util.development.ProhibitedAnnotation;
-import com.averagegames.ultimatetowerdefense.util.development.Specific;
-import com.averagegames.ultimatetowerdefense.util.development.SpecificAnnotation;
 import javafx.application.Platform;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -24,7 +19,7 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
-import static com.averagegames.ultimatetowerdefense.util.LogManager.LOGGER;
+import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
 
 /**
  * The {@link Tower} class serves as a {@code super} class to all in-game enemies.
@@ -87,13 +82,13 @@ public abstract class Tower {
     /**
      * Whether the {@link Tower} can detect a {@code hidden} {@link Enemy}.
      */
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter(AccessLevel.PROTECTED)
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter(value = AccessLevel.PROTECTED)
     private boolean hiddenDetection;
 
     /**
      * Whether the {@link Tower} can detect a {@code flying} {@link Enemy}.
      */
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter(AccessLevel.PROTECTED)
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter(value = AccessLevel.PROTECTED)
     private boolean flyingDetection;
 
     /**
@@ -232,11 +227,11 @@ public abstract class Tower {
 
     /**
      * Determines whether the {@link Tower} is within the given {@link Circle} at any point.
-     * @param node the {@link Circle} to be checked.
+     * @param range the {@link Circle} to be checked.
      * @return {@code true} if the {@link Tower} is within the {@link Circle}, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
-    public final boolean isInRange(@NotNull final Circle node) {
+    public final boolean isInRange(@NotNull final Circle range) {
 
         // The tower's current position.
         Position currentPos = this.getPosition();
@@ -247,7 +242,7 @@ public abstract class Tower {
         // The change in x and change in y for between the tower and the circle.
 
         double x = currentPos.x() - rangePos.x();
-        double y = currentPos.y() - rangePos.y();
+        double y = (currentPos.y() - (this.image != null ? this.image.getHeight() / 2 : 0)) - rangePos.y();
 
         // The circle's radius.
         double radius = range.getRadius();
@@ -285,6 +280,12 @@ public abstract class Tower {
 
         this.range.setCenterX(this.getPosition().x());
         this.range.setCenterY(this.getPosition().y());
+
+        this.range.setFill(Paint.valueOf("#3a5bb6"));
+        this.range.setOpacity(0.25);
+        this.range.setVisible(false);
+        this.loadedTower.setOnMouseClicked(e -> this.range.setVisible(!this.range.isVisible()));
+        this.parent.getChildren().add(this.range);
 
         // Adds the tower to the tower's parent group.
         this.parent.getChildren().add(this.loadedTower);
@@ -348,7 +349,7 @@ public abstract class Tower {
      * Gets the {@link Tower}'s target {@link Enemy} based on which {@link Targeting} mode is active.
      * @return the {@link Tower}'s target {@link Enemy}.
      */
-    private @Nullable Enemy getTarget() throws ConcurrentModificationException {
+    private @Nullable Enemy getTarget() {
 
         // The object that will be returned as the target enemy.
         Enemy target = null;
@@ -443,7 +444,7 @@ public abstract class Tower {
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.
 
-            @Unmodifiable List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
+            List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
             fixedList.removeIf(enemy -> !this.canAttack(enemy));
 
             // Returns either the strongest or weakest active enemy depending on the tower's targeting.
@@ -577,12 +578,7 @@ public abstract class Tower {
      * By default, this method does nothing.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = Tower.class, subclasses = true)
     protected void onPlace() {
-
-        // Verifies that the calling class of the method was specified by the method's annotation.
-        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
-
         // This method can be overridden by a subclass so each individual tower can have unique action to do when placed.
     }
 
@@ -591,12 +587,7 @@ public abstract class Tower {
      * By default, this method does nothing.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = Tower.class, subclasses = true)
     protected void onHeal() {
-
-        // Verifies that the calling class of the method was specified by the method's annotation.
-        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
-
         // This method can be overridden by a subclass so each individual tower can have unique action to do when healed.
     }
 
@@ -605,12 +596,7 @@ public abstract class Tower {
      * By default, this method does nothing.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = Tower.class, subclasses = true)
     protected void onDamaged() {
-
-        // Verifies that the calling class of the method was specified by the method's annotation.
-        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
-
         // This method can be overridden by a subclass so each individual tower can have unique action to do when damaged.
     }
 
@@ -619,12 +605,7 @@ public abstract class Tower {
      * By default, this method does nothing.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = Tower.class, subclasses = true)
     protected void onDeath() {
-
-        // Verifies that the calling class of the method was specified by the method's annotation.
-        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
-
         // This method can be overridden by a subclass so each individual tower can have unique action to do when eliminated.
     }
 
@@ -635,12 +616,7 @@ public abstract class Tower {
      * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
-    @Specific(value = Tower.class, subclasses = true)
     protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
-
-        // Verifies that the calling class of the method was specified by the method's annotation.
-        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
-
         // This method can be overridden by a subclass so each individual tower can have unique action to do when attacking.
     }
 
@@ -650,12 +626,7 @@ public abstract class Tower {
      * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
-    @Prohibited(value = Enemy.class, subclasses = true)
     public void upgrade() throws InterruptedException {
-
-        // Verifies that the calling class of the method was specified by the method's annotation.
-        ProhibitedAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
-
         // This method can be overridden by a subclass so that each individual tower can have a unique upgrading action.
     }
 
@@ -665,12 +636,7 @@ public abstract class Tower {
      * @throws InterruptedException when the {@link Tower} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
-    @Prohibited(value = Enemy.class, subclasses = true)
     public void special() throws InterruptedException {
-
-        // Verifies that the calling class of the method was specified by the method's annotation.
-        ProhibitedAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
-
         // This method can be overridden by a subclass so that each individual tower can have a unique special ability.
     }
 }

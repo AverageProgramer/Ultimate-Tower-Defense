@@ -5,8 +5,6 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
-import com.averagegames.ultimatetowerdefense.util.development.Specific;
-import com.averagegames.ultimatetowerdefense.util.development.SpecificAnnotation;
 import javafx.scene.image.Image;
 
 @Zombie
@@ -44,10 +42,7 @@ public final class Quick extends Enemy {
     }
 
     @Override
-    @Specific(value = Enemy.class, subclasses = true)
     public void onDeath() {
-        SpecificAnnotation.verify(StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass(), new Object() {}.getClass().getEnclosingMethod());
-
         try {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 2.wav");
             player.play();

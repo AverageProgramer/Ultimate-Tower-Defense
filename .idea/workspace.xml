@@ -9,15 +9,32 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fully re-implemented the tools from the previous commit. These tools include the Specific and Prohibited annotations as well as the LogManager class. The Property annotation has also been implemented and indicates that an annotated field is an inherent property of a class.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/GiantTitan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/GiantTitan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/LootBoxTitan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/LootBoxTitan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/NormalTitan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/NormalTitan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Quick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Quick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Slow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Slow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Stealthy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Stealthy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/LogManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/LogManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Prohibited.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/ProhibitedAccessException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/ProhibitedAnnotation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Specific.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/SpecificAnnotation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/UnspecifiedAccessException.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +54,7 @@
         <option value="Enum" />
         <option value="AnnotationType" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -62,7 +80,8 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+        <option name="customMavenHome" value="C:\Users\User\Desktop\apache-maven\apache-maven-3.9.9" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -80,48 +99,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Main.executor": "Run",
-    "JUnit.EnemyTest.EnemySpawnShouldFail.executor": "Run",
-    "JUnit.EnemyTest.enemySpawnShouldFail.executor": "Run",
-    "JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor": "Run",
-    "JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor": "Run",
-    "JUnit.EnemyTest.executor": "Run",
-    "JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor": "Run",
-    "JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor": "Run",
-    "JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "main",
-    "ignore.preview.features.used": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Desktop/Ultimate Tower Defense",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.stylelint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.build",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.EnemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.enemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/Ultimate Tower Defense&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\java\com\averagegames\ultimatetowerdefense\enemies\normal" />
@@ -230,6 +249,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.EnemyTest.enemySpawnShouldNotThrowAnException" />
+      <item itemvalue="JUnit.EnemyTest.enemySpawnShouldThrowAnException" />
+      <item itemvalue="JUnit.EnemyTest.invalidDamageShouldThrowAnException" />
+      <item itemvalue="JUnit.EnemyTest.invalidParametersShouldThrowAnException" />
+      <item itemvalue="JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException" />
@@ -239,13 +266,6 @@
         <item itemvalue="JUnit.EnemyTest.enemySpawnShouldNotThrowAnException" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -259,14 +279,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00007" summary="Added comments and java documentation to the Enemy, Spawner, TranslationHandler, and ImageLoader classes.">
-      <option name="closed" value="true" />
-      <created>1708919922988</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1708919922988</updated>
     </task>
     <task id="LOCAL-00008" summary="Changed certain fields in the Enemy class to be protected so that inheriting enemies can directly access those fields.">
       <option name="closed" value="true" />
@@ -652,7 +664,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741302556227</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future.">
+      <option name="closed" value="true" />
+      <created>1741366683569</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1741366683569</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +680,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Changed various features of the program. Logging is now disabled by default and must be manually activated using the &quot;enableLogging&quot; method in the Manager class. In addition to this, a new method was added to the Enemy class. This method is an overloaded version of the Enemy class' &quot;spawn&quot; method. The new method takes a Group to add the Enemy to as a parameter." />
     <MESSAGE value="Added a static HashMap in the Builder interface. This HashMap can be used to easily manage custom-built Scenes. When Scenes are added to the HashMap, they should be paired with a unique ID, this way they can be easily found and identified. It is not a requirement for Scenes to be added to this HashMap, but it is heavily recommended." />
     <MESSAGE value="Added the StrictHashMap class. This class functions almost identically to a HashMap but there is one key difference. The StrictHashMap does not allow for any identical keys or values to passed in. If the StrictHashMap already contains, for example, the key &quot;1&quot;, no other pairs may use that key. The same rule applies to the values. If there is a value, for example, &quot;Value&quot;, no other pairs may use that value. The SCENE_MANAGER constant in the Builder interface will use the StrictHashMap going forwards." />
     <MESSAGE value="This commit is merely a test. The project faced several errors and a complete reset was necessary. Basically the project needed to be deleted and re-cloned from GitHub." />
@@ -685,7 +704,8 @@
     <MESSAGE value="Forgot about another compiler error. The error has been fixed." />
     <MESSAGE value="Re-implemented a variety of useful tools that had been previously removed. These tools include the Specific and Prohibited annotations as well as the newly implemented Property annotation. The Specific annotation allows an annotated method or constructor to specify which classes can access that constructor or method. The Prohibited annotation is similar to the Specific annotation however specified classes will be unable to access the annotated constructor or method. The Property annotation indicates that an annotated field is a property of a class." />
     <MESSAGE value="Fully re-implemented the tools from the previous commit. These tools include the Specific and Prohibited annotations as well as the LogManager class. The Property annotation has also been implemented and indicates that an annotated field is an inherent property of a class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fully re-implemented the tools from the previous commit. These tools include the Specific and Prohibited annotations as well as the LogManager class. The Property annotation has also been implemented and indicates that an annotated field is an inherent property of a class." />
+    <MESSAGE value="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
