@@ -4,9 +4,11 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
 import com.averagegames.ultimatetowerdefense.player.Player;
+import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The {@link Energizer} is considered a {@code legendary} {@link Tower} capable of dealing massive amounts of {@code damage}.
@@ -54,11 +56,19 @@ public class Energizer extends Tower {
     @Property
     private final int attackTime = 3000;
 
+    private int totalTime = 0;
+
     /**
      * The {@link Energizer}'s cool down between {@code attacks}.
      */
     @Property
-    private final int coolDown = 250;
+    private final int coolDown = 200;
+
+    /**
+     * The {@link Energizer}'s cool down between being able to {@code attack} and {@code charge}.
+     */
+    @Property
+    private final int chargeCoolDown = 2500;
 
     /**
      * The {@link Energizer}'s starting {@code health}.
@@ -78,9 +88,10 @@ public class Energizer extends Tower {
     private boolean doCharge;
 
     /**
-     * A boolean that determines whether the {@link Energizer} should {@code attack}.
+     * The {@link Thread} responsible for handling {@code charging}.
      */
-    private boolean doAttack;
+    @NotNull
+    private Thread chargeThread;
 
     /**
      * A constructor that properly sets the attributes of the {@link Energizer} {@link Tower}.
@@ -108,8 +119,10 @@ public class Energizer extends Tower {
         // Properly sets the boolean that determines whether the energizer should charge to true.
         this.doCharge = true;
 
-        // Properly sets the boolean that determines whether the energizer should attack to true.
-        this.doAttack = true;
+        // Initializes the thread that the energizer will use to charge.
+        this.chargeThread = new Thread(() -> {
+            // This thread does nothing by default.
+        });
     }
 
     /**
@@ -118,7 +131,46 @@ public class Energizer extends Tower {
      * @throws InterruptedException when the {@code attack} is {@code interrupted}.
      */
     @Override
-    protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
-        // TODO: Implement tower attacks
+    protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
+        if (enemy != null && this.doCharge && !this.chargeThread.isAlive()) {
+            this.totalTime = 0;
+
+            (this.chargeThread = new Thread(() -> {
+                try {
+                    Thread.sleep(this.chargeTime);
+
+                    this.doCharge = false;
+                } catch (Exception ex) {
+                    // Ignore
+                }
+            })).start();
+        }
+
+        if (enemy == null && !this.doCharge) {
+            this.chargeThread.interrupt();
+
+            this.doCharge = true;
+
+            Thread.sleep(this.chargeCoolDown);
+        }
+
+        if (!this.doCharge && enemy != null) {
+            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Energy Gun 2.wav");
+            try {
+                player.play();
+            } catch (Exception ex) {
+                // Ignore
+            }
+
+            enemy.damage(super.damage);
+
+            this.totalTime += super.coolDown;
+
+            if (this.totalTime == this.attackTime) {
+                this.doCharge = true;
+
+                Thread.sleep(this.chargeCoolDown);
+            }
+        }
     }
 }

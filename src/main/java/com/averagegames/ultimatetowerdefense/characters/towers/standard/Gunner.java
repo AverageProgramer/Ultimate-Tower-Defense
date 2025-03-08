@@ -5,7 +5,7 @@ import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Gunner extends Tower {
 
@@ -31,7 +31,14 @@ public class Gunner extends Tower {
     }
 
     @Override
-    protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
+    protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
+        // Determines whether the enemy is null.
+        if (enemy == null) {
+
+            // Prevents the scout from attacking a null enemy.
+            return;
+        }
+
         for (int i = 0; i < 3; i++) {
             try {
                 AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");

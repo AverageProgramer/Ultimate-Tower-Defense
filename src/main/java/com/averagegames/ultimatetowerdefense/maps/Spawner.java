@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.scene.Group;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,12 +41,6 @@ public final class Spawner {
     private Path enemyPathing;
 
     /**
-     * A {@link Thread} that is responsible for handling all {@link Enemy} {@code spawns}.
-     */
-    @NotNull
-    private Thread spawnThread;
-
-    /**
      * A default, no args constructor for the {@link Spawner} class.
      * @since Ultimate Tower Defense 1.0
      */
@@ -56,11 +51,6 @@ public final class Spawner {
 
         // Initializes the spawning enemies' pathing to a default, null path.
         this.enemyPathing = null;
-
-        // Initializes the thread responsible for spawning enemies.
-        this.spawnThread = new Thread(() -> {
-            // This thread does nothing by default.
-        });
     }
 
     /**
@@ -123,41 +113,35 @@ public final class Spawner {
      * @param group the {@link Group} the {@link Enemy} {@link Wave} should be added to.
      * @see Wave
      */
+    @Blocking
     public void spawn(@NotNull final Wave wave, @NotNull final Group group) {
 
-        // Creates a new thread that will handle enemy spawns.
-        this.spawnThread = new Thread(() -> {
+        // Logs that the spawner has begun spawning the given wave.
+        LOGGER.info(STR."Spawner \{this} has begun spawning wave \{wave}.");
 
-            // Logs that the spawner has begun spawning the given wave.
-            LOGGER.info(STR."Spawner \{this} has begun spawning wave \{wave}.");
+        // A loop that will iterate through every enemy in the given wave.
+        for (Enemy enemy : wave.enemies()) {
 
-            // A loop that will iterate through every enemy in the given wave.
-            for (Enemy enemy : wave.enemies()) {
+            // Spawns the individual enemy.
+            this.spawn(enemy, group);
 
-                // Spawns the individual enemy.
-                this.spawn(enemy, group);
+            // Allows the loop to be broken out of if the spawner is interrupted.
+            try {
 
-                // Allows the loop to be broken out of if the spawner is interrupted.
-                try {
+                // Causes the current thread to wait for the spawner's time delay between spawns.
+                Thread.sleep(this.spawnDelay);
+            } catch (InterruptedException ex) {
 
-                    // Causes the current thread to wait for the spawner's time delay between spawns.
-                    Thread.sleep(this.spawnDelay);
-                } catch (InterruptedException ex) {
+                // Logs that the spawner has stopped spawning the given wave.
+                LOGGER.info(STR."Spawner \{this} has stopped spawning wave \{wave}.");
 
-                    // Logs that the spawner has stopped spawning the given wave.
-                    LOGGER.info(STR."Spawner \{this} has stopped spawning wave \{wave}.");
-
-                    // Breaks out of the loop if the spawner is forcefully interrupted.
-                    break;
-                }
+                // Breaks out of the loop if the spawner is forcefully interrupted.
+                break;
             }
+        }
 
-            // Logs that the spawner has finished spawning the given wave.
-            LOGGER.info(STR."Spawner \{this} has finished spawning wave \{wave}.");
-        });
-
-        // Starts the thread so that enemies can be spawned.
-        this.spawnThread.start();
+        // Logs that the spawner has finished spawning the given wave.
+        LOGGER.info(STR."Spawner \{this} has finished spawning wave \{wave}.");
     }
 
     /**
@@ -165,8 +149,8 @@ public final class Spawner {
      */
     public void stopSpawning() {
 
-        // Interrupts the thread controlling enemy spawns.
+        // Interrupts the current thread which controls enemy spawns.
         // This will cause an exception to be thrown which will break out of the loop spawning the enemies.
-        this.spawnThread.interrupt();
+        Thread.currentThread().interrupt();
     }
 }

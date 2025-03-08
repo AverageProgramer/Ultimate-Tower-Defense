@@ -6,7 +6,7 @@ import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The {@link Scout} is one of the two {@code starter} {@link Tower}'s that the {@link Player} will receive when first starting the game.
@@ -81,7 +81,14 @@ public final class Scout extends Tower {
      * @since Ultimate Tower Defense 1.0
      */
     @Override
-    protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
+    protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
+
+        // Determines whether the enemy is null.
+        if (enemy == null) {
+
+            // Prevents the scout from attacking a null enemy.
+            return;
+        }
 
         // A try-catch statement that will catch any exceptions that occur when playing an audio file.
         try {

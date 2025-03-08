@@ -9,32 +9,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a missed compiler error in the module-info file.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Timer Sound Effect 1.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/GiantTitan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/GiantTitan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/LootBoxTitan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/LootBoxTitan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/NormalTitan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/titans/NormalTitan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Quick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Quick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Slow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Slow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Stealthy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Stealthy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/LogManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/LogManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Prohibited.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/ProhibitedAccessException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/ProhibitedAnnotation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Specific.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/SpecificAnnotation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/UnspecifiedAccessException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,22 +263,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00008" summary="Changed certain fields in the Enemy class to be protected so that inheriting enemies can directly access those fields.">
-      <option name="closed" value="true" />
-      <created>1708969613900</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1708969613900</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Made the Enemy class's image field private and created a setter method for it. Going forwards, any object fields must be private however primitive fields can be protected. Any public field should be final.">
-      <option name="closed" value="true" />
-      <created>1708976864304</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1708976864304</updated>
     </task>
     <task id="LOCAL-00010" summary="Added the Type enum which will be used to determine what enemies certain towers can attack. Null safety was also added to the Spawner class.">
       <option name="closed" value="true" />
@@ -672,7 +640,23 @@
       <option name="project" value="LOCAL" />
       <updated>1741366683569</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Once again removed a variety of tools that just wound up doing more harm than good. These tools include the Specific and Prohibited annotations as well as their verification classes, SpecificAnnotation and ProhibitedAnnotation. The verification was causing noticeable levels of lag and has thus been removed.">
+      <option name="closed" value="true" />
+      <created>1741411524238</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1741411524238</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Fixed a missed compiler error in the module-info file.">
+      <option name="closed" value="true" />
+      <created>1741411571818</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1741411571819</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,8 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added a static HashMap in the Builder interface. This HashMap can be used to easily manage custom-built Scenes. When Scenes are added to the HashMap, they should be paired with a unique ID, this way they can be easily found and identified. It is not a requirement for Scenes to be added to this HashMap, but it is heavily recommended." />
-    <MESSAGE value="Added the StrictHashMap class. This class functions almost identically to a HashMap but there is one key difference. The StrictHashMap does not allow for any identical keys or values to passed in. If the StrictHashMap already contains, for example, the key &quot;1&quot;, no other pairs may use that key. The same rule applies to the values. If there is a value, for example, &quot;Value&quot;, no other pairs may use that value. The SCENE_MANAGER constant in the Builder interface will use the StrictHashMap going forwards." />
     <MESSAGE value="This commit is merely a test. The project faced several errors and a complete reset was necessary. Basically the project needed to be deleted and re-cloned from GitHub." />
     <MESSAGE value="Added a &quot;native&quot; folder to the project. This is where all native C\C++ code will be located. Currently, there is only one C++ source file in this folder. This source file contains the native code for the &quot;getTarget&quot; method in the Enemy class." />
     <MESSAGE value="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file." />
@@ -705,7 +687,9 @@
     <MESSAGE value="Re-implemented a variety of useful tools that had been previously removed. These tools include the Specific and Prohibited annotations as well as the newly implemented Property annotation. The Specific annotation allows an annotated method or constructor to specify which classes can access that constructor or method. The Prohibited annotation is similar to the Specific annotation however specified classes will be unable to access the annotated constructor or method. The Property annotation indicates that an annotated field is a property of a class." />
     <MESSAGE value="Fully re-implemented the tools from the previous commit. These tools include the Specific and Prohibited annotations as well as the LogManager class. The Property annotation has also been implemented and indicates that an annotated field is an inherent property of a class." />
     <MESSAGE value="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future." />
+    <MESSAGE value="Once again removed a variety of tools that just wound up doing more harm than good. These tools include the Specific and Prohibited annotations as well as their verification classes, SpecificAnnotation and ProhibitedAnnotation. The verification was causing noticeable levels of lag and has thus been removed." />
+    <MESSAGE value="Fixed a missed compiler error in the module-info file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a missed compiler error in the module-info file." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

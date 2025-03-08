@@ -495,15 +495,19 @@ public abstract class Tower {
                     }
                 }
 
-                // Determines whether the tower's target is either alive or null.
-                if (target == null || !target.isAlive()) {
+                // Determines whether the tower's target is either null or alive.
+                if (target != null && !target.isAlive()) {
 
                     // Jumps to the next iteration of the loop preventing any exceptions from occurring.
                     continue;
                 }
 
-                // Logs that the tower has found a target.
-                LOGGER.info(STR."Tower \{this} has successfully targeted enemy \{target}.");
+                // Determines whether the tower's target is null.
+                if (target != null) {
+
+                    // Logs that the tower has found a target.
+                    LOGGER.info(STR."Tower \{this} has successfully targeted enemy \{target}.");
+                }
 
                 // Allows the attack the loop to be broken out of if the tower is eliminated.
                 try {
@@ -515,15 +519,23 @@ public abstract class Tower {
                     Thread.sleep(this.coolDown);
                 } catch (InterruptedException ex) {
 
-                    // Logs that the tower's attack has been interrupted and ended.
-                    LOGGER.info(STR."Tower \{this} has stopped attacking enemy \{target}.");
+                    // Determines whether the tower's target is null.
+                    if (target != null) {
+
+                        // Logs that the tower's attack has been interrupted and ended.
+                        LOGGER.info(STR."Tower \{this} has stopped attacking enemy \{target}.");
+                    }
 
                     // Breaks out of the loop if the current thread is forcefully interrupted.
                     break;
                 }
 
-                // Logs that the tower has attacked its target.
-                LOGGER.info(STR."Tower \{this} has successfully attacked enemy \{target}.");
+                // Determines whether the tower's target is null.
+                if (target != null) {
+
+                    // Logs that the tower has attacked its target.
+                    LOGGER.info(STR."Tower \{this} has successfully attacked enemy \{target}.");
+                }
             }
         });
 
@@ -616,7 +628,7 @@ public abstract class Tower {
      * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
-    protected void attack(@NotNull final Enemy enemy) throws InterruptedException {
+    protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
         // This method can be overridden by a subclass so each individual tower can have unique action to do when attacking.
     }
 
