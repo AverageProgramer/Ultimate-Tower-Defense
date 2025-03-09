@@ -1,9 +1,13 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.player.Player;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.animation.TranslationHandler;
+import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -190,6 +194,16 @@ public abstract class Enemy {
         // Removes the given amount from the enemy's health.
         this.health -= damage;
 
+        // A loop that will iterate one time through each health point the enemy lost.
+        for (int i = 0; i < damage; i++) {
+
+            // Adds the enemy's income to the player's current cash.
+            Player.cash += this.income;
+        }
+
+        // Updates the in-game text that displays the player's current cash.
+        Platform.runLater(() -> GameScene.cashText.setText(STR."$\{Player.cash}"));
+
         // Logs that the enemy has been damaged by a given amount.
         LOGGER.info(STR."Enemy \{this} health has been decreased by \{damage}.");
 
@@ -229,21 +243,29 @@ public abstract class Enemy {
                 }
             }
 
-            // Returns the enemy's speed back to normal.
-            this.speed *= ((double) 4 / 3);
+            // Determines whether the enemy is a zombie.
+            if (this.getClass().isAnnotationPresent(Zombie.class)) {
 
-            // Updates the enemy's movement so that it will move at its original speed.
-            this.updateMovement();
+                // Returns the enemy's speed back to normal.
+                this.speed *= ((double) 4 / 3);
+
+                // Updates the enemy's movement so that it will move at its original speed.
+                this.updateMovement();
+            }
 
             // Sets the boolean indicating that the enemy is burning to false.
             this.burning = false;
         }).start();
 
-        // Lowers the enemy's speed.
-        this.speed *= ((double) 3 / 4);
+        // Determines whether the enemy is a zombie.
+        if (this.getClass().isAnnotationPresent(Zombie.class)) {
 
-        // Updates the enemy's movement so that it will move at the new speed.
-        this.updateMovement();
+            // Lowers the enemy's speed.
+            this.speed *= ((double) 3 / 4);
+
+            // Updates the enemy's movement so that it will move at the new speed.
+            this.updateMovement();
+        }
 
         // Sets the boolean indicating that the enemy is burning to true.
         this.burning = true;
@@ -444,6 +466,52 @@ public abstract class Enemy {
                 // Logs that the enemy has reached its target destination.
                 LOGGER.info(STR."Enemy \{this} has successfully reached position \{position}.");
             }
+
+            // Damages the base by however much health the enemy has remaining.
+            Base.health -= this.health;
+
+            // Determines whether the base's health is below 0.
+            if (Base.health <= 0) {
+
+                // Sets the base's health to 0.
+                Base.health = 0;
+
+                // Stops new enemies from spawning.
+                GameScene.SPAWNER.stopSpawning();
+
+                // Allows for nodes to be added to the group despite the current thread possible not being the JavaFX application thread.
+                // Removes all enemies from their parent groups.
+                Platform.runLater(() -> {
+
+                    // A loop that will iterate through the list containing every active enemy.
+                    LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
+
+                        // Removes the enemy from its parent group.
+                        enemy.getParent().getChildren().remove(enemy.loadedEnemy);
+
+                        // Stops all enemy movement and attacks.
+                        // This will prevent any threads from continuing to run and use memory.
+
+                        enemy.stopMoving();
+                        enemy.stopAttacking();
+                    });
+                });
+
+                // A try-catch statement that will catch any exceptions that occur when playing an audio file.
+                try {
+
+                    // Creates a new audio player that will play an audio file.
+                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - You Lost!.wav");
+
+                    // Plays the previously given audio file.
+                    player.play();
+                } catch (Exception ex) {
+                    // The exception does not need to be handled.
+                }
+            }
+
+            // Updates the in-game text that displays the base's current health.
+            Platform.runLater(() -> GameScene.baseText.setText(STR."\{Base.health} HP"));
 
             // Removes the enemy from its parent group now that it has finished its path.
             Platform.runLater(this::eliminate);

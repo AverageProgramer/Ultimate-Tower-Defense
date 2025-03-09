@@ -7,7 +7,7 @@ import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
-public class Marksman extends Tower {
+public final class Marksman extends Tower {
 
     public static final int COST = 300;
 

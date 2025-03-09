@@ -62,7 +62,7 @@ public class LootBox extends Enemy {
                 continue;
             }
 
-            positions.add(this.getPathing().positions()[i]);
+            positions.add(this.getReferencePathing().positions()[i]);
         }
 
         Path path = new Path(positions.toArray(Position[]::new));

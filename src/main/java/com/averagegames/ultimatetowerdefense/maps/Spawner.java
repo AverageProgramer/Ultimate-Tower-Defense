@@ -76,6 +76,12 @@ public final class Spawner {
      */
     public void spawn(@NotNull final Enemy enemy, @NotNull final Group group) {
 
+        // TODO: Add enableSpawning method
+        if (Base.health <= 0) {
+
+            return;
+        }
+
         // Sets the enemy's parent group to the given group.
         enemy.setParent(group);
 

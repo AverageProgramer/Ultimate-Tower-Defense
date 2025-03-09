@@ -18,13 +18,19 @@ import org.jetbrains.annotations.Nullable;
  * @see Tower
  * @author AverageProgramer
  */
-public class Energizer extends Tower {
+public final class Energizer extends Tower {
 
     /**
      * The {@link Energizer}'s {@code placement cost}.
      */
     @Property
     public static final int COST = 2500;
+
+    /**
+     * The {@link Energizer}'s placement {@code limit}.
+     */
+    @Property
+    public static final int LIMIT = 8;
 
     /**
      * The {@link Energizer}'s {@link Image}.

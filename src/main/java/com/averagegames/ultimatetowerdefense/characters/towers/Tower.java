@@ -119,6 +119,8 @@ public abstract class Tower {
         this.loadedTower = new ImageLoader();
         this.image = null;
 
+        this.loadedTower.toFront();
+
         // Initializes the tower's range to a default circle.
         this.range = new Circle();
 
@@ -516,8 +518,12 @@ public abstract class Tower {
                     // Attacks the tower's current target enemy.
                     this.attack(target);
 
-                    // Causes the current thread to wait for the tower's cool down to end.
-                    Thread.sleep(this.coolDown);
+                    // Determines whether the target is null.
+                    if (target != null) {
+
+                        // Causes the current thread to wait for the tower's cool down to end.
+                        Thread.sleep(this.coolDown);
+                    }
                 } catch (InterruptedException ex) {
 
                     // Determines whether the tower's target is null.

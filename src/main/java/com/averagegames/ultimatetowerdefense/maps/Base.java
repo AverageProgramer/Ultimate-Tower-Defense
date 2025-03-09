@@ -20,7 +20,7 @@ public final class Base {
     @Setter @Getter
     private Path unitPathing;
 
-    private int health;
+    public static int health = 100;
 
     @NotNull
     private Thread unitSpawnThread;

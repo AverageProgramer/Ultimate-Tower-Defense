@@ -1,34 +1,51 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
-import com.averagegames.ultimatetowerdefense.characters.towers.standard.Gunner;
-import com.averagegames.ultimatetowerdefense.characters.towers.standard.Marksman;
-import com.averagegames.ultimatetowerdefense.characters.towers.standard.Pyromancer;
-import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.*;
+import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
+import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.player.modes.Challenging;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
+import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
+import static com.averagegames.ultimatetowerdefense.player.Player.LIST_OF_ACTIVE_FARMS;
 
-/**
- * Everything in the {@link GameScene} class as of right now is temporary and subject to change.
- */
+// TODO: Complete overhaul of GameScene class. Add wave timer and bonus.
+
 public final class GameScene extends Scene implements SceneBuilder {
 
     private int tower = -1;
+
+    private int wave = 1;
+
+    public static final Text cashText = new Text(STR."$\{Player.cash}");
+
+    public static final Text baseText = new Text(STR."\{Base.health} HP");
+
+    private boolean skip;
+
+    private boolean spawnerFinished;
+
+    public static final Spawner SPAWNER = getTestSpawner();
 
     public GameScene(@NotNull final Parent root) {
         super(root);
@@ -37,7 +54,7 @@ public final class GameScene extends Scene implements SceneBuilder {
     @Override
     public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Nuclear Fallen King.wav");
-        player.loop(AudioPlayer.INDEFINITELY);
+        // player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
     }
@@ -64,7 +81,19 @@ public final class GameScene extends Scene implements SceneBuilder {
     }
 
     private void timerWait() {
-        while (!LIST_OF_ACTIVE_ENEMIES.isEmpty());
+        spawnerFinished = true;
+
+        while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !skip && Base.health > 0);
+
+        spawnerFinished = false;
+
+        if (Base.health <= 0) {
+            return;
+        }
+
+        ++this.wave;
+
+        this.skip = false;
 
         for (int i = 0; i < 4; i++) {
             try {
@@ -82,105 +111,190 @@ public final class GameScene extends Scene implements SceneBuilder {
                 // Ignore
             }
         }
+
+        for (Farm farm : LIST_OF_ACTIVE_FARMS) {
+            Player.cash += farm.getBonus();
+
+            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Farm Income 1.wav");
+            try {
+                player.play();
+            } catch (Exception ex) {
+                // Ignore
+            }
+        }
+        Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
     }
 
     @Override
     public void build(@NotNull final Stage stage) {
         Group root = (Group) super.getRoot();
 
-        Spawner spawner = getTestSpawner();
+        cashText.setX(50);
+        cashText.setY(725);
+        cashText.setFill(Paint.valueOf("#3dbe23"));
+        cashText.setFont(Font.font(50));
+        root.getChildren().add(cashText);
+
+        baseText.setX(1300);
+        baseText.setY(725);
+        baseText.setFill(Paint.valueOf("#b60e0e"));
+        baseText.setFont(Font.font(50));
+        root.getChildren().add(baseText);
 
         new Thread(() -> {
-            spawner.spawn(Challenging.WAVE_1, root);
+            SPAWNER.spawn(Challenging.WAVE_1, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_2, root);
+            SPAWNER.spawn(Challenging.WAVE_2, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_3, root);
+            SPAWNER.spawn(Challenging.WAVE_3, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_4, root);
+            SPAWNER.spawn(Challenging.WAVE_4, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_5, root);
+            SPAWNER.spawn(Challenging.WAVE_5, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_6, root);
+            SPAWNER.spawn(Challenging.WAVE_6, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_7, root);
+            SPAWNER.spawn(Challenging.WAVE_7, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_8, root);
+            SPAWNER.spawn(Challenging.WAVE_8, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_9, root);
+            SPAWNER.spawn(Challenging.WAVE_9, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_10, root);
+            SPAWNER.spawn(Challenging.WAVE_10, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_11, root);
+            SPAWNER.spawn(Challenging.WAVE_11, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_12, root);
+            SPAWNER.spawn(Challenging.WAVE_12, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_13, root);
+            SPAWNER.spawn(Challenging.WAVE_13, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_14, root);
+            SPAWNER.spawn(Challenging.WAVE_14, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_15, root);
+            SPAWNER.spawn(Challenging.WAVE_15, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_16, root);
+            SPAWNER.spawn(Challenging.WAVE_16, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_17, root);
+            SPAWNER.spawn(Challenging.WAVE_17, root);
             timerWait();
 
-            spawner.spawn(Challenging.WAVE_18, root);
+            SPAWNER.spawn(Challenging.WAVE_18, root);
         }).start();
 
         this.setOnMouseClicked(event -> {
-            if (this.tower == 0) {
+            if (this.tower == 0 && Player.cash >= Scout.COST) {
                 Scout scout = new Scout();
 
                 scout.setParent(root);
                 scout.place(new Position(event.getX(), event.getY()));
 
                 scout.startAttacking();
-            } else if (this.tower == 1) {
+
+                Player.cash -= Scout.COST;
+
+                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+            } else if (this.tower == 1 && Player.cash >= Marksman.COST) {
                 Marksman marksman = new Marksman();
 
                 marksman.setParent(root);
                 marksman.place(new Position(event.getX(), event.getY()));
 
                 marksman.startAttacking();
-            } else if (this.tower == 2) {
+
+                Player.cash -= Marksman.COST;
+
+                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+            } else if (this.tower == 2 && Player.cash >= Gunner.COST) {
                 Gunner gunner = new Gunner();
 
                 gunner.setParent(root);
                 gunner.place(new Position(event.getX(), event.getY()));
 
                 gunner.startAttacking();
-            } else if (this.tower == 3) {
-                Pyromancer pyromancer = new Pyromancer();
 
-                pyromancer.setParent(root);
-                pyromancer.place(new Position(event.getX(), event.getY()));
+                Player.cash -= Gunner.COST;
 
-                pyromancer.startAttacking();
-            } else if (this.tower == 4) {
-                Energizer energizer = new Energizer();
+                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+            } else if (this.tower == 3 && Player.cash >= Energizer.COST) {
+                AtomicInteger amount = new AtomicInteger();
 
-                energizer.setParent(root);
-                energizer.place(new Position(event.getX(), event.getY()));
+                LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
+                    if (tower1 instanceof Energizer) {
+                        amount.incrementAndGet();
+                    }
+                });
 
-                energizer.startAttacking();
+                if (amount.get() < Energizer.LIMIT) {
+                    Energizer energizer = new Energizer();
+
+                    energizer.setParent(root);
+                    energizer.place(new Position(event.getX(), event.getY()));
+
+                    energizer.startAttacking();
+
+                    Player.cash -= Energizer.COST;
+
+                    Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+                } else {
+                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
+                    try {
+                        player.play();
+                    } catch (Exception ex) {
+                        // Ignore
+                    }
+                }
+            } else if (this.tower == 4 && Player.cash >= Farm.COST) {
+                AtomicInteger amount = new AtomicInteger();
+
+                LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
+                    if (tower1 instanceof Farm) {
+                        amount.incrementAndGet();
+                    }
+                });
+
+                if (amount.get() < Farm.LIMIT) {
+                    Farm farm = new Farm();
+
+                    farm.setParent(root);
+                    farm.place(new Position(event.getX(), event.getY()));
+
+                    farm.startAttacking();
+
+                    Player.cash -= Farm.COST;
+
+                    Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+                } else {
+                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
+                    try {
+                        player.play();
+                    } catch (Exception ex) {
+                        // Ignore
+                    }
+                }
+            } else if (this.tower == -1) {
+                // Nothing
+            } else {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
+                try {
+                    player.play();
+                } catch (Exception ex) {
+                    // Ignore
+                }
             }
         });
 
@@ -197,6 +311,12 @@ public final class GameScene extends Scene implements SceneBuilder {
                 this.tower = 4;
             } else if (event.getCode().equals(KeyCode.DIGIT0)) {
                 this.tower = -1;
+            } else if (event.getCode().equals(KeyCode.S) && this.spawnerFinished) {
+                Player.cash += (this.wave * 5) + 100;
+
+                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                this.skip = true;
             }
         });
 
