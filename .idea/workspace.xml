@@ -9,24 +9,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Farm Income 1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - You Lost!.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/FarmTower.gif" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented the most basic version of the final game. Currently, the player is able to do everything that will be available in the final game except tower upgrades. More enemies and towers will be added in the next commit.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Armored.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Summoner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Shield 2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/ArmoredZombie.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/SummonerZombie.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Pyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Pyromancer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Base.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Base.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Bank.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Challenging.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Challenging.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,10 +134,10 @@
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\music" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\enemies" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\music" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -272,14 +266,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00012" summary="Removed the position field inside the Enemy class as it was essentially useless. Now the method of retrieving and enemy's position involves getting the current x and y values of the given enemy using the loaded enemy field.">
-      <option name="closed" value="true" />
-      <created>1709055292459</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1709055292459</updated>
     </task>
     <task id="LOCAL-00013" summary="Object fields of a super class are now allowed to be protected. The @NotNull annotation makes it so that they cant be set to null, meaning that there is inherently nothing wrong with making them protected now.">
       <option name="closed" value="true" />
@@ -665,7 +651,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741470518240</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Implemented the most basic version of the final game. Currently, the player is able to do everything that will be available in the final game except tower upgrades. More enemies and towers will be added in the next commit.">
+      <option name="closed" value="true" />
+      <created>1741548558732</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1741548558732</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -673,7 +667,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file." />
     <MESSAGE value="Added numerous classes to the project. These classes include the &quot;Enemy&quot; class, &quot;Tower Class&quot;, and a whole variety of other classes. Each new file was previously used in an old Ultimate Tower Defense project and will now be used here. The structure of the folders and packages has been updated and cleaned up. Other features deemed to be useless or ineffective will also be removed in the future." />
     <MESSAGE value="Made a few additional changes to the structure of the various packages within the project. The GreaterThan and LessThan annotations along with their respective exceptions and verifiers have been removed. More classes will likely be cleaned up or removed in the future." />
     <MESSAGE value="Made a few more changes to the structure of the project. Several maven dependencies were removed as they were not actually doing anything useful. The rest of the custom annotation interfaces were also removed as they to were doing nothing. These should be the last of the changes made for the sole purpose of cleaning up the project." />
@@ -698,7 +691,8 @@
     <MESSAGE value="Fixed a missed compiler error in the module-info file." />
     <MESSAGE value="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like." />
     <MESSAGE value="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage." />
+    <MESSAGE value="Implemented the most basic version of the final game. Currently, the player is able to do everything that will be available in the final game except tower upgrades. More enemies and towers will be added in the next commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented the most basic version of the final game. Currently, the player is able to do everything that will be available in the final game except tower upgrades. More enemies and towers will be added in the next commit." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

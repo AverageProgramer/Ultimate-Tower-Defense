@@ -19,10 +19,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
 
@@ -73,6 +70,9 @@ public abstract class Enemy {
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
     private int health;
 
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED)
+    private int shield;
+
     /**
      * A boolean that indicates whether the {@link Enemy} is {@code burning}.
      */
@@ -95,7 +95,7 @@ public abstract class Enemy {
      * The current {@link Path} the {@link Enemy} will follow.
      */
     @Nullable
-    @Accessors(makeFinal = true) @Getter
+    @Accessors(makeFinal = true) @Setter @Getter
     private Path pathing;
 
     /**
@@ -186,6 +186,21 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
+
+        if (this.shield > 0 && damage < 5) {
+            try {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Shield 2.wav");
+                player.play();
+            } catch (Exception ex) {
+                // Ignore
+            }
+
+            return;
+        } else if (this.shield > 0) {
+            this.shield -= damage;
+
+            return;
+        }
 
         // Performs the enemy's on damaged action.
         // This method is unique to each individual inheritor of the enemy class.
@@ -294,20 +309,6 @@ public abstract class Enemy {
 
         // Returns the enemy's current position.
         return new Position(this.loadedEnemy.getCurrentX() + (this.image != null ? this.image.getWidth() / 2 : 0), this.loadedEnemy.getCurrentY() + (this.image != null ? this.image.getHeight() : 0));
-    }
-
-    /**
-     * Sets the {@link Enemy}'s {@link Path} to a newly given {@link Path}
-     * @param pathing the {@link Enemy}'s {@link Path} to follow.
-     */
-    public final void setPathing(@Nullable final Path pathing) {
-
-        // Sets the enemy's pathing to the given pathing.
-        this.pathing = pathing;
-
-        // Sets the enemy's pathing to the reference pathing so that towers can properly target the enemy.
-        // The reference pathing allows enemies spawned by loot box zombies or loot box titans to be targeted.
-        this.referencePathing = pathing;
     }
 
     /**
@@ -529,25 +530,13 @@ public abstract class Enemy {
         // This will cause an exception to be thrown which will break out of the loop managing enemy movement.
         this.movementThread.interrupt();
 
-        // Creates a temporary list that will contain every future position along the enemy's current pathing.
         ArrayList<Position> positions = new ArrayList<>();
-
-        // A loop that will iterate through every position along the enemy's current path.
-        for (int i = 0; i < Objects.requireNonNull(this.getPathing()).positions().length; i++) {
-
-            // Determines whether the current position is ahead of the enemy.
+        for (int i = 0; i < Objects.requireNonNull(this.getReferencePathing()).positions().length; i++) {
             if (i < this.getPositionIndex()) {
-
-                // Jumps to the next iteration of the loop.
                 continue;
             }
-
-            // Adds the current position to the temporary list of positions.
-            positions.add(this.getPathing().positions()[i]);
+            positions.add(this.getReferencePathing().positions()[i]);
         }
-
-        // Sets the enemy's pathing to contain only the positions that were in the temporary list.
-        // Enemy movement can now be resumed and not just restarted.
         this.pathing = new Path(positions.toArray(Position[]::new));
     }
 

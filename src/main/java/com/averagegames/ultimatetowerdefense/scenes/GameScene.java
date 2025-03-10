@@ -7,7 +7,7 @@ import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
 import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.player.modes.Challenging;
+import com.averagegames.ultimatetowerdefense.player.modes.Easy;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -45,6 +45,19 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     private boolean spawnerFinished;
 
+    public static final Path PATH = new Path(new Position[] {
+            new Position(400, 100),
+            new Position(550, 300),
+            new Position(550, 500),
+            new Position(900, 500),
+            new Position(900, 300),
+            new Position(700, 200),
+            new Position(700, 100),
+            new Position(1050, 100),
+            new Position(1200, 300),
+            new Position(1350, 300)
+    });
+
     public static final Spawner SPAWNER = getTestSpawner();
 
     public GameScene(@NotNull final Parent root) {
@@ -62,18 +75,7 @@ public final class GameScene extends Scene implements SceneBuilder {
     private static @NotNull Spawner getTestSpawner() {
         Spawner spawner = new Spawner(new Position(0, 100));
 
-        spawner.setEnemyPathing(new Path(new Position[] {
-                new Position(400, 100),
-                new Position(550, 300),
-                new Position(550, 500),
-                new Position(900, 500),
-                new Position(900, 300),
-                new Position(700, 200),
-                new Position(700, 100),
-                new Position(1050, 100),
-                new Position(1200, 300),
-                new Position(1350, 300)
-        }));
+        spawner.setEnemyPathing(PATH);
 
         spawner.setSpawnDelay(1500);
 
@@ -142,58 +144,71 @@ public final class GameScene extends Scene implements SceneBuilder {
         root.getChildren().add(baseText);
 
         new Thread(() -> {
-            SPAWNER.spawn(Challenging.WAVE_1, root);
+            SPAWNER.spawn(Easy.WAVE_1, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_2, root);
+            SPAWNER.spawn(Easy.WAVE_2, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_3, root);
+            SPAWNER.spawn(Easy.WAVE_3, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_4, root);
+            SPAWNER.spawn(Easy.WAVE_4, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_5, root);
+            SPAWNER.spawn(Easy.WAVE_5, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_6, root);
+            SPAWNER.spawn(Easy.WAVE_6, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_7, root);
+            SPAWNER.spawn(Easy.WAVE_7, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_8, root);
+            SPAWNER.spawn(Easy.WAVE_8, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_9, root);
+            SPAWNER.spawn(Easy.WAVE_9, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_10, root);
+            SPAWNER.spawn(Easy.WAVE_10, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_11, root);
+            SPAWNER.spawn(Easy.WAVE_11, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_12, root);
+            SPAWNER.spawn(Easy.WAVE_12, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_13, root);
+            SPAWNER.spawn(Easy.WAVE_13, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_14, root);
+            SPAWNER.spawn(Easy.WAVE_14, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_15, root);
+            SPAWNER.spawn(Easy.WAVE_15, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_16, root);
+            SPAWNER.spawn(Easy.WAVE_16, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_17, root);
+            SPAWNER.spawn(Easy.WAVE_17, root);
             timerWait();
 
-            SPAWNER.spawn(Challenging.WAVE_18, root);
+            SPAWNER.spawn(Easy.WAVE_18, root);
+            timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_19, root);
+            timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_20, root);
+            timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_21, root);
+            timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_22, root);
+            timerWait();
         }).start();
 
         this.setOnMouseClicked(event -> {

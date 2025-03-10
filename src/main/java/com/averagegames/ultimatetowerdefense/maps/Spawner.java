@@ -101,7 +101,12 @@ public final class Spawner {
         if (this.enemyPathing != null) {
 
             // Sets the enemy's pathing to the previously set path.
-            enemy.setPathing(enemyPathing);
+            enemy.setPathing(this.enemyPathing);
+
+            if (enemy.getReferencePathing() == null) {
+
+                enemy.setReferencePathing(this.enemyPathing);
+            }
         }
 
         // Begins moving the enemy.
