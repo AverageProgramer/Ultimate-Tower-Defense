@@ -18,6 +18,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -35,7 +36,8 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     private int tower = -1;
 
-    private int wave = 1;
+    @Getter
+    private static int wave = 1;
 
     public static final Text cashText = new Text(STR."$\{Player.cash}");
 
@@ -93,7 +95,7 @@ public final class GameScene extends Scene implements SceneBuilder {
             return;
         }
 
-        ++this.wave;
+        ++wave;
 
         this.skip = false;
 

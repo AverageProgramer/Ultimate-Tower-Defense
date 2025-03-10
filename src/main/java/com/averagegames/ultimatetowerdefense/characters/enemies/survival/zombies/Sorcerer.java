@@ -8,15 +8,14 @@ import com.averagegames.ultimatetowerdefense.maps.Spawner;
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
-import javafx.application.Platform;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
 @Zombie
-public class Summoner extends Enemy {
+public class Sorcerer extends Enemy {
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/SummonerZombie.gif");
+    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/SorcererZombie.gif");
 
     @Property
     private final Type type = Type.REGULAR;
@@ -36,7 +35,7 @@ public class Summoner extends Enemy {
     @NotNull
     private Thread spawnThread;
 
-    public Summoner() {
+    public Sorcerer() {
         super.image = this.image;
 
         super.type = this.type;
@@ -67,7 +66,7 @@ public class Summoner extends Enemy {
                     Enemy[] enemies = new Enemy[5];
 
                     for (int i = 0; i < 5; i++) {
-                        int enemy = (int) (Math.random() * (6 - 1)) + 1;
+                        int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 7 : 6) - 1)) + 1;
 
                         switch (enemy) {
                             case 1:
@@ -123,6 +122,18 @@ public class Summoner extends Enemy {
                                 lootBox.setPositionIndex(super.getPositionIndex());
 
                                 enemies[i] = lootBox;
+
+                                break;
+
+                            case 6:
+                                Armored armored = new Armored();
+
+                                armored.setParent(super.getParent());
+                                armored.setReferencePathing(GameScene.PATH);
+                                armored.setPosition(super.getPosition());
+                                armored.setPositionIndex(super.getPositionIndex());
+
+                                enemies[i] = armored;
 
                                 break;
                             default:

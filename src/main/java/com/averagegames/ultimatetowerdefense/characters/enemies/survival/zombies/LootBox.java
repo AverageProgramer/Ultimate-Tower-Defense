@@ -32,7 +32,7 @@ public class LootBox extends Enemy {
     private final int speed = 30;
 
     @Property
-    private final int income = 1;
+    private final int income = 0;
 
     public LootBox() {
         super.image = this.image;
@@ -67,7 +67,7 @@ public class LootBox extends Enemy {
 
         Path path = new Path(positions.toArray(Position[]::new));
 
-        int enemy = (int) (Math.random() * (5 - 1)) + 1;
+        int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 6 : 5) - 1)) + 1;
 
         Enemy e = null;
 
@@ -114,6 +114,18 @@ public class LootBox extends Enemy {
                 stealthy.setPositionIndex(this.getPositionIndex());
                 stealthy.spawn(this.getPosition());
                 stealthy.startMoving();
+
+                break;
+
+            case 5:
+                Armored armored = new Armored();
+
+                armored.setParent(this.getParent());
+                armored.setPathing(path);
+                armored.setReferencePathing(GameScene.PATH);
+                armored.setPositionIndex(this.getPositionIndex());
+                armored.spawn(this.getPosition());
+                armored.startMoving();
 
                 break;
             default:

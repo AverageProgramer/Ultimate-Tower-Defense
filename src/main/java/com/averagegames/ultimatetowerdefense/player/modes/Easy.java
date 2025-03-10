@@ -3,7 +3,6 @@ package com.averagegames.ultimatetowerdefense.player.modes;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.GiantTitan;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.LootBoxTitan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.NormalTitan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.*;
 
@@ -357,7 +356,7 @@ public class Easy {
 
             new NormalTitan(),
 
-            new Summoner()
+            new Sorcerer()
     });
 
     public static final Wave WAVE_20 = new Wave(new Enemy[] {
@@ -423,34 +422,5 @@ public class Easy {
             new NormalTitan(),
 
             new GiantTitan()
-    });
-
-    public static final Wave WAVE_35 = new Wave(new Enemy[] {
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-            new LootBox(),
-
-            new LootBoxTitan(),
-            new LootBoxTitan(),
-            new LootBoxTitan(),
-            new LootBoxTitan(),
-            new LootBoxTitan(),
-            new LootBoxTitan(),
-            new LootBoxTitan(),
-            new LootBoxTitan(),
-            new LootBoxTitan(),
-            new LootBoxTitan(),
     });
 }
