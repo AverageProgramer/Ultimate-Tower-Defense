@@ -9,12 +9,6 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies
 
 public class Easy {
     public static final Wave WAVE_1 = new Wave(new Enemy[] {
-            new Bolt(),
-            new Bolt(),
-            new Bolt(),
-            new Bolt(),
-            new Bolt(),
-
             new Normal(),
             new Normal(),
             new Normal(),
@@ -475,5 +469,46 @@ public class Easy {
             new Soldier(),
 
             new InvisibleTitan()
+    });
+
+    public static final Wave WAVE_25 = new Wave(new Enemy[] {
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+
+            new NormalTitan(),
+            new NormalTitan(),
+            new NormalTitan(),
+            new NormalTitan(),
+
+            new Sorcerer(),
+            new Sorcerer(),
+            new Sorcerer(),
+    });
+
+    public static final Wave WAVE_26 = new Wave(new Enemy[] {
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
     });
 }

@@ -216,6 +216,11 @@ public final class GameScene extends Scene implements SceneBuilder {
 
             SPAWNER.spawn(Easy.WAVE_24, root);
             timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_25, root);
+            timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_26, root);
         }).start();
 
         this.setOnMouseClicked(event -> {
