@@ -21,12 +21,16 @@ public final class Gunner extends Tower {
     private final int coolDown = 1250;
 
     @Property
+    private final int startHealth = 100;
+
+    @Property
     private final double radius = 125;
 
     public Gunner() {
         super.image = this.image;
         super.damage = this.damage;
         super.coolDown = this.coolDown;
+        super.setHealth(this.startHealth);
         super.setRadius(this.radius);
     }
 

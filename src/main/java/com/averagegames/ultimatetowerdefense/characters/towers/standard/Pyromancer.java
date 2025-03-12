@@ -21,12 +21,16 @@ public final class Pyromancer extends Tower {
     private final int coolDown = 350;
 
     @Property
+    private final int startHealth = 100;
+
+    @Property
     private final double radius = 75;
 
     public Pyromancer() {
         super.image = this.image;
         super.damage = this.damage;
         super.coolDown = this.coolDown;
+        super.setHealth(this.startHealth);
         super.setRadius(this.radius);
     }
 

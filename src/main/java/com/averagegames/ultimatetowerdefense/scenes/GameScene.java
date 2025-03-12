@@ -43,6 +43,8 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     public static final Text baseText = new Text(STR."\{Base.health} HP");
 
+    public static final Text waveText = new Text("Wave 1");
+
     private boolean skip;
 
     private boolean spawnerFinished;
@@ -96,6 +98,8 @@ public final class GameScene extends Scene implements SceneBuilder {
 
         ++wave;
 
+        Platform.runLater(() -> waveText.setText(STR."Wave \{wave}"));
+
         this.skip = false;
 
         for (int i = 0; i < 4; i++) {
@@ -125,6 +129,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                 // Ignore
             }
         }
+
         Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
     }
 
@@ -143,6 +148,11 @@ public final class GameScene extends Scene implements SceneBuilder {
         baseText.setFill(Paint.valueOf("#b60e0e"));
         baseText.setFont(Font.font(50));
         root.getChildren().add(baseText);
+
+        waveText.setX(1300);
+        waveText.setY(100);
+        waveText.setFont(Font.font(50));
+        root.getChildren().add(waveText);
 
         new Thread(() -> {
             SPAWNER.spawn(Easy.WAVE_1, root);
@@ -221,6 +231,9 @@ public final class GameScene extends Scene implements SceneBuilder {
             timerWait();
 
             SPAWNER.spawn(Easy.WAVE_26, root);
+            timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_27, root);
         }).start();
 
         this.setOnMouseClicked(event -> {

@@ -511,4 +511,50 @@ public class Easy {
             new Bolt(),
             new Bolt(),
     });
+
+    public static final Wave WAVE_27 = new Wave(new Enemy[] {
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+
+            new Sorcerer(),
+            new Sorcerer(),
+            new Sorcerer(),
+
+            new GiantTitan(),
+            new GiantTitan(),
+
+            new NormalTitan(),
+            new NormalTitan(),
+            new NormalTitan(),
+            new NormalTitan(),
+
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+    });
 }

@@ -23,10 +23,14 @@ public final class Marksman extends Tower {
     @Property
     private final double radius = 175;
 
+    @Property
+    private final int startHealth = 100;
+
     public Marksman() {
         super.image = this.image;
         super.damage = this.damage;
         super.coolDown = this.coolDown;
+        super.setHealth(this.startHealth);
         super.setRadius(this.radius);
     }
 
