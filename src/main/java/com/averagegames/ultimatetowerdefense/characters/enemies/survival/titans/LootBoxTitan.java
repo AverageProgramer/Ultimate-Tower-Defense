@@ -30,7 +30,7 @@ public class LootBoxTitan extends Enemy {
     private final int speed = 20;
 
     @Property
-    private final int income = 1;
+    private final int income = 0;
 
     public LootBoxTitan() {
         super.image = this.image;

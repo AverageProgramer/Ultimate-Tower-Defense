@@ -32,7 +32,7 @@ public final class Pyromancer extends Tower {
 
     @Override
     protected void attack(@Nullable final Enemy enemy) {
-        if (enemy != null) {
+        if (enemy != null && super.isAlive()) {
             try {
                 AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Flamethrower 1.wav");
                 player.play();

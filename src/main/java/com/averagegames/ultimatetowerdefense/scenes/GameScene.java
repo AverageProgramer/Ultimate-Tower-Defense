@@ -78,7 +78,6 @@ public final class GameScene extends Scene implements SceneBuilder {
         Spawner spawner = new Spawner(new Position(0, 100));
 
         spawner.setEnemyPathing(PATH);
-
         spawner.setSpawnDelay(1500);
 
         return spawner;
@@ -211,6 +210,12 @@ public final class GameScene extends Scene implements SceneBuilder {
 
             SPAWNER.spawn(Easy.WAVE_22, root);
             timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_23, root);
+            timerWait();
+
+            SPAWNER.spawn(Easy.WAVE_24, root);
+            timerWait();
         }).start();
 
         this.setOnMouseClicked(event -> {
@@ -329,7 +334,7 @@ public final class GameScene extends Scene implements SceneBuilder {
             } else if (event.getCode().equals(KeyCode.DIGIT0)) {
                 this.tower = -1;
             } else if (event.getCode().equals(KeyCode.S) && this.spawnerFinished) {
-                Player.cash += (this.wave * 5) + 100;
+                Player.cash += (wave * 5) + 100;
 
                 Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
 

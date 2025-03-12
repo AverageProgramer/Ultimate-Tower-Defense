@@ -4,12 +4,13 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Zombie
 public class Sorcerer extends Enemy {
@@ -32,8 +33,10 @@ public class Sorcerer extends Enemy {
     @Property
     private final int income = 2;
 
-    @NotNull
-    private Thread spawnThread;
+    @Property
+    private final int coolDown = 15000;
+
+    private boolean first;
 
     public Sorcerer() {
         super.image = this.image;
@@ -45,121 +48,120 @@ public class Sorcerer extends Enemy {
 
         super.speed = this.speed;
 
+        super.coolDown = this.coolDown;
+
         super.income = this.income;
 
-        this.spawnThread = new Thread(() -> {
-
-        });
+        this.first = true;
     }
 
     @Override
-    protected void onSpawn() {
-        this.spawnThread = new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(15000);
+    public void onSpawn() {
+        super.startAttacking();
+    }
 
-                    super.stopMoving();
+    @Override
+    public void attack(@Nullable final Tower tower) throws InterruptedException {
+        if (first) {
+            Thread.sleep(super.coolDown);
 
-                    Thread.sleep(1500);
+            first = false;
+        }
 
-                    Enemy[] enemies = new Enemy[5];
+        super.stopMoving();
 
-                    for (int i = 0; i < 5; i++) {
-                        int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 7 : 6) - 1)) + 1;
+        Thread.sleep(1500);
 
-                        switch (enemy) {
-                            case 1:
-                                Normal normal = new Normal();
+        Enemy[] enemies = new Enemy[5];
 
-                                normal.setParent(super.getParent());
-                                normal.setReferencePathing(GameScene.PATH);
-                                normal.setPosition(super.getPosition());
-                                normal.setPositionIndex(super.getPositionIndex());
+        for (int i = 0; i < 5; i++) {
+            int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 7 : 6) - 1)) + 1;
 
-                                enemies[i] = normal;
+            switch (enemy) {
+                case 1:
+                    Normal normal = new Normal();
 
-                                break;
-                            case 2:
-                                Quick quick = new Quick();
+                    normal.setParent(super.getParent());
+                    normal.setReferencePathing(GameScene.PATH);
+                    normal.setPosition(super.getPosition());
+                    normal.setPositionIndex(super.getPositionIndex());
 
-                                quick.setParent(super.getParent());
-                                quick.setReferencePathing(GameScene.PATH);
-                                quick.setPosition(super.getPosition());
-                                quick.setPositionIndex(super.getPositionIndex());
+                    enemies[i] = normal;
 
-                                enemies[i] = quick;
-
-                                break;
-                            case 3:
-                                Slow slow = new Slow();
-
-                                slow.setParent(super.getParent());
-                                slow.setReferencePathing(GameScene.PATH);
-                                slow.setPosition(super.getPosition());
-                                slow.setPositionIndex(super.getPositionIndex());
-
-                                enemies[i] = slow;
-
-                                break;
-                            case 4:
-                                Stealthy stealthy = new Stealthy();
-
-                                stealthy.setParent(super.getParent());
-                                stealthy.setReferencePathing(GameScene.PATH);
-                                stealthy.setPosition(super.getPosition());
-                                stealthy.setPositionIndex(super.getPositionIndex());
-
-                                enemies[i] = stealthy;
-
-                                break;
-                            case 5:
-                                LootBox lootBox = new LootBox();
-
-                                lootBox.setParent(super.getParent());
-                                lootBox.setReferencePathing(GameScene.PATH);
-                                lootBox.setPosition(super.getPosition());
-                                lootBox.setPositionIndex(super.getPositionIndex());
-
-                                enemies[i] = lootBox;
-
-                                break;
-
-                            case 6:
-                                Armored armored = new Armored();
-
-                                armored.setParent(super.getParent());
-                                armored.setReferencePathing(GameScene.PATH);
-                                armored.setPosition(super.getPosition());
-                                armored.setPositionIndex(super.getPositionIndex());
-
-                                enemies[i] = armored;
-
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-                    Spawner spawner = new Spawner(super.getPosition());
-
-                    spawner.setEnemyPathing(super.getPathing());
-                    spawner.setSpawnDelay(1500);
-
-                    assert super.getParent() != null;
-
-                    spawner.spawn(new Wave(enemies), super.getParent());
-
-                    Thread.sleep(1500);
-
-                    super.startMoving();
-                } catch (InterruptedException ex) {
                     break;
-                }
-            }
-        });
+                case 2:
+                    Quick quick = new Quick();
 
-        this.spawnThread.start();
+                    quick.setParent(super.getParent());
+                    quick.setReferencePathing(GameScene.PATH);
+                    quick.setPosition(super.getPosition());
+                    quick.setPositionIndex(super.getPositionIndex());
+
+                    enemies[i] = quick;
+
+                    break;
+                case 3:
+                    Slow slow = new Slow();
+
+                    slow.setParent(super.getParent());
+                    slow.setReferencePathing(GameScene.PATH);
+                    slow.setPosition(super.getPosition());
+                    slow.setPositionIndex(super.getPositionIndex());
+
+                    enemies[i] = slow;
+
+                    break;
+                case 4:
+                    Stealthy stealthy = new Stealthy();
+
+                    stealthy.setParent(super.getParent());
+                    stealthy.setReferencePathing(GameScene.PATH);
+                    stealthy.setPosition(super.getPosition());
+                    stealthy.setPositionIndex(super.getPositionIndex());
+
+                    enemies[i] = stealthy;
+
+                    break;
+                case 5:
+                    LootBox lootBox = new LootBox();
+
+                    lootBox.setParent(super.getParent());
+                    lootBox.setReferencePathing(GameScene.PATH);
+                    lootBox.setPosition(super.getPosition());
+                    lootBox.setPositionIndex(super.getPositionIndex());
+
+                    enemies[i] = lootBox;
+
+                    break;
+
+                case 6:
+                    Armored armored = new Armored();
+
+                    armored.setParent(super.getParent());
+                    armored.setReferencePathing(GameScene.PATH);
+                    armored.setPosition(super.getPosition());
+                    armored.setPositionIndex(super.getPositionIndex());
+
+                    enemies[i] = armored;
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        Spawner spawner = new Spawner(super.getPosition());
+
+        spawner.setEnemyPathing(super.getPathing());
+        spawner.setSpawnDelay(1500);
+
+        assert super.getParent() != null;
+
+        spawner.spawn(new Wave(enemies), super.getParent());
+
+        Thread.sleep(1500);
+
+        super.startMoving();
     }
 
     @Override
@@ -170,7 +172,5 @@ public class Sorcerer extends Enemy {
         } catch (Exception ex) {
             System.out.println("Exception occurred");
         }
-
-        this.spawnThread.interrupt();
     }
 }

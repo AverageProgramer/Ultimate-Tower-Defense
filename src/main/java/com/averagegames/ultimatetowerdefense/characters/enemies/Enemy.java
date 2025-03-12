@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.Sorcerer;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Path;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
+import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
 import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
 
 /**
@@ -70,6 +72,9 @@ public abstract class Enemy {
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
     private int health;
 
+    /**
+     * The {@link Enemy}'s current shield.
+     */
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED)
     private int shield;
 
@@ -84,6 +89,9 @@ public abstract class Enemy {
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
     protected int damage;
+
+    @NotNull
+    private final Circle range;
 
     /**
      * The {@link Enemy}'s speed in pixels per second.
@@ -111,8 +119,8 @@ public abstract class Enemy {
     @Accessors(makeFinal = true) @Setter @Getter
     private int positionIndex;
 
-    @NotNull
-    private final Circle range;
+    @Range(from = 0L, to = Long.MAX_VALUE)
+    protected int coolDown;
 
     /**
      * The money the {@code player} will receive when damaging the {@link Enemy}.
@@ -309,6 +317,28 @@ public abstract class Enemy {
 
         // Returns the enemy's current position.
         return new Position(this.loadedEnemy.getCurrentX() + (this.image != null ? this.image.getWidth() / 2 : 0), this.loadedEnemy.getCurrentY() + (this.image != null ? this.image.getHeight() : 0));
+    }
+
+    /**
+     * Sets the radius of the {@link Circle} representing the {@link Tower}'s {@code range} to a newly given value.
+     * @param radius the radius of the {@link Tower}'s {@code range}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    protected final void setRadius(@Range(from = 0, to = Integer.MAX_VALUE) final double radius) {
+
+        // Sets the enemy's range to have the given radius.
+        this.range.setRadius(radius);
+    }
+
+    /**
+     * Gets the radius of the {@link Circle} representing the {@link Enemy}'s {@code range}.
+     * @return the radius of the {@link Enemy}'s {@code range}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final double getRadius() {
+
+        // Returns the range's current radius.
+        return this.range.getRadius();
     }
 
     /**
@@ -554,19 +584,6 @@ public abstract class Enemy {
     }
 
     /**
-     * Gets the {@link Tower} that the {@link Enemy} is most likely to {@code attack}.\
-     * @return the {@link Tower} to {@code attack}.
-     * @since Ultimate Tower Defense 1.0
-     */
-    @Contract(pure = true)
-    private @Nullable Tower getTarget() {
-
-        // TODO: Implement enemy targeting
-
-        return null;
-    }
-
-    /**
      * Determines whether the {@link Enemy} can {@code attack} the given {@link Tower}.
      * This is a helper method.
      * @param tower the {@link Tower} to {@code attack}.
@@ -575,7 +592,19 @@ public abstract class Enemy {
     private boolean canAttack(@NotNull final Tower tower) {
 
         // Returns whether the given tower is within the enemy's range.
-        return tower.isInRange(this.range);
+        return tower.isInRange(this.range, this.loadedEnemy);
+    }
+
+    /**
+     * Gets the {@link Tower} that the {@link Enemy} is most likely to {@code attack}.
+     * @return the {@link Tower} to {@code attack}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    private @Nullable Tower getTarget() {
+        List<Tower> fixedList = new ArrayList<>(LIST_OF_ACTIVE_TOWERS);
+        fixedList.removeIf(tower -> !this.canAttack(tower));
+
+        return fixedList.isEmpty() ? null : fixedList.get((int) (Math.random() * fixedList.size()));
     }
 
     /**
@@ -584,6 +613,7 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     @NonBlocking
+    @SuppressWarnings("all")
     public final void startAttacking() {
 
         // Interrupts the thread controlling enemy attacks so that the new attacks can override the old attacks if there were any.
@@ -591,7 +621,81 @@ public abstract class Enemy {
 
         // Creates a new thread that will handle enemy attacks and starts it.
         (this.attackThread = new Thread(() -> {
-            // Enemy attacking has not yet been implemented.
+
+            // Logs that the enemy has begun attacking.
+            LOGGER.info(STR."Enemy \{this} has begun to attack.");
+
+            // A loop that will continuously run until the tower is eliminated.
+            while (true) {
+
+                // Gets the tower's current target enemy.
+                Tower target = null;
+
+                // A loop that will iterate until the enemy gets a valid target.
+                while (true) {
+
+                    // A try-catch statement that will prevent any exceptions from occurring while the enemy is getting a target.
+                    try {
+
+                        // Gets the enemy's current target.
+                        // A concurrent modification exception may be thrown while finding a target.
+                        target = this.getTarget();
+
+                        // Breaks out of the loop since the enemy would have gotten a valid target.
+                        break;
+                    } catch (ConcurrentModificationException ex) {
+
+                        // Logs that the enemy has encountered an error while getting its target.
+                        LOGGER.warning(STR."Enemy \{this} has encountered exception \{ex} while searching for a target.");
+                    }
+                }
+
+                // Determines whether the enemy's target is either null or alive.
+                if (target != null && !target.isAlive()) {
+
+                    // Jumps to the next iteration of the loop preventing any exceptions from occurring.
+                    continue;
+                }
+
+                // Determines whether the enemy's target is null.
+                if (target != null) {
+
+                    // Logs that the enemy has found a target.
+                    LOGGER.info(STR."Enemy \{this} has successfully targeted tower \{target}.");
+                }
+
+                // Allows the attack the loop to be broken out of if the tower is eliminated.
+                try {
+
+                    // Attacks the enemy's current target tower.
+                    this.attack(target);
+
+                    // Determines whether the target is null.
+                    if (target != null || this instanceof Sorcerer) {
+
+                        // Causes the current thread to wait for the enemy's cool down to end.
+                        Thread.sleep(this.coolDown);
+                    }
+                } catch (InterruptedException ex) {
+
+                    // Determines whether the enemy's target is null.
+                    if (target != null) {
+
+                        // Logs that the enemy's attack has been interrupted and ended.
+                        LOGGER.info(STR."Enemy \{this} has stopped attacking tower \{target}.");
+                    }
+
+                    // Breaks out of the loop if the current thread is forcefully interrupted.
+                    break;
+                }
+
+                // Determines whether the enemy's target is null.
+                if (target != null) {
+
+                    // Logs that the enemy has attacked its target.
+                    LOGGER.info(STR."Enemy \{this} has successfully attacked tower \{target}.");
+                }
+            }
         })).start();
     }
 
@@ -683,7 +787,7 @@ public abstract class Enemy {
      * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
-    protected void attack(@NotNull final Tower tower) throws InterruptedException {
+    protected void attack(@Nullable final Tower tower) throws InterruptedException {
         // This method can be overridden by a subclass so that each individual enemy can have a unique attack.
     }
 
@@ -693,7 +797,7 @@ public abstract class Enemy {
      * @throws InterruptedException when the {@link Enemy} is {@code eliminated}.
      * @since Ultimate Tower Defense 1.0
      */
-    protected void special(@NotNull final Tower tower) throws InterruptedException {
+    protected void special(@Nullable final Tower tower) throws InterruptedException {
         // This method can be overridden by a subclass so that each individual enemy can have a unique special ability.
     }
 }

@@ -33,7 +33,7 @@ public final class Marksman extends Tower {
     @Override
     protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
         // Determines whether the enemy is null.
-        if (enemy == null) {
+        if (enemy == null || !super.isAlive()) {
 
             // Prevents the scout from attacking a null enemy.
             return;

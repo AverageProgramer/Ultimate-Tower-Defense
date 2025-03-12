@@ -83,10 +83,10 @@ public final class Scout extends Tower {
     @Override
     protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
 
-        // Determines whether the enemy is null.
-        if (enemy == null) {
+        // Determines whether the enemy is null and whether the scout is alive.
+        if (enemy == null || !super.isAlive()) {
 
-            // Prevents the scout from attacking a null enemy.
+            // Prevents the scout from attacking a null enemy or attacking when eliminated.
             return;
         }
 

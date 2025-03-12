@@ -51,17 +51,15 @@ public final class Energizer extends Tower {
     private final int chargeTime = 3000;
 
     /**
-     * The time between {@code damaging} a given {@link Enemy}.
-     */
-    @Property
-    private final int damageTime = 200;
-
-    /**
      * The time the {@link Energizer} can {@code attack}.
      */
     @Property
     private final int attackTime = 3000;
 
+    /**
+     * The {@link Energizer}'s total time {@code attacking}.
+     */
+    @Property
     private int totalTime = 0;
 
     /**
@@ -160,21 +158,31 @@ public final class Energizer extends Tower {
         }
 
         if (enemy != null && !this.doCharge) {
-            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Energy Gun 2.wav");
-            try {
-                player.play();
-            } catch (Exception ex) {
-                // Ignore
-            }
+            while (true) {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Energy Gun 2.wav");
+                try {
+                    player.play();
+                } catch (Exception ex) {
+                    // Ignore
+                }
 
-            enemy.damage(super.damage);
+                enemy.damage(super.damage);
 
-            this.totalTime += super.coolDown;
+                this.totalTime += super.coolDown;
 
-            if (this.totalTime == this.attackTime) {
-                this.doCharge = true;
+                if (this.totalTime >= this.attackTime) {
+                    this.doCharge = true;
 
-                Thread.sleep(this.chargeCoolDown);
+                    Thread.sleep(this.chargeCoolDown);
+
+                    break;
+                }
+
+                if (!enemy.isAlive()) {
+                    break;
+                }
+
+                Thread.sleep(super.coolDown);
             }
         }
     }

@@ -230,16 +230,17 @@ public abstract class Tower {
     /**
      * Determines whether the {@link Tower} is within the given {@link Circle} at any point.
      * @param range the {@link Circle} to be checked.
+     * @param reference temporary
      * @return {@code true} if the {@link Tower} is within the {@link Circle}, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
-    public final boolean isInRange(@NotNull final Circle range) {
+    public final boolean isInRange(@NotNull final Circle range, @NotNull final ImageLoader reference) {
 
         // The tower's current position.
         Position currentPos = this.getPosition();
 
         // The circle's current position.
-        Position rangePos = new Position(range.getCenterX(), range.getCenterY());
+        Position rangePos = new Position(reference.getCurrentX(), reference.getCurrentY());
 
         // The change in x and change in y for between the tower and the circle.
 
@@ -312,6 +313,17 @@ public abstract class Tower {
 
         // Places the tower using the default placement method.
         this.place();
+    }
+
+    /**
+     * Gets whether the {@link Tower} is alive and still a member of its parent {@link Group}.
+     * @return {@code true} if the {@link Tower} is alive, {@code false} otherwise.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final boolean isAlive() {
+
+        // Returns whether the tower is alive or not.
+        return this.parent != null && this.parent.getChildren().contains(this.loadedTower);
     }
 
     /**
@@ -482,7 +494,7 @@ public abstract class Tower {
                 // A loop that will iterate until the enemy gets a valid target.
                 while (true) {
 
-                    // A try-catch statement that will prevent any exceptions from occuring while the enemy is getting a target.
+                    // A try-catch statement that will prevent any exceptions from occurring while the enemy is getting a target.
                     try {
 
                         // Gets the tower's current target.

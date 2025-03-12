@@ -1,34 +1,34 @@
-package com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans;
+package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.Titan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 
-@Titan
-public class GiantTitan extends Enemy {
+@Zombie
+public class Bolt extends Enemy {
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/GiantTitan.gif");
+    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/BoltZombie.gif");
 
     @Property
     private final Type type = Type.REGULAR;
 
     @Property
-    private final int startHealth = 1750;
+    private final int startHealth = 80;
 
     @Property
     private final int damage = 1;
 
     @Property
-    private final int speed = 8;
+    private final int speed = 85;
 
     @Property
-    private final int income = 3;
+    private final int income = 1;
 
-    public GiantTitan() {
+    public Bolt() {
         super.image = this.image;
 
         super.type = this.type;
@@ -44,7 +44,7 @@ public class GiantTitan extends Enemy {
     @Override
     public void onDeath() {
         try {
-            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 6.wav");
+            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 7.wav");
             player.play();
         } catch (Exception ex) {
             System.out.println("Exception occurred");

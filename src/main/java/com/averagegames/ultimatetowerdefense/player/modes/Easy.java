@@ -3,11 +3,18 @@ package com.averagegames.ultimatetowerdefense.player.modes;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.GiantTitan;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.InvisibleTitan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.NormalTitan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.*;
 
 public class Easy {
     public static final Wave WAVE_1 = new Wave(new Enemy[] {
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+
             new Normal(),
             new Normal(),
             new Normal(),
@@ -422,5 +429,51 @@ public class Easy {
             new NormalTitan(),
 
             new GiantTitan()
+    });
+
+    public static final Wave WAVE_23 = new Wave(new Enemy[] {
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+
+            new GiantTitan(),
+
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+
+            new Sorcerer(),
+            new Sorcerer(),
+            new Sorcerer(),
+            new Sorcerer(),
+            new Sorcerer(),
+
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+    });
+
+    public static final Wave WAVE_24 = new Wave(new Enemy[] {
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+
+            new InvisibleTitan()
     });
 }

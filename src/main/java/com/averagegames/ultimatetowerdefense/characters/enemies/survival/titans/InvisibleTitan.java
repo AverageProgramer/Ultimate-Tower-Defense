@@ -3,32 +3,31 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Titan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 
 @Titan
-public class GiantTitan extends Enemy {
+public final class InvisibleTitan extends Enemy {
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/GiantTitan.gif");
+    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/InvisibleTitan.gif");
 
     @Property
-    private final Type type = Type.REGULAR;
+    private final Type type = Type.HIDDEN;
 
     @Property
-    private final int startHealth = 1750;
+    private final int startHealth = 825;
 
     @Property
     private final int damage = 1;
 
     @Property
-    private final int speed = 8;
+    private final int speed = 35;
 
     @Property
-    private final int income = 3;
+    private final int income = 2;
 
-    public GiantTitan() {
+    public InvisibleTitan() {
         super.image = this.image;
 
         super.type = this.type;
@@ -43,11 +42,6 @@ public class GiantTitan extends Enemy {
 
     @Override
     public void onDeath() {
-        try {
-            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 6.wav");
-            player.play();
-        } catch (Exception ex) {
-            System.out.println("Exception occurred");
-        }
+
     }
 }
