@@ -64,7 +64,7 @@ public class Sorcerer extends Enemy {
                 try {
                     Thread.sleep(this.coolDown);
                 } catch (InterruptedException e) {
-                    // Ignore
+                    break;
                 }
 
                 super.stopMoving();
@@ -72,7 +72,7 @@ public class Sorcerer extends Enemy {
                 try {
                     Thread.sleep(1500);
                 } catch (InterruptedException e) {
-                    // Ignore
+                    break;
                 }
 
                 Enemy[] enemies = new Enemy[5];
@@ -165,7 +165,7 @@ public class Sorcerer extends Enemy {
                 try {
                     Thread.sleep(1500);
                 } catch (InterruptedException e) {
-                    // Ignore
+                    break;
                 }
 
                 super.startMoving();
