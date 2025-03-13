@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -70,7 +71,7 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Nuclear Fallen King.wav");
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Grave Buster.wav");
         // player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
@@ -97,8 +98,6 @@ public final class GameScene extends Scene implements SceneBuilder {
         }
 
         ++wave;
-
-        Platform.runLater(() -> waveText.setText(STR."Wave \{wave}"));
 
         this.skip = false;
 
@@ -130,6 +129,8 @@ public final class GameScene extends Scene implements SceneBuilder {
             }
         }
 
+        Platform.runLater(() -> waveText.setText(STR."Wave \{wave}"));
+
         Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
     }
 
@@ -153,6 +154,43 @@ public final class GameScene extends Scene implements SceneBuilder {
         waveText.setY(100);
         waveText.setFont(Font.font(50));
         root.getChildren().add(waveText);
+
+        int scoutButtonX = 500;
+
+        Button scoutButton = new Button("Scout: $200");
+        scoutButton.setPrefSize(100, 100);
+        scoutButton.setTranslateX(scoutButtonX);
+        scoutButton.setTranslateY(650);
+        scoutButton.setOnAction(event -> this.tower = 0);
+        root.getChildren().add(scoutButton);
+
+        Button marksmanButton = new Button("Marksman:\n$300");
+        marksmanButton.setPrefSize(100, 100);
+        marksmanButton.setTranslateX(scoutButtonX + 100);
+        marksmanButton.setTranslateY(650);
+        marksmanButton.setOnAction(event -> this.tower = 1);
+        root.getChildren().add(marksmanButton);
+
+        Button gunnerButton = new Button("Gunner: $500");
+        gunnerButton.setPrefSize(100, 100);
+        gunnerButton.setTranslateX(scoutButtonX + 200);
+        gunnerButton.setTranslateY(650);
+        gunnerButton.setOnAction(event -> this.tower = 2);
+        root.getChildren().add(gunnerButton);
+
+        Button energizerButton = new Button("Energizer:\n$2500");
+        energizerButton.setPrefSize(100, 100);
+        energizerButton.setTranslateX(scoutButtonX + 300);
+        energizerButton.setTranslateY(650);
+        energizerButton.setOnAction(event -> this.tower = 3);
+        root.getChildren().add(energizerButton);
+
+        Button farmButton = new Button("Farm: $250");
+        farmButton.setPrefSize(100, 100);
+        farmButton.setTranslateX(scoutButtonX + 400);
+        farmButton.setTranslateY(650);
+        farmButton.setOnAction(event -> this.tower = 4);
+        root.getChildren().add(farmButton);
 
         new Thread(() -> {
             SPAWNER.spawn(Easy.WAVE_1, root);
@@ -237,7 +275,7 @@ public final class GameScene extends Scene implements SceneBuilder {
         }).start();
 
         this.setOnMouseClicked(event -> {
-            if (this.tower == 0 && Player.cash >= Scout.COST) {
+            if (this.tower == 0 && Player.cash >= Scout.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 Scout scout = new Scout();
 
                 scout.setParent(root);
@@ -248,7 +286,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                 Player.cash -= Scout.COST;
 
                 Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-            } else if (this.tower == 1 && Player.cash >= Marksman.COST) {
+            } else if (this.tower == 1 && Player.cash >= Marksman.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 Marksman marksman = new Marksman();
 
                 marksman.setParent(root);
@@ -259,7 +297,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                 Player.cash -= Marksman.COST;
 
                 Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-            } else if (this.tower == 2 && Player.cash >= Gunner.COST) {
+            } else if (this.tower == 2 && Player.cash >= Gunner.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 Gunner gunner = new Gunner();
 
                 gunner.setParent(root);
@@ -270,7 +308,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                 Player.cash -= Gunner.COST;
 
                 Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-            } else if (this.tower == 3 && Player.cash >= Energizer.COST) {
+            } else if (this.tower == 3 && Player.cash >= Energizer.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 AtomicInteger amount = new AtomicInteger();
 
                 LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
@@ -298,7 +336,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                         // Ignore
                     }
                 }
-            } else if (this.tower == 4 && Player.cash >= Farm.COST) {
+            } else if (this.tower == 4 && Player.cash >= Farm.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 AtomicInteger amount = new AtomicInteger();
 
                 LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
@@ -318,13 +356,6 @@ public final class GameScene extends Scene implements SceneBuilder {
                     Player.cash -= Farm.COST;
 
                     Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-                } else {
-                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
-                    try {
-                        player.play();
-                    } catch (Exception ex) {
-                        // Ignore
-                    }
                 }
             } else if (this.tower == -1) {
                 // Nothing

@@ -44,6 +44,18 @@ public class Armored extends Enemy {
     }
 
     @Override
+    public void onDamaged() {
+        if (super.getShield() > 0) {
+            try {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Shield 2.wav");
+                player.play();
+            } catch (Exception ex) {
+                // Ignore
+            }
+        }
+    }
+
+    @Override
     public void onDeath() {
         try {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav");

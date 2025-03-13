@@ -75,7 +75,7 @@ public abstract class Enemy {
     /**
      * The {@link Enemy}'s current shield.
      */
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED)
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
     private int shield;
 
     /**
@@ -195,24 +195,16 @@ public abstract class Enemy {
      */
     public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
 
-        if (this.shield > 0 && damage < 5) {
-            try {
-                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Shield 2.wav");
-                player.play();
-            } catch (Exception ex) {
-                // Ignore
-            }
-
-            return;
-        } else if (this.shield > 0) {
-            this.shield -= damage;
-
-            return;
-        }
-
         // Performs the enemy's on damaged action.
         // This method is unique to each individual inheritor of the enemy class.
         this.onDamaged();
+
+        if (this.shield > 0 && damage < 5) {
+            return;
+        } else if (this.shield > 0) {
+            this.shield -= damage;
+            return;
+        }
 
         // Removes the given amount from the enemy's health.
         this.health -= damage;

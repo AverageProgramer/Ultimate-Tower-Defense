@@ -10,6 +10,7 @@ import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Zombie
@@ -36,7 +37,8 @@ public class Sorcerer extends Enemy {
     @Property
     private final int coolDown = 15000;
 
-    private boolean first;
+    @NotNull
+    private Thread spawnThread;
 
     public Sorcerer() {
         super.image = this.image;
@@ -48,124 +50,135 @@ public class Sorcerer extends Enemy {
 
         super.speed = this.speed;
 
-        super.coolDown = this.coolDown;
-
         super.income = this.income;
 
-        this.first = true;
+        spawnThread = new Thread(() -> {
+
+        });
     }
 
     @Override
     public void onSpawn() {
-        super.startAttacking();
-    }
+        this.spawnThread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(this.coolDown);
+                } catch (InterruptedException e) {
+                    // Ignore
+                }
 
-    @Override
-    public void attack(@Nullable final Tower tower) throws InterruptedException {
-        if (first) {
-            Thread.sleep(super.coolDown);
+                super.stopMoving();
 
-            first = false;
-        }
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    // Ignore
+                }
 
-        super.stopMoving();
+                Enemy[] enemies = new Enemy[5];
 
-        Thread.sleep(1500);
+                for (int i = 0; i < 5; i++) {
+                    int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 7 : 6) - 1)) + 1;
 
-        Enemy[] enemies = new Enemy[5];
+                    switch (enemy) {
+                        case 1:
+                            Normal normal = new Normal();
 
-        for (int i = 0; i < 5; i++) {
-            int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 7 : 6) - 1)) + 1;
+                            normal.setParent(super.getParent());
+                            normal.setReferencePathing(GameScene.PATH);
+                            normal.setPosition(super.getPosition());
+                            normal.setPositionIndex(super.getPositionIndex());
 
-            switch (enemy) {
-                case 1:
-                    Normal normal = new Normal();
+                            enemies[i] = normal;
 
-                    normal.setParent(super.getParent());
-                    normal.setReferencePathing(GameScene.PATH);
-                    normal.setPosition(super.getPosition());
-                    normal.setPositionIndex(super.getPositionIndex());
+                            break;
+                        case 2:
+                            Quick quick = new Quick();
 
-                    enemies[i] = normal;
+                            quick.setParent(super.getParent());
+                            quick.setReferencePathing(GameScene.PATH);
+                            quick.setPosition(super.getPosition());
+                            quick.setPositionIndex(super.getPositionIndex());
 
-                    break;
-                case 2:
-                    Quick quick = new Quick();
+                            enemies[i] = quick;
 
-                    quick.setParent(super.getParent());
-                    quick.setReferencePathing(GameScene.PATH);
-                    quick.setPosition(super.getPosition());
-                    quick.setPositionIndex(super.getPositionIndex());
+                            break;
+                        case 3:
+                            Slow slow = new Slow();
 
-                    enemies[i] = quick;
+                            slow.setParent(super.getParent());
+                            slow.setReferencePathing(GameScene.PATH);
+                            slow.setPosition(super.getPosition());
+                            slow.setPositionIndex(super.getPositionIndex());
 
-                    break;
-                case 3:
-                    Slow slow = new Slow();
+                            enemies[i] = slow;
 
-                    slow.setParent(super.getParent());
-                    slow.setReferencePathing(GameScene.PATH);
-                    slow.setPosition(super.getPosition());
-                    slow.setPositionIndex(super.getPositionIndex());
+                            break;
+                        case 4:
+                            Stealthy stealthy = new Stealthy();
 
-                    enemies[i] = slow;
+                            stealthy.setParent(super.getParent());
+                            stealthy.setReferencePathing(GameScene.PATH);
+                            stealthy.setPosition(super.getPosition());
+                            stealthy.setPositionIndex(super.getPositionIndex());
 
-                    break;
-                case 4:
-                    Stealthy stealthy = new Stealthy();
+                            enemies[i] = stealthy;
 
-                    stealthy.setParent(super.getParent());
-                    stealthy.setReferencePathing(GameScene.PATH);
-                    stealthy.setPosition(super.getPosition());
-                    stealthy.setPositionIndex(super.getPositionIndex());
+                            break;
+                        case 5:
+                            LootBox lootBox = new LootBox();
 
-                    enemies[i] = stealthy;
+                            lootBox.setParent(super.getParent());
+                            lootBox.setReferencePathing(GameScene.PATH);
+                            lootBox.setPosition(super.getPosition());
+                            lootBox.setPositionIndex(super.getPositionIndex());
 
-                    break;
-                case 5:
-                    LootBox lootBox = new LootBox();
+                            enemies[i] = lootBox;
 
-                    lootBox.setParent(super.getParent());
-                    lootBox.setReferencePathing(GameScene.PATH);
-                    lootBox.setPosition(super.getPosition());
-                    lootBox.setPositionIndex(super.getPositionIndex());
+                            break;
 
-                    enemies[i] = lootBox;
+                        case 6:
+                            Armored armored = new Armored();
 
-                    break;
+                            armored.setParent(super.getParent());
+                            armored.setReferencePathing(GameScene.PATH);
+                            armored.setPosition(super.getPosition());
+                            armored.setPositionIndex(super.getPositionIndex());
 
-                case 6:
-                    Armored armored = new Armored();
+                            enemies[i] = armored;
 
-                    armored.setParent(super.getParent());
-                    armored.setReferencePathing(GameScene.PATH);
-                    armored.setPosition(super.getPosition());
-                    armored.setPositionIndex(super.getPositionIndex());
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
-                    enemies[i] = armored;
+                Spawner spawner = new Spawner(super.getPosition());
 
-                    break;
-                default:
-                    break;
+                spawner.setEnemyPathing(super.getPathing());
+                spawner.setSpawnDelay(1500);
+
+                assert super.getParent() != null;
+
+                spawner.spawn(new Wave(enemies), super.getParent());
+
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    // Ignore
+                }
+
+                super.startMoving();
             }
-        }
+        });
 
-        Spawner spawner = new Spawner(super.getPosition());
-
-        spawner.setEnemyPathing(super.getPathing());
-        spawner.setSpawnDelay(1500);
-
-        assert super.getParent() != null;
-
-        spawner.spawn(new Wave(enemies), super.getParent());
-
-        Thread.sleep(1500);
-
-        super.startMoving();
+        this.spawnThread.start();
     }
 
     @Override
     protected void onDeath() {
+        this.spawnThread.interrupt();
+
         try {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav");
             player.play();

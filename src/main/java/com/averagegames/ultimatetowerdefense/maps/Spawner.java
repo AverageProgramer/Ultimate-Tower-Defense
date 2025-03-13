@@ -18,26 +18,24 @@ import static com.averagegames.ultimatetowerdefense.util.development.LogManager.
  * @see Wave
  * @author AverageProgramer
  */
+@Setter @Getter
 public final class Spawner {
 
     /**
      * The {@link Position} that a {@code spawned} {@link Enemy} will be placed at.
      */
     @Nullable
-    @Setter @Getter
     private Position spawnPosition;
 
     /**
      * The time between {@link Enemy} {@code spawns}.
      */
-    @Setter @Getter
     private int spawnDelay;
 
     /**
      * The {@link Path} that any {@link Enemy} {@code spawned} by the {@link Spawner} will follow.
      */
     @Nullable
-    @Setter @Getter
     private Path enemyPathing;
 
     /**
@@ -103,8 +101,10 @@ public final class Spawner {
             // Sets the enemy's pathing to the previously set path.
             enemy.setPathing(this.enemyPathing);
 
+            // Determines whether the enemy's reference pathing is null.
             if (enemy.getReferencePathing() == null) {
 
+                // Sets the enemy's reference pathing to the previously given pathing.
                 enemy.setReferencePathing(this.enemyPathing);
             }
         }

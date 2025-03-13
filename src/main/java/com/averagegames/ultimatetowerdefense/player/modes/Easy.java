@@ -496,7 +496,7 @@ public class Easy {
 
             new Sorcerer(),
             new Sorcerer(),
-            new Sorcerer(),
+            new Sorcerer()
     });
 
     public static final Wave WAVE_26 = new Wave(new Enemy[] {
@@ -509,7 +509,7 @@ public class Easy {
             new Bolt(),
             new Bolt(),
             new Bolt(),
-            new Bolt(),
+            new Bolt()
     });
 
     public static final Wave WAVE_27 = new Wave(new Enemy[] {
@@ -555,6 +555,10 @@ public class Easy {
             new Bolt(),
             new Bolt(),
             new Bolt(),
-            new Bolt(),
+            new Bolt()
+    });
+
+    public static final Wave TEST_WAVE = new Wave(new Enemy[] {
+            new Sorcerer(),
     });
 }
