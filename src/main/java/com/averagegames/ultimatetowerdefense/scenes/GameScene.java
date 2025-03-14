@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -136,24 +137,27 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void build(@NotNull final Stage stage) {
-        Group root = (Group) super.getRoot();
+        Group root = (Group) super.getRoot();;
+
+        Text loadingText = new Text("Loading...");
+        loadingText.setFont(Font.font(50));
+        loadingText.setX(650);
+        loadingText.setY(380);
+        root.getChildren().add(loadingText);
 
         cashText.setX(50);
         cashText.setY(725);
         cashText.setFill(Paint.valueOf("#3dbe23"));
         cashText.setFont(Font.font(50));
-        root.getChildren().add(cashText);
 
         baseText.setX(1300);
         baseText.setY(725);
         baseText.setFill(Paint.valueOf("#b60e0e"));
         baseText.setFont(Font.font(50));
-        root.getChildren().add(baseText);
 
         waveText.setX(1300);
         waveText.setY(100);
         waveText.setFont(Font.font(50));
-        root.getChildren().add(waveText);
 
         int scoutButtonX = 500;
 
@@ -162,37 +166,72 @@ public final class GameScene extends Scene implements SceneBuilder {
         scoutButton.setTranslateX(scoutButtonX);
         scoutButton.setTranslateY(650);
         scoutButton.setOnAction(event -> this.tower = 0);
-        root.getChildren().add(scoutButton);
 
         Button marksmanButton = new Button("Marksman:\n$300");
         marksmanButton.setPrefSize(100, 100);
         marksmanButton.setTranslateX(scoutButtonX + 100);
         marksmanButton.setTranslateY(650);
         marksmanButton.setOnAction(event -> this.tower = 1);
-        root.getChildren().add(marksmanButton);
 
         Button gunnerButton = new Button("Gunner: $500");
         gunnerButton.setPrefSize(100, 100);
         gunnerButton.setTranslateX(scoutButtonX + 200);
         gunnerButton.setTranslateY(650);
         gunnerButton.setOnAction(event -> this.tower = 2);
-        root.getChildren().add(gunnerButton);
 
         Button energizerButton = new Button("Energizer:\n$2500");
         energizerButton.setPrefSize(100, 100);
         energizerButton.setTranslateX(scoutButtonX + 300);
         energizerButton.setTranslateY(650);
         energizerButton.setOnAction(event -> this.tower = 3);
-        root.getChildren().add(energizerButton);
 
         Button farmButton = new Button("Farm: $250");
         farmButton.setPrefSize(100, 100);
         farmButton.setTranslateX(scoutButtonX + 400);
         farmButton.setTranslateY(650);
         farmButton.setOnAction(event -> this.tower = 4);
-        root.getChildren().add(farmButton);
 
         new Thread(() -> {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {
+                // Ignore
+            }
+
+            Platform.runLater(() -> {
+                Position lastPos = new Position(0, 100);
+                for (Position pos : PATH.positions()) {
+                    Line line = new Line();
+
+                    line.setStartX(lastPos.x());
+                    line.setStartY(lastPos.y());
+                    line.setEndX(pos.x());
+                    line.setEndY(pos.y());
+
+                    lastPos = pos;
+
+                    root.getChildren().add(line);
+                }
+
+                root.getChildren().add(cashText);
+                root.getChildren().add(baseText);
+                root.getChildren().add(waveText);
+
+                root.getChildren().add(scoutButton);
+                root.getChildren().add(marksmanButton);
+                root.getChildren().add(gunnerButton);
+                root.getChildren().add(energizerButton);
+                root.getChildren().add(farmButton);
+
+                root.getChildren().remove(loadingText);
+            });
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                // Ignore
+            }
+
             SPAWNER.spawn(Easy.WAVE_1, root);
             timerWait();
 
@@ -356,6 +395,52 @@ public final class GameScene extends Scene implements SceneBuilder {
                     Player.cash -= Farm.COST;
 
                     Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+                } else {
+                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
+                    try {
+                        player.play();
+                    } catch (Exception ex) {
+                        // Ignore
+                    }
+                }
+            } else if (this.tower == 5 && Player.cash >= Pyromancer.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
+                Pyromancer pyromancer = new Pyromancer();
+
+                pyromancer.setParent(root);
+                pyromancer.place(new Position(event.getX(), event.getY()));
+
+                pyromancer.startAttacking();
+
+                Player.cash -= Pyromancer.COST;
+
+                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+            } else if (this.tower == 6 && Player.cash >= Gunship.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
+                AtomicInteger amount = new AtomicInteger();
+
+                LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
+                    if (tower1 instanceof Gunship) {
+                        amount.incrementAndGet();
+                    }
+                });
+
+                if (amount.get() < Gunship.LIMIT) {
+                    Gunship gunship = new Gunship();
+
+                    gunship.setParent(root);
+                    gunship.place(new Position(event.getX(), event.getY()));
+
+                    gunship.startAttacking();
+
+                    Player.cash -= Gunship.COST;
+
+                    Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+                } else {
+                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
+                    try {
+                        player.play();
+                    } catch (Exception ex) {
+                        // Ignore
+                    }
                 }
             } else if (this.tower == -1) {
                 // Nothing
@@ -380,6 +465,10 @@ public final class GameScene extends Scene implements SceneBuilder {
                 this.tower = 3;
             } else if (event.getCode().equals(KeyCode.DIGIT5)) {
                 this.tower = 4;
+            } else if (event.getCode().equals(KeyCode.DIGIT6)) {
+                this.tower = 5;
+            } else if (event.getCode().equals(KeyCode.DIGIT7)) {
+                this.tower = 6;
             } else if (event.getCode().equals(KeyCode.DIGIT0)) {
                 this.tower = -1;
             } else if (event.getCode().equals(KeyCode.S) && this.spawnerFinished) {

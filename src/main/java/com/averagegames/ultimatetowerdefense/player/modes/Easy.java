@@ -444,8 +444,6 @@ public class Easy {
             new Sorcerer(),
             new Sorcerer(),
             new Sorcerer(),
-            new Sorcerer(),
-            new Sorcerer(),
 
             new Soldier(),
             new Soldier(),
@@ -496,6 +494,8 @@ public class Easy {
 
             new Sorcerer(),
             new Sorcerer(),
+            new Sorcerer(),
+            new Sorcerer(),
             new Sorcerer()
     });
 
@@ -537,6 +537,8 @@ public class Easy {
             new Sorcerer(),
             new Sorcerer(),
             new Sorcerer(),
+            new Sorcerer(),
+            new Sorcerer(),
 
             new GiantTitan(),
             new GiantTitan(),
@@ -546,6 +548,88 @@ public class Easy {
             new NormalTitan(),
             new NormalTitan(),
 
+            new InvisibleTitan(),
+            new InvisibleTitan(),
+
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt()
+    });
+
+    public static final Wave WAVE_28 = new Wave(new Enemy[] {
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+            new Armored(),
+
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+            new Soldier(),
+
+            new NormalTitan(),
+            new NormalTitan(),
+            new NormalTitan(),
+            new NormalTitan(),
+            new NormalTitan(),
+
+            new GiantTitan(),
+            new GiantTitan(),
+            new GiantTitan(),
+
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+            new Stealthy(),
+
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+            new LootBox(),
+
+            new InvisibleTitan(),
+            new InvisibleTitan(),
+            new InvisibleTitan(),
+            new InvisibleTitan(),
+
+            new Sorcerer(),
+            new Sorcerer(),
+            new Sorcerer(),
+
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
+            new Bolt(),
             new Bolt(),
             new Bolt(),
             new Bolt(),

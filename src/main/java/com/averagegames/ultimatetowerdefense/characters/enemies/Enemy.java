@@ -1,6 +1,5 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.Sorcerer;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Path;
@@ -345,7 +344,7 @@ public abstract class Enemy {
         Position currentPos = this.getPosition();
 
         // The circle's current position.
-        Position rangePos = new Position(range.getCenterX(), range.getCenterY());
+        Position rangePos = new Position(range.getCenterX() + (range.getTranslateX() + range.getStrokeWidth() / 2), range.getCenterY() + (range.getTranslateY() + range.getStrokeWidth() / 2));
 
         // The change in x and change in y for between the enemy and the circle.
 
@@ -502,22 +501,12 @@ public abstract class Enemy {
                 // Stops new enemies from spawning.
                 GameScene.SPAWNER.stopSpawning();
 
-                // Allows for nodes to be added to the group despite the current thread possible not being the JavaFX application thread.
-                // Removes all enemies from their parent groups.
-                Platform.runLater(() -> {
+                // A loop that will iterate through the list containing every active enemy.
+                LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
 
-                    // A loop that will iterate through the list containing every active enemy.
-                    LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
-
-                        // Removes the enemy from its parent group.
-                        enemy.getParent().getChildren().remove(enemy.loadedEnemy);
-
-                        // Stops all enemy movement and attacks.
-                        // This will prevent any threads from continuing to run and use memory.
-
-                        enemy.stopMoving();
-                        enemy.stopAttacking();
-                    });
+                    // Allows for nodes to be removed to the group despite the current thread possible not being the JavaFX application thread.
+                    // Eliminates each remaining enemy from their parent groups.
+                    Platform.runLater(enemy::eliminate);
                 });
 
                 // A try-catch statement that will catch any exceptions that occur when playing an audio file.
@@ -663,7 +652,7 @@ public abstract class Enemy {
                     this.attack(target);
 
                     // Determines whether the target is null.
-                    if (target != null || this instanceof Sorcerer) {
+                    if (target != null) {
 
                         // Causes the current thread to wait for the enemy's cool down to end.
                         Thread.sleep(this.coolDown);

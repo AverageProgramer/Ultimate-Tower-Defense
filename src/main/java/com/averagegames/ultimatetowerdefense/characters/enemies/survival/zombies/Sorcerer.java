@@ -9,6 +9,7 @@ import com.averagegames.ultimatetowerdefense.maps.Spawner;
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -60,6 +61,8 @@ public class Sorcerer extends Enemy {
     @Override
     public void onSpawn() {
         this.spawnThread = new Thread(() -> {
+            spawning:
+
             while (true) {
                 try {
                     Thread.sleep(this.coolDown);
@@ -85,55 +88,60 @@ public class Sorcerer extends Enemy {
                             Normal normal = new Normal();
 
                             normal.setParent(super.getParent());
+                            normal.setPathing(super.getPathing());
                             normal.setReferencePathing(GameScene.PATH);
                             normal.setPosition(super.getPosition());
                             normal.setPositionIndex(super.getPositionIndex());
-
-                            enemies[i] = normal;
+                            Platform.runLater(normal::spawn);
+                            normal.startMoving();
 
                             break;
                         case 2:
                             Quick quick = new Quick();
 
                             quick.setParent(super.getParent());
+                            quick.setPathing(super.getPathing());
                             quick.setReferencePathing(GameScene.PATH);
                             quick.setPosition(super.getPosition());
                             quick.setPositionIndex(super.getPositionIndex());
-
-                            enemies[i] = quick;
+                            Platform.runLater(quick::spawn);
+                            quick.startMoving();
 
                             break;
                         case 3:
                             Slow slow = new Slow();
 
                             slow.setParent(super.getParent());
+                            slow.setPathing(super.getPathing());
                             slow.setReferencePathing(GameScene.PATH);
                             slow.setPosition(super.getPosition());
                             slow.setPositionIndex(super.getPositionIndex());
-
-                            enemies[i] = slow;
+                            Platform.runLater(slow::spawn);
+                            slow.startMoving();
 
                             break;
                         case 4:
                             Stealthy stealthy = new Stealthy();
 
                             stealthy.setParent(super.getParent());
+                            stealthy.setPathing(super.getPathing());
                             stealthy.setReferencePathing(GameScene.PATH);
                             stealthy.setPosition(super.getPosition());
                             stealthy.setPositionIndex(super.getPositionIndex());
-
-                            enemies[i] = stealthy;
+                            Platform.runLater(stealthy::spawn);
+                            stealthy.startMoving();
 
                             break;
                         case 5:
                             LootBox lootBox = new LootBox();
 
                             lootBox.setParent(super.getParent());
+                            lootBox.setPathing(super.getPathing());
                             lootBox.setReferencePathing(GameScene.PATH);
                             lootBox.setPosition(super.getPosition());
                             lootBox.setPositionIndex(super.getPositionIndex());
-
-                            enemies[i] = lootBox;
+                            Platform.runLater(lootBox::spawn);
+                            lootBox.startMoving();
 
                             break;
 
@@ -141,26 +149,24 @@ public class Sorcerer extends Enemy {
                             Armored armored = new Armored();
 
                             armored.setParent(super.getParent());
+                            armored.setPathing(super.getPathing());
                             armored.setReferencePathing(GameScene.PATH);
                             armored.setPosition(super.getPosition());
                             armored.setPositionIndex(super.getPositionIndex());
-
-                            enemies[i] = armored;
+                            Platform.runLater(armored::spawn);
+                            armored.startMoving();
 
                             break;
                         default:
                             break;
                     }
+
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException ex) {
+                        break spawning;
+                    }
                 }
-
-                Spawner spawner = new Spawner(super.getPosition());
-
-                spawner.setEnemyPathing(super.getPathing());
-                spawner.setSpawnDelay(1500);
-
-                assert super.getParent() != null;
-
-                spawner.spawn(new Wave(enemies), super.getParent());
 
                 try {
                     Thread.sleep(1500);

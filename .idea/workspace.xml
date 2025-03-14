@@ -9,17 +9,28 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added a Wave counter to the GameScene class. Also fixed an issue with the Marksman, Gunner, and Pyromancer Towers. These Towers had not previously set their starting health to 0. This would cause them to get instantly eliminated by Soldier Enemies.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/OilRig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Shotgunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 3.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 4.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Plane 1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipRunway.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipTower.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ShotgunnerTower.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Armored.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Armored.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Soldier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Pyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Pyromancer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/BoltZombie.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/PyromancerTower.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/PyromancerTower.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,9 +143,9 @@
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\enemies" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\enemies" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\music" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio" />
     </key>
@@ -264,22 +275,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00018" summary="Replaced the Map class with a Map interface. The reason for this switch is that maps each have a unique design, therefore it is simply better to use overridden methods from an interface to load and unload it since loading and unloading the map should not require any additional pre-built methods that a class would be able to provide.">
-      <option name="closed" value="true" />
-      <created>1709687592527</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1709687592527</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Added the NotInstantiable annotation. This annotation is meant to be an indication that the annotated class can not be instantiated. The annotation is only for readability and does not actually do anything. The Tower class is also being working on.">
-      <option name="closed" value="true" />
-      <created>1709902742104</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1709902742104</updated>
     </task>
     <task id="LOCAL-00020" summary="Made the abstract &quot;attack&quot; method in the Enemy class not abstract. It is now no longer a requirement for enemies to have some sort of attack. In addition to this, the &quot;setHealth&quot; method has been replaced with the &quot;heal&quot; and &quot;damage&quot; methods to avoid any unwanted modifications to the enemy's health. The new methods also allow for the enemy to properly have an &quot;onHeal&quot; and an &quot;onDamaged&quot; event.">
       <option name="closed" value="true" />
@@ -657,7 +652,23 @@
       <option name="project" value="LOCAL" />
       <updated>1741799499945</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Fixed an issue with the Sorcerer where it would spawn Enemies even after it was eliminated.">
+      <option name="closed" value="true" />
+      <created>1741891260626</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1741891260627</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue.">
+      <option name="closed" value="true" />
+      <created>1741892358648</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1741892358648</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,8 +676,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated the project structure once again. The 'world' package was removed and the 'scenes' and 'maps' packages were relocated. The Enemies, Towers, and Maps classes were all removed as well. The ArrayLists of active enemies and towers can now simply be found in the Enemy and Tower classes respectively. The MapBuilder interface was also removed because it wasn't entirely necessary." />
-    <MESSAGE value="Began implementing Tower attacks. Towers, specifically the Scout, can now be placed wherever the user clicks the screen. Currently, the implemented attack and placement methods are very primitive and will likely be updated continuously in the future." />
     <MESSAGE value="Added JAVADOC and code comments to the remaining methods within the Tower class." />
     <MESSAGE value="Added a variety of sound effects to the game. A few methods and constructors have also been removed from the Enemy and Tower classes as well as a few of the inheritors." />
     <MESSAGE value="Implemented the targeting for the Tower class. Currently, the Tower can either target the first Enemy along a given Path or the last Enemy. In the future, there will be more targeting modes that the Tower can use. These modes will include the 'strongest' and 'weakest' targeting modes. In addition to this, a variety of other classes that will be implemented in the future have been added to the project. These classes include new Towers, the MapBuilder, and the CharacterBuilder class." />
@@ -690,7 +699,9 @@
     <MESSAGE value="Reworked the Energizer. The Energizer will now attack an Enemy until that Enemy has been eliminated. The Sorcerer has also been reworked. Instead of using a completely separate thread to spawn Enemies, the Sorcerer now uses the Enemy attack thread. The Bolt Enemy has also been implemented." />
     <MESSAGE value="Fixed the Wave structure in the GameScene class. Also added Waves 25 and 26 to Easy mode." />
     <MESSAGE value="Added a Wave counter to the GameScene class. Also fixed an issue with the Marksman, Gunner, and Pyromancer Towers. These Towers had not previously set their starting health to 0. This would cause them to get instantly eliminated by Soldier Enemies." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a Wave counter to the GameScene class. Also fixed an issue with the Marksman, Gunner, and Pyromancer Towers. These Towers had not previously set their starting health to 0. This would cause them to get instantly eliminated by Soldier Enemies." />
+    <MESSAGE value="Fixed an issue with the Sorcerer where it would spawn Enemies even after it was eliminated." />
+    <MESSAGE value="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue." />
+    <option name="LAST_COMMIT_MESSAGE" value="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -127,7 +127,7 @@ public class TranslationHandler {
         });
 
         // Starts the node's animation.
-        this.animation.play();
+        this.animation.playFromStart();
     }
 
     /**

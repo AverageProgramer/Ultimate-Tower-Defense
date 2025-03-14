@@ -40,7 +40,7 @@ public abstract class Tower {
      * The {@link Tower}'s parent {@link Group}.
      */
     @Nullable
-    @Accessors(makeFinal = true) @Setter
+    @Accessors(makeFinal = true) @Setter @Getter
     private Group parent;
 
     /**
@@ -71,6 +71,7 @@ public abstract class Tower {
      * The {@link Tower}'s {@code range}.
      */
     @NotNull
+    @Accessors(makeFinal = true) @Getter(AccessLevel.PROTECTED)
     private final Circle range;
 
     /**

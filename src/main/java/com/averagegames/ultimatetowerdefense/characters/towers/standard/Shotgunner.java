@@ -7,27 +7,27 @@ import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
-public final class Pyromancer extends Tower {
+public class Shotgunner extends Tower {
 
     @Property
-    public static final int COST = 450;
+    public static final int COST = 600;
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/PyromancerTower.gif");
+    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ShotgunnerTower.gif");
 
     @Property
-    private final int damage = 0;
+    private final int damage = 2;
 
     @Property
-    private final int coolDown = 350;
+    private final int coolDown = 1500;
 
     @Property
     private final int startHealth = 100;
 
     @Property
-    private final double radius = 75;
+    private final double radius = 40;
 
-    public Pyromancer() {
+    public Shotgunner() {
         super.image = this.image;
         super.damage = this.damage;
         super.coolDown = this.coolDown;
@@ -39,16 +39,13 @@ public final class Pyromancer extends Tower {
     protected void attack(@Nullable final Enemy enemy) {
         if (enemy != null && super.isAlive()) {
             try {
-                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Flamethrower 1.wav");
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 4.wav");
                 player.play();
             } catch (Exception ex) {
                 System.out.println("Exception occurred");
             }
 
-            // Basic burn damage.
-            if (!enemy.isBurning()) {
-                enemy.burn(1,4);
-            }
+            enemy.damage(super.damage);
         }
     }
 
