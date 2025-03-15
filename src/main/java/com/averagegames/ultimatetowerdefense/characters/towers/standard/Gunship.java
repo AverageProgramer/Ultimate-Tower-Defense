@@ -65,6 +65,7 @@ public final class Gunship extends Tower {
         ImageLoader plane = new ImageLoader();
 
         plane.setImage(new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipTower.gif"));
+        plane.setViewOrder(Integer.MIN_VALUE);
 
         Circle path = new Circle(super.getPosition().x(), super.getPosition().y(), this.flightRadius);
 
@@ -86,15 +87,12 @@ public final class Gunship extends Tower {
         animation.setRate(1);
         animation.setDuration(Duration.seconds(5));
 
-        PathTransition rangeAnimation = new PathTransition();
+        animation.currentTimeProperty().addListener(((observable, oldValue, newValue) -> {
+            Circle range = super.getRange();
 
-        rangeAnimation.setNode(super.getRange());
-        rangeAnimation.setPath(path);
-        rangeAnimation.setInterpolator(Interpolator.LINEAR);
-        rangeAnimation.setCycleCount(Animation.INDEFINITE);
-        rangeAnimation.setAutoReverse(false);
-        rangeAnimation.setRate(1);
-        rangeAnimation.setDuration(Duration.seconds(5));
+            range.setCenterX(plane.getCurrentX() + (plane.getImage().getWidth() / 2));
+            range.setCenterY(plane.getCurrentY() + (plane.getImage().getHeight() / 2));
+        }));
 
         RotateTransition rotation = new RotateTransition();
 
@@ -106,7 +104,6 @@ public final class Gunship extends Tower {
         rotation.setNode(plane);
 
         animation.play();
-        rangeAnimation.play();
         rotation.play();
     }
 

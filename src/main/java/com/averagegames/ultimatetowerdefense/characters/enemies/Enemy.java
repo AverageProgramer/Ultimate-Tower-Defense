@@ -230,62 +230,6 @@ public abstract class Enemy {
     }
 
     /**
-     * Applies burn {@code damage} and effects to the {@link Enemy} for a given {@code duration}.
-     * @param damage the {@code damage} the {@link Enemy} takes every second.
-     * @param duration the {@code duration} to remain burned in seconds.
-     * @since Ultimate Tower Defense 1.0
-     */
-    public final void burn(@Range(from = 0, to = Integer.MAX_VALUE) final int damage, @Range(from = 0, to = Integer.MAX_VALUE) final int duration) {
-
-        // Creates a new thread that will handle burn damage and starts it.
-        new Thread(() -> {
-
-            // A loop that will iterate the same amount of times as the given duration.
-            for (int i = 0; i < duration; i++) {
-
-                // A try-catch statement that will allow the enemy to take burn damage.
-                try {
-
-                    // Damages the enemy the given amount.
-                    this.damage(damage);
-
-                    // Pauses the thread for one second.
-                    // Once the thread resumes the enemy will be damaged again.
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    // The exception does not need to be handled.
-                }
-            }
-
-            // Determines whether the enemy is a zombie.
-            if (this.getClass().isAnnotationPresent(Zombie.class)) {
-
-                // Returns the enemy's speed back to normal.
-                this.speed *= ((double) 4 / 3);
-
-                // Updates the enemy's movement so that it will move at its original speed.
-                this.updateMovement();
-            }
-
-            // Sets the boolean indicating that the enemy is burning to false.
-            this.burning = false;
-        }).start();
-
-        // Determines whether the enemy is a zombie.
-        if (this.getClass().isAnnotationPresent(Zombie.class)) {
-
-            // Lowers the enemy's speed.
-            this.speed *= ((double) 3 / 4);
-
-            // Updates the enemy's movement so that it will move at the new speed.
-            this.updateMovement();
-        }
-
-        // Sets the boolean indicating that the enemy is burning to true.
-        this.burning = true;
-    }
-
-    /**
      * Sets the {@link Enemy}'s {@link Position} to a newly given {@link Position}.
      * @param position the new {@link Position}.
      * @since Ultimate Tower Defense 1.0
@@ -385,6 +329,9 @@ public abstract class Enemy {
 
         // Adds the enemy to the enemy's parent group.
         this.parent.getChildren().add(this.loadedEnemy);
+
+        // Sets the enemy's view order to its current y position.
+        this.loadedEnemy.setViewOrder(-this.getPosition().y());
 
         // Adds the enemy to the list containing every active enemy.
         LIST_OF_ACTIVE_ENEMIES.add(this);
@@ -506,7 +453,7 @@ public abstract class Enemy {
 
                     // Allows for nodes to be removed to the group despite the current thread possible not being the JavaFX application thread.
                     // Eliminates each remaining enemy from their parent groups.
-                    Platform.runLater(enemy::eliminate);
+                    Platform.runLater(() -> enemy.eliminate(false));
                 });
 
                 // A try-catch statement that will catch any exceptions that occur when playing an audio file.
@@ -555,7 +502,7 @@ public abstract class Enemy {
      * Updates the {@link Enemy}'s movement to reflect any {@code speed} changes that may have occurred.
      * @since Ultimate Tower Defense 1.0
      */
-    private void updateMovement() {
+    public final void refreshMovement() {
 
         // Stops the enemy's movement.
         this.stopMoving();
@@ -694,9 +641,10 @@ public abstract class Enemy {
 
     /**
      * Removes the {@link Enemy} from its parent {@link Group}.
+     * @param doAction whether the {@link Enemy} should perform its on death action.
      * @since Ultimate Tower Defense 1.0
      */
-    public synchronized final void eliminate() {
+    public synchronized final void eliminate(final boolean doAction) {
 
         // Determines whether the enemy's parent group is null and whether the enemy was already eliminated from its parent group.
         if (this.parent == null || !this.parent.getChildren().contains(this.loadedEnemy)) {
@@ -705,9 +653,13 @@ public abstract class Enemy {
             return;
         }
 
-        // Performs the enemy's death action.
-        // This method is unique to each individual inheritor of the enemy class.
-        this.onDeath();
+        // Determines whether the enemy should perform its on death action.
+        if (doAction) {
+
+            // Performs the enemy's death action.
+            // This method is unique to each individual inheritor of the enemy class.
+            this.onDeath();
+        }
 
         // Removes the enemy from its parent group.
         this.parent.getChildren().remove(this.loadedEnemy);
@@ -723,6 +675,16 @@ public abstract class Enemy {
 
         // Logs that the enemy has been eliminated.
         LOGGER.info(STR."Enemy \{this} eliminated.");
+    }
+
+    /**
+     * Removes the {@link Enemy} from its parent {@link Group}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void eliminate() {
+
+        // Eliminates the enemy and sets it so that the enemy will perform its on death action.
+        this.eliminate(true);
     }
 
     /**

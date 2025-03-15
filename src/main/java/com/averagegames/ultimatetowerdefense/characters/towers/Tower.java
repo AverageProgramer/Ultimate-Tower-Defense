@@ -285,15 +285,21 @@ public abstract class Tower {
         this.range.setCenterX(this.getPosition().x());
         this.range.setCenterY(this.getPosition().y());
 
+        // FOR TESTING ONLY
+        // ---------------------------------------------------------------------------------------------------
         this.range.setFill(Paint.valueOf("#3a5bb6"));
         this.range.setOpacity(0.25);
-        this.range.toBack();
+        this.range.setViewOrder(Integer.MAX_VALUE);
         this.range.setVisible(false);
         this.loadedTower.setOnMouseClicked(e -> this.range.setVisible(!this.range.isVisible()));
         this.parent.getChildren().add(this.range);
+        // ---------------------------------------------------------------------------------------------------
 
         // Adds the tower to the tower's parent group.
         this.parent.getChildren().add(this.loadedTower);
+
+        // Sets the tower's view order to its current y position.
+        this.loadedTower.setViewOrder(-this.getPosition().y());
 
         // Adds the tower to the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.add(this);

@@ -10,15 +10,19 @@ import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.player.modes.Easy;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import javafx.application.Platform;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -47,22 +51,26 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     public static final Text waveText = new Text("Wave 1");
 
+    private static final Rectangle2D screen = Screen.getPrimary().getBounds();
+
+    private static final double xSpace;
+
+    private static final double ySpace;
+
     private boolean skip;
 
     private boolean spawnerFinished;
 
-    public static final Path PATH = new Path(new Position[] {
-            new Position(400, 100),
-            new Position(550, 300),
-            new Position(550, 500),
-            new Position(900, 500),
-            new Position(900, 300),
-            new Position(700, 200),
-            new Position(700, 100),
-            new Position(1050, 100),
-            new Position(1200, 300),
-            new Position(1350, 300)
-    });
+    static {
+        while (true) {
+            if (screen.getWidth() != 0 && screen.getHeight() != 0) {
+                break;
+            }
+        }
+
+        xSpace = (screen.getWidth() - 1350) / 2;
+        ySpace = (screen.getHeight() - 500) / 2;
+    }
 
     public static final Spawner SPAWNER = getTestSpawner();
 
@@ -72,16 +80,29 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Grave Buster.wav");
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav");
         // player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
+        stage.setResizable(false);
     }
 
     private static @NotNull Spawner getTestSpawner() {
-        Spawner spawner = new Spawner(new Position(0, 100));
+        Spawner spawner = new Spawner(new Position(xSpace, ySpace));
 
-        spawner.setEnemyPathing(PATH);
+        spawner.setEnemyPathing(new Path(new Position[] {
+                new Position(xSpace + 400, ySpace),
+                new Position(xSpace + 550, ySpace + 200),
+                new Position(xSpace + 550, ySpace + 400),
+                new Position(xSpace + 900, ySpace + 400),
+                new Position(xSpace + 900, ySpace + 200),
+                new Position(xSpace + 700, ySpace + 100),
+                new Position(xSpace + 700, ySpace),
+                new Position(xSpace + 1050, ySpace),
+                new Position(xSpace + 1200, ySpace + 200),
+                new Position(xSpace + 1350, ySpace + 200)
+        }));
+
         spawner.setSpawnDelay(1500);
 
         return spawner;
@@ -90,7 +111,7 @@ public final class GameScene extends Scene implements SceneBuilder {
     private void timerWait() {
         spawnerFinished = true;
 
-        while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !skip && Base.health > 0);
+        while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !this.skip && Base.health > 0);
 
         spawnerFinished = false;
 
@@ -137,97 +158,110 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void build(@NotNull final Stage stage) {
-        Group root = (Group) super.getRoot();;
+        stage.setTitle("Ultimate Tower Defense");
 
-        Text loadingText = new Text("Loading...");
-        loadingText.setFont(Font.font(50));
-        loadingText.setX(650);
-        loadingText.setY(380);
-        root.getChildren().add(loadingText);
+        Group root = (Group) super.getRoot();
+
+        Circle circle1 = new Circle(5);
+        circle1.setCenterX(xSpace);
+        circle1.setCenterY(ySpace);
+
+        Circle circle2 = new Circle(5);
+        circle2.setCenterX(xSpace + 1350);
+        circle2.setCenterY(ySpace + 200);
 
         cashText.setX(50);
-        cashText.setY(725);
+        cashText.setY(screen.getHeight() - 50 - cashText.getLayoutBounds().getHeight());
         cashText.setFill(Paint.valueOf("#3dbe23"));
         cashText.setFont(Font.font(50));
 
-        baseText.setX(1300);
-        baseText.setY(725);
+        baseText.setX(screen.getWidth() - 180 - baseText.getLayoutBounds().getWidth());
+        baseText.setY(screen.getHeight() - 50 - baseText.getLayoutBounds().getHeight());
         baseText.setFill(Paint.valueOf("#b60e0e"));
         baseText.setFont(Font.font(50));
 
-        waveText.setX(1300);
-        waveText.setY(100);
+        waveText.setX(screen.getWidth() - 180 - waveText.getLayoutBounds().getWidth());
+        waveText.setY(80);
         waveText.setFont(Font.font(50));
 
-        int scoutButtonX = 500;
+        double gunnerButtonX = (screen.getWidth() / 2) - 50;
+        double y = screen.getHeight() - 200;
 
         Button scoutButton = new Button("Scout: $200");
         scoutButton.setPrefSize(100, 100);
-        scoutButton.setTranslateX(scoutButtonX);
-        scoutButton.setTranslateY(650);
+        scoutButton.setTranslateX(gunnerButtonX - 200);
+        scoutButton.setTranslateY(y);
         scoutButton.setOnAction(event -> this.tower = 0);
 
         Button marksmanButton = new Button("Marksman:\n$300");
         marksmanButton.setPrefSize(100, 100);
-        marksmanButton.setTranslateX(scoutButtonX + 100);
-        marksmanButton.setTranslateY(650);
+        marksmanButton.setTranslateX(gunnerButtonX - 100);
+        marksmanButton.setTranslateY(y);
         marksmanButton.setOnAction(event -> this.tower = 1);
 
-        Button gunnerButton = new Button("Gunner: $500");
+        Button gunnerButton = new Button("Gunship: $750");
         gunnerButton.setPrefSize(100, 100);
-        gunnerButton.setTranslateX(scoutButtonX + 200);
-        gunnerButton.setTranslateY(650);
-        gunnerButton.setOnAction(event -> this.tower = 2);
+        gunnerButton.setTranslateX(gunnerButtonX);
+        gunnerButton.setTranslateY(y);
+        gunnerButton.setOnAction(event -> this.tower = 6);
 
         Button energizerButton = new Button("Energizer:\n$2500");
         energizerButton.setPrefSize(100, 100);
-        energizerButton.setTranslateX(scoutButtonX + 300);
-        energizerButton.setTranslateY(650);
+        energizerButton.setTranslateX(gunnerButtonX + 100);
+        energizerButton.setTranslateY(y);
         energizerButton.setOnAction(event -> this.tower = 3);
 
         Button farmButton = new Button("Farm: $250");
         farmButton.setPrefSize(100, 100);
-        farmButton.setTranslateX(scoutButtonX + 400);
-        farmButton.setTranslateY(650);
+        farmButton.setTranslateX(gunnerButtonX + 200);
+        farmButton.setTranslateY(y);
         farmButton.setOnAction(event -> this.tower = 4);
+
+        Platform.runLater(() -> {
+            Position lastPos = new Position(xSpace, ySpace);
+            for (Position pos : new Path(new Position[] {
+                    new Position(xSpace + 400, ySpace),
+                    new Position(xSpace + 550, ySpace + 200),
+                    new Position(xSpace + 550, ySpace + 400),
+                    new Position(xSpace + 900, ySpace + 400),
+                    new Position(xSpace + 900, ySpace + 200),
+                    new Position(xSpace + 700, ySpace + 100),
+                    new Position(xSpace + 700, ySpace),
+                    new Position(xSpace + 1050, ySpace),
+                    new Position(xSpace + 1200, ySpace + 200),
+                    new Position(xSpace + 1350, ySpace + 200)
+            }).positions()) {
+                Line line = new Line();
+
+                line.setStartX(lastPos.x());
+                line.setStartY(lastPos.y());
+                line.setEndX(pos.x());
+                line.setEndY(pos.y());
+
+                line.setViewOrder(Integer.MAX_VALUE);
+
+                lastPos = pos;
+
+                root.getChildren().add(line);
+            }
+
+            root.getChildren().add(cashText);
+            root.getChildren().add(baseText);
+            root.getChildren().add(waveText);
+
+            root.getChildren().add(circle1);
+            root.getChildren().add(circle2);
+
+            root.getChildren().add(scoutButton);
+            root.getChildren().add(marksmanButton);
+            root.getChildren().add(gunnerButton);
+            root.getChildren().add(energizerButton);
+            root.getChildren().add(farmButton);
+        });
 
         new Thread(() -> {
             try {
-                Thread.sleep(10000);
-            } catch (InterruptedException ex) {
-                // Ignore
-            }
-
-            Platform.runLater(() -> {
-                Position lastPos = new Position(0, 100);
-                for (Position pos : PATH.positions()) {
-                    Line line = new Line();
-
-                    line.setStartX(lastPos.x());
-                    line.setStartY(lastPos.y());
-                    line.setEndX(pos.x());
-                    line.setEndY(pos.y());
-
-                    lastPos = pos;
-
-                    root.getChildren().add(line);
-                }
-
-                root.getChildren().add(cashText);
-                root.getChildren().add(baseText);
-                root.getChildren().add(waveText);
-
-                root.getChildren().add(scoutButton);
-                root.getChildren().add(marksmanButton);
-                root.getChildren().add(gunnerButton);
-                root.getChildren().add(energizerButton);
-                root.getChildren().add(farmButton);
-
-                root.getChildren().remove(loadingText);
-            });
-
-            try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException ex) {
                 // Ignore
             }
@@ -460,7 +494,7 @@ public final class GameScene extends Scene implements SceneBuilder {
             } else if (event.getCode().equals(KeyCode.DIGIT2)) {
                 this.tower = 1;
             } else if (event.getCode().equals(KeyCode.DIGIT3)) {
-                this.tower = 2;
+                this.tower = 6;
             } else if (event.getCode().equals(KeyCode.DIGIT4)) {
                 this.tower = 3;
             } else if (event.getCode().equals(KeyCode.DIGIT5)) {

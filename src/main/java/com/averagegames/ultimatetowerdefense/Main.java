@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class Main extends Application {
 
     @Override
-    public void init() {
+    public void init() throws Exception {
         LOGGER.info(STR."Application \{this} initalized.");
     }
 

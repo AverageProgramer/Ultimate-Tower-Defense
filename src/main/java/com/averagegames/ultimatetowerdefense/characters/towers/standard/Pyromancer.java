@@ -47,7 +47,7 @@ public final class Pyromancer extends Tower {
 
             // Basic burn damage.
             if (!enemy.isBurning()) {
-                enemy.burn(1,4);
+                enemy.damage(1);
             }
         }
     }

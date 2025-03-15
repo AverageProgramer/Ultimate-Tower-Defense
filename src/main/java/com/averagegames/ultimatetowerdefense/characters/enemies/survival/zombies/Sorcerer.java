@@ -89,7 +89,7 @@ public class Sorcerer extends Enemy {
 
                             normal.setParent(super.getParent());
                             normal.setPathing(super.getPathing());
-                            normal.setReferencePathing(GameScene.PATH);
+                            normal.setReferencePathing(super.getReferencePathing());
                             normal.setPosition(super.getPosition());
                             normal.setPositionIndex(super.getPositionIndex());
                             Platform.runLater(normal::spawn);
@@ -101,7 +101,7 @@ public class Sorcerer extends Enemy {
 
                             quick.setParent(super.getParent());
                             quick.setPathing(super.getPathing());
-                            quick.setReferencePathing(GameScene.PATH);
+                            quick.setReferencePathing(super.getReferencePathing());
                             quick.setPosition(super.getPosition());
                             quick.setPositionIndex(super.getPositionIndex());
                             Platform.runLater(quick::spawn);
@@ -113,7 +113,7 @@ public class Sorcerer extends Enemy {
 
                             slow.setParent(super.getParent());
                             slow.setPathing(super.getPathing());
-                            slow.setReferencePathing(GameScene.PATH);
+                            slow.setReferencePathing(super.getReferencePathing());
                             slow.setPosition(super.getPosition());
                             slow.setPositionIndex(super.getPositionIndex());
                             Platform.runLater(slow::spawn);
@@ -125,7 +125,7 @@ public class Sorcerer extends Enemy {
 
                             stealthy.setParent(super.getParent());
                             stealthy.setPathing(super.getPathing());
-                            stealthy.setReferencePathing(GameScene.PATH);
+                            stealthy.setReferencePathing(super.getReferencePathing());
                             stealthy.setPosition(super.getPosition());
                             stealthy.setPositionIndex(super.getPositionIndex());
                             Platform.runLater(stealthy::spawn);
@@ -137,7 +137,7 @@ public class Sorcerer extends Enemy {
 
                             lootBox.setParent(super.getParent());
                             lootBox.setPathing(super.getPathing());
-                            lootBox.setReferencePathing(GameScene.PATH);
+                            lootBox.setReferencePathing(super.getReferencePathing());
                             lootBox.setPosition(super.getPosition());
                             lootBox.setPositionIndex(super.getPositionIndex());
                             Platform.runLater(lootBox::spawn);
@@ -150,7 +150,7 @@ public class Sorcerer extends Enemy {
 
                             armored.setParent(super.getParent());
                             armored.setPathing(super.getPathing());
-                            armored.setReferencePathing(GameScene.PATH);
+                            armored.setReferencePathing(super.getReferencePathing());
                             armored.setPosition(super.getPosition());
                             armored.setPositionIndex(super.getPositionIndex());
                             Platform.runLater(armored::spawn);

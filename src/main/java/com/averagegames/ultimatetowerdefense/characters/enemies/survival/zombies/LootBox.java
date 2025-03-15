@@ -77,7 +77,7 @@ public class LootBox extends Enemy {
 
                 normal.setParent(this.getParent());
                 normal.setPathing(path);
-                normal.setReferencePathing(GameScene.PATH);
+                normal.setReferencePathing(super.getReferencePathing());
                 normal.setPositionIndex(this.getPositionIndex());
                 normal.spawn(this.getPosition());
                 normal.startMoving();
@@ -88,7 +88,7 @@ public class LootBox extends Enemy {
 
                 quick.setParent(this.getParent());
                 quick.setPathing(path);
-                quick.setReferencePathing(GameScene.PATH);
+                quick.setReferencePathing(super.getReferencePathing());
                 quick.setPositionIndex(this.getPositionIndex());
                 quick.spawn(this.getPosition());
                 quick.startMoving();
@@ -99,7 +99,7 @@ public class LootBox extends Enemy {
 
                 slow.setParent(this.getParent());
                 slow.setPathing(path);
-                slow.setReferencePathing(GameScene.PATH);
+                slow.setReferencePathing(super.getReferencePathing());
                 slow.setPositionIndex(this.getPositionIndex());
                 slow.spawn(this.getPosition());
                 slow.startMoving();
@@ -110,7 +110,7 @@ public class LootBox extends Enemy {
 
                 stealthy.setParent(this.getParent());
                 stealthy.setPathing(path);
-                stealthy.setReferencePathing(GameScene.PATH);
+                stealthy.setReferencePathing(super.getReferencePathing());
                 stealthy.setPositionIndex(this.getPositionIndex());
                 stealthy.spawn(this.getPosition());
                 stealthy.startMoving();
@@ -122,7 +122,7 @@ public class LootBox extends Enemy {
 
                 armored.setParent(this.getParent());
                 armored.setPathing(path);
-                armored.setReferencePathing(GameScene.PATH);
+                armored.setReferencePathing(super.getReferencePathing());
                 armored.setPositionIndex(this.getPositionIndex());
                 armored.spawn(this.getPosition());
                 armored.startMoving();

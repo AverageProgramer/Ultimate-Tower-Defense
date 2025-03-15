@@ -80,7 +80,6 @@ public class TranslationHandler {
      * Begins moving the given {@link Node} to the given {@code destination} at the given {@code speed}.
      * @since Ultimate Tower Defense 1.0
      */
-    @SuppressWarnings("unused")
     public final void start() {
 
         // Sets the duration of the animation to a calculated amount of seconds.
@@ -113,6 +112,10 @@ public class TranslationHandler {
 
             this.animation.setToX(this.destination.x() - this.node.getLayoutBounds().getMinX());
             this.animation.setToY(this.destination.y() - this.node.getLayoutBounds().getMinY());
+
+            // Adds an event listener to the animations current time property.
+            // This will allow the node's layer to be changed during the animation.
+            this.animation.currentTimeProperty().addListener(((observable, oldValue, newValue) -> this.node.setViewOrder(-(this.node.getLayoutBounds().getMaxY() + this.node.getTranslateY()))));
         }
 
         // Sets the event meant to happen when the animation is finished.
