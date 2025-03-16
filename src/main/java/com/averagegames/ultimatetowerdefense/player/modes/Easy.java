@@ -151,6 +151,7 @@ public class Easy {
             new Normal(),
             new Normal(),
             new Normal(),
+            new Normal(),
 
             new Slow(),
             new Slow(),

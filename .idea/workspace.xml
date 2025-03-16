@@ -9,12 +9,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Game is currently bugged. This commit is just to test whether the bug is a hardware issue.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed the previously mentioned bug. The bug had caused random Enemies to move at significantly slower speeds when spawned than they are supposed to. In addition to fixing that bug, the GameScene class has also been set up to now fit any computer screen. Lastly, in addition to fixing the previously mentioned animation bug, all other animation bugs have been fixed. These bugs include: Enemies getting stuck at spawn, Enemies stopping at various Positions along their set Path, and Enemies moving at slightly different speeds.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/MilitaryBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Placement 1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/MilitaryBaseTower.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/FarmTower.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/FarmTower.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,48 +86,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.EnemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/Ultimate Tower Defense&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "JUnit.EnemyTest.EnemySpawnShouldFail.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldFail.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.executor": "Run",
+    "JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "main",
+    "ignore.preview.features.used": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/IdeaProjects/Ultimate-Tower-Defense",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\java\com\averagegames\ultimatetowerdefense\enemies\normal" />
@@ -259,14 +266,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00022" summary="Changed the way assertions are being used in the program. Going forwards, assertions should only be used when it is a developer problem only. For example, code that determines something about a method's behavior such as checking if the Specific annotation is present on the method asking for verification should use assertions because it will always be present. If it isn't, then that is a developer problem only. On the other hand, assertions should not be used for validating method calls, parameters, etc. Long story short, assertions should only be used for development related problems and nothing else.">
-      <option name="closed" value="true" />
-      <created>1710120194695</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1710120194695</updated>
     </task>
     <task id="LOCAL-00023" summary="Added the GreaterThan and LessThan annotations. These annotations serve as a way to make a sure a Number value given to a method is either greater than or less than a specified value. In addition to the annotations, two classes, the GreaterThanAnnotation and LessThanAnnotation classes, were added as a way to verify if the number is a valid input to a method.">
       <option name="closed" value="true" />
@@ -652,7 +651,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742069347413</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Fixed the previously mentioned bug. The bug had caused random Enemies to move at significantly slower speeds when spawned than they are supposed to. In addition to fixing that bug, the GameScene class has also been set up to now fit any computer screen. Lastly, in addition to fixing the previously mentioned animation bug, all other animation bugs have been fixed. These bugs include: Enemies getting stuck at spawn, Enemies stopping at various Positions along their set Path, and Enemies moving at slightly different speeds.">
+      <option name="closed" value="true" />
+      <created>1742085053821</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1742085053821</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +667,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented the targeting for the Tower class. Currently, the Tower can either target the first Enemy along a given Path or the last Enemy. In the future, there will be more targeting modes that the Tower can use. These modes will include the 'strongest' and 'weakest' targeting modes. In addition to this, a variety of other classes that will be implemented in the future have been added to the project. These classes include new Towers, the MapBuilder, and the CharacterBuilder class." />
     <MESSAGE value="Fully implemented the Marksman and Gunner towers, each being equipped with their own methods of attack. The 'strongest' and 'weakest' targeting modes for towers have also been fully implemented. The AudioPlayer class has also been added, making it much easier to play both sound effects and music." />
     <MESSAGE value="There was a missed compiler error in the previous commit. That is the only change that has been made." />
     <MESSAGE value="Fixed a bug regarding the 'getTarget' method in the Tower class. Previously, the tower would attempt to target hidden and flying enemies even without having hidden and flying detection capabilities. This would ultimately cause the Tower to get stuck and unable to attack other enemies. The Stealthy zombie has also now been added. It is the first zombie to properly use the hidden Type." />
@@ -685,7 +691,8 @@
     <MESSAGE value="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue." />
     <MESSAGE value="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave." />
     <MESSAGE value="Game is currently bugged. This commit is just to test whether the bug is a hardware issue." />
-    <option name="LAST_COMMIT_MESSAGE" value="Game is currently bugged. This commit is just to test whether the bug is a hardware issue." />
+    <MESSAGE value="Fixed the previously mentioned bug. The bug had caused random Enemies to move at significantly slower speeds when spawned than they are supposed to. In addition to fixing that bug, the GameScene class has also been set up to now fit any computer screen. Lastly, in addition to fixing the previously mentioned animation bug, all other animation bugs have been fixed. These bugs include: Enemies getting stuck at spawn, Enemies stopping at various Positions along their set Path, and Enemies moving at slightly different speeds." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the previously mentioned bug. The bug had caused random Enemies to move at significantly slower speeds when spawned than they are supposed to. In addition to fixing that bug, the GameScene class has also been set up to now fit any computer screen. Lastly, in addition to fixing the previously mentioned animation bug, all other animation bugs have been fixed. These bugs include: Enemies getting stuck at spawn, Enemies stopping at various Positions along their set Path, and Enemies moving at slightly different speeds." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.*;
 import com.averagegames.ultimatetowerdefense.maps.Base;
@@ -16,12 +17,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -30,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
@@ -80,7 +85,7 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Fallen Boss.wav");
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Nuclear Fallen King.wav");
         // player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
@@ -109,12 +114,36 @@ public final class GameScene extends Scene implements SceneBuilder {
     }
 
     private void timerWait() {
-        Button skipButton = new Button("Skip");
+        Rectangle rectangle = new Rectangle(260, 115);
 
-        skipButton.setPrefSize(100, 25);
-        skipButton.setTranslateX((screen.getWidth() / 2) - 50);
-        skipButton.setTranslateY(50);
-        skipButton.setOnAction(event -> {
+        rectangle.setX((screen.getWidth() / 2) - (rectangle.getWidth() / 2));
+        rectangle.setY(15);
+        rectangle.setArcWidth(10);
+        rectangle.setArcHeight(10);
+        rectangle.setStroke(Color.BLACK);
+        rectangle.setFill(Paint.valueOf("#e1e1e1"));
+
+        Platform.runLater(() -> root.getChildren().add(rectangle));
+
+        Text skipText = new Text("Skip wave?");
+
+        skipText.setFont(Font.font(20));
+        skipText.setX((screen.getWidth() / 2) - (skipText.getBoundsInLocal().getWidth() / 2));
+        skipText.setY(55);
+        skipText.setTextAlignment(TextAlignment.CENTER);
+
+        Platform.runLater(() -> root.getChildren().add(skipText));
+
+        Button ySkipButton = new Button("Yes");
+
+        ySkipButton.setPrefSize(100, 25);
+        ySkipButton.setTranslateX((screen.getWidth() / 2) - 110);
+        ySkipButton.setTranslateY(80);
+        ySkipButton.setStyle("-fx-font-weight: bold;");
+        ySkipButton.setBackground(Background.fill(Paint.valueOf("#00ff00")));
+        ySkipButton.setOnMouseEntered(event -> ySkipButton.setBackground(Background.fill(Paint.valueOf("#20bc20"))));
+        ySkipButton.setOnMouseExited(event -> ySkipButton.setBackground(Background.fill(Paint.valueOf("#00ff00"))));
+        ySkipButton.setOnAction(event -> {
             Player.cash += (wave * 5) + 100;
 
             Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
@@ -122,11 +151,36 @@ public final class GameScene extends Scene implements SceneBuilder {
             this.skip = true;
         });
 
-        Platform.runLater(() -> root.getChildren().add(skipButton));
+        Button nSkipButton = new Button("No");
+
+        nSkipButton.setPrefSize(100, 25);
+        nSkipButton.setTranslateX((screen.getWidth() / 2) + 10);
+        nSkipButton.setTranslateY(80);
+        nSkipButton.setStyle("-fx-font-weight: bold;");
+        nSkipButton.setBackground(Background.fill(Paint.valueOf("#ff0000")));
+        nSkipButton.setOnMouseEntered(event -> nSkipButton.setBackground(Background.fill(Paint.valueOf("#bc2020"))));
+        nSkipButton.setOnMouseExited(event -> nSkipButton.setBackground(Background.fill(Paint.valueOf("#ff0000"))));
+        nSkipButton.setOnAction(event -> Platform.runLater(() -> {
+            root.getChildren().remove(ySkipButton);
+            root.getChildren().remove(nSkipButton);
+            root.getChildren().remove(skipText);
+            root.getChildren().remove(rectangle);
+        }));
+
+        Platform.runLater(() -> {
+            root.getChildren().add(ySkipButton);
+            root.getChildren().add(nSkipButton);
+        });
 
         while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !this.skip && Base.health > 0);
 
-        Platform.runLater(() -> root.getChildren().remove(skipButton));
+        Platform.runLater(() -> {
+            root.getChildren().remove(rectangle);
+
+            root.getChildren().remove(ySkipButton);
+            root.getChildren().remove(nSkipButton);
+            root.getChildren().remove(skipText);
+        });
 
         if (Base.health <= 0) {
             return;
@@ -210,17 +264,17 @@ public final class GameScene extends Scene implements SceneBuilder {
         marksmanButton.setTranslateY(y);
         marksmanButton.setOnAction(event -> this.tower = 1);
 
-        Button gunnerButton = new Button("Gunship: $750");
+        Button gunnerButton = new Button("Gunner: $500");
         gunnerButton.setPrefSize(100, 100);
         gunnerButton.setTranslateX(gunnerButtonX);
         gunnerButton.setTranslateY(y);
-        gunnerButton.setOnAction(event -> this.tower = 6);
+        gunnerButton.setOnAction(event -> this.tower = 2);
 
-        Button energizerButton = new Button("Energizer:\n$2500");
+        Button energizerButton = new Button("Gunship:\n$750");
         energizerButton.setPrefSize(100, 100);
         energizerButton.setTranslateX(gunnerButtonX + 100);
         energizerButton.setTranslateY(y);
-        energizerButton.setOnAction(event -> this.tower = 3);
+        energizerButton.setOnAction(event -> this.tower = 6);
 
         Button farmButton = new Button("Farm: $250");
         farmButton.setPrefSize(100, 100);
@@ -370,6 +424,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                 Player.cash -= Scout.COST;
 
                 Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                this.tower = -1;
             } else if (this.tower == 1 && Player.cash >= Marksman.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 Marksman marksman = new Marksman();
 
@@ -381,6 +437,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                 Player.cash -= Marksman.COST;
 
                 Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                this.tower = -1;
             } else if (this.tower == 2 && Player.cash >= Gunner.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 Gunner gunner = new Gunner();
 
@@ -392,6 +450,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                 Player.cash -= Gunner.COST;
 
                 Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                this.tower = -1;
             } else if (this.tower == 3 && Player.cash >= Energizer.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 AtomicInteger amount = new AtomicInteger();
 
@@ -412,6 +472,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                     Player.cash -= Energizer.COST;
 
                     Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                    this.tower = -1;
                 } else {
                     AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
                     try {
@@ -440,6 +502,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                     Player.cash -= Farm.COST;
 
                     Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                    this.tower = -1;
                 } else {
                     AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
                     try {
@@ -459,6 +523,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                 Player.cash -= Pyromancer.COST;
 
                 Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                this.tower = -1;
             } else if (this.tower == 6 && Player.cash >= Gunship.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 AtomicInteger amount = new AtomicInteger();
 
@@ -479,6 +545,38 @@ public final class GameScene extends Scene implements SceneBuilder {
                     Player.cash -= Gunship.COST;
 
                     Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                    this.tower = -1;
+                } else {
+                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
+                    try {
+                        player.play();
+                    } catch (Exception ex) {
+                        // Ignore
+                    }
+                }
+            } else if (this.tower == 7 && Player.cash >= MilitaryBase.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
+                AtomicInteger amount = new AtomicInteger();
+
+                LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
+                    if (tower1 instanceof MilitaryBase) {
+                        amount.incrementAndGet();
+                    }
+                });
+
+                if (amount.get() < MilitaryBase.LIMIT) {
+                    MilitaryBase militaryBase = new MilitaryBase();
+
+                    militaryBase.setParent(root);
+                    militaryBase.place(new Position(event.getX(), event.getY()));
+
+                    militaryBase.startAttacking();
+
+                    Player.cash -= MilitaryBase.COST;
+
+                    Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+                    this.tower = -1;
                 } else {
                     AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
                     try {
@@ -488,7 +586,7 @@ public final class GameScene extends Scene implements SceneBuilder {
                     }
                 }
             } else if (this.tower == -1) {
-                // Nothing
+
             } else {
                 AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
                 try {
@@ -500,21 +598,7 @@ public final class GameScene extends Scene implements SceneBuilder {
         });
 
         this.setOnKeyPressed(event -> {
-            if (event.getCode().equals(KeyCode.DIGIT1)) {
-                this.tower = 0;
-            } else if (event.getCode().equals(KeyCode.DIGIT2)) {
-                this.tower = 1;
-            } else if (event.getCode().equals(KeyCode.DIGIT3)) {
-                this.tower = 6;
-            } else if (event.getCode().equals(KeyCode.DIGIT4)) {
-                this.tower = 3;
-            } else if (event.getCode().equals(KeyCode.DIGIT5)) {
-                this.tower = 4;
-            } else if (event.getCode().equals(KeyCode.DIGIT6)) {
-                this.tower = 5;
-            } else if (event.getCode().equals(KeyCode.DIGIT7)) {
-                this.tower = 6;
-            } else if (event.getCode().equals(KeyCode.DIGIT0)) {
+            if (event.getCode().equals(KeyCode.ESCAPE)) {
                 this.tower = -1;
             }
         });

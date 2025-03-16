@@ -4,6 +4,9 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.maps.gui.UpgradePanel;
+import com.averagegames.ultimatetowerdefense.player.Player;
+import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -291,7 +294,7 @@ public abstract class Tower {
         this.range.setOpacity(0.25);
         this.range.setViewOrder(Integer.MAX_VALUE);
         this.range.setVisible(false);
-        this.loadedTower.setOnMouseClicked(e -> this.range.setVisible(!this.range.isVisible()));
+        this.loadedTower.setOnMouseClicked(e -> this.select());
         this.parent.getChildren().add(this.range);
         // ---------------------------------------------------------------------------------------------------
 
@@ -303,6 +306,13 @@ public abstract class Tower {
 
         // Adds the tower to the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.add(this);
+
+        try {
+            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Placement 1.wav");
+            player.play();
+        } catch (Exception ex) {
+            System.out.println("Exception occurred.");
+        }
 
         // Logs that the tower has been placed.
         LOGGER.info(STR."Tower \{this} placed.");
@@ -320,6 +330,50 @@ public abstract class Tower {
 
         // Places the tower using the default placement method.
         this.place();
+    }
+
+    /**
+     * Deselects the {@link Tower} and makes its {@code range} and {@link UpgradePanel} are visible to the {@link Player}
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void select() {
+
+        // Determines whether the tower is already selected.
+        if (this.range.isVisible()) {
+
+            // Deselects the tower.
+            this.deselect();
+
+            // Prevents the tower's range from being set to visible again.
+            return;
+        }
+
+        // Deselects every other active tower.
+        LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+
+        // Sets the tower's range to be visible.
+        this.range.setVisible(true);
+    }
+
+    /**
+     * Deselects the {@link Tower} and makes its {@code range} and {@link UpgradePanel} are invisible to the {@link Player}
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void deselect() {
+
+        // Sets the tower's range to be invisible.
+        this.range.setVisible(false);
+    }
+
+    /**
+     * Gets whether the {@link Tower} is currently selected.
+     * @return {@code true} if the {@link Tower} is selected, {@code false} otherwise.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final boolean isSelected() {
+
+        // Returns whether the tower's range is visible.
+        return this.range.isVisible();
     }
 
     /**

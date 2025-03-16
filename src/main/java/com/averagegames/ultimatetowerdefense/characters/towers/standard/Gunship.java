@@ -39,7 +39,7 @@ public final class Gunship extends Tower {
     private final double radius = 40;
 
     @Property
-    private final double speed = 27.5;
+    private final double speed = 125;
 
     @Property
     private final int flightRadius = 100;
@@ -51,6 +51,10 @@ public final class Gunship extends Tower {
         super.coolDown = this.coolDown;
         super.setHealth(this.startHealth);
         super.setRadius(this.radius);
+    }
+
+    private double calculateDuration() {
+        return (2 * Math.PI) / (this.speed / this.flightRadius);
     }
 
     @Override
@@ -85,7 +89,7 @@ public final class Gunship extends Tower {
         animation.setCycleCount(Animation.INDEFINITE);
         animation.setAutoReverse(false);
         animation.setRate(1);
-        animation.setDuration(Duration.seconds(5));
+        animation.setDuration(Duration.seconds(this.calculateDuration()));
 
         animation.currentTimeProperty().addListener(((observable, oldValue, newValue) -> {
             Circle range = super.getRange();
@@ -99,7 +103,7 @@ public final class Gunship extends Tower {
         rotation.setToAngle(360);
         rotation.setInterpolator(Interpolator.LINEAR);
         rotation.setRate(1);
-        rotation.setDuration(Duration.seconds(5));
+        rotation.setDuration(Duration.seconds(this.calculateDuration()));
         rotation.setCycleCount(Animation.INDEFINITE);
         rotation.setNode(plane);
 
