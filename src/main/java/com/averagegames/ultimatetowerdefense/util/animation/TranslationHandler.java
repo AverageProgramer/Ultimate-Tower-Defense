@@ -2,6 +2,7 @@ package com.averagegames.ultimatetowerdefense.util.animation;
 
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import javafx.animation.Interpolator;
+import javafx.animation.PathTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
@@ -106,9 +107,6 @@ public class TranslationHandler {
                     break;
                 }
             }
-
-            // Sets the x and y coordinates that the node should travel to using the given destination.
-            // The coordinates are relative to the window, not the node.
 
             this.animation.setToX(this.destination.x() - this.node.getLayoutBounds().getMinX());
             this.animation.setToY(this.destination.y() - this.node.getLayoutBounds().getMinY());

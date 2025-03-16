@@ -57,9 +57,9 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     private static final double ySpace;
 
-    private boolean skip;
+    private Group root = (Group) super.getRoot();
 
-    private boolean spawnerFinished;
+    private boolean skip;
 
     static {
         while (true) {
@@ -109,11 +109,24 @@ public final class GameScene extends Scene implements SceneBuilder {
     }
 
     private void timerWait() {
-        spawnerFinished = true;
+        Button skipButton = new Button("Skip");
+
+        skipButton.setPrefSize(100, 25);
+        skipButton.setTranslateX((screen.getWidth() / 2) - 50);
+        skipButton.setTranslateY(50);
+        skipButton.setOnAction(event -> {
+            Player.cash += (wave * 5) + 100;
+
+            Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+
+            this.skip = true;
+        });
+
+        Platform.runLater(() -> root.getChildren().add(skipButton));
 
         while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !this.skip && Base.health > 0);
 
-        spawnerFinished = false;
+        Platform.runLater(() -> root.getChildren().remove(skipButton));
 
         if (Base.health <= 0) {
             return;
@@ -159,8 +172,6 @@ public final class GameScene extends Scene implements SceneBuilder {
     @Override
     public void build(@NotNull final Stage stage) {
         stage.setTitle("Ultimate Tower Defense");
-
-        Group root = (Group) super.getRoot();
 
         Circle circle1 = new Circle(5);
         circle1.setCenterX(xSpace);
@@ -261,7 +272,7 @@ public final class GameScene extends Scene implements SceneBuilder {
 
         new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 // Ignore
             }
@@ -505,12 +516,6 @@ public final class GameScene extends Scene implements SceneBuilder {
                 this.tower = 6;
             } else if (event.getCode().equals(KeyCode.DIGIT0)) {
                 this.tower = -1;
-            } else if (event.getCode().equals(KeyCode.S) && this.spawnerFinished) {
-                Player.cash += (wave * 5) + 100;
-
-                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                this.skip = true;
             }
         });
 

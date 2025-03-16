@@ -9,19 +9,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/CircularTranslationHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/ProjectileTranslationHandler.java" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Game is currently bugged. This commit is just to test whether the bug is a hardware issue.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Pyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Pyromancer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipTower.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipTower.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,14 +259,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00021" summary="Updated certain segments of code that used boolean expressions to either throw or not throw an exception. These code segments now use assertions. The reason this switch won't cause problems is that the expressions will always evaluate to true while the program is running. If they do not and an exception is thrown, then that means there is an error with the code. Assertions should only be used when the condition is guaranteed to be true so that missing them will not cause problems.">
-      <option name="closed" value="true" />
-      <created>1710115826757</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1710115826757</updated>
     </task>
     <task id="LOCAL-00022" summary="Changed the way assertions are being used in the program. Going forwards, assertions should only be used when it is a developer problem only. For example, code that determines something about a method's behavior such as checking if the Specific annotation is present on the method asking for verification should use assertions because it will always be present. If it isn't, then that is a developer problem only. On the other hand, assertions should not be used for validating method calls, parameters, etc. Long story short, assertions should only be used for development related problems and nothing else.">
       <option name="closed" value="true" />
@@ -659,7 +644,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741991095667</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Game is currently bugged. This commit is just to test whether the bug is a hardware issue.">
+      <option name="closed" value="true" />
+      <created>1742069347412</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1742069347413</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,7 +660,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added a variety of sound effects to the game. A few methods and constructors have also been removed from the Enemy and Tower classes as well as a few of the inheritors." />
     <MESSAGE value="Implemented the targeting for the Tower class. Currently, the Tower can either target the first Enemy along a given Path or the last Enemy. In the future, there will be more targeting modes that the Tower can use. These modes will include the 'strongest' and 'weakest' targeting modes. In addition to this, a variety of other classes that will be implemented in the future have been added to the project. These classes include new Towers, the MapBuilder, and the CharacterBuilder class." />
     <MESSAGE value="Fully implemented the Marksman and Gunner towers, each being equipped with their own methods of attack. The 'strongest' and 'weakest' targeting modes for towers have also been fully implemented. The AudioPlayer class has also been added, making it much easier to play both sound effects and music." />
     <MESSAGE value="There was a missed compiler error in the previous commit. That is the only change that has been made." />
@@ -692,7 +684,8 @@
     <MESSAGE value="Fixed an issue with the Sorcerer where it would spawn Enemies even after it was eliminated." />
     <MESSAGE value="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue." />
     <MESSAGE value="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave." />
+    <MESSAGE value="Game is currently bugged. This commit is just to test whether the bug is a hardware issue." />
+    <option name="LAST_COMMIT_MESSAGE" value="Game is currently bugged. This commit is just to test whether the bug is a hardware issue." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
