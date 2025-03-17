@@ -58,7 +58,7 @@ public final class UpgradePanel extends Group {
         this.area.setArcWidth(AREA_ARC_LENGTH);
         this.area.setArcHeight(AREA_ARC_HEIGHT);
 
-        this.upgradeButton = new Button(tower.getLevel() < 5 ? STR."\{tower.getUpgradeCosts()[tower.getLevel()]}" : "MAX LEVEL");
+        this.upgradeButton = new Button(tower.getLevel() < 5 ? STR."$\{tower.getUpgradeCosts()[tower.getLevel()]}" : "MAX LEVEL");
         this.targetingButton = new Button("FIRST");
 
         this.upgradeButton.setPrefSize(BUTTON_PREF_WIDTH, BUTTON_PREF_HEIGHT);
@@ -97,7 +97,7 @@ public final class UpgradePanel extends Group {
                     System.out.println("Exception occurred");
                 }
 
-                this.upgradeButton.setText(STR."\{tower.getUpgradeCosts()[tower.getLevel()]}");
+                this.upgradeButton.setText(STR."$\{tower.getUpgradeCosts()[tower.getLevel()]}");
             } else {
                 try {
                     if (Player.cash >= tower.getUpgradeCosts()[tower.getLevel()]) {
