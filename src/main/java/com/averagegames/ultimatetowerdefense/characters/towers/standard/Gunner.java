@@ -18,16 +18,16 @@ public final class Gunner extends Tower {
     private final int[] upgradeCosts = {100, 400, 1500, 2500, 4750};
 
     @Property
-    private final int[] damages = {1, 1, 2, 4, 6, 8};
+    private final int[] damages = {1, 1, 2, 3, 4, 5};
 
     @Property
-    private final int[] coolDowns = {1250, 1000, 1000, 1000, 1000, 700};
+    private final int[] coolDowns = {1250, 1000, 900, 900, 800, 700};
 
     @Property
     private final int startHealth = 100;
 
     @Property
-    private final double[] radii = {125, 130, 135, 135, 140, 150};
+    private final double[] radii = {125, 130, 130, 135, 135, 140};
 
     public Gunner() {
         super.image = this.image;

@@ -18,13 +18,13 @@ public final class Marksman extends Tower {
     private final int[] upgradeCosts = {150, 500, 1500, 2250, 4000};
 
     @Property
-    private final int[] damages = {4, 6, 12, 20, 35, 40};
+    private final int[] damages = {4, 6, 12, 20, 25, 30};
 
     @Property
-    private final int[] coolDowns = {5000, 4500, 4500, 3500, 3250, 3000};
+    private final int[] coolDowns = {5000, 4500, 4500, 4000, 3750, 3500};
 
     @Property
-    private final double[] radii = {175, 175, 185, 190, 210, 220};
+    private final double[] radii = {175, 180, 180, 185, 190, 200};
 
     @Property
     private final int startHealth = 100;

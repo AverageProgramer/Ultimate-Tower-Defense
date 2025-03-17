@@ -41,13 +41,13 @@ public final class Scout extends Tower {
      * The {@code damage} the {@link Scout} can do during an {@code attack}.
      */
     @Property
-    private final int[] damages = {1, 1, 2, 3, 4, 5};
+    private final int[] damages = {1, 1, 1, 2, 3, 4};
 
     /**
      * The {@link Scout}'s cool down between {@code attacks}.
      */
     @Property
-    private final int[] coolDowns = {2000, 1750, 1500, 750, 600, 300};
+    private final int[] coolDowns = {2000, 1750, 1500, 1200, 600, 550};
 
     /**
      * The {@link Scout}'s starting {@code health}.
