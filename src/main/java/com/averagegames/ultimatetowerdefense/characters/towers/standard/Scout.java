@@ -8,6 +8,8 @@ import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 /**
  * The {@link Scout} is one of the two {@code starter} {@link Tower}'s that the {@link Player} will receive when first starting the game.
  * While the {@link Scout} may prove useful in early game strategy, it will not be able to get the {@link Player} all the way to a {@code victory}.
@@ -30,16 +32,22 @@ public final class Scout extends Tower {
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ScoutTower.gif");
 
     /**
+     * The {@link Scout}'s {@code upgrade} costs per {@code level}.
+     */
+    @Property
+    private final int[] upgradeCosts = {25, 250, 750, 1525, 2575};
+
+    /**
      * The {@code damage} the {@link Scout} can do during an {@code attack}.
      */
     @Property
-    private final int damage = 1;
+    private final int[] damages = {1, 1, 2, 3, 4, 5};
 
     /**
      * The {@link Scout}'s cool down between {@code attacks}.
      */
     @Property
-    private final int coolDown = 2000;
+    private final int[] coolDowns = {2000, 1750, 1500, 750, 600, 300};
 
     /**
      * The {@link Scout}'s starting {@code health}.
@@ -51,7 +59,7 @@ public final class Scout extends Tower {
      * The {@link Scout}'s {@code range} radius in pixels.
      */
     @Property
-    private final double radius = 100;
+    private final double[] radii = {100, 100, 105, 110, 115, 120};
 
     /**
      * A constructor that properly sets the attributes of the {@link Scout} {@link Tower}.
@@ -61,17 +69,20 @@ public final class Scout extends Tower {
         // Properly sets the scout's image to the finalized image.
         super.image = this.image;
 
+        // Properly sets the scout's upgrade costs to the finalized costs.
+        super.upgradeCosts = this.upgradeCosts;
+
         // Properly sets the scout's damage per attack to the finalized damage per attack.
-        super.damage = this.damage;
+        super.damages = this.damages;
 
         // Properly sets the scout's cool down in between attacks.
-        super.coolDown = this.coolDown;
+        super.coolDowns = this.coolDowns;
 
         // Properly sets the scout's health to the finalized starting health.
         super.setHealth(this.startHealth);
 
         // Properly sets the scout's range to have the finalized radius.
-        super.setRadius(this.radius);
+        super.setRadius(this.radii[0]);
     }
 
     /**
@@ -103,11 +114,17 @@ public final class Scout extends Tower {
         }
 
         // Damages the given enemy.
-        enemy.damage(this.damage);
+        enemy.damage(super.damages[super.getLevel()]);
     }
 
     @Override
     public void upgrade() throws InterruptedException {
+        super.setLevel(super.getLevel() + 1);
 
+        if (super.getLevel() >= 2) {
+            super.setHiddenDetection(true);
+        }
+
+        super.setRadius(this.radii[super.getLevel()]);
     }
 }

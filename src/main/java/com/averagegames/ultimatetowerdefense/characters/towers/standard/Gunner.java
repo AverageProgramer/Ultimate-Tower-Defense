@@ -15,23 +15,27 @@ public final class Gunner extends Tower {
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif");
 
     @Property
-    private final int damage = 1;
+    private final int[] upgradeCosts = {100, 400, 1500, 2500, 4750};
 
     @Property
-    private final int coolDown = 1250;
+    private final int[] damages = {1, 1, 2, 4, 6, 8};
+
+    @Property
+    private final int[] coolDowns = {1250, 1000, 1000, 1000, 1000, 700};
 
     @Property
     private final int startHealth = 100;
 
     @Property
-    private final double radius = 125;
+    private final double[] radii = {125, 130, 135, 135, 140, 150};
 
     public Gunner() {
         super.image = this.image;
-        super.damage = this.damage;
-        super.coolDown = this.coolDown;
+        super.upgradeCosts = this.upgradeCosts;
+        super.damages = this.damages;
+        super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
-        super.setRadius(this.radius);
+        super.setRadius(this.radii[0]);
     }
 
     @Override
@@ -44,14 +48,18 @@ public final class Gunner extends Tower {
         }
 
         for (int i = 0; i < 3; i++) {
-            try {
-                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
-                player.play();
-            } catch (Exception ex) {
-                System.out.println("Exception occurred");
-            }
+            if (enemy.isAlive()) {
+                try {
+                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
+                    player.play();
+                } catch (Exception ex) {
+                    System.out.println("Exception occurred");
+                }
 
-            enemy.damage(this.damage);
+                enemy.damage(super.damages[super.getLevel()]);
+            } else {
+                break;
+            }
 
             Thread.sleep(200);
         }
@@ -59,6 +67,12 @@ public final class Gunner extends Tower {
 
     @Override
     public void upgrade() throws InterruptedException {
+        super.setLevel(super.getLevel() + 1);
 
+        if (super.getLevel() >= 2) {
+            super.setHiddenDetection(true);
+        }
+
+        super.setRadius(this.radii[super.getLevel()]);
     }
 }

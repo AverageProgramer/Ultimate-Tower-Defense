@@ -6,6 +6,7 @@ import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.gui.UpgradePanel;
 import com.averagegames.ultimatetowerdefense.player.Player;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
 import javafx.application.Platform;
@@ -59,6 +60,17 @@ public abstract class Tower {
     protected Image image;
 
     /**
+     * The {@link Tower}'s {@code upgrade} panel.
+     */
+    private UpgradePanel panel;
+
+    /**
+     * The {@link Tower}'s {@code upgrade} costs per {@code level}.
+     */
+    @Accessors(makeFinal = true) @Getter
+    protected int[] upgradeCosts;
+
+    /**
      * The {@link Tower}'s current {@code health}.
      */
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
@@ -68,7 +80,7 @@ public abstract class Tower {
      * The {@code damage} the {@link Tower} can do during an {@code attack}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    protected int damage;
+    protected int[] damages;
 
     /**
      * The {@link Tower}'s {@code range}.
@@ -81,6 +93,7 @@ public abstract class Tower {
      * The {@link Tower}'s {@link Targeting}.
      */
     @NotNull
+    @Accessors(makeFinal = true) @Setter @Getter
     protected Targeting targeting;
 
     /**
@@ -99,7 +112,7 @@ public abstract class Tower {
      * The {@link Tower}'s cool down in milliseconds between {@code attacks}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    protected int coolDown;
+    protected int[] coolDowns;
 
     /**
      * The {@link Tower}'s {@code level}.
@@ -123,16 +136,17 @@ public abstract class Tower {
         this.loadedTower = new ImageLoader();
         this.image = null;
 
-        this.loadedTower.toFront();
+        // Initializes the tower's upgrade panel to a default, null value.
+        this.panel = null;
+
+        // Initializes the tower's upgrade costs to a default, empty array.
+        this.upgradeCosts = new int[0];
 
         // Initializes the tower's range to a default circle.
         this.range = new Circle();
 
         // Initializes the tower's targeting to 'first' by default.
         this.targeting = Targeting.FIRST;
-
-        // Initializes the tower's level so that it starts at 1 and not 0.
-        this.level = 1;
 
         // Initializes the thread that the tower will use to attack.
         this.attackThread = new Thread(() -> {
@@ -304,6 +318,10 @@ public abstract class Tower {
         // Sets the tower's view order to its current y position.
         this.loadedTower.setViewOrder(-this.getPosition().y());
 
+        this.panel = new UpgradePanel(this);
+
+        LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+
         // Adds the tower to the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.add(this);
 
@@ -313,6 +331,8 @@ public abstract class Tower {
         } catch (Exception ex) {
             System.out.println("Exception occurred.");
         }
+
+        this.select();
 
         // Logs that the tower has been placed.
         LOGGER.info(STR."Tower \{this} placed.");
@@ -353,6 +373,13 @@ public abstract class Tower {
 
         // Sets the tower's range to be visible.
         this.range.setVisible(true);
+
+        this.panel.setX(this.getPosition().x() >= GameScene.screen.getWidth() / 2 ? 15 : GameScene.screen.getWidth() - this.panel.getAreaWidth() - 15);
+        this.panel.setY(GameScene.screen.getHeight() / 2 - this.panel.getAreaHeight() / 2);
+
+        if (this.parent != null) {
+            this.parent.getChildren().add(this.panel);
+        }
     }
 
     /**
@@ -363,6 +390,10 @@ public abstract class Tower {
 
         // Sets the tower's range to be invisible.
         this.range.setVisible(false);
+
+        if (this.parent != null) {
+            this.parent.getChildren().remove(this.panel);
+        }
     }
 
     /**
@@ -520,8 +551,15 @@ public abstract class Tower {
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.
 
-            List<Enemy> fixedList = LIST_OF_ACTIVE_ENEMIES;
+            List<Enemy> fixedList = new ArrayList<>(LIST_OF_ACTIVE_ENEMIES);
             fixedList.removeIf(enemy -> !this.canAttack(enemy));
+
+            // Determines whether the fixed list containing every possible enemy target is empty.
+            if (fixedList.isEmpty()) {
+
+                // Returns null because there are no possible target enemies.
+                return null;
+            }
 
             // Returns either the strongest or weakest active enemy depending on the tower's targeting.
             return this.targeting == Targeting.STRONGEST ? fixedList.getLast() : fixedList.getFirst();
@@ -595,7 +633,7 @@ public abstract class Tower {
                     if (target != null) {
 
                         // Causes the current thread to wait for the tower's cool down to end.
-                        Thread.sleep(this.coolDown);
+                        Thread.sleep(this.coolDowns[this.level]);
                     }
                 } catch (InterruptedException ex) {
 

@@ -12,7 +12,6 @@ import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @Zombie
 public class Sorcerer extends Enemy {
@@ -83,83 +82,34 @@ public class Sorcerer extends Enemy {
                 for (int i = 0; i < 5; i++) {
                     int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 7 : 6) - 1)) + 1;
 
-                    switch (enemy) {
-                        case 1:
-                            Normal normal = new Normal();
+                    Enemy e = switch (enemy) {
+                        case 1 ->
+                                new Normal();
+                        case 2 ->
+                                new Quick();
+                        case 3 ->
+                                new Slow();
+                        case 4 ->
+                                new Stealthy();
+                        case 5 ->
+                                new LootBox();
+                        case 6 ->
+                                new Armored();
+                        default ->
+                                null;
+                    };
 
-                            normal.setParent(super.getParent());
-                            normal.setPathing(super.getPathing());
-                            normal.setReferencePathing(super.getReferencePathing());
-                            normal.setPosition(super.getPosition());
-                            normal.setPositionIndex(super.getPositionIndex());
-                            Platform.runLater(normal::spawn);
-                            normal.startMoving();
-
-                            break;
-                        case 2:
-                            Quick quick = new Quick();
-
-                            quick.setParent(super.getParent());
-                            quick.setPathing(super.getPathing());
-                            quick.setReferencePathing(super.getReferencePathing());
-                            quick.setPosition(super.getPosition());
-                            quick.setPositionIndex(super.getPositionIndex());
-                            Platform.runLater(quick::spawn);
-                            quick.startMoving();
-
-                            break;
-                        case 3:
-                            Slow slow = new Slow();
-
-                            slow.setParent(super.getParent());
-                            slow.setPathing(super.getPathing());
-                            slow.setReferencePathing(super.getReferencePathing());
-                            slow.setPosition(super.getPosition());
-                            slow.setPositionIndex(super.getPositionIndex());
-                            Platform.runLater(slow::spawn);
-                            slow.startMoving();
-
-                            break;
-                        case 4:
-                            Stealthy stealthy = new Stealthy();
-
-                            stealthy.setParent(super.getParent());
-                            stealthy.setPathing(super.getPathing());
-                            stealthy.setReferencePathing(super.getReferencePathing());
-                            stealthy.setPosition(super.getPosition());
-                            stealthy.setPositionIndex(super.getPositionIndex());
-                            Platform.runLater(stealthy::spawn);
-                            stealthy.startMoving();
-
-                            break;
-                        case 5:
-                            LootBox lootBox = new LootBox();
-
-                            lootBox.setParent(super.getParent());
-                            lootBox.setPathing(super.getPathing());
-                            lootBox.setReferencePathing(super.getReferencePathing());
-                            lootBox.setPosition(super.getPosition());
-                            lootBox.setPositionIndex(super.getPositionIndex());
-                            Platform.runLater(lootBox::spawn);
-                            lootBox.startMoving();
-
-                            break;
-
-                        case 6:
-                            Armored armored = new Armored();
-
-                            armored.setParent(super.getParent());
-                            armored.setPathing(super.getPathing());
-                            armored.setReferencePathing(super.getReferencePathing());
-                            armored.setPosition(super.getPosition());
-                            armored.setPositionIndex(super.getPositionIndex());
-                            Platform.runLater(armored::spawn);
-                            armored.startMoving();
-
-                            break;
-                        default:
-                            break;
+                    if (e == null) {
+                        return;
                     }
+
+                    e.setParent(super.getParent());
+                    e.setPathing(super.getPathing());
+                    e.setReferencePathing(super.getReferencePathing());
+                    e.setPosition(super.getPosition());
+                    e.setPositionIndex(super.getPositionIndex());
+                    Platform.runLater(e::spawn);
+                    e.startMoving();
 
                     try {
                         Thread.sleep(1500);

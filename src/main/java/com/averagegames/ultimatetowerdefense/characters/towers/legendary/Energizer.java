@@ -42,7 +42,7 @@ public final class Energizer extends Tower {
      * The {@code damage} the {@link Energizer} can do during an {@code attack}.
      */
     @Property
-    private final int damage = 5;
+    private final int[] damages = {5};
 
     /**
      * The time it takes the {@link Energizer} to {@code charge} and {@code attack}.
@@ -66,7 +66,7 @@ public final class Energizer extends Tower {
      * The {@link Energizer}'s cool down between {@code attacks}.
      */
     @Property
-    private final int coolDown = 200;
+    private final int[] coolDowns = {200};
 
     /**
      * The {@link Energizer}'s cool down between being able to {@code attack} and {@code charge}.
@@ -106,10 +106,10 @@ public final class Energizer extends Tower {
         super.image = this.image;
 
         // Properly sets the energizer's damage per attack to the finalized damage per attack.
-        super.damage = this.damage;
+        super.damages = this.damages;
 
         // Properly sets the energizer's cool down in between attacks.
-        super.coolDown = this.coolDown;
+        super.coolDowns = this.coolDowns;
 
         // Properly sets the energizer's hidden detection capabilities to true.
         super.setHiddenDetection(true);
@@ -166,9 +166,9 @@ public final class Energizer extends Tower {
                     // Ignore
                 }
 
-                enemy.damage(super.damage);
+                enemy.damage(super.damages[super.getLevel()]);
 
-                this.totalTime += super.coolDown;
+                this.totalTime += super.coolDowns[super.getLevel()];
 
                 if (this.totalTime >= this.attackTime) {
                     this.doCharge = true;
@@ -182,7 +182,7 @@ public final class Energizer extends Tower {
                     break;
                 }
 
-                Thread.sleep(super.coolDown);
+                Thread.sleep(super.coolDowns[super.getLevel()]);
             }
         }
     }

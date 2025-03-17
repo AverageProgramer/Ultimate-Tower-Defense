@@ -1,12 +1,12 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
-import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.*;
 import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.Spawner;
+import com.averagegames.ultimatetowerdefense.maps.gui.SkipPanel;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.player.modes.Easy;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
@@ -56,15 +56,15 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     public static final Text waveText = new Text("Wave 1");
 
-    private static final Rectangle2D screen = Screen.getPrimary().getBounds();
+    public static final Rectangle2D screen = Screen.getPrimary().getVisualBounds();
 
     private static final double xSpace;
 
     private static final double ySpace;
 
-    private Group root = (Group) super.getRoot();
+    private final Group root = (Group) super.getRoot();
 
-    private boolean skip;
+    public static boolean skip;
 
     static {
         while (true) {
@@ -90,6 +90,9 @@ public final class GameScene extends Scene implements SceneBuilder {
 
         stage.setMaximized(true);
         stage.setResizable(false);
+
+        stage.setWidth(screen.getWidth());
+        stage.setHeight(screen.getHeight());
     }
 
     private static @NotNull Spawner getTestSpawner() {
@@ -116,71 +119,16 @@ public final class GameScene extends Scene implements SceneBuilder {
     private void timerWait() {
         Rectangle rectangle = new Rectangle(260, 115);
 
-        rectangle.setX((screen.getWidth() / 2) - (rectangle.getWidth() / 2));
-        rectangle.setY(15);
-        rectangle.setArcWidth(10);
-        rectangle.setArcHeight(10);
-        rectangle.setStroke(Color.BLACK);
-        rectangle.setFill(Paint.valueOf("#e1e1e1"));
+        SkipPanel panel = new SkipPanel();
 
-        Platform.runLater(() -> root.getChildren().add(rectangle));
+        panel.setX((screen.getWidth() / 2) - (rectangle.getWidth() / 2));
+        panel.setY(15);
 
-        Text skipText = new Text("Skip wave?");
+        Platform.runLater(() -> root.getChildren().add(panel));
 
-        skipText.setFont(Font.font(20));
-        skipText.setX((screen.getWidth() / 2) - (skipText.getBoundsInLocal().getWidth() / 2));
-        skipText.setY(55);
-        skipText.setTextAlignment(TextAlignment.CENTER);
+        while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !skip && Base.health > 0);
 
-        Platform.runLater(() -> root.getChildren().add(skipText));
-
-        Button ySkipButton = new Button("Yes");
-
-        ySkipButton.setPrefSize(100, 25);
-        ySkipButton.setTranslateX((screen.getWidth() / 2) - 110);
-        ySkipButton.setTranslateY(80);
-        ySkipButton.setStyle("-fx-font-weight: bold;");
-        ySkipButton.setBackground(Background.fill(Paint.valueOf("#00ff00")));
-        ySkipButton.setOnMouseEntered(event -> ySkipButton.setBackground(Background.fill(Paint.valueOf("#20bc20"))));
-        ySkipButton.setOnMouseExited(event -> ySkipButton.setBackground(Background.fill(Paint.valueOf("#00ff00"))));
-        ySkipButton.setOnAction(event -> {
-            Player.cash += (wave * 5) + 100;
-
-            Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-            this.skip = true;
-        });
-
-        Button nSkipButton = new Button("No");
-
-        nSkipButton.setPrefSize(100, 25);
-        nSkipButton.setTranslateX((screen.getWidth() / 2) + 10);
-        nSkipButton.setTranslateY(80);
-        nSkipButton.setStyle("-fx-font-weight: bold;");
-        nSkipButton.setBackground(Background.fill(Paint.valueOf("#ff0000")));
-        nSkipButton.setOnMouseEntered(event -> nSkipButton.setBackground(Background.fill(Paint.valueOf("#bc2020"))));
-        nSkipButton.setOnMouseExited(event -> nSkipButton.setBackground(Background.fill(Paint.valueOf("#ff0000"))));
-        nSkipButton.setOnAction(event -> Platform.runLater(() -> {
-            root.getChildren().remove(ySkipButton);
-            root.getChildren().remove(nSkipButton);
-            root.getChildren().remove(skipText);
-            root.getChildren().remove(rectangle);
-        }));
-
-        Platform.runLater(() -> {
-            root.getChildren().add(ySkipButton);
-            root.getChildren().add(nSkipButton);
-        });
-
-        while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !this.skip && Base.health > 0);
-
-        Platform.runLater(() -> {
-            root.getChildren().remove(rectangle);
-
-            root.getChildren().remove(ySkipButton);
-            root.getChildren().remove(nSkipButton);
-            root.getChildren().remove(skipText);
-        });
+        Platform.runLater(() -> root.getChildren().remove(panel));
 
         if (Base.health <= 0) {
             return;
@@ -188,7 +136,7 @@ public final class GameScene extends Scene implements SceneBuilder {
 
         ++wave;
 
-        this.skip = false;
+        skip = false;
 
         for (int i = 0; i < 4; i++) {
             try {
@@ -208,7 +156,7 @@ public final class GameScene extends Scene implements SceneBuilder {
         }
 
         for (Farm farm : LIST_OF_ACTIVE_FARMS) {
-            Player.cash += farm.getBonus();
+            Player.cash += farm.getBonuses()[farm.getLevel()];
 
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Farm Income 1.wav");
             try {
@@ -236,12 +184,12 @@ public final class GameScene extends Scene implements SceneBuilder {
         circle2.setCenterY(ySpace + 200);
 
         cashText.setX(50);
-        cashText.setY(screen.getHeight() - 50 - cashText.getLayoutBounds().getHeight());
+        cashText.setY(screen.getHeight() - 20 - cashText.getLayoutBounds().getHeight());
         cashText.setFill(Paint.valueOf("#3dbe23"));
         cashText.setFont(Font.font(50));
 
         baseText.setX(screen.getWidth() - 180 - baseText.getLayoutBounds().getWidth());
-        baseText.setY(screen.getHeight() - 50 - baseText.getLayoutBounds().getHeight());
+        baseText.setY(screen.getHeight() - 20 - baseText.getLayoutBounds().getHeight());
         baseText.setFill(Paint.valueOf("#b60e0e"));
         baseText.setFont(Font.font(50));
 
@@ -250,7 +198,7 @@ public final class GameScene extends Scene implements SceneBuilder {
         waveText.setFont(Font.font(50));
 
         double gunnerButtonX = (screen.getWidth() / 2) - 50;
-        double y = screen.getHeight() - 200;
+        double y = screen.getHeight() - 175;
 
         Button scoutButton = new Button("Scout: $200");
         scoutButton.setPrefSize(100, 100);
@@ -270,11 +218,11 @@ public final class GameScene extends Scene implements SceneBuilder {
         gunnerButton.setTranslateY(y);
         gunnerButton.setOnAction(event -> this.tower = 2);
 
-        Button energizerButton = new Button("Gunship:\n$750");
+        Button energizerButton = new Button("Energizer:\n$2500");
         energizerButton.setPrefSize(100, 100);
         energizerButton.setTranslateX(gunnerButtonX + 100);
         energizerButton.setTranslateY(y);
-        energizerButton.setOnAction(event -> this.tower = 6);
+        energizerButton.setOnAction(event -> this.tower = 3);
 
         Button farmButton = new Button("Farm: $250");
         farmButton.setPrefSize(100, 100);

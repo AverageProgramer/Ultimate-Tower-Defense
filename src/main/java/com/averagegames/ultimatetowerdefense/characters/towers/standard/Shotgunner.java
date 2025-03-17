@@ -16,10 +16,10 @@ public class Shotgunner extends Tower {
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ShotgunnerTower.gif");
 
     @Property
-    private final int damage = 2;
+    private final int[] damages = {2};
 
     @Property
-    private final int coolDown = 1500;
+    private final int[] coolDowns = {1500};
 
     @Property
     private final int startHealth = 100;
@@ -29,8 +29,8 @@ public class Shotgunner extends Tower {
 
     public Shotgunner() {
         super.image = this.image;
-        super.damage = this.damage;
-        super.coolDown = this.coolDown;
+        super.damages = this.damages;
+        super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
         super.setRadius(this.radius);
     }
@@ -45,7 +45,7 @@ public class Shotgunner extends Tower {
                 System.out.println("Exception occurred");
             }
 
-            enemy.damage(super.damage);
+            enemy.damage(super.damages[super.getLevel()]);
         }
     }
 

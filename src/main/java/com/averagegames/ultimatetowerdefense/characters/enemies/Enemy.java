@@ -370,13 +370,17 @@ public abstract class Enemy {
      * @param animation the {@link TranslationHandler} to refresh.
      * @since Ultimate Tower Defense 1.0
      */
-    private void refreshAnimation(@NotNull final TranslationHandler animation) {
+    private void refreshAnimation(@NotNull final TranslationHandler animation, @Range(from = 0, to = Integer.MAX_VALUE) final int times) {
 
-        // Stops the given animation.
-        animation.stop();
+        // A loop that will iterate the amount of times given.
+        for (int i = 0; i < times; i++) {
 
-        // Starts the given animation from the start.
-        animation.start();
+            // Stops the given animation.
+            animation.stop();
+
+            // Starts the given animation from the start.
+            animation.start();
+        }
     }
 
     /**
@@ -423,7 +427,7 @@ public abstract class Enemy {
                 animation.start();
 
                 // Refreshes the animation to avoid frame-rate related issues.
-                this.refreshAnimation(animation);
+                this.refreshAnimation(animation, 10);
 
                 // Logs that the enemy has begun moving to its target destination.
                 LOGGER.info(STR."Enemy \{this} moving to position \{position}.");

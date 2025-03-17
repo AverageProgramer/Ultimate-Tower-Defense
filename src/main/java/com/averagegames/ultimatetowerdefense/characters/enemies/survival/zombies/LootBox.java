@@ -69,67 +69,30 @@ public class LootBox extends Enemy {
 
         int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 6 : 5) - 1)) + 1;
 
-        Enemy e = null;
+        Enemy e = switch (enemy) {
+            case 1 ->
+                    new Normal();
+            case 2 ->
+                    new Quick();
+            case 3 ->
+                    new Slow();
+            case 4 ->
+                    new Stealthy();
+            case 5 ->
+                    new Armored();
+            default ->
+                    null;
+        };
 
-        switch (enemy) {
-            case 1:
-                Normal normal = new Normal();
-
-                normal.setParent(this.getParent());
-                normal.setPathing(path);
-                normal.setReferencePathing(super.getReferencePathing());
-                normal.setPositionIndex(this.getPositionIndex());
-                normal.spawn(this.getPosition());
-                normal.startMoving();
-
-                break;
-            case 2:
-                Quick quick = new Quick();
-
-                quick.setParent(this.getParent());
-                quick.setPathing(path);
-                quick.setReferencePathing(super.getReferencePathing());
-                quick.setPositionIndex(this.getPositionIndex());
-                quick.spawn(this.getPosition());
-                quick.startMoving();
-
-                break;
-            case 3:
-                Slow slow = new Slow();
-
-                slow.setParent(this.getParent());
-                slow.setPathing(path);
-                slow.setReferencePathing(super.getReferencePathing());
-                slow.setPositionIndex(this.getPositionIndex());
-                slow.spawn(this.getPosition());
-                slow.startMoving();
-
-                break;
-            case 4:
-                Stealthy stealthy = new Stealthy();
-
-                stealthy.setParent(this.getParent());
-                stealthy.setPathing(path);
-                stealthy.setReferencePathing(super.getReferencePathing());
-                stealthy.setPositionIndex(this.getPositionIndex());
-                stealthy.spawn(this.getPosition());
-                stealthy.startMoving();
-
-                break;
-
-            case 5:
-                Armored armored = new Armored();
-
-                armored.setParent(this.getParent());
-                armored.setPathing(path);
-                armored.setReferencePathing(super.getReferencePathing());
-                armored.setPositionIndex(this.getPositionIndex());
-                armored.spawn(this.getPosition());
-                armored.startMoving();
-
-                break;
-            default:
-                break;
+        if (e == null) {
+            return;
         }
+
+        e.setParent(this.getParent());
+        e.setPathing(path);
+        e.setReferencePathing(super.getReferencePathing());
+        e.setPositionIndex(this.getPositionIndex());
+        e.spawn(this.getPosition());
+        e.startMoving();
     }
 }

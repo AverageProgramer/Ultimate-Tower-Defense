@@ -27,10 +27,13 @@ public final class Gunship extends Tower {
     private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipRunway.gif");
 
     @Property
-    private final int damage = 1;
+    private final int[] upgradeCosts = {300, 350, 1500, 3500, 7500};
 
     @Property
-    private final int coolDown = 250;
+    private final int[] damages = {1, 2, 2, 3, 6, 10};
+
+    @Property
+    private final int[] coolDowns = {250};
 
     @Property
     private final int startHealth = 800;
@@ -47,8 +50,9 @@ public final class Gunship extends Tower {
 
     public Gunship() {
         super.image = this.image;
-        super.damage = this.damage;
-        super.coolDown = this.coolDown;
+        super.upgradeCosts = this.upgradeCosts;
+        super.damages = this.damages;
+        super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
         super.setRadius(this.radius);
     }
@@ -128,11 +132,11 @@ public final class Gunship extends Tower {
             System.out.println("Exception occurred");
         }
 
-        enemy.damage(this.damage);
+        enemy.damage(super.damages[super.getLevel()]);
     }
 
     @Override
     public void upgrade() throws InterruptedException {
-
+        super.setLevel(super.getLevel() + 1);
     }
 }
