@@ -178,7 +178,7 @@ public abstract class Tower {
      * @param damage the amount to {@code damage} the {@link Tower} by.
      * @since Ultimate Tower Defense 1.0
      */
-    public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
+    public void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
 
         // Performs the tower's on damaged action.
         // This method is unique to each individual inheritor of the tower class.
@@ -204,7 +204,7 @@ public abstract class Tower {
      * @since Ultimate Tower Defense 1.0
      */
     @SuppressWarnings("unused")
-    public final void setPosition(@NotNull final Position position) {
+    public void setPosition(@NotNull final Position position) {
 
         // Updates the tower's x and y coordinates to the given position's x and y coordinates.
 
@@ -218,7 +218,7 @@ public abstract class Tower {
      * @since Ultimate Tower Defense 1.0
      */
     @Contract(" -> new")
-    public final @NotNull Position getPosition() {
+    public @NotNull Position getPosition() {
 
         // Returns the tower's current position.
         return new Position(this.loadedTower.getCurrentX() + (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getWidth() / 2 : 0), this.loadedTower.getCurrentY() + (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getHeight() : 0));

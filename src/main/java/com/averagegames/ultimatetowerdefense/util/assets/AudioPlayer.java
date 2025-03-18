@@ -30,10 +30,14 @@ public class AudioPlayer {
     @NotNull
     private String pathname;
 
+    @NotNull
+    private Clip clip;
+
     /**
      * A constructor that loads an audio {@link File} at a given location.
      * @param pathname the {@link File}'s location.
      * @implNote The audio {@link File} must be a {@code WAV} {@link File}.
+     * @since Ultimate Tower Defense 1.0
      */
     public AudioPlayer(@NotNull final String pathname) {
 
@@ -48,6 +52,7 @@ public class AudioPlayer {
      * @throws LineUnavailableException if the {@code line} cannot be opened.
      * @throws IOException if an {@code input} or {@code output} related issue occurs while {@code reading} the {@link File}.
      * @throws UnsupportedAudioFileException if the audio {@link File} is in an unsupported {@code format}.
+     * @since Ultimate Tower Defense 1.0
      */
     private @NotNull Clip open() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
 
@@ -66,27 +71,37 @@ public class AudioPlayer {
     /**
      * Plays an audio {@link File} one time through to completion.
      * @since Ultimate Tower Defense 1.0
-     * @throws LineUnavailableException if the {@code line} cannot be opened.
-     * @throws IOException if an {@code input} or {@code output} related issue occurs while {@code reading} the {@link File}.
-     * @throws UnsupportedAudioFileException if the audio {@link File} is in an unsupported {@code format}.
      */
     public void play() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
 
+        // Opens a clip using the given path to an audio file.
+        this.clip = this.open();
+
         // Plays the audio file once.
-        this.open().start();
+        this.clip.start();
     }
 
     /**
      * Plays an audio {@link File} through to completion a given amount of times.
-     * @since Ultimate Tower Defense 1.0
      * @param count the amount of times to loop the audio {@link File}.
-     * @throws LineUnavailableException if the {@code line} cannot be opened.
-     * @throws IOException if an {@code input} or {@code output} related issue occurs while {@code reading} the {@link File}.
-     * @throws UnsupportedAudioFileException if the audio {@link File} is in an unsupported {@code format}.
+     * @since Ultimate Tower Defense 1.0
      */
     public void loop(final int count) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
 
+        // Opens a clip using the given path to an audio file.
+        this.clip = this.open();
+
         // Plays the audio file the given amount of times.
-        this.open().loop(count);
+        this.clip.loop(count);
+    }
+
+    /**
+     * Stops playing an audio {@link File} if it has already been started.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public void stop() {
+
+        // Stops the audio file from playing.
+        this.clip.stop();
     }
 }

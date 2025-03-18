@@ -370,20 +370,6 @@ public abstract class Enemy {
     }
 
     /**
-     * Refreshes a given {@link TranslationHandler} to avoid any {@code frame-rate} related issues.
-     * @param animation the {@link TranslationHandler} to refresh.
-     * @since Ultimate Tower Defense 1.0
-     */
-    private void refreshAnimation(@NotNull final TranslationHandler animation) {
-
-        // Stops the given animation.
-        animation.stop();
-
-        // Starts the given animation from the start.
-        animation.start();
-    }
-
-    /**
      * Begins moving the {@link Enemy} along a set {@link Path}.
      * The {@link Path} will need to be set prior to calling this method.
      * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
@@ -425,9 +411,6 @@ public abstract class Enemy {
 
                 // Starts the animation.
                 animation.start();
-
-                // Refreshes the animation to avoid frame-rate related issues.
-                this.refreshAnimation(animation);
 
                 // Logs that the enemy has begun moving to its target destination.
                 LOGGER.info(STR."Enemy \{this} moving to position \{position}.");

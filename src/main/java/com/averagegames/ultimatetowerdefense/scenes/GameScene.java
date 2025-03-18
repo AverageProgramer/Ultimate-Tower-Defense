@@ -63,6 +63,8 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     private Tower tempTower;
 
+    public static boolean placed;
+
     public static boolean skip;
 
     static {
@@ -228,10 +230,12 @@ public final class GameScene extends Scene implements SceneBuilder {
                 }
 
                 Platform.runLater(() -> {
-                    this.tempTower.getRange().setVisible(true);
+                    if (!(tempTower instanceof Gunship)) {
+                        this.tempTower.getRange().setVisible(true);
 
-                    this.tempTower.getRange().setCenterX(tempTower.getPosition().x());
-                    this.tempTower.getRange().setCenterY(tempTower.getPosition().y());
+                        this.tempTower.getRange().setCenterX(tempTower.getPosition().x());
+                        this.tempTower.getRange().setCenterY(tempTower.getPosition().y());
+                    }
                 });
             }
         });
@@ -282,7 +286,7 @@ public final class GameScene extends Scene implements SceneBuilder {
             this.tempTower.setParent(this.root);
         });
 
-        Button gunnerButton = new Button("Gunner: $500");
+        Button gunnerButton = new Button("Gunship: $750");
         gunnerButton.setPrefSize(100, 100);
         gunnerButton.setTranslateX(gunnerButtonX);
         gunnerButton.setTranslateY(y);
@@ -482,6 +486,8 @@ public final class GameScene extends Scene implements SceneBuilder {
         }).start();
 
         this.setOnMouseClicked(event -> {
+            placed = true;
+
             if (this.tower == 0 && Player.cash >= Scout.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
                 if (tempTower != null) {
                     tempTower.eliminate();
@@ -665,6 +671,11 @@ public final class GameScene extends Scene implements SceneBuilder {
                 if (amount.get() < Gunship.LIMIT) {
                     if (tempTower != null) {
                         tempTower.eliminate();
+                        this.root.getChildren().remove(tempTower.getRange());
+
+                        if (tempTower instanceof Farm) {
+                            LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                        }
                     }
 
                     Gunship gunship = new Gunship();
@@ -731,6 +742,8 @@ public final class GameScene extends Scene implements SceneBuilder {
                     // Ignore
                 }
             }
+
+            placed = false;
         });
 
         this.setOnKeyPressed(event -> {
