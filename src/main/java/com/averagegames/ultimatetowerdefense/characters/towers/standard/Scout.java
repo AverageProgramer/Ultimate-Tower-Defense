@@ -2,13 +2,12 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
 
 /**
  * The {@link Scout} is one of the two {@code starter} {@link Tower}'s that the {@link Player} will receive when first starting the game.
@@ -26,10 +25,17 @@ public final class Scout extends Tower {
     public static final int COST = 200;
 
     /**
-     * The {@link Scout}'s {@link Image}.
+     * The {@link Scout}'s {@link Image}s.
      */
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ScoutTower.gif");
+    private final Image[] images = {
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower0.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower1.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower2.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower3.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower4.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower5.gif")
+    };
 
     /**
      * The {@link Scout}'s {@code upgrade} costs per {@code level}.
@@ -47,7 +53,7 @@ public final class Scout extends Tower {
      * The {@link Scout}'s cool down between {@code attacks}.
      */
     @Property
-    private final int[] coolDowns = {2000, 1750, 1500, 1200, 600, 550};
+    private final int[] coolDowns = {2000, 1750, 1500, 1200, 1000, 500};
 
     /**
      * The {@link Scout}'s starting {@code health}.
@@ -67,7 +73,7 @@ public final class Scout extends Tower {
     public Scout() {
 
         // Properly sets the scout's image to the finalized image.
-        super.image = this.image;
+        super.images = this.images;
 
         // Properly sets the scout's upgrade costs to the finalized costs.
         super.upgradeCosts = this.upgradeCosts;
@@ -119,12 +125,18 @@ public final class Scout extends Tower {
 
     @Override
     public void upgrade() throws InterruptedException {
+        Position oldPos = super.getPosition();
+
         super.setLevel(super.getLevel() + 1);
 
         if (super.getLevel() >= 2) {
             super.setHiddenDetection(true);
         }
 
+        super.getLoadedTower().setImage(super.images[super.getLevel()]);
+
         super.setRadius(this.radii[super.getLevel()]);
+
+        super.setPosition(oldPos);
     }
 }

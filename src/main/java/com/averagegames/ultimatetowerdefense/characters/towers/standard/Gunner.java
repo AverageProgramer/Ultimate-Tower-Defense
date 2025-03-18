@@ -12,7 +12,14 @@ public final class Gunner extends Tower {
     public static final int COST = 500;
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif");
+    private final Image[] images = {
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif"),
+    };
 
     @Property
     private final int[] upgradeCosts = {100, 400, 1500, 2500, 4750};
@@ -30,7 +37,7 @@ public final class Gunner extends Tower {
     private final double[] radii = {125, 130, 130, 135, 135, 140};
 
     public Gunner() {
-        super.image = this.image;
+        super.images = this.images;
         super.upgradeCosts = this.upgradeCosts;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;

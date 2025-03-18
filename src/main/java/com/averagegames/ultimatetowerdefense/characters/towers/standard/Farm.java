@@ -1,6 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import lombok.Getter;
@@ -23,10 +24,17 @@ public final class Farm extends Tower {
     private int[] bonuses = {50, 100, 250, 500, 750, 1500};
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/FarmTower.gif");
+    private final Image[] images = {
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/farm/FarmTower0.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/farm/FarmTower1.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/farm/FarmTower2.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/farm/FarmTower3.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/farm/FarmTower4.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/farm/FarmTower5.gif"),
+    };
 
     public Farm() {
-        super.image = this.image;
+        super.images = this.images;
 
         super.upgradeCosts = this.upgradeCosts;
 
@@ -35,6 +43,12 @@ public final class Farm extends Tower {
 
     @Override
     public void upgrade() throws InterruptedException {
+        Position oldPos = super.getPosition();
+
         super.setLevel(super.getLevel() + 1);
+
+        super.getLoadedTower().setImage(super.images[super.getLevel()]);
+
+        super.setPosition(oldPos);
     }
 }

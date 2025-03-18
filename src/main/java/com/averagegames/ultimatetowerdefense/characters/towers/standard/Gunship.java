@@ -24,7 +24,7 @@ public final class Gunship extends Tower {
     public static final int LIMIT = 5;
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipRunway.gif");
+    private final Image[] images = {new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipRunway.gif")};
 
     @Property
     private final int[] upgradeCosts = {300, 350, 1500, 3500, 7500};
@@ -49,7 +49,7 @@ public final class Gunship extends Tower {
 
 
     public Gunship() {
-        super.image = this.image;
+        super.images = this.images;
         super.upgradeCosts = this.upgradeCosts;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;

@@ -13,7 +13,7 @@ public class Shotgunner extends Tower {
     public static final int COST = 600;
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ShotgunnerTower.gif");
+    private final Image[] images = {new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ShotgunnerTower.gif")};
 
     @Property
     private final int[] damages = {2};
@@ -28,7 +28,7 @@ public class Shotgunner extends Tower {
     private final double radius = 40;
 
     public Shotgunner() {
-        super.image = this.image;
+        super.images = this.images;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);

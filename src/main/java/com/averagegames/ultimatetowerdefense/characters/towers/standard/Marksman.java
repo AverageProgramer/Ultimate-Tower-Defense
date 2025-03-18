@@ -12,7 +12,14 @@ public final class Marksman extends Tower {
     public static final int COST = 300;
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/MarksmanTower.gif");
+    private final Image[] images = {
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/marksman/MarksmanTower0.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/marksman/MarksmanTower1.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/marksman/MarksmanTower2.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/marksman/MarksmanTower3.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/marksman/MarksmanTower4.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/marksman/MarksmanTower5.gif"),
+    };
 
     @Property
     private final int[] upgradeCosts = {150, 500, 1500, 2250, 4000};
@@ -24,13 +31,13 @@ public final class Marksman extends Tower {
     private final int[] coolDowns = {5000, 4500, 4500, 4000, 3750, 3500};
 
     @Property
-    private final double[] radii = {175, 180, 180, 185, 190, 200};
+    private final double[] radii = {175, 175, 180, 190, 200, 220};
 
     @Property
     private final int startHealth = 100;
 
     public Marksman() {
-        super.image = this.image;
+        super.images = this.images;
         super.upgradeCosts = this.upgradeCosts;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;
@@ -64,6 +71,8 @@ public final class Marksman extends Tower {
         if (super.getLevel() >= 4) {
             super.setHiddenDetection(true);
         }
+
+        super.getLoadedTower().setImage(super.images[super.getLevel()]);
 
         super.setRadius(this.radii[super.getLevel()]);
     }

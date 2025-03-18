@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.*;
 import com.averagegames.ultimatetowerdefense.maps.Base;
@@ -17,15 +18,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -34,7 +32,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
@@ -64,6 +61,8 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     private final Group root = (Group) super.getRoot();
 
+    private Tower tempTower;
+
     public static boolean skip;
 
     static {
@@ -85,8 +84,8 @@ public final class GameScene extends Scene implements SceneBuilder {
 
     @Override
     public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Nuclear Fallen King.wav");
-        // player.loop(AudioPlayer.INDEFINITELY);
+        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - The Horde.wav");
+        player.loop(AudioPlayer.INDEFINITELY);
 
         stage.setMaximized(true);
         stage.setResizable(false);
@@ -124,11 +123,15 @@ public final class GameScene extends Scene implements SceneBuilder {
         panel.setX((screen.getWidth() / 2) - (rectangle.getWidth() / 2));
         panel.setY(15);
 
-        Platform.runLater(() -> root.getChildren().add(panel));
+        synchronized (panel) {
+            Platform.runLater(() -> root.getChildren().add(panel));
+        }
 
         while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !skip && Base.health > 0);
 
-        Platform.runLater(() -> root.getChildren().remove(panel));
+        synchronized (panel) {
+            Platform.runLater(() -> root.getChildren().remove(panel));
+        }
 
         if (Base.health <= 0) {
             return;
@@ -166,9 +169,13 @@ public final class GameScene extends Scene implements SceneBuilder {
             }
         }
 
-        Platform.runLater(() -> waveText.setText(STR."Wave \{wave}"));
+        synchronized (waveText) {
+            Platform.runLater(() -> waveText.setText(STR."Wave \{wave}"));
+        }
 
-        Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+        synchronized (cashText) {
+            Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
+        }
     }
 
     @Override
@@ -200,35 +207,149 @@ public final class GameScene extends Scene implements SceneBuilder {
         double gunnerButtonX = (screen.getWidth() / 2) - 50;
         double y = screen.getHeight() - 175;
 
+        this.setOnMouseMoved(event -> {
+            if (this.tower != -1 && this.tempTower != null) {
+                if (!this.root.getChildren().contains(tempTower.getLoadedTower())) {
+                    Platform.runLater(() -> {
+                        this.tempTower.place(new Position(event.getX(), event.getY()));
+
+                        this.tempTower.getLoadedTower().setOpacity(0.75);
+                    });
+
+                    if (tempTower instanceof Farm) {
+                        LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                    }
+                }
+
+                Platform.runLater(() -> this.tempTower.setPosition(new Position(event.getX(), event.getY())));
+
+                if (tempTower instanceof Farm) {
+                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                }
+
+                Platform.runLater(() -> {
+                    this.tempTower.getRange().setVisible(true);
+
+                    this.tempTower.getRange().setCenterX(tempTower.getPosition().x());
+                    this.tempTower.getRange().setCenterY(tempTower.getPosition().y());
+                });
+            }
+        });
+
         Button scoutButton = new Button("Scout: $200");
         scoutButton.setPrefSize(100, 100);
         scoutButton.setTranslateX(gunnerButtonX - 200);
         scoutButton.setTranslateY(y);
-        scoutButton.setOnAction(event -> this.tower = 0);
+        scoutButton.setOnAction(event -> {
+            if (tempTower != null) {
+                tempTower.eliminate();
+                this.root.getChildren().remove(tempTower.getRange());
+
+                if (tempTower instanceof Farm) {
+                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                }
+            }
+
+            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+
+            this.tower = 0;
+
+            this.tempTower = new Scout();
+
+            this.tempTower.setParent(this.root);
+        });
 
         Button marksmanButton = new Button("Marksman:\n$300");
         marksmanButton.setPrefSize(100, 100);
         marksmanButton.setTranslateX(gunnerButtonX - 100);
         marksmanButton.setTranslateY(y);
-        marksmanButton.setOnAction(event -> this.tower = 1);
+        marksmanButton.setOnAction(event -> {
+            if (tempTower != null) {
+                tempTower.eliminate();
+                this.root.getChildren().remove(tempTower.getRange());
+
+                if (tempTower instanceof Farm) {
+                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                }
+            }
+
+            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+
+            this.tower = 1;
+
+            this.tempTower = new Marksman();
+
+            this.tempTower.setParent(this.root);
+        });
 
         Button gunnerButton = new Button("Gunner: $500");
         gunnerButton.setPrefSize(100, 100);
         gunnerButton.setTranslateX(gunnerButtonX);
         gunnerButton.setTranslateY(y);
-        gunnerButton.setOnAction(event -> this.tower = 2);
+        gunnerButton.setOnAction(event -> {
+            if (tempTower != null) {
+                tempTower.eliminate();
+                this.root.getChildren().remove(tempTower.getRange());
+
+                if (tempTower instanceof Farm) {
+                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                }
+            }
+
+            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+
+            this.tower = 2;
+
+            this.tempTower = new Gunner();
+
+            this.tempTower.setParent(this.root);
+        });
 
         Button energizerButton = new Button("Energizer:\n$2500");
         energizerButton.setPrefSize(100, 100);
         energizerButton.setTranslateX(gunnerButtonX + 100);
         energizerButton.setTranslateY(y);
-        energizerButton.setOnAction(event -> this.tower = 3);
+        energizerButton.setOnAction(event -> {
+            if (tempTower != null) {
+                tempTower.eliminate();
+                this.root.getChildren().remove(tempTower.getRange());
+
+                if (tempTower instanceof Farm) {
+                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                }
+            }
+
+            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+
+            this.tower = 3;
+
+            this.tempTower = new Energizer();
+
+            this.tempTower.setParent(this.root);
+        });
 
         Button farmButton = new Button("Farm: $250");
         farmButton.setPrefSize(100, 100);
         farmButton.setTranslateX(gunnerButtonX + 200);
         farmButton.setTranslateY(y);
-        farmButton.setOnAction(event -> this.tower = 4);
+        farmButton.setOnAction(event -> {
+            if (tempTower != null) {
+                tempTower.eliminate();
+                this.root.getChildren().remove(tempTower.getRange());
+
+                if (tempTower instanceof Farm) {
+                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                }
+            }
+
+            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+
+            this.tower = 4;
+
+            this.tempTower = new Farm();
+
+            this.tempTower.setParent(this.root);
+        });
 
         Platform.runLater(() -> {
             Position lastPos = new Position(xSpace, ySpace);
@@ -362,12 +483,23 @@ public final class GameScene extends Scene implements SceneBuilder {
 
         this.setOnMouseClicked(event -> {
             if (this.tower == 0 && Player.cash >= Scout.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
+                if (tempTower != null) {
+                    tempTower.eliminate();
+                    this.root.getChildren().remove(tempTower.getRange());
+
+                    if (tempTower instanceof Farm) {
+                        LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                    }
+                }
+
                 Scout scout = new Scout();
 
                 scout.setParent(root);
-                scout.place(new Position(event.getX(), event.getY()));
+                Platform.runLater(() -> scout.place(new Position(event.getX(), event.getY())));
 
-                scout.startAttacking();
+                Platform.runLater(scout::startAttacking);
+
+                Platform.runLater(scout::select);
 
                 Player.cash -= Scout.COST;
 
@@ -375,12 +507,23 @@ public final class GameScene extends Scene implements SceneBuilder {
 
                 this.tower = -1;
             } else if (this.tower == 1 && Player.cash >= Marksman.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
+                if (tempTower != null) {
+                    tempTower.eliminate();
+                    this.root.getChildren().remove(tempTower.getRange());
+
+                    if (tempTower instanceof Farm) {
+                        LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                    }
+                }
+
                 Marksman marksman = new Marksman();
 
                 marksman.setParent(root);
-                marksman.place(new Position(event.getX(), event.getY()));
+                Platform.runLater(() -> marksman.place(new Position(event.getX(), event.getY())));
 
-                marksman.startAttacking();
+                Platform.runLater(marksman::startAttacking);
+
+                Platform.runLater(marksman::select);
 
                 Player.cash -= Marksman.COST;
 
@@ -388,12 +531,23 @@ public final class GameScene extends Scene implements SceneBuilder {
 
                 this.tower = -1;
             } else if (this.tower == 2 && Player.cash >= Gunner.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
+                if (tempTower != null) {
+                    tempTower.eliminate();
+                    this.root.getChildren().remove(tempTower.getRange());
+
+                    if (tempTower instanceof Farm) {
+                        LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                    }
+                }
+
                 Gunner gunner = new Gunner();
 
                 gunner.setParent(root);
-                gunner.place(new Position(event.getX(), event.getY()));
+                Platform.runLater(() -> gunner.place(new Position(event.getX(), event.getY())));
 
-                gunner.startAttacking();
+                Platform.runLater(gunner::startAttacking);
+
+                Platform.runLater(gunner::select);
 
                 Player.cash -= Gunner.COST;
 
@@ -404,18 +558,29 @@ public final class GameScene extends Scene implements SceneBuilder {
                 AtomicInteger amount = new AtomicInteger();
 
                 LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
-                    if (tower1 instanceof Energizer) {
+                    if (tower1 instanceof Energizer && tower1 != tempTower) {
                         amount.incrementAndGet();
                     }
                 });
 
                 if (amount.get() < Energizer.LIMIT) {
+                    if (tempTower != null) {
+                        tempTower.eliminate();
+                        this.root.getChildren().remove(tempTower.getRange());
+
+                        if (tempTower instanceof Farm) {
+                            LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                        }
+                    }
+
                     Energizer energizer = new Energizer();
 
                     energizer.setParent(root);
-                    energizer.place(new Position(event.getX(), event.getY()));
+                    Platform.runLater(() -> energizer.place(new Position(event.getX(), event.getY())));
 
-                    energizer.startAttacking();
+                    Platform.runLater(energizer::startAttacking);
+
+                    Platform.runLater(energizer::select);
 
                     Player.cash -= Energizer.COST;
 
@@ -434,18 +599,29 @@ public final class GameScene extends Scene implements SceneBuilder {
                 AtomicInteger amount = new AtomicInteger();
 
                 LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
-                    if (tower1 instanceof Farm) {
+                    if (tower1 instanceof Farm && tower1 != tempTower) {
                         amount.incrementAndGet();
                     }
                 });
 
                 if (amount.get() < Farm.LIMIT) {
+                    if (tempTower != null) {
+                        tempTower.eliminate();
+                        this.root.getChildren().remove(tempTower.getRange());
+
+                        if (tempTower instanceof Farm) {
+                            LIST_OF_ACTIVE_FARMS.remove(tempTower);
+                        }
+                    }
+
                     Farm farm = new Farm();
 
                     farm.setParent(root);
-                    farm.place(new Position(event.getX(), event.getY()));
+                    Platform.runLater(() -> farm.place(new Position(event.getX(), event.getY())));
 
-                    farm.startAttacking();
+                    Platform.runLater(farm::startAttacking);
+
+                    Platform.runLater(farm::select);
 
                     Player.cash -= Farm.COST;
 
@@ -461,6 +637,10 @@ public final class GameScene extends Scene implements SceneBuilder {
                     }
                 }
             } else if (this.tower == 5 && Player.cash >= Pyromancer.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
+                if (tempTower != null) {
+                    tempTower.eliminate();
+                }
+
                 Pyromancer pyromancer = new Pyromancer();
 
                 pyromancer.setParent(root);
@@ -483,6 +663,10 @@ public final class GameScene extends Scene implements SceneBuilder {
                 });
 
                 if (amount.get() < Gunship.LIMIT) {
+                    if (tempTower != null) {
+                        tempTower.eliminate();
+                    }
+
                     Gunship gunship = new Gunship();
 
                     gunship.setParent(root);
@@ -513,6 +697,10 @@ public final class GameScene extends Scene implements SceneBuilder {
                 });
 
                 if (amount.get() < MilitaryBase.LIMIT) {
+                    if (tempTower != null) {
+                        tempTower.eliminate();
+                    }
+
                     MilitaryBase militaryBase = new MilitaryBase();
 
                     militaryBase.setParent(root);
@@ -548,6 +736,11 @@ public final class GameScene extends Scene implements SceneBuilder {
         this.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ESCAPE)) {
                 this.tower = -1;
+
+                if (tempTower != null) {
+                    tempTower.deselect();
+                    tempTower.eliminate();
+                }
             }
         });
 

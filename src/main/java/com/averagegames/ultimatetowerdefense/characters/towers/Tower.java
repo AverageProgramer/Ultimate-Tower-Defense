@@ -51,13 +51,14 @@ public abstract class Tower {
      * The {@link Tower}'s {@link Image} loaded using an {@link ImageLoader}.
      */
     @NotNull
+    @Accessors(makeFinal = true) @Getter
     private final ImageLoader loadedTower;
 
     /**
      * The {@link Tower}'s {@link Image}.
      */
     @Nullable
-    protected Image image;
+    protected Image[] images;
 
     /**
      * The {@link Tower}'s {@code upgrade} panel.
@@ -86,7 +87,7 @@ public abstract class Tower {
      * The {@link Tower}'s {@code range}.
      */
     @NotNull
-    @Accessors(makeFinal = true) @Getter(AccessLevel.PROTECTED)
+    @Accessors(makeFinal = true) @Getter
     private final Circle range;
 
     /**
@@ -134,7 +135,7 @@ public abstract class Tower {
         // Initializes the tower's image to a default, null image.
 
         this.loadedTower = new ImageLoader();
-        this.image = null;
+        this.images = new Image[0];
 
         // Initializes the tower's upgrade panel to a default, null value.
         this.panel = null;
@@ -207,8 +208,8 @@ public abstract class Tower {
 
         // Updates the tower's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedTower.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
-        this.loadedTower.setY(position.y() - (this.image != null ? this.image.getHeight() / 2 : 0));
+        this.loadedTower.setX(position.x() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getWidth() / 2 : 0));
+        this.loadedTower.setY(position.y() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getHeight() : 0));
     }
 
     /**
@@ -220,7 +221,7 @@ public abstract class Tower {
     public final @NotNull Position getPosition() {
 
         // Returns the tower's current position.
-        return new Position(this.loadedTower.getCurrentX() + (this.image != null ? this.image.getWidth() / 2 : 0), this.loadedTower.getCurrentY() + (this.image != null ? this.image.getHeight() / 2 : 0));
+        return new Position(this.loadedTower.getCurrentX() + (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getWidth() / 2 : 0), this.loadedTower.getCurrentY() + (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getHeight() : 0));
     }
 
     /**
@@ -263,7 +264,7 @@ public abstract class Tower {
         // The change in x and change in y for between the tower and the circle.
 
         double x = currentPos.x() - rangePos.x();
-        double y = (currentPos.y() - (this.image != null ? this.image.getHeight() / 2 : 0)) - rangePos.y();
+        double y = (currentPos.y() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getHeight() / 2 : 0)) - rangePos.y();
 
         // The circle's radius.
         double radius = range.getRadius();
@@ -291,10 +292,10 @@ public abstract class Tower {
         this.onPlace();
 
         // Determines whether the tower's image is null.
-        if (this.image != null) {
+        if (this.images[this.level] != null) {
 
             // Loads the tower's image.
-            this.loadedTower.setImage(this.image);
+            this.loadedTower.setImage(this.images[this.level]);
         }
 
         // Sets the range's x and y components to the position of the tower's x and y components.
@@ -308,7 +309,7 @@ public abstract class Tower {
         this.range.setOpacity(0.25);
         this.range.setViewOrder(Integer.MAX_VALUE);
         this.range.setVisible(false);
-        this.loadedTower.setOnMouseClicked(e -> this.select());
+        this.loadedTower.setOnMouseClicked(e -> Platform.runLater(this::select));
         this.parent.getChildren().add(this.range);
         // ---------------------------------------------------------------------------------------------------
 
@@ -320,7 +321,7 @@ public abstract class Tower {
 
         this.panel = new UpgradePanel(this);
 
-        LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+        LIST_OF_ACTIVE_TOWERS.forEach(tower -> Platform.runLater(tower::deselect));
 
         // Adds the tower to the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.add(this);
@@ -331,8 +332,6 @@ public abstract class Tower {
         } catch (Exception ex) {
             System.out.println("Exception occurred.");
         }
-
-        this.select();
 
         // Logs that the tower has been placed.
         LOGGER.info(STR."Tower \{this} placed.");

@@ -333,6 +333,10 @@ public abstract class Enemy {
         // Sets the enemy's view order to its current y position.
         this.loadedEnemy.setViewOrder(-this.getPosition().y());
 
+        // Adds a listener to the enemy's translate y property.
+        // This will change the enemy's view order depending on its current y position.
+        this.loadedEnemy.translateYProperty().addListener(((observable, oldValue, newValue) -> this.loadedEnemy.setViewOrder(-this.getPosition().y())));
+
         // Adds the enemy to the list containing every active enemy.
         LIST_OF_ACTIVE_ENEMIES.add(this);
 
@@ -370,17 +374,13 @@ public abstract class Enemy {
      * @param animation the {@link TranslationHandler} to refresh.
      * @since Ultimate Tower Defense 1.0
      */
-    private void refreshAnimation(@NotNull final TranslationHandler animation, @Range(from = 0, to = Integer.MAX_VALUE) final int times) {
+    private void refreshAnimation(@NotNull final TranslationHandler animation) {
 
-        // A loop that will iterate the amount of times given.
-        for (int i = 0; i < times; i++) {
+        // Stops the given animation.
+        animation.stop();
 
-            // Stops the given animation.
-            animation.stop();
-
-            // Starts the given animation from the start.
-            animation.start();
-        }
+        // Starts the given animation from the start.
+        animation.start();
     }
 
     /**
@@ -427,7 +427,7 @@ public abstract class Enemy {
                 animation.start();
 
                 // Refreshes the animation to avoid frame-rate related issues.
-                this.refreshAnimation(animation, 10);
+                this.refreshAnimation(animation);
 
                 // Logs that the enemy has begun moving to its target destination.
                 LOGGER.info(STR."Enemy \{this} moving to position \{position}.");
@@ -439,7 +439,7 @@ public abstract class Enemy {
                     animation.waitForFinish();
                 } catch (InterruptedException ex) {
 
-                    // Stops the enemy's animation.
+                    // Stops the animation.
                     animation.stop();
 
                     // Logs that the enemy's movement has been interrupted and ended.

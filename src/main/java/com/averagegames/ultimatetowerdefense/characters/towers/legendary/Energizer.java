@@ -32,10 +32,17 @@ public final class Energizer extends Tower {
     public static final int LIMIT = 8;
 
     /**
-     * The {@link Energizer}'s {@link Image}.
+     * The {@link Energizer}'s {@link Image}s.
      */
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/EnergizerTower.gif");
+    private final Image[] images = {
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/energizer/EnergizerTower0.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/energizer/EnergizerTower1.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/energizer/EnergizerTower2.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/energizer/EnergizerTower3.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/energizer/EnergizerTower4.gif"),
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/energizer/EnergizerTower5.gif"),
+    };
 
     /**
      * The {@link Energizer}'s {@code upgrade} costs per {@code level}.
@@ -108,7 +115,7 @@ public final class Energizer extends Tower {
     public Energizer() {
 
         // Properly sets the energizer's image to the finalized image.
-        super.image = this.image;
+        super.images = this.images;
 
         // Properly sets the energizer's upgrade costs to the finalized costs.
         super.upgradeCosts = this.upgradeCosts;
@@ -195,6 +202,8 @@ public final class Energizer extends Tower {
     @Override
     public void upgrade() throws InterruptedException {
         super.setLevel(super.getLevel() + 1);
+
+        super.getLoadedTower().setImage(super.images[super.getLevel()]);
 
         if (super.getLevel() >= 1) {
             super.setHiddenDetection(true);

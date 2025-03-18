@@ -16,10 +16,10 @@ public final class MilitaryBase extends Tower {
     public static final int LIMIT = 5;
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/MilitaryBaseTower.gif");
+    private final Image[] images = {new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/MilitaryBaseTower.gif")};
 
     public MilitaryBase() {
-        super.image = this.image;
+        super.images = this.images;
     }
 
     @Override

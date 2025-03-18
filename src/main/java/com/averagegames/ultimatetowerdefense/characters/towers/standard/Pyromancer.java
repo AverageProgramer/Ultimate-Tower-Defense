@@ -13,7 +13,7 @@ public final class Pyromancer extends Tower {
     public static final int COST = 450;
 
     @Property
-    private final Image image = new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/PyromancerTower.gif");
+    private final Image[] images = {new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/PyromancerTower.gif")};
 
     @Property
     private final int[] damages = {0};
@@ -28,7 +28,7 @@ public final class Pyromancer extends Tower {
     private final double radius = 75;
 
     public Pyromancer() {
-        super.image = this.image;
+        super.images = this.images;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);

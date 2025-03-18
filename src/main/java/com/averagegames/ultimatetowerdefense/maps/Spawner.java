@@ -109,8 +109,9 @@ public final class Spawner {
             }
         }
 
+        // Allows for the enemy to begin moving down its set path without any issues.
         // Begins moving the enemy.
-        enemy.startMoving();
+        Platform.runLater(enemy::startMoving);
 
         // Logs that the spawner has spawned the given enemy.
         LOGGER.info(STR."Spawner \{this} has successfully spawned enemy \{enemy}.");
