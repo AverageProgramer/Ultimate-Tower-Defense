@@ -20,6 +20,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -342,6 +343,17 @@ public class GameScene extends Scene implements Builder {
                 this.tempTower.getRange().setCenterX(event.getX());
                 this.tempTower.getRange().setCenterY(event.getY());
 
+            }
+        });
+
+        this.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                if (this.tempTower != null) {
+                    this.tempTower.eliminate();
+                    this.parent.getChildren().remove(this.tempTower.getLoadedTower());
+                }
+
+                this.towerIndex = -1;
             }
         });
 
