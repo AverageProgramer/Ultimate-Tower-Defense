@@ -354,6 +354,80 @@ public class GameScene extends Scene implements Builder {
 
             ENEMY_SPAWNER.spawn(Easy.WAVE_2, this.parent);
             this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_3, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_4, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_5, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_6, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_7, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_8, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_9, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_10, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_11, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_12, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_13, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_14, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_15, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_16, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_17, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_18, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_19, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_20, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_21, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_22, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_23, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_24, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_25, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_26, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_27, this.parent);
         });
 
         this.spawnThread.start();
