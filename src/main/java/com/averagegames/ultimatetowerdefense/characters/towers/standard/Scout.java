@@ -19,12 +19,6 @@ import org.jetbrains.annotations.Nullable;
 public final class Scout extends Tower {
 
     /**
-     * The {@link Scout}'s {@code placement cost}.
-     */
-    @Property
-    public static final int COST = 200;
-
-    /**
      * The {@link Scout}'s {@link Image}s.
      */
     @Property
@@ -36,6 +30,12 @@ public final class Scout extends Tower {
             new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower4.gif"),
             new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower5.gif")
     };
+
+    /**
+     * The {@link Scout}'s {@code placement cost}.
+     */
+    @Property
+    public final int placementCost = 200;
 
     /**
      * The {@link Scout}'s {@code upgrade} costs per {@code level}.
@@ -74,6 +74,9 @@ public final class Scout extends Tower {
 
         // Properly sets the scout's image to the finalized image.
         super.images = this.images;
+
+        // Properly sets the scout's placement cost to the finalized placement cost.
+        super.placementCost = this.placementCost;
 
         // Properly sets the scout's upgrade costs to the finalized costs.
         super.upgradeCosts = this.upgradeCosts;

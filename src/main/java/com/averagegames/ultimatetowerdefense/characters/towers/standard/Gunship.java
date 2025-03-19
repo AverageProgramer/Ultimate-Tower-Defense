@@ -22,13 +22,13 @@ import java.util.Objects;
 public final class Gunship extends Tower {
 
     @Property
-    public static final int COST = 750;
-
-    @Property
-    public static final int LIMIT = 5;
-
-    @Property
     private final Image[] images = {new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipRunway.gif")};
+
+    @Property
+    public final int placementCost = 750;
+
+    @Property
+    public final int placementLimit = 5;
 
     @Property
     private final int[] upgradeCosts = {300, 350, 1500, 3500, 7500};
@@ -58,6 +58,8 @@ public final class Gunship extends Tower {
 
     public Gunship() {
         super.images = this.images;
+        super.placementCost = this.placementCost;
+        super.placementLimit = this.placementLimit;
         super.upgradeCosts = this.upgradeCosts;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;

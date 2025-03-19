@@ -22,6 +22,9 @@ public final class Marksman extends Tower {
     };
 
     @Property
+    private final int placementCost = 300;
+
+    @Property
     private final int[] upgradeCosts = {150, 500, 1500, 2250, 4000};
 
     @Property
@@ -38,6 +41,7 @@ public final class Marksman extends Tower {
 
     public Marksman() {
         super.images = this.images;
+        super.placementCost = this.placementCost;
         super.upgradeCosts = this.upgradeCosts;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;

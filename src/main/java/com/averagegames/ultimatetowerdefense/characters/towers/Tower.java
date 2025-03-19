@@ -61,6 +61,20 @@ public abstract class Tower {
     protected Image[] images;
 
     /**
+     * The {@link Tower}'s placement {@code cost}.
+     */
+    @Range(from = 0L, to = Long.MAX_VALUE)
+    @Accessors(makeFinal = true) @Getter
+    protected int placementCost;
+
+    /**
+     * The {@link Tower}'s placement {@code limit}.
+     */
+    @Range(from = 0L, to = Long.MAX_VALUE)
+    @Accessors(makeFinal = true) @Getter
+    protected int placementLimit;
+
+    /**
      * The {@link Tower}'s {@code upgrade} panel.
      */
     private UpgradePanel panel;
@@ -70,10 +84,6 @@ public abstract class Tower {
      */
     @Accessors(makeFinal = true) @Getter
     protected int[] upgradeCosts;
-
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Getter
-    protected int placementLimit = Integer.MAX_VALUE;
 
     /**
      * The {@link Tower}'s current {@code health}.
@@ -139,6 +149,9 @@ public abstract class Tower {
 
         this.loadedTower = new ImageLoader();
         this.images = new Image[0];
+
+        // Initializes the tower's placement limit to be at the maximum integer value.
+        this.placementLimit = Integer.MAX_VALUE;
 
         // Initializes the tower's upgrade panel to a default, null value.
         this.panel = null;

@@ -20,18 +20,6 @@ import org.jetbrains.annotations.Nullable;
 public final class Energizer extends Tower {
 
     /**
-     * The {@link Energizer}'s {@code placement cost}.
-     */
-    @Property
-    public static final int COST = 2500;
-
-    /**
-     * The {@link Energizer}'s placement {@code limit}.
-     */
-    @Property
-    public static final int LIMIT = 8;
-
-    /**
      * The {@link Energizer}'s {@link Image}s.
      */
     @Property
@@ -43,6 +31,18 @@ public final class Energizer extends Tower {
             new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/energizer/EnergizerTower4.gif"),
             new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/energizer/EnergizerTower5.gif"),
     };
+
+    /**
+     * The {@link Energizer}'s {@code placement cost}.
+     */
+    @Property
+    private final int placementCost = 2500;
+
+    /**
+     * The {@link Energizer}'s placement {@code limit}.
+     */
+    @Property
+    private final int placementLimit = 8;
 
     /**
      * The {@link Energizer}'s {@code upgrade} costs per {@code level}.
@@ -114,10 +114,12 @@ public final class Energizer extends Tower {
      */
     public Energizer() {
 
-        super.placementLimit = LIMIT;
-
         // Properly sets the energizer's image to the finalized image.
         super.images = this.images;
+
+        super.placementCost = this.placementCost;
+
+        super.placementLimit = this.placementLimit;
 
         // Properly sets the energizer's upgrade costs to the finalized costs.
         super.upgradeCosts = this.upgradeCosts;

@@ -9,8 +9,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Shotgunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Shotgunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -261,14 +271,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00034" summary="This commit is merely a test. The project faced several errors and a complete reset was necessary. Basically the project needed to be deleted and re-cloned from GitHub.">
-      <option name="closed" value="true" />
-      <created>1711763122831</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1711763122831</updated>
     </task>
     <task id="LOCAL-00035" summary="Added a &quot;native&quot; folder to the project. This is where all native C\C++ code will be located. Currently, there is only one C++ source file in this folder. This source file contains the native code for the &quot;getTarget&quot; method in the Enemy class.">
       <option name="closed" value="true" />
@@ -654,7 +656,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742352309333</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers.">
+      <option name="closed" value="true" />
+      <created>1742357869232</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1742357869232</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,7 +672,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like." />
     <MESSAGE value="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage." />
     <MESSAGE value="Implemented the most basic version of the final game. Currently, the player is able to do everything that will be available in the final game except tower upgrades. More enemies and towers will be added in the next commit." />
     <MESSAGE value="Implemented the Summoner and Armored zombies into the game. The Summoner zombies have the ability to spawn 5 random Enemies every 15 seconds. The Armored zombies are the first Enemies to use a 'shield'. Shields can only be damaged if enough damage is actually dealt to the Enemy. For example, if an Enemy has 20 base HP and 15 shield, a Tower can only begin to wear down the Shield if the Tower does a minimum of 5 damage. More Towers will be added in the next commit." />
@@ -687,7 +696,8 @@
     <MESSAGE value="Added Waves 3 - 27 to the GameScene class." />
     <MESSAGE value="Added a feature that allows the Player to cancel placing a tower if they press ESC." />
     <MESSAGE value="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future." />
+    <MESSAGE value="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

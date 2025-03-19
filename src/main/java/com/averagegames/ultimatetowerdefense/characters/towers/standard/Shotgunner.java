@@ -10,10 +10,10 @@ import org.jetbrains.annotations.Nullable;
 public class Shotgunner extends Tower {
 
     @Property
-    public static final int COST = 600;
+    private final Image[] images = {new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ShotgunnerTower.gif")};
 
     @Property
-    private final Image[] images = {new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/ShotgunnerTower.gif")};
+    private final int placementCost = 600;
 
     @Property
     private final int[] damages = {2};
@@ -29,6 +29,7 @@ public class Shotgunner extends Tower {
 
     public Shotgunner() {
         super.images = this.images;
+        super.placementCost = this.placementCost;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);

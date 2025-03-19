@@ -22,13 +22,19 @@ public final class Player {
      * The {@link Player}'s current amount of in-game {@code cash}.
      */
     @Property(mutable = true)
-    public static int cash = 500;
+    public static int cash;
 
     /**
      * The {@link Player}'s current in-game {@link Wave}
      */
     @Property(mutable = true)
-    public static int wave = 1;
+    public static int wave;
+
+    /**
+     * The {@link Player}'s {@link Inventory}
+     */
+    @Property
+    public static Inventory inventory;
 
     /**
      * The {@link Player}'s current amount of {@code silver} coins.

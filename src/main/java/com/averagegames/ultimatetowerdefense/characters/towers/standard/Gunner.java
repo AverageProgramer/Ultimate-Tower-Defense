@@ -23,6 +23,9 @@ public final class Gunner extends Tower {
     };
 
     @Property
+    private final int placementCost = 500;
+
+    @Property
     private final int[] upgradeCosts = {100, 400, 1500, 2500, 4750};
 
     @Property
@@ -45,6 +48,7 @@ public final class Gunner extends Tower {
 
     public Gunner() {
         super.images = this.images;
+        super.placementCost = this.placementCost;
         super.upgradeCosts = this.upgradeCosts;
         super.damages = this.damages;
         super.coolDowns = this.coolDowns;

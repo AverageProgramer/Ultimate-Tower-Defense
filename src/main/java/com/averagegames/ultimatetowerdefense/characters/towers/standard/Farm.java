@@ -9,10 +9,10 @@ import lombok.Getter;
 public final class Farm extends Tower {
 
     @Property
-    public static final int COST = 250;
+    public final int placementCost = 250;
 
     @Property
-    public static final int LIMIT = 8;
+    public final int placementLimit = 8;
 
     @Property
     private final int[] upgradeCosts = {200, 550, 1000, 2500, 5000};
@@ -36,7 +36,9 @@ public final class Farm extends Tower {
 
         super.upgradeCosts = this.upgradeCosts;
 
-        super.placementLimit = LIMIT;
+        super.placementCost = this.placementCost;
+
+        super.placementLimit = this.placementLimit;
     }
 
     @Override
