@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added a feature that allows the Player to cancel placing a tower if they press ESC.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
     </list>
@@ -29,9 +29,9 @@
         <option value="package-info" />
         <option value="Enum" />
         <option value="FxmlFile" />
-        <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -261,14 +261,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00033" summary="Added the StrictHashMap class. This class functions almost identically to a HashMap but there is one key difference. The StrictHashMap does not allow for any identical keys or values to passed in. If the StrictHashMap already contains, for example, the key &quot;1&quot;, no other pairs may use that key. The same rule applies to the values. If there is a value, for example, &quot;Value&quot;, no other pairs may use that value. The SCENE_MANAGER constant in the Builder interface will use the StrictHashMap going forwards.">
-      <option name="closed" value="true" />
-      <created>1711303028427</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1711303028427</updated>
     </task>
     <task id="LOCAL-00034" summary="This commit is merely a test. The project faced several errors and a complete reset was necessary. Basically the project needed to be deleted and re-cloned from GitHub.">
       <option name="closed" value="true" />
@@ -654,7 +646,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742351282744</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future.">
+      <option name="closed" value="true" />
+      <created>1742352309333</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1742352309333</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a missed compiler error in the module-info file." />
     <MESSAGE value="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like." />
     <MESSAGE value="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage." />
     <MESSAGE value="Implemented the most basic version of the final game. Currently, the player is able to do everything that will be available in the final game except tower upgrades. More enemies and towers will be added in the next commit." />
@@ -687,7 +686,8 @@
     <MESSAGE value="Reset the Player's cash for the GameScene to 500." />
     <MESSAGE value="Added Waves 3 - 27 to the GameScene class." />
     <MESSAGE value="Added a feature that allows the Player to cancel placing a tower if they press ESC." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a feature that allows the Player to cancel placing a tower if they press ESC." />
+    <MESSAGE value="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

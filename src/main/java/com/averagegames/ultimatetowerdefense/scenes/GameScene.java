@@ -1,6 +1,7 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.Farm;
@@ -49,7 +50,7 @@ public class GameScene extends Scene implements Builder {
      * A {@link Constant} representing the starting cash for the {@link Player}.
      */
     @Constant
-    private static final int STARTING_CASH = 500;
+    private static final int STARTING_CASH = 1000000;
 
     /**
      * A {@link Constant} representing the starting wave for the {@link Player}.
@@ -113,6 +114,9 @@ public class GameScene extends Scene implements Builder {
      */
     private Tower tempTower;
 
+    /**
+     * A boolean value that will allow for a {@link Wave} to be {@code skipped}.
+     */
     private boolean allowSkip;
 
     /**
@@ -165,6 +169,9 @@ public class GameScene extends Scene implements Builder {
 
     @Override
     public void pre_build(@NotNull final Stage stage) {
+
+        // Sets the stages title to the title of the game.
+        stage.setTitle("Ultimate Tower Defense");
 
         // Sets the stage to maximize.
         stage.setMaximized(true);
@@ -288,6 +295,11 @@ public class GameScene extends Scene implements Builder {
             };
 
             if (tower != null) {
+                if (this.tempTower != null) {
+                    this.tempTower.eliminate();
+                    this.parent.getChildren().remove(this.tempTower.getLoadedTower());
+                }
+
                 int amount = 0;
 
                 for (Tower t : LIST_OF_ACTIVE_TOWERS) {
@@ -297,10 +309,12 @@ public class GameScene extends Scene implements Builder {
                 }
 
                 if (amount < tower.getPlacementLimit() && Player.cash >= cost) {
-                    tower.setParent(this.parent);
-                    tower.place(new Position(event.getX(), event.getY()));
-                    tower.select();
-                    tower.startAttacking();
+                    Platform.runLater(() -> {
+                        tower.setParent(this.parent);
+                        tower.place(new Position(event.getX(), event.getY()));
+                        tower.select();
+                        tower.startAttacking();
+                    });
 
                     Player.cash -= cost;
                     CASH_TEXT.setText(STR."$\{Player.cash}");
@@ -312,11 +326,6 @@ public class GameScene extends Scene implements Builder {
                         // Ignore
                     }
                 }
-            }
-
-            if (this.tempTower != null) {
-                this.tempTower.eliminate();
-                this.parent.getChildren().remove(this.tempTower.getLoadedTower());
             }
 
             this.towerIndex = -1;
@@ -363,6 +372,8 @@ public class GameScene extends Scene implements Builder {
                     this.tempTower.eliminate();
                     this.parent.getChildren().remove(this.tempTower.getLoadedTower());
                 }
+
+                LIST_OF_ACTIVE_TOWERS.forEach(tower -> tower.deselect());
 
                 this.towerIndex = -1;
             }
