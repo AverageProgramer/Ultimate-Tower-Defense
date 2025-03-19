@@ -11,7 +11,6 @@ import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Map;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.maps.gui.SkipPanel;
-import com.averagegames.ultimatetowerdefense.player.Inventory;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.player.modes.Easy;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
@@ -42,13 +41,14 @@ import static com.averagegames.ultimatetowerdefense.maps.Map.*;
  * @see StoreScene
  * @author AverageProgramer
  */
+@SuppressWarnings("all")
 public class GameScene extends Scene implements Builder {
 
     /**
      * A {@link Constant} representing the starting cash for the {@link Player}.
      */
     @Constant
-    private static final int STARTING_CASH = 1000000;
+    private static final int STARTING_CASH = 500;
 
     /**
      * A {@link Constant} representing the starting wave for the {@link Player}.
