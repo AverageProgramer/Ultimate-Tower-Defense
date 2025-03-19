@@ -9,20 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Shotgunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Shotgunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
-    </list>
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fully implemented the Inventory class into the project. The Inventory class is merely a record that keeps track of the Towers the Player wishes to bring into a round. In the final game, the Player will be able to take five Towers of their choosing with them into a round, regardless of difficulty." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -271,14 +258,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00035" summary="Added a &quot;native&quot; folder to the project. This is where all native C\C++ code will be located. Currently, there is only one C++ source file in this folder. This source file contains the native code for the &quot;getTarget&quot; method in the Enemy class.">
-      <option name="closed" value="true" />
-      <created>1711765655493</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1711765655493</updated>
     </task>
     <task id="LOCAL-00036" summary="Updated the project's structure. The header file for the native C++ code is now located within the native folder. It was previously located in the target folder which is ignored by the .gitignore file.">
       <option name="closed" value="true" />
@@ -664,7 +643,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742357869232</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Fully implemented the Inventory class into the project. The Inventory class is merely a record that keeps track of the Towers the Player wishes to bring into a round. In the final game, the Player will be able to take five Towers of their choosing with them into a round, regardless of difficulty.">
+      <option name="closed" value="true" />
+      <created>1742389718283</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1742389718283</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -672,7 +659,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage." />
     <MESSAGE value="Implemented the most basic version of the final game. Currently, the player is able to do everything that will be available in the final game except tower upgrades. More enemies and towers will be added in the next commit." />
     <MESSAGE value="Implemented the Summoner and Armored zombies into the game. The Summoner zombies have the ability to spawn 5 random Enemies every 15 seconds. The Armored zombies are the first Enemies to use a 'shield'. Shields can only be damaged if enough damage is actually dealt to the Enemy. For example, if an Enemy has 20 base HP and 15 shield, a Tower can only begin to wear down the Shield if the Tower does a minimum of 5 damage. More Towers will be added in the next commit." />
     <MESSAGE value="Made an update to the LootBox zombie. The LootBox zombie will no longer grant money when damaged. The Summoner has also been renamed to the Sorcerer." />
@@ -697,7 +683,8 @@
     <MESSAGE value="Added a feature that allows the Player to cancel placing a tower if they press ESC." />
     <MESSAGE value="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future." />
     <MESSAGE value="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers." />
+    <MESSAGE value="Fully implemented the Inventory class into the project. The Inventory class is merely a record that keeps track of the Towers the Player wishes to bring into a round. In the final game, the Player will be able to take five Towers of their choosing with them into a round, regardless of difficulty." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fully implemented the Inventory class into the project. The Inventory class is merely a record that keeps track of the Towers the Player wishes to bring into a round. In the final game, the Player will be able to take five Towers of their choosing with them into a round, regardless of difficulty." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
