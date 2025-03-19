@@ -1,12 +1,12 @@
 package com.averagegames.ultimatetowerdefense;
 
-import static com.averagegames.ultimatetowerdefense.scenes.SceneBuilder.loadBuild;
+import static com.averagegames.ultimatetowerdefense.scenes.Builder.loadBuild;
 import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
 
+import com.averagegames.ultimatetowerdefense.maps.dev.TestMap;
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 
@@ -21,18 +21,11 @@ public class Main extends Application {
 
     @Override
     public void start(@NotNull final Stage stage) throws Exception {
-        new Thread(() -> {
-            GameScene scene = new GameScene(new Group());
-            Platform.runLater(() -> {
-                try {
-                    loadBuild(scene, stage);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            });
+        GameScene scene = new GameScene(new Group(), new TestMap());
 
-            LOGGER.info(STR."Scene \{scene} has been loaded successfully onto stage \{stage}.");
-        }).start();
+        loadBuild(scene, stage);
+
+        LOGGER.info(STR."Scene \{scene} has been loaded successfully onto stage \{stage}.");
 
         LOGGER.info(STR."Application \{this} started.");
     }

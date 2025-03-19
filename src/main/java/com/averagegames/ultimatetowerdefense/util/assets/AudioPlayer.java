@@ -16,7 +16,7 @@ import java.io.IOException;
  * @see Clip
  * @author AverageProgramer
  */
-@NoArgsConstructor(force = true) @Setter @Getter
+@NoArgsConstructor(force = true)
 public class AudioPlayer {
 
     /**
@@ -28,6 +28,7 @@ public class AudioPlayer {
      * The {@code path} the the audio {@link File}.
      */
     @NotNull
+    @Setter @Getter
     private String pathname;
 
     @NotNull

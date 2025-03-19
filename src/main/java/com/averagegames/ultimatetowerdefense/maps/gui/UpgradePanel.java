@@ -83,7 +83,7 @@ public final class UpgradePanel extends Group {
                     if (Player.cash >= tower.getUpgradeCosts()[tower.getLevel()]) {
                         Player.cash -= tower.getUpgradeCosts()[tower.getLevel()];
 
-                        Platform.runLater(() -> GameScene.cashText.setText(STR."$\{Player.cash}"));
+                        Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));
 
                         tower.upgrade();
 
@@ -103,7 +103,7 @@ public final class UpgradePanel extends Group {
                     if (Player.cash >= tower.getUpgradeCosts()[tower.getLevel()]) {
                         Player.cash -= tower.getUpgradeCosts()[tower.getLevel()];
 
-                        Platform.runLater(() -> GameScene.cashText.setText(STR."$\{Player.cash}"));
+                        Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));
 
                         tower.upgrade();
 

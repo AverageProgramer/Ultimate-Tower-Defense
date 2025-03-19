@@ -2,11 +2,8 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombie
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
-import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.maps.Spawner;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.application.Platform;
@@ -80,7 +77,7 @@ public class Sorcerer extends Enemy {
                 Enemy[] enemies = new Enemy[5];
 
                 for (int i = 0; i < 5; i++) {
-                    int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 7 : 6) - 1)) + 1;
+                    int enemy = (int) (Math.random() * ((Player.wave >= 20 ? 7 : 6) - 1)) + 1;
 
                     Enemy e = switch (enemy) {
                         case 1 ->

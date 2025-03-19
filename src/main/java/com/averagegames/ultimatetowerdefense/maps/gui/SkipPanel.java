@@ -1,9 +1,8 @@
 package com.averagegames.ultimatetowerdefense.maps.gui;
 
-import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
-import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
@@ -77,16 +76,6 @@ public final class SkipPanel extends Group {
         this.text.setTextAlignment(TextAlignment.CENTER);
         this.text.setFont(Font.font(20));
 
-        this.yButton.setOnAction(event -> {
-            Player.cash += (GameScene.getWave() * 5) + 100;
-            Platform.runLater(() -> GameScene.cashText.setText(STR."$\{Player.cash}"));
-
-            GameScene.skip = true;
-
-            super.getChildren().removeAll(this.area, this.yButton, this.nButton, this.text);
-        });
-        this.nButton.setOnAction(event -> super.getChildren().removeAll(this.area, this.yButton, this.nButton, this.text));
-
         super.getChildren().addAll(this.area, this.yButton, this.nButton, this.text);
 
         super.setViewOrder(Integer.MIN_VALUE);
@@ -126,5 +115,13 @@ public final class SkipPanel extends Group {
     @SuppressWarnings("unused")
     public double getAreaHeight() {
         return this.area.getHeight();
+    }
+
+    public void setOnAccept(@NotNull final EventHandler<ActionEvent> event) {
+        this.yButton.setOnAction(event);
+    }
+
+    public void setOnDeny(@NotNull final EventHandler<ActionEvent> event) {
+        this.nButton.setOnAction(event);
     }
 }

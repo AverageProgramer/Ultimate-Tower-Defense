@@ -38,7 +38,7 @@ public abstract class Tower {
      * A {@link List} containing every active {@link Tower} in a game.
      */
     @NotNull
-    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());
+    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new LinkedList<>());
 
     /**
      * The {@link Tower}'s parent {@link Group}.
@@ -70,6 +70,10 @@ public abstract class Tower {
      */
     @Accessors(makeFinal = true) @Getter
     protected int[] upgradeCosts;
+
+    @Range(from = 0L, to = Long.MAX_VALUE)
+    @Accessors(makeFinal = true) @Getter
+    protected int placementLimit = Integer.MAX_VALUE;
 
     /**
      * The {@link Tower}'s current {@code health}.
@@ -112,7 +116,6 @@ public abstract class Tower {
     /**
      * The {@link Tower}'s cool down in milliseconds between {@code attacks}.
      */
-    @Range(from = 0L, to = Long.MAX_VALUE)
     protected int[] coolDowns;
 
     /**
@@ -373,8 +376,8 @@ public abstract class Tower {
         // Sets the tower's range to be visible.
         this.range.setVisible(true);
 
-        this.panel.setX(this.getPosition().x() >= GameScene.screen.getWidth() / 2 ? 15 : GameScene.screen.getWidth() - this.panel.getAreaWidth() - 15);
-        this.panel.setY(GameScene.screen.getHeight() / 2 - this.panel.getAreaHeight() / 2);
+        this.panel.setX(this.getPosition().x() >= GameScene.SCREEN.getWidth() / 2 ? 15 : GameScene.SCREEN.getWidth() - this.panel.getAreaWidth() - 15);
+        this.panel.setY(GameScene.SCREEN.getHeight() / 2 - this.panel.getAreaHeight() / 2);
 
         if (this.parent != null) {
             this.parent.getChildren().add(this.panel);
@@ -685,6 +688,8 @@ public abstract class Tower {
         // Performs the tower's death action.
         // This method is unique to each individual inheritor of the tower class.
         this.onDeath();
+
+        this.parent.getChildren().remove(this.range);
 
         // Removes the tower from its parent group.
         this.parent.getChildren().remove(this.loadedTower);

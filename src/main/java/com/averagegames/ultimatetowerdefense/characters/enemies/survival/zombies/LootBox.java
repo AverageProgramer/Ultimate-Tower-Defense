@@ -5,7 +5,7 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
@@ -67,7 +67,7 @@ public class LootBox extends Enemy {
 
         Path path = new Path(positions.toArray(Position[]::new));
 
-        int enemy = (int) (Math.random() * ((GameScene.getWave() >= 20 ? 6 : 5) - 1)) + 1;
+        int enemy = (int) (Math.random() * ((Player.wave >= 20 ? 6 : 5) - 1)) + 1;
 
         Enemy e = switch (enemy) {
             case 1 ->

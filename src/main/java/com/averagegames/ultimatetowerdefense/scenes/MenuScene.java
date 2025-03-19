@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
-public final class MenuScene extends Scene implements SceneBuilder {
+public final class MenuScene extends Scene implements Builder {
     public MenuScene(Parent root) {
         super(root);
     }

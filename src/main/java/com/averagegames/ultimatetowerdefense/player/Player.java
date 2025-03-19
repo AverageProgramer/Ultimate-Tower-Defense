@@ -1,13 +1,44 @@
 package com.averagegames.ultimatetowerdefense.player;
 
-import com.averagegames.ultimatetowerdefense.characters.towers.standard.Farm;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
+import com.averagegames.ultimatetowerdefense.util.development.Property;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+/**
+ * The {@link Player} class serves as a way to encapsulate and represent all game {@code data} that a {@link Player} might have.
+ * This data can include anything from in-game {@code cash} to menu {@code silver} and {@code gold} coins.
+ * @since Ultimate Tower Defense 1.0
+ * @author AverageProgramer
+ */
+public final class Player {
 
-public class Player {
+    /**
+     * The amount of {@link Tower}'s the {@link Player} can place during a game.
+     */
+    @Property
+    public static final int TOWER_LIMIT = 40;
+
+    /**
+     * The {@link Player}'s current amount of in-game {@code cash}.
+     */
+    @Property(mutable = true)
     public static int cash = 500;
-    public static int LIMIT = 40;
-    public static final List<Farm> LIST_OF_ACTIVE_FARMS = Collections.synchronizedList(new ArrayList<>());
+
+    /**
+     * The {@link Player}'s current in-game {@link Wave}
+     */
+    @Property(mutable = true)
+    public static int wave = 1;
+
+    /**
+     * The {@link Player}'s current amount of {@code silver} coins.
+     */
+    @Property(mutable = true)
+    public static int silver;
+
+    /**
+     * The {@link Player}'s current amount of {@code gold} coins.
+     */
+    @Property(mutable = true)
+    public static int gold;
 }

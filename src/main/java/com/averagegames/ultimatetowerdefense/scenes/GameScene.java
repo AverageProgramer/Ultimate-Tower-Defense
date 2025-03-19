@@ -1,147 +1,398 @@
 package com.averagegames.ultimatetowerdefense.scenes;
 
+import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
-import com.averagegames.ultimatetowerdefense.characters.towers.standard.*;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Farm;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Gunner;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Marksman;
+import com.averagegames.ultimatetowerdefense.characters.towers.standard.Scout;
 import com.averagegames.ultimatetowerdefense.maps.Base;
-import com.averagegames.ultimatetowerdefense.maps.Path;
+import com.averagegames.ultimatetowerdefense.maps.Map;
 import com.averagegames.ultimatetowerdefense.maps.Position;
-import com.averagegames.ultimatetowerdefense.maps.Spawner;
 import com.averagegames.ultimatetowerdefense.maps.gui.SkipPanel;
+import com.averagegames.ultimatetowerdefense.player.Inventory;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.player.modes.Easy;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
 import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
-import static com.averagegames.ultimatetowerdefense.player.Player.LIST_OF_ACTIVE_FARMS;
+import static com.averagegames.ultimatetowerdefense.maps.Map.*;
 
-// TODO: Complete overhaul of GameScene class. Add wave timer and bonus.
+/**
+ * The {@link GameScene} class is one of a variety of different {@link Scene}'s the {@link Player} will experience while playing the game.
+ * The {@link GameScene} class, using the {@link Builder} interface, is a custom-built scene that {@link Map}s can easily be added to and removed from.
+ * {@link Player} cash and coins are also managed and altered accordingly within the {@link GameScene} class.
+ * @since Ultimate Tower Defense 1.0
+ * @see MenuScene
+ * @see StoreScene
+ * @author AverageProgramer
+ */
+public class GameScene extends Scene implements Builder {
 
-public final class GameScene extends Scene implements SceneBuilder {
+    /**
+     * A {@link Constant} representing the starting cash for the {@link Player}.
+     */
+    @Constant
+    private static final int STARTING_CASH = 1000000;
 
-    private int tower = -1;
+    /**
+     * A {@link Constant} representing the starting wave for the {@link Player}.
+     */
+    @Constant
+    private static final int STARTING_WAVE = 1;
 
-    @Getter
-    private static int wave = 1;
+    /**
+     * The {@link Player}'s {@link Screen} dimensions.
+     */
+    public static final Rectangle2D SCREEN;
 
-    public static final Text cashText = new Text(STR."$\{Player.cash}");
+    /**
+     * A global {@link AudioPlayer} for playing background music.
+     */
+    public static final AudioPlayer GLOBAL_PLAYER;
 
-    public static final Text baseText = new Text(STR."\{Base.health} HP");
+    /**
+     * The {@link Text} that will display the {@link Player}'s {@code cash}.
+     */
+    public static final Text CASH_TEXT;
 
-    public static final Text waveText = new Text("Wave 1");
+    /**
+     * The {@link Text} that will display the {@link Base}'s {@code health}.
+     */
+    public static final Text HEALTH_TEXT;
 
-    public static final Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+    /**
+     * The {@link Text} that will display the {@code wave}.
+     */
+    public static final Text WAVE_TEXT;
 
-    private static final double xSpace;
+    /**
+     * The {@link GameScene}'s parent {@link Group}.
+     */
+    @NotNull
+    private final Group parent;
 
-    private static final double ySpace;
+    /**
+     * The {@link GameScene}'s {@link Map} to be loaded.
+     */
+    @NotNull
+    private final Map map;
 
-    private final Group root = (Group) super.getRoot();
+    /**
+     * An {@code index} representing which {@link Tower} to place.
+     */
+    private int towerIndex;
 
+    /**
+     * A {@link Tower} that will be used to indicate where the {@link Player} would like to place a {@link Tower}.
+     */
     private Tower tempTower;
 
-    public static boolean placed;
+    private boolean allowSkip;
 
-    public static boolean skip;
+    /**
+     * A {@link Thread} that is responsible for handling all {@link Enemy} {@code spawns}.
+     */
+    @NotNull
+    private Thread spawnThread;
 
     static {
-        while (true) {
-            if (screen.getWidth() != 0 && screen.getHeight() != 0) {
-                break;
-            }
-        }
 
-        xSpace = (screen.getWidth() - 1350) / 2;
-        ySpace = (screen.getHeight() - 500) / 2;
+        // Initializes the screen bounds as the player's screen.
+        SCREEN = Screen.getPrimary().getVisualBounds();
+
+        // Initializes the global audio player to a default audio player with no given path.
+        GLOBAL_PLAYER = new AudioPlayer();
+
+        // Initializes the text that will display the player's current cash.
+        CASH_TEXT = new Text();
+
+        // Initializes the text that will display the base's current health.
+        HEALTH_TEXT = new Text();
+
+        // Initializes the text that will display the current wave.
+        WAVE_TEXT = new Text();
     }
 
-    public static final Spawner SPAWNER = getTestSpawner();
+    /**
+     * A constructor that initializes the {@link GameScene} using a given {@link Group}.
+     * @param root the parent {@link Group}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public GameScene(@NotNull final Group root, @NotNull final Map map) {
 
-    public GameScene(@NotNull final Parent root) {
+        // Initializes the scene using a constructor that takes a group object as a parameter from the inherited super class.
         super(root);
+
+        // Sets the scene's parent group to the given group.
+        this.parent = root;
+
+        // Sets the scene's map to the given map.
+        this.map = map;
+
+        this.towerIndex = -1;
+
+        // Initializes the thread that will be used to spawn enemies.
+        this.spawnThread = new Thread(() -> {
+            // This thread does nothing by default.
+        });
     }
 
     @Override
-    public void pre_build(@NotNull final Stage stage) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - The Horde.wav");
-        player.loop(AudioPlayer.INDEFINITELY);
+    public void pre_build(@NotNull final Stage stage) {
 
+        // Sets the stage to maximize.
         stage.setMaximized(true);
+
+        // Sets it so that the stage can't be resized.
         stage.setResizable(false);
 
-        stage.setWidth(screen.getWidth());
-        stage.setHeight(screen.getHeight());
+        // Sets the dimensions of the stage to the screen's dimensions.
+
+        stage.setWidth(SCREEN.getWidth());
+        stage.setHeight(SCREEN.getHeight());
+
+        // Sets the player's current cash to the global constant representing starting cash.
+        Player.cash = STARTING_CASH;
+
+        // Sets the player's current wave to the global constant representing starting wave.
+        Player.wave = STARTING_WAVE;
     }
 
-    private static @NotNull Spawner getTestSpawner() {
-        Spawner spawner = new Spawner(new Position(xSpace, ySpace));
+    @Override
+    public void build(@NotNull final Stage stage) throws Exception {
+        loadMap(this.map, this);
 
-        spawner.setEnemyPathing(new Path(new Position[] {
-                new Position(xSpace + 400, ySpace),
-                new Position(xSpace + 550, ySpace + 200),
-                new Position(xSpace + 550, ySpace + 400),
-                new Position(xSpace + 900, ySpace + 400),
-                new Position(xSpace + 900, ySpace + 200),
-                new Position(xSpace + 700, ySpace + 100),
-                new Position(xSpace + 700, ySpace),
-                new Position(xSpace + 1050, ySpace),
-                new Position(xSpace + 1200, ySpace + 200),
-                new Position(xSpace + 1350, ySpace + 200)
-        }));
+        CASH_TEXT.setText(STR."$\{Player.cash}");
 
-        spawner.setSpawnDelay(1500);
+        CASH_TEXT.setFill(Paint.valueOf("#3dbe23"));
+        CASH_TEXT.setFont(Font.font(50));
 
-        return spawner;
+        CASH_TEXT.setX(50);
+        CASH_TEXT.setY(SCREEN.getHeight() + 10 - CASH_TEXT.getLayoutBounds().getHeight());
+
+        HEALTH_TEXT.setText(STR."\{Base.health} HP");
+
+        HEALTH_TEXT.setFill(Paint.valueOf("#b60e0e"));
+        HEALTH_TEXT.setTextAlignment(TextAlignment.RIGHT);
+        HEALTH_TEXT.setFont(Font.font(50));
+
+        HEALTH_TEXT.setX(SCREEN.getWidth() - 60 - HEALTH_TEXT.getLayoutBounds().getWidth());
+        HEALTH_TEXT.setY(SCREEN.getHeight() + 20 - HEALTH_TEXT.getLayoutBounds().getHeight());
+
+        WAVE_TEXT.setText(STR."Wave \{Player.wave}");
+
+        WAVE_TEXT.setFont(Font.font(50));
+        WAVE_TEXT.setTextAlignment(TextAlignment.RIGHT);
+
+        WAVE_TEXT.setX(SCREEN.getWidth() - 60 - WAVE_TEXT.getLayoutBounds().getWidth());
+        WAVE_TEXT.setY(100);
+
+        this.parent.getChildren().addAll(CASH_TEXT, HEALTH_TEXT, WAVE_TEXT);
+
+        Button scoutButton = new Button(STR."Scout: \{Scout.COST}");
+        Button marksmanButton = new Button(STR."Marksman:\n\{Marksman.COST}");
+        Button gunnerButton = new Button(STR."Gunner: \{Gunner.COST}");
+        Button energizerButton = new Button(STR."Energizer:\n\{Energizer.COST}");
+        Button farmButton = new Button(STR."Farm: \{Farm.COST}");
+
+        Button[] buttons = new Button[5];
+
+        buttons[0] = scoutButton;
+        buttons[1] = marksmanButton;
+        buttons[2] = gunnerButton;
+        buttons[3] = energizerButton;
+        buttons[4] = farmButton;
+
+        double x = (SCREEN.getWidth() / 2) - 50;
+        double y = SCREEN.getHeight() - 175;
+
+        for (int i = 0; i < buttons.length; i++) {
+
+            buttons[i].setPrefSize(100, 100);
+            buttons[i].setTranslateX(x + (-200 + (i * 100)));
+            buttons[i].setTranslateY(y);
+
+            int index = i;
+
+            buttons[i].setOnAction(event -> {
+                LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
+
+                this.towerIndex = index;
+            });
+
+            this.parent.getChildren().add(buttons[i]);
+        }
+
+        this.setOnMouseClicked(event -> {
+            Tower tower = switch (this.towerIndex) {
+                case 0 ->
+                        new Scout();
+                case 1 ->
+                        new Marksman();
+                case 2 ->
+                        new Gunner();
+                case 3 ->
+                        new Energizer();
+                case 4 ->
+                        new Farm();
+                default ->
+                        null;
+            };
+
+            int cost = switch (tower) {
+                case Scout scout ->
+                        Scout.COST;
+                case Marksman marksman ->
+                        Marksman.COST;
+                case Gunner gunner ->
+                        Gunner.COST;
+                case Energizer energizer ->
+                        Energizer.COST;
+                case Farm farm ->
+                        Farm.COST;
+                case null ->
+                        Integer.MAX_VALUE;
+                default ->
+                        throw new IllegalStateException("Unexpected value: " + tower);
+            };
+
+            if (tower != null) {
+                int amount = 0;
+
+                for (Tower t : LIST_OF_ACTIVE_TOWERS) {
+                    if (tower.getClass() == t.getClass()) {
+                        amount++;
+                    }
+                }
+
+                if (amount < tower.getPlacementLimit() && Player.cash >= cost) {
+                    tower.setParent(this.parent);
+                    tower.place(new Position(event.getX(), event.getY()));
+                    tower.select();
+                    tower.startAttacking();
+
+                    Player.cash -= cost;
+                    CASH_TEXT.setText(STR."$\{Player.cash}");
+                } else {
+                    try {
+                        AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
+                        player.play();
+                    } catch (Exception ex) {
+                        // Ignore
+                    }
+                }
+            }
+
+            if (this.tempTower != null) {
+                this.tempTower.eliminate();
+                this.parent.getChildren().remove(this.tempTower.getLoadedTower());
+            }
+
+            this.towerIndex = -1;
+        });
+
+        this.setOnMouseMoved(event -> {
+            if (this.tempTower == null) {
+                this.tempTower = switch (this.towerIndex) {
+                    case 0 ->
+                            new Scout();
+                    case 1 ->
+                            new Marksman();
+                    case 2 ->
+                            new Gunner();
+                    case 3 ->
+                            new Energizer();
+                    case 4 ->
+                            new Farm();
+                    default ->
+                            null;
+                };
+            }
+
+            if (this.tempTower != null && this.towerIndex != -1) {
+                if (!this.parent.getChildren().contains(this.tempTower.getLoadedTower())) {
+                    this.tempTower.setParent(this.parent);
+
+                    this.tempTower.place(new Position(event.getX(), event.getY()));
+
+                    LIST_OF_ACTIVE_TOWERS.remove(this.tempTower);
+
+                    this.tempTower.getLoadedTower().setOpacity(0.75);
+                    this.tempTower.getRange().setVisible(true);
+                }
+
+                this.tempTower.setPosition(new Position(event.getX(), event.getY()));
+
+                this.tempTower.getRange().setCenterX(event.getX());
+                this.tempTower.getRange().setCenterY(event.getY());
+
+            }
+        });
+
+        GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - The Horde.wav");
+        GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
+
+        this.spawnThread = new Thread(() -> {
+            ENEMY_SPAWNER.spawn(Easy.WAVE_1, this.parent);
+            this.spawnerWait();
+
+            ENEMY_SPAWNER.spawn(Easy.WAVE_2, this.parent);
+            this.spawnerWait();
+        });
+
+        this.spawnThread.start();
     }
 
-    private void timerWait() {
-        Rectangle rectangle = new Rectangle(260, 115);
+    @Override
+    public void post_build(@NotNull final Stage stage) {
 
+        // Sets the stage's scene as this scene.
+        stage.setScene(this);
+
+        // Enables the stage for use.
+        stage.show();
+    }
+
+    @SuppressWarnings("all")
+    private void spawnerWait() {
         SkipPanel panel = new SkipPanel();
 
-        panel.setX((screen.getWidth() / 2) - (rectangle.getWidth() / 2));
+        panel.setX((SCREEN.getWidth() / 2) - (panel.getAreaWidth() / 2));
         panel.setY(15);
 
-        synchronized (panel) {
-            Platform.runLater(() -> root.getChildren().add(panel));
-        }
+        panel.setOnAccept(event -> {
+            Player.cash += (Player.wave * 5) + 100;
+            Platform.runLater(() -> CASH_TEXT.setText(STR."$\{Player.cash}"));
 
-        while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !skip && Base.health > 0);
+            this.allowSkip = true;
+        });
 
-        synchronized (panel) {
-            Platform.runLater(() -> root.getChildren().remove(panel));
-        }
+        panel.setOnDeny(event -> Platform.runLater(() -> this.parent.getChildren().remove(panel)));
 
-        if (Base.health <= 0) {
-            return;
-        }
+        Platform.runLater(() -> this.parent.getChildren().add(panel));
 
-        ++wave;
+        while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !this.allowSkip && Base.health > 0);
 
-        skip = false;
+        Platform.runLater(() -> this.parent.getChildren().remove(panel));
+
+        Player.wave++;
+        this.allowSkip = false;
 
         for (int i = 0; i < 4; i++) {
             try {
@@ -160,608 +411,24 @@ public final class GameScene extends Scene implements SceneBuilder {
             }
         }
 
-        for (Farm farm : LIST_OF_ACTIVE_FARMS) {
-            Player.cash += farm.getBonuses()[farm.getLevel()];
+        for (Tower tower : LIST_OF_ACTIVE_TOWERS) {
+            if (!(tower instanceof Farm)) {
+                continue;
+            }
 
-            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Farm Income 1.wav");
+            Player.cash += ((Farm) tower).getBonuses()[tower.getLevel()];
+
             try {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Farm Income 1.wav");
                 player.play();
             } catch (Exception ex) {
                 // Ignore
             }
         }
 
-        synchronized (waveText) {
-            Platform.runLater(() -> waveText.setText(STR."Wave \{wave}"));
-        }
-
-        synchronized (cashText) {
-            Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-        }
-    }
-
-    @Override
-    public void build(@NotNull final Stage stage) {
-        stage.setTitle("Ultimate Tower Defense");
-
-        Circle circle1 = new Circle(5);
-        circle1.setCenterX(xSpace);
-        circle1.setCenterY(ySpace);
-
-        Circle circle2 = new Circle(5);
-        circle2.setCenterX(xSpace + 1350);
-        circle2.setCenterY(ySpace + 200);
-
-        cashText.setX(50);
-        cashText.setY(screen.getHeight() - 20 - cashText.getLayoutBounds().getHeight());
-        cashText.setFill(Paint.valueOf("#3dbe23"));
-        cashText.setFont(Font.font(50));
-
-        baseText.setX(screen.getWidth() - 180 - baseText.getLayoutBounds().getWidth());
-        baseText.setY(screen.getHeight() - 20 - baseText.getLayoutBounds().getHeight());
-        baseText.setFill(Paint.valueOf("#b60e0e"));
-        baseText.setFont(Font.font(50));
-
-        waveText.setX(screen.getWidth() - 180 - waveText.getLayoutBounds().getWidth());
-        waveText.setY(80);
-        waveText.setFont(Font.font(50));
-
-        double gunnerButtonX = (screen.getWidth() / 2) - 50;
-        double y = screen.getHeight() - 175;
-
-        this.setOnMouseMoved(event -> {
-            if (this.tower != -1 && this.tempTower != null) {
-                if (!this.root.getChildren().contains(tempTower.getLoadedTower())) {
-                    Platform.runLater(() -> {
-                        this.tempTower.place(new Position(event.getX(), event.getY()));
-
-                        this.tempTower.getLoadedTower().setOpacity(0.75);
-                    });
-
-                    if (tempTower instanceof Farm) {
-                        LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                    }
-                }
-
-                Platform.runLater(() -> this.tempTower.setPosition(new Position(event.getX(), event.getY())));
-
-                if (tempTower instanceof Farm) {
-                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                }
-
-                Platform.runLater(() -> {
-                    if (!(tempTower instanceof Gunship)) {
-                        this.tempTower.getRange().setVisible(true);
-
-                        this.tempTower.getRange().setCenterX(tempTower.getPosition().x());
-                        this.tempTower.getRange().setCenterY(tempTower.getPosition().y());
-                    }
-                });
-            }
-        });
-
-        Button scoutButton = new Button("Scout: $200");
-        scoutButton.setPrefSize(100, 100);
-        scoutButton.setTranslateX(gunnerButtonX - 200);
-        scoutButton.setTranslateY(y);
-        scoutButton.setOnAction(event -> {
-            if (tempTower != null) {
-                tempTower.eliminate();
-                this.root.getChildren().remove(tempTower.getRange());
-
-                if (tempTower instanceof Farm) {
-                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                }
-            }
-
-            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
-
-            this.tower = 0;
-
-            this.tempTower = new Scout();
-
-            this.tempTower.setParent(this.root);
-        });
-
-        Button marksmanButton = new Button("Marksman:\n$300");
-        marksmanButton.setPrefSize(100, 100);
-        marksmanButton.setTranslateX(gunnerButtonX - 100);
-        marksmanButton.setTranslateY(y);
-        marksmanButton.setOnAction(event -> {
-            if (tempTower != null) {
-                tempTower.eliminate();
-                this.root.getChildren().remove(tempTower.getRange());
-
-                if (tempTower instanceof Farm) {
-                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                }
-            }
-
-            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
-
-            this.tower = 1;
-
-            this.tempTower = new Marksman();
-
-            this.tempTower.setParent(this.root);
-        });
-
-        Button gunnerButton = new Button("Gunship: $750");
-        gunnerButton.setPrefSize(100, 100);
-        gunnerButton.setTranslateX(gunnerButtonX);
-        gunnerButton.setTranslateY(y);
-        gunnerButton.setOnAction(event -> {
-            if (tempTower != null) {
-                tempTower.eliminate();
-                this.root.getChildren().remove(tempTower.getRange());
-
-                if (tempTower instanceof Farm) {
-                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                }
-            }
-
-            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
-
-            this.tower = 2;
-
-            this.tempTower = new Gunner();
-
-            this.tempTower.setParent(this.root);
-        });
-
-        Button energizerButton = new Button("Energizer:\n$2500");
-        energizerButton.setPrefSize(100, 100);
-        energizerButton.setTranslateX(gunnerButtonX + 100);
-        energizerButton.setTranslateY(y);
-        energizerButton.setOnAction(event -> {
-            if (tempTower != null) {
-                tempTower.eliminate();
-                this.root.getChildren().remove(tempTower.getRange());
-
-                if (tempTower instanceof Farm) {
-                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                }
-            }
-
-            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
-
-            this.tower = 3;
-
-            this.tempTower = new Energizer();
-
-            this.tempTower.setParent(this.root);
-        });
-
-        Button farmButton = new Button("Farm: $250");
-        farmButton.setPrefSize(100, 100);
-        farmButton.setTranslateX(gunnerButtonX + 200);
-        farmButton.setTranslateY(y);
-        farmButton.setOnAction(event -> {
-            if (tempTower != null) {
-                tempTower.eliminate();
-                this.root.getChildren().remove(tempTower.getRange());
-
-                if (tempTower instanceof Farm) {
-                    LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                }
-            }
-
-            LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
-
-            this.tower = 4;
-
-            this.tempTower = new Farm();
-
-            this.tempTower.setParent(this.root);
-        });
-
         Platform.runLater(() -> {
-            Position lastPos = new Position(xSpace, ySpace);
-            for (Position pos : new Path(new Position[] {
-                    new Position(xSpace + 400, ySpace),
-                    new Position(xSpace + 550, ySpace + 200),
-                    new Position(xSpace + 550, ySpace + 400),
-                    new Position(xSpace + 900, ySpace + 400),
-                    new Position(xSpace + 900, ySpace + 200),
-                    new Position(xSpace + 700, ySpace + 100),
-                    new Position(xSpace + 700, ySpace),
-                    new Position(xSpace + 1050, ySpace),
-                    new Position(xSpace + 1200, ySpace + 200),
-                    new Position(xSpace + 1350, ySpace + 200)
-            }).positions()) {
-                Line line = new Line();
-
-                line.setStartX(lastPos.x());
-                line.setStartY(lastPos.y());
-                line.setEndX(pos.x());
-                line.setEndY(pos.y());
-
-                line.setViewOrder(Integer.MAX_VALUE);
-
-                lastPos = pos;
-
-                root.getChildren().add(line);
-            }
-
-            root.getChildren().add(cashText);
-            root.getChildren().add(baseText);
-            root.getChildren().add(waveText);
-
-            root.getChildren().add(circle1);
-            root.getChildren().add(circle2);
-
-            root.getChildren().add(scoutButton);
-            root.getChildren().add(marksmanButton);
-            root.getChildren().add(gunnerButton);
-            root.getChildren().add(energizerButton);
-            root.getChildren().add(farmButton);
+            CASH_TEXT.setText(STR."$\{Player.cash}");
+            WAVE_TEXT.setText(STR."Wave \{Player.wave}");
         });
-
-        new Thread(() -> {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                // Ignore
-            }
-
-            SPAWNER.spawn(Easy.WAVE_1, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_2, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_3, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_4, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_5, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_6, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_7, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_8, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_9, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_10, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_11, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_12, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_13, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_14, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_15, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_16, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_17, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_18, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_19, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_20, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_21, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_22, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_23, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_24, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_25, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_26, root);
-            timerWait();
-
-            SPAWNER.spawn(Easy.WAVE_27, root);
-        }).start();
-
-        this.setOnMouseClicked(event -> {
-            placed = true;
-
-            if (this.tower == 0 && Player.cash >= Scout.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
-                if (tempTower != null) {
-                    tempTower.eliminate();
-                    this.root.getChildren().remove(tempTower.getRange());
-
-                    if (tempTower instanceof Farm) {
-                        LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                    }
-                }
-
-                Scout scout = new Scout();
-
-                scout.setParent(root);
-                Platform.runLater(() -> scout.place(new Position(event.getX(), event.getY())));
-
-                Platform.runLater(scout::startAttacking);
-
-                Platform.runLater(scout::select);
-
-                Player.cash -= Scout.COST;
-
-                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                this.tower = -1;
-            } else if (this.tower == 1 && Player.cash >= Marksman.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
-                if (tempTower != null) {
-                    tempTower.eliminate();
-                    this.root.getChildren().remove(tempTower.getRange());
-
-                    if (tempTower instanceof Farm) {
-                        LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                    }
-                }
-
-                Marksman marksman = new Marksman();
-
-                marksman.setParent(root);
-                Platform.runLater(() -> marksman.place(new Position(event.getX(), event.getY())));
-
-                Platform.runLater(marksman::startAttacking);
-
-                Platform.runLater(marksman::select);
-
-                Player.cash -= Marksman.COST;
-
-                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                this.tower = -1;
-            } else if (this.tower == 2 && Player.cash >= Gunner.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
-                if (tempTower != null) {
-                    tempTower.eliminate();
-                    this.root.getChildren().remove(tempTower.getRange());
-
-                    if (tempTower instanceof Farm) {
-                        LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                    }
-                }
-
-                Gunner gunner = new Gunner();
-
-                gunner.setParent(root);
-                Platform.runLater(() -> gunner.place(new Position(event.getX(), event.getY())));
-
-                Platform.runLater(gunner::startAttacking);
-
-                Platform.runLater(gunner::select);
-
-                Player.cash -= Gunner.COST;
-
-                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                this.tower = -1;
-            } else if (this.tower == 3 && Player.cash >= Energizer.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
-                AtomicInteger amount = new AtomicInteger();
-
-                LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
-                    if (tower1 instanceof Energizer && tower1 != tempTower) {
-                        amount.incrementAndGet();
-                    }
-                });
-
-                if (amount.get() < Energizer.LIMIT) {
-                    if (tempTower != null) {
-                        tempTower.eliminate();
-                        this.root.getChildren().remove(tempTower.getRange());
-
-                        if (tempTower instanceof Farm) {
-                            LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                        }
-                    }
-
-                    Energizer energizer = new Energizer();
-
-                    energizer.setParent(root);
-                    Platform.runLater(() -> energizer.place(new Position(event.getX(), event.getY())));
-
-                    Platform.runLater(energizer::startAttacking);
-
-                    Platform.runLater(energizer::select);
-
-                    Player.cash -= Energizer.COST;
-
-                    Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                    this.tower = -1;
-                } else {
-                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
-                    try {
-                        player.play();
-                    } catch (Exception ex) {
-                        // Ignore
-                    }
-                }
-            } else if (this.tower == 4 && Player.cash >= Farm.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
-                AtomicInteger amount = new AtomicInteger();
-
-                LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
-                    if (tower1 instanceof Farm && tower1 != tempTower) {
-                        amount.incrementAndGet();
-                    }
-                });
-
-                if (amount.get() < Farm.LIMIT) {
-                    if (tempTower != null) {
-                        tempTower.eliminate();
-                        this.root.getChildren().remove(tempTower.getRange());
-
-                        if (tempTower instanceof Farm) {
-                            LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                        }
-                    }
-
-                    Farm farm = new Farm();
-
-                    farm.setParent(root);
-                    Platform.runLater(() -> farm.place(new Position(event.getX(), event.getY())));
-
-                    Platform.runLater(farm::startAttacking);
-
-                    Platform.runLater(farm::select);
-
-                    Player.cash -= Farm.COST;
-
-                    Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                    this.tower = -1;
-                } else {
-                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
-                    try {
-                        player.play();
-                    } catch (Exception ex) {
-                        // Ignore
-                    }
-                }
-            } else if (this.tower == 5 && Player.cash >= Pyromancer.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
-                if (tempTower != null) {
-                    tempTower.eliminate();
-                }
-
-                Pyromancer pyromancer = new Pyromancer();
-
-                pyromancer.setParent(root);
-                pyromancer.place(new Position(event.getX(), event.getY()));
-
-                pyromancer.startAttacking();
-
-                Player.cash -= Pyromancer.COST;
-
-                Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                this.tower = -1;
-            } else if (this.tower == 6 && Player.cash >= Gunship.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
-                AtomicInteger amount = new AtomicInteger();
-
-                LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
-                    if (tower1 instanceof Gunship) {
-                        amount.incrementAndGet();
-                    }
-                });
-
-                if (amount.get() < Gunship.LIMIT) {
-                    if (tempTower != null) {
-                        tempTower.eliminate();
-                        this.root.getChildren().remove(tempTower.getRange());
-
-                        if (tempTower instanceof Farm) {
-                            LIST_OF_ACTIVE_FARMS.remove(tempTower);
-                        }
-                    }
-
-                    Gunship gunship = new Gunship();
-
-                    gunship.setParent(root);
-                    gunship.place(new Position(event.getX(), event.getY()));
-
-                    gunship.startAttacking();
-
-                    Player.cash -= Gunship.COST;
-
-                    Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                    this.tower = -1;
-                } else {
-                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
-                    try {
-                        player.play();
-                    } catch (Exception ex) {
-                        // Ignore
-                    }
-                }
-            } else if (this.tower == 7 && Player.cash >= MilitaryBase.COST && LIST_OF_ACTIVE_TOWERS.size() < Player.LIMIT) {
-                AtomicInteger amount = new AtomicInteger();
-
-                LIST_OF_ACTIVE_TOWERS.forEach(tower1 -> {
-                    if (tower1 instanceof MilitaryBase) {
-                        amount.incrementAndGet();
-                    }
-                });
-
-                if (amount.get() < MilitaryBase.LIMIT) {
-                    if (tempTower != null) {
-                        tempTower.eliminate();
-                    }
-
-                    MilitaryBase militaryBase = new MilitaryBase();
-
-                    militaryBase.setParent(root);
-                    militaryBase.place(new Position(event.getX(), event.getY()));
-
-                    militaryBase.startAttacking();
-
-                    Player.cash -= MilitaryBase.COST;
-
-                    Platform.runLater(() -> cashText.setText(STR."$\{Player.cash}"));
-
-                    this.tower = -1;
-                } else {
-                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
-                    try {
-                        player.play();
-                    } catch (Exception ex) {
-                        // Ignore
-                    }
-                }
-            } else if (this.tower == -1) {
-
-            } else {
-                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
-                try {
-                    player.play();
-                } catch (Exception ex) {
-                    // Ignore
-                }
-            }
-
-            placed = false;
-        });
-
-        this.setOnKeyPressed(event -> {
-            if (event.getCode().equals(KeyCode.ESCAPE)) {
-                this.tower = -1;
-
-                if (tempTower != null) {
-                    tempTower.deselect();
-                    tempTower.eliminate();
-                }
-            }
-        });
-
-        stage.setScene(this);
-    }
-
-    @Override
-    public void post_build(@NotNull final Stage stage) {
-        stage.show();
     }
 }

@@ -19,5 +19,18 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.FIELD)
 public @interface Property {
-    // This annotation serves as an indicator to IDE's that a field should not be flagged for specific warnings.
+
+    /**
+     * Gets whether the {@link Property} is unique to a class and not a field within the superclass if there is one.
+     * @return {@code true} if the {@link Property} is unique, {@code false} otherwise.
+     * @since Ultimate Tower Defense 1.0
+     */
+    boolean unique() default false;
+
+    /**
+     * Gets whether the {@link Property} is a mutable {@link Property}.
+     * @return {@code true} if the {@link Property} is mutable, {@code false} otherwise.
+     * @since Ultimate Tower Defense 1.0
+     */
+    boolean mutable() default false;
 }

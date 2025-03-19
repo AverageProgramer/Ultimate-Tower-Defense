@@ -9,23 +9,36 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented a variety of new images for the Towers. The Scout, Marksman, Farm, and Energizer all now have each of the images for each of their levels. Fixed a bug that would cause the GUI to stop updating and NullPointerExceptions to be repeatedly thrown in the JavaFX Application thread.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunner/GunnerTower1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunner/GunnerTower2.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunner/GunnerTower3.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunner/GunnerTower4.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunner/GunnerTower5.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added the rest of the Gunner's images to the game. Also, fully implemented the upgrades for the Gunner. Started at 'level 3' the Gunner will attack in bursts of 4 instead of 3. At 'level 4' the Gunner will attack in bursts of 5. At 'level 5' the Gunner will attack in bursts of 7. The Gunner's range has also been increased.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/dev/TestMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/TestScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/CharacterBuilder.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/MilitaryBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/MilitaryBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/MapBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/SkipPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/SkipPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/survival/easy/GrassyPlains.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/survival/easy/SandyArchipelago.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/survival/hard/DauntingClifftops.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/survival/hard/VolcanicTomb.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/MenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/MenuScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/SceneBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/Builder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/StoreScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/StoreScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunnerTower.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunner/GunnerTower0.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower5.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/scout/ScoutTower5.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Property.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,10 +54,10 @@
         <option value="JavaFXApplication" />
         <option value="JUnit5 Test Class" />
         <option value="package-info" />
-        <option value="Interface" />
         <option value="Enum" />
         <option value="FxmlFile" />
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -275,14 +288,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00028" summary="Updated the GameElement annotation so that only certain strings can be provided as a parameter. These strings must be equal to either &quot;character&quot;, &quot;component&quot;, or &quot;graphic&quot;. Characters are any moving features of the game. For example, an Enemy would be a character. Components are features on a map that do some sort of action. For example, a Spawner spawns enemies. Graphics are any features that are for purely design.">
-      <option name="closed" value="true" />
-      <created>1711227036592</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1711227036592</updated>
     </task>
     <task id="LOCAL-00029" summary="Updated the GameElement annotation so that only certain strings can be provided as a parameter. These strings must be equal to either &quot;character&quot;, &quot;component&quot;, or &quot;graphic&quot;. Characters are any moving features of the game. For example, an Enemy would be a character. Components are features on a map that do some sort of action. For example, a Spawner spawns enemies. Graphics are any features that are for purely design.">
       <option name="closed" value="true" />
@@ -668,7 +673,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742262606664</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Added the rest of the Gunner's images to the game. Also, fully implemented the upgrades for the Gunner. Started at 'level 3' the Gunner will attack in bursts of 4 instead of 3. At 'level 4' the Gunner will attack in bursts of 5. At 'level 5' the Gunner will attack in bursts of 7. The Gunner's range has also been increased.">
+      <option name="closed" value="true" />
+      <created>1742314987274</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1742314987274</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -676,7 +689,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Forgot about another compiler error. The error has been fixed." />
     <MESSAGE value="Re-implemented a variety of useful tools that had been previously removed. These tools include the Specific and Prohibited annotations as well as the newly implemented Property annotation. The Specific annotation allows an annotated method or constructor to specify which classes can access that constructor or method. The Prohibited annotation is similar to the Specific annotation however specified classes will be unable to access the annotated constructor or method. The Property annotation indicates that an annotated field is a property of a class." />
     <MESSAGE value="Fully re-implemented the tools from the previous commit. These tools include the Specific and Prohibited annotations as well as the LogManager class. The Property annotation has also been implemented and indicates that an annotated field is an inherent property of a class." />
     <MESSAGE value="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future." />
@@ -701,7 +713,8 @@
     <MESSAGE value="Made a slight GUI change to the UpgradePanel class." />
     <MESSAGE value="Implemented a variety of new images for the Towers. The Scout, Marksman, Farm, and Energizer all now have each of the images for each of their levels. There is currently a bug taking place that causes the entire Application to completely freeze however the code is still running in the background. It is only the GUI that stops updating." />
     <MESSAGE value="Implemented a variety of new images for the Towers. The Scout, Marksman, Farm, and Energizer all now have each of the images for each of their levels. Fixed a bug that would cause the GUI to stop updating and NullPointerExceptions to be repeatedly thrown in the JavaFX Application thread." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented a variety of new images for the Towers. The Scout, Marksman, Farm, and Energizer all now have each of the images for each of their levels. Fixed a bug that would cause the GUI to stop updating and NullPointerExceptions to be repeatedly thrown in the JavaFX Application thread." />
+    <MESSAGE value="Added the rest of the Gunner's images to the game. Also, fully implemented the upgrades for the Gunner. Started at 'level 3' the Gunner will attack in bursts of 4 instead of 3. At 'level 4' the Gunner will attack in bursts of 5. At 'level 5' the Gunner will attack in bursts of 7. The Gunner's range has also been increased." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the rest of the Gunner's images to the game. Also, fully implemented the upgrades for the Gunner. Started at 'level 3' the Gunner will attack in bursts of 4 instead of 3. At 'level 4' the Gunner will attack in bursts of 5. At 'level 5' the Gunner will attack in bursts of 7. The Gunner's range has also been increased." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

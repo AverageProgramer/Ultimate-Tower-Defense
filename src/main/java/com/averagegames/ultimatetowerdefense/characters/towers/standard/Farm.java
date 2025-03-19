@@ -6,8 +6,6 @@ import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import lombok.Getter;
 
-import static com.averagegames.ultimatetowerdefense.player.Player.LIST_OF_ACTIVE_FARMS;
-
 public final class Farm extends Tower {
 
     @Property
@@ -38,7 +36,7 @@ public final class Farm extends Tower {
 
         super.upgradeCosts = this.upgradeCosts;
 
-        LIST_OF_ACTIVE_FARMS.add(this);
+        super.placementLimit = LIMIT;
     }
 
     @Override

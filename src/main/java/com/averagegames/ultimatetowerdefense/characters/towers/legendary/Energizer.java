@@ -96,7 +96,7 @@ public final class Energizer extends Tower {
      * The {@link Energizer}'s {@code range} radius in pixels.
      */
     @Property
-    private final double[] radii = {125, 125, 130, 130, 135, 170};
+    private final double[] radii = {125, 125, 130, 130, 145, 170};
 
     /**
      * A boolean that determines whether the {@link Energizer} should charge for an {@code attack}.
@@ -113,6 +113,8 @@ public final class Energizer extends Tower {
      * A constructor that properly sets the attributes of the {@link Energizer} {@link Tower}.
      */
     public Energizer() {
+
+        super.placementLimit = LIMIT;
 
         // Properly sets the energizer's image to the finalized image.
         super.images = this.images;

@@ -2,12 +2,12 @@ package com.averagegames.ultimatetowerdefense.characters.enemies;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Base;
+import com.averagegames.ultimatetowerdefense.maps.Map;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.animation.TranslationHandler;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -37,7 +37,7 @@ public abstract class Enemy {
      * A {@link List} containing every active {@link Enemy} in a game.
      */
     @NotNull
-    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new ArrayList<>());
+    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new LinkedList<>());
 
     /**
      * The {@link Enemy}'s parent {@link Group}.
@@ -216,7 +216,7 @@ public abstract class Enemy {
         }
 
         // Updates the in-game text that displays the player's current cash.
-        Platform.runLater(() -> GameScene.cashText.setText(STR."$\{Player.cash}"));
+        Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));
 
         // Logs that the enemy has been damaged by a given amount.
         LOGGER.info(STR."Enemy \{this} health has been decreased by \{damage}.");
@@ -450,7 +450,7 @@ public abstract class Enemy {
                 Base.health = 0;
 
                 // Stops new enemies from spawning.
-                GameScene.SPAWNER.stopSpawning();
+                Map.ENEMY_SPAWNER.stopSpawning();
 
                 // A loop that will iterate through the list containing every active enemy.
                 LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
@@ -463,18 +463,20 @@ public abstract class Enemy {
                 // A try-catch statement that will catch any exceptions that occur when playing an audio file.
                 try {
 
+                    GameScene.GLOBAL_PLAYER.stop();
+
                     // Creates a new audio player that will play an audio file.
-                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - You Lost!.wav");
+                    GameScene.GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - You Lost!.wav");
 
                     // Plays the previously given audio file.
-                    player.play();
+                    GameScene.GLOBAL_PLAYER.play();
                 } catch (Exception ex) {
                     // The exception does not need to be handled.
                 }
             }
 
             // Updates the in-game text that displays the base's current health.
-            Platform.runLater(() -> GameScene.baseText.setText(STR."\{Base.health} HP"));
+            Platform.runLater(() -> GameScene.HEALTH_TEXT.setText(STR."\{Base.health} HP"));
 
             // Removes the enemy from its parent group now that it has finished its path.
             Platform.runLater(this::eliminate);
