@@ -5,6 +5,7 @@ import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -48,7 +49,7 @@ public final class UpgradePanel extends Group {
     private final Rectangle area, healthBar, highlight;
 
     @NotNull
-    private final Label healthLabel;
+    private final Label healthLabel, levelLabel;
 
     private int totalSpent;
 
@@ -95,6 +96,11 @@ public final class UpgradePanel extends Group {
 
         this.healthLabel.setFont(Font.font("Courier New", FontWeight.BOLD, 20));
         this.healthLabel.setTextFill(Color.BLACK);
+
+        this.levelLabel = new Label(STR."\{tower.getClass().getSimpleName().toUpperCase()}: Level \{tower.getLevel()}");
+
+        this.levelLabel.setFont(Font.font("Courier New", FontWeight.BOLD, 20));
+        this.levelLabel.setTextFill(Color.BLACK);
 
         this.sellButton = new Button();
 
@@ -159,6 +165,8 @@ public final class UpgradePanel extends Group {
 
                         tower.upgrade();
 
+                        this.levelLabel.setText(STR."\{tower.getClass().getSimpleName().toUpperCase()}: Level \{tower.getLevel()}");
+
                         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Upgrade 1.wav");
                         player.play();
                     } else {
@@ -179,6 +187,8 @@ public final class UpgradePanel extends Group {
                         Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));
 
                         tower.upgrade();
+
+                        this.levelLabel.setText(STR."\{tower.getClass().getSimpleName().toUpperCase()}: Level \{tower.getLevel()}");
 
                         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Upgrade 1.wav");
                         player.play();
@@ -209,7 +219,7 @@ public final class UpgradePanel extends Group {
             this.targetingButton.setText(STR."\{tower.getTargeting()}");
         });
 
-        super.getChildren().addAll(this.area, this.upgradeButton, this.targetingButton, this.sellButton, this.escButton, this.healthBar, this.highlight, this.healthLabel);
+        super.getChildren().addAll(this.area, this.upgradeButton, this.targetingButton, this.sellButton, this.escButton, this.healthBar, this.highlight, this.healthLabel, this.levelLabel);
 
         super.setViewOrder(Integer.MIN_VALUE);
     }
@@ -224,6 +234,8 @@ public final class UpgradePanel extends Group {
         this.escButton.setTranslateX((x + this.getAreaWidth()) - this.escButton.getPrefWidth() - 20);
 
         this.healthLabel.setTranslateX(x + 20);
+
+        this.levelLabel.setTranslateX(x + 20);
 
         this.healthBar.setTranslateX(x + 105);
         this.highlight.setTranslateX(x + 105);
@@ -243,6 +255,8 @@ public final class UpgradePanel extends Group {
         this.escButton.setTranslateY(y + 20);
 
         this.healthLabel.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 80);
+
+        this.levelLabel.setTranslateY(y + 60);
 
         this.healthBar.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 77.5);
         this.highlight.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 77.5);

@@ -34,6 +34,8 @@ public final class Farm extends Tower {
     public Farm() {
         super.images = this.images;
 
+        super.setHealth(100);
+
         super.upgradeCosts = this.upgradeCosts;
 
         super.placementCost = this.placementCost;
