@@ -94,6 +94,15 @@ public class GameScene extends Scene implements Builder {
     @NotNull
     private final Map map;
 
+    @NotNull
+    private Tower[] inventory = {
+            new Scout(),
+            new Marksman(),
+            new Gunner(),
+            new Energizer(),
+            new Farm()
+    };
+
     /**
      * An {@code index} representing which {@link Tower} to place.
      */
@@ -232,6 +241,11 @@ public class GameScene extends Scene implements Builder {
             int index = i;
 
             buttons[i].setOnAction(event -> {
+                if (this.tempTower != null) {
+                    this.tempTower.eliminate();
+                    this.parent.getChildren().remove(this.tempTower.getLoadedTower());
+                }
+
                 LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
 
                 this.towerIndex = index;
@@ -309,24 +323,22 @@ public class GameScene extends Scene implements Builder {
         });
 
         this.setOnMouseMoved(event -> {
-            if (this.tempTower == null) {
-                this.tempTower = switch (this.towerIndex) {
-                    case 0 ->
-                            new Scout();
-                    case 1 ->
-                            new Marksman();
-                    case 2 ->
-                            new Gunner();
-                    case 3 ->
-                            new Energizer();
-                    case 4 ->
-                            new Farm();
-                    default ->
-                            null;
-                };
-            }
+            this.tempTower = switch (this.towerIndex) {
+                case 0 ->
+                        inventory[this.towerIndex];
+                case 1 ->
+                        inventory[this.towerIndex];
+                case 2 ->
+                        inventory[this.towerIndex];
+                case 3 ->
+                        inventory[this.towerIndex];
+                case 4 ->
+                        inventory[this.towerIndex];
+                default ->
+                        null;
+            };
 
-            if (this.tempTower != null && this.towerIndex != -1) {
+            if (this.towerIndex != -1) {
                 if (!this.parent.getChildren().contains(this.tempTower.getLoadedTower())) {
                     this.tempTower.setParent(this.parent);
 
@@ -342,7 +354,6 @@ public class GameScene extends Scene implements Builder {
 
                 this.tempTower.getRange().setCenterX(event.getX());
                 this.tempTower.getRange().setCenterY(event.getY());
-
             }
         });
 

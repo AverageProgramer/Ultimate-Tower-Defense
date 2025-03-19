@@ -9,7 +9,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added Waves 3 - 27 to the GameScene class." />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added a feature that allows the Player to cancel placing a tower if they press ESC.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -258,14 +261,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00032" summary="Added a static HashMap in the Builder interface. This HashMap can be used to easily manage custom-built Scenes. When Scenes are added to the HashMap, they should be paired with a unique ID, this way they can be easily found and identified. It is not a requirement for Scenes to be added to this HashMap, but it is heavily recommended.">
-      <option name="closed" value="true" />
-      <created>1711250798537</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1711250798537</updated>
     </task>
     <task id="LOCAL-00033" summary="Added the StrictHashMap class. This class functions almost identically to a HashMap but there is one key difference. The StrictHashMap does not allow for any identical keys or values to passed in. If the StrictHashMap already contains, for example, the key &quot;1&quot;, no other pairs may use that key. The same rule applies to the values. If there is a value, for example, &quot;Value&quot;, no other pairs may use that value. The SCENE_MANAGER constant in the Builder interface will use the StrictHashMap going forwards.">
       <option name="closed" value="true" />
@@ -651,7 +646,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742350977605</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Added a feature that allows the Player to cancel placing a tower if they press ESC.">
+      <option name="closed" value="true" />
+      <created>1742351282744</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1742351282744</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -659,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Once again removed a variety of tools that just wound up doing more harm than good. These tools include the Specific and Prohibited annotations as well as their verification classes, SpecificAnnotation and ProhibitedAnnotation. The verification was causing noticeable levels of lag and has thus been removed." />
     <MESSAGE value="Fixed a missed compiler error in the module-info file." />
     <MESSAGE value="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like." />
     <MESSAGE value="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage." />
@@ -684,7 +686,8 @@
     <MESSAGE value="Remade and cleaned up the GameScene class. The GameScene class was previously just a way to test new game aspects and mechanics. The new GameScene class is more similar to what can be expected in the final game. The Map interface has also been fully implemented. Any classes implemented the map interface can now be easily loaded onto any Scene such as the GameScene class." />
     <MESSAGE value="Reset the Player's cash for the GameScene to 500." />
     <MESSAGE value="Added Waves 3 - 27 to the GameScene class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Waves 3 - 27 to the GameScene class." />
+    <MESSAGE value="Added a feature that allows the Player to cancel placing a tower if they press ESC." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a feature that allows the Player to cancel placing a tower if they press ESC." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
