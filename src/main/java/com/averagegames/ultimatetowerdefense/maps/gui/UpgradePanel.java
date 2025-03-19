@@ -9,10 +9,13 @@ import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
@@ -42,10 +45,15 @@ public final class UpgradePanel extends Group {
     private Tower tower;
 
     @NotNull
-    private final Rectangle area;
+    private final Rectangle area, healthBar, highlight;
 
     @NotNull
-    private final Button upgradeButton, targetingButton;
+    private final Label healthLabel;
+
+    private int totalSpent;
+
+    @NotNull
+    private final Button upgradeButton, targetingButton, sellButton, escButton;
 
     public UpgradePanel(@NotNull final Tower tower) {
         this.tower = tower;
@@ -57,6 +65,52 @@ public final class UpgradePanel extends Group {
 
         this.area.setArcWidth(AREA_ARC_LENGTH);
         this.area.setArcHeight(AREA_ARC_HEIGHT);
+
+        this.healthBar = new Rectangle();
+
+        this.healthBar.setHeight(20);
+
+        this.healthBar.setFill(Paint.valueOf("#00ff00"));
+
+        this.healthBar.setArcWidth(AREA_ARC_LENGTH);
+        this.healthBar.setArcHeight(AREA_ARC_HEIGHT);
+
+        this.updateHealthBar();
+
+        this.highlight = new Rectangle();
+
+        this.highlight.setHeight(20);
+
+        this.highlight.setFill(Color.TRANSPARENT);
+        this.highlight.setStroke(Color.BLACK);
+
+        this.highlight.setArcWidth(AREA_ARC_LENGTH);
+        this.highlight.setArcHeight(AREA_ARC_HEIGHT);
+
+        this.highlight.setWidth(136);
+
+        this.healthLabel = new Label();
+
+        this.healthLabel.setText("HEALTH: ");
+
+        this.healthLabel.setFont(Font.font("Courier New", FontWeight.BOLD, 20));
+        this.healthLabel.setTextFill(Color.BLACK);
+
+        this.sellButton = new Button();
+
+        this.sellButton.setPrefSize((double) BUTTON_PREF_WIDTH / 2, BUTTON_PREF_HEIGHT);
+
+        this.sellButton.setText(STR."Sell");
+
+        this.sellButton.setStyle("-fx-font-weight: bold;");
+        this.sellButton.setBackground(Background.fill(Paint.valueOf("#ff0000")));
+
+        this.sellButton.setOnMouseEntered(event -> this.sellButton.setBackground(Background.fill(Paint.valueOf("#bc2020"))));
+        this.sellButton.setOnMouseExited(event -> this.sellButton.setBackground(Background.fill(Paint.valueOf("#ff0000"))));
+
+        this.escButton = new Button("X");
+
+        this.escButton.setPrefSize((double) BUTTON_PREF_WIDTH / 4, BUTTON_PREF_HEIGHT);
 
         this.upgradeButton = new Button(tower.getLevel() < 5 ? STR."$\{tower.getUpgradeCosts()[tower.getLevel()]}" : "MAX LEVEL");
         this.targetingButton = new Button("FIRST");
@@ -77,11 +131,29 @@ public final class UpgradePanel extends Group {
         this.targetingButton.setOnMouseEntered(event -> this.targetingButton.setBackground(Background.fill(Paint.valueOf("#c78814"))));
         this.targetingButton.setOnMouseExited(event -> this.targetingButton.setBackground(Background.fill(Color.ORANGE)));
 
+        this.sellButton.setOnAction(event -> {
+            tower.eliminate();
+
+            Player.cash += this.totalSpent / 2;
+
+            Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));
+
+            try {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Upgrade 1.wav");
+                player.play();
+            } catch (Exception ex) {
+                // Ignore
+            }
+        });
+
+        this.escButton.setOnAction(event -> tower.deselect());
+
         this.upgradeButton.setOnAction(event -> {
             if (tower.getLevel() < 4) {
                 try {
                     if (Player.cash >= tower.getUpgradeCosts()[tower.getLevel()]) {
                         Player.cash -= tower.getUpgradeCosts()[tower.getLevel()];
+                        this.totalSpent += tower.getUpgradeCosts()[tower.getLevel()];
 
                         Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));
 
@@ -102,6 +174,7 @@ public final class UpgradePanel extends Group {
                 try {
                     if (Player.cash >= tower.getUpgradeCosts()[tower.getLevel()]) {
                         Player.cash -= tower.getUpgradeCosts()[tower.getLevel()];
+                        this.totalSpent += tower.getUpgradeCosts()[tower.getUpgradeCosts().length - 1];
 
                         Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));
 
@@ -109,6 +182,8 @@ public final class UpgradePanel extends Group {
 
                         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Upgrade 1.wav");
                         player.play();
+
+                        this.upgradeButton.setText("MAX LEVEL");
                     } else {
                         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
                         player.play();
@@ -116,8 +191,6 @@ public final class UpgradePanel extends Group {
                 } catch (Exception e) {
                     System.out.println("Exception occurred");
                 }
-
-                this.upgradeButton.setText("MAX LEVEL");
             }
         });
 
@@ -136,7 +209,7 @@ public final class UpgradePanel extends Group {
             this.targetingButton.setText(STR."\{tower.getTargeting()}");
         });
 
-        super.getChildren().addAll(this.area, this.upgradeButton, this.targetingButton);
+        super.getChildren().addAll(this.area, this.upgradeButton, this.targetingButton, this.sellButton, this.escButton, this.healthBar, this.highlight, this.healthLabel);
 
         super.setViewOrder(Integer.MIN_VALUE);
     }
@@ -146,6 +219,14 @@ public final class UpgradePanel extends Group {
 
         this.upgradeButton.setTranslateX(x + 20);
         this.targetingButton.setTranslateX(x + 140);
+
+        this.sellButton.setTranslateX(x + 20);
+        this.escButton.setTranslateX((x + this.getAreaWidth()) - this.escButton.getPrefWidth() - 20);
+
+        this.healthLabel.setTranslateX(x + 20);
+
+        this.healthBar.setTranslateX(x + 105);
+        this.highlight.setTranslateX(x + 105);
     }
 
     public double getX() {
@@ -157,6 +238,14 @@ public final class UpgradePanel extends Group {
 
         this.upgradeButton.setTranslateY((y + this.area.getHeight()) - this.upgradeButton.getPrefHeight() - 20);
         this.targetingButton.setTranslateY((y + this.area.getHeight()) - this.targetingButton.getPrefHeight() - 20);
+
+        this.sellButton.setTranslateY(y + 20);
+        this.escButton.setTranslateY(y + 20);
+
+        this.healthLabel.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 80);
+
+        this.healthBar.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 77.5);
+        this.highlight.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 77.5);
     }
 
     public double getY() {
@@ -169,5 +258,17 @@ public final class UpgradePanel extends Group {
 
     public double getAreaHeight() {
         return this.area.getHeight();
+    }
+
+    public void updateHealthBar() {
+        if (tower.getHealth() > 50) {
+            this.healthBar.setFill(Paint.valueOf("#00ff00"));
+        } else if (tower.getHealth() > 25) {
+            this.healthBar.setFill(Paint.valueOf("#e8ff00"));
+        } else {
+            this.healthBar.setFill(Paint.valueOf("#ff0000"));
+        }
+
+        this.healthBar.setWidth(((double) tower.getHealth() / 100) * 136);
     }
 }

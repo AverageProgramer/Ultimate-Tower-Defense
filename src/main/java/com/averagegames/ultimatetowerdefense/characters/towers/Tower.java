@@ -185,6 +185,8 @@ public abstract class Tower {
         // Adds the given amount to the tower's health.
         this.health += amount;
 
+        Platform.runLater(() -> this.panel.updateHealthBar());
+
         // Logs that the tower has been healed by a given amount.
         LOGGER.info(STR."Tower \{this} health has been increased by \{amount}.");
     }
@@ -202,6 +204,8 @@ public abstract class Tower {
 
         // Removes the given amount from the tower's health.
         this.health -= damage;
+
+        Platform.runLater(() -> this.panel.updateHealthBar());
 
         // Logs that the enemy has been damaged by a given amount.
         LOGGER.info(STR."Tower \{this} health has been decreased by \{damage}.");
@@ -703,6 +707,8 @@ public abstract class Tower {
         this.onDeath();
 
         this.parent.getChildren().remove(this.range);
+
+        this.parent.getChildren().remove(this.panel);
 
         // Removes the tower from its parent group.
         this.parent.getChildren().remove(this.loadedTower);
