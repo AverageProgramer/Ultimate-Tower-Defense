@@ -9,22 +9,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added an indicator to the UpgradePanel that shows what level the Tower is.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Element.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower2.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower3.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower4.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower5.gif" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipRunway.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipRunway.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipTower.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower0.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,14 +260,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00039" summary="Made a few more changes to the structure of the project. Several maven dependencies were removed as they were not actually doing anything useful. The rest of the custom annotation interfaces were also removed as they to were doing nothing. These should be the last of the changes made for the sole purpose of cleaning up the project.">
-      <option name="closed" value="true" />
-      <created>1740021447390</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1740021447390</updated>
     </task>
     <task id="LOCAL-00040" summary="Removed a few additional classes that were deemed inherently useless. These classes include the two interfaces Zombie, and Titan. The Boss interface has also been updated to include the 'special' method. This method can be implemented by certain enemies to use a special attack.">
       <option name="closed" value="true" />
@@ -667,7 +645,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742400472455</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character.">
+      <option name="closed" value="true" />
+      <created>1742431656997</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1742431656997</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +661,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Reworked the Energizer. The Energizer will now attack an Enemy until that Enemy has been eliminated. The Sorcerer has also been reworked. Instead of using a completely separate thread to spawn Enemies, the Sorcerer now uses the Enemy attack thread. The Bolt Enemy has also been implemented." />
     <MESSAGE value="Fixed the Wave structure in the GameScene class. Also added Waves 25 and 26 to Easy mode." />
     <MESSAGE value="Added a Wave counter to the GameScene class. Also fixed an issue with the Marksman, Gunner, and Pyromancer Towers. These Towers had not previously set their starting health to 0. This would cause them to get instantly eliminated by Soldier Enemies." />
     <MESSAGE value="Fixed an issue with the Sorcerer where it would spawn Enemies even after it was eliminated." />
@@ -700,7 +685,8 @@
     <MESSAGE value="Removed an unused import in the GameScene class." />
     <MESSAGE value="Updated the UpgradePanel to now include a health bar, sell button, and exit button. The health bar will update as the Tower is damaged. The sell button allows the player to sell a Tower for half the money that they would have already put into the Tower. The exit button just deselects the Tower." />
     <MESSAGE value="Added an indicator to the UpgradePanel that shows what level the Tower is." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added an indicator to the UpgradePanel that shows what level the Tower is." />
+    <MESSAGE value="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

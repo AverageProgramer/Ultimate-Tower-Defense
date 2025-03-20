@@ -255,6 +255,10 @@ public final class Gunship extends Tower {
 
     @Override
     public void onDeath() {
+        if (super.getParent() != null) {
+            super.getParent().getChildren().remove(this.plane);
+        }
+
         this.player.stop();
     }
 
