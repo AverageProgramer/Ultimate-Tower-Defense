@@ -180,7 +180,7 @@ public final class UpgradePanel extends Group {
                 }
 
                 this.upgradeButton.setText(STR."$\{tower.getUpgradeCosts()[tower.getLevel()]}");
-            } else {
+            } else if (tower.getLevel() == 4) {
                 try {
                     if (Player.cash >= tower.getUpgradeCosts()[4]) {
                         Player.cash -= tower.getUpgradeCosts()[4];

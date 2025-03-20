@@ -36,7 +36,7 @@ public final class Energizer extends Tower {
      * The {@link Energizer}'s {@code placement cost}.
      */
     @Property
-    private final int placementCost = 2500;
+    private final int placementCost = 5000;
 
     /**
      * The {@link Energizer}'s placement {@code limit}.
