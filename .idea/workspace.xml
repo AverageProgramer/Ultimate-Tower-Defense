@@ -9,11 +9,22 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Updated the UpgradePanel to now include a health bar, sell button, and exit button. The health bar will update as the Tower is damaged. The sell button allows the player to sell a Tower for half the money that they would have already put into the Tower. The exit button just deselects the Tower.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added an indicator to the UpgradePanel that shows what level the Tower is.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Element.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower5.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipRunway.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipRunway.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/GunshipTower.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower0.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +40,9 @@
         <option value="JavaFXApplication" />
         <option value="JUnit5 Test Class" />
         <option value="package-info" />
-        <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
         <option value="AnnotationType" />
       </list>
@@ -131,11 +142,11 @@
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\gunship" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\scout" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\gunner" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\energizer" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\marksman" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\farm" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -263,14 +274,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00038" summary="Made a few additional changes to the structure of the various packages within the project. The GreaterThan and LessThan annotations along with their respective exceptions and verifiers have been removed. More classes will likely be cleaned up or removed in the future.">
-      <option name="closed" value="true" />
-      <created>1740013725954</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1740013725954</updated>
     </task>
     <task id="LOCAL-00039" summary="Made a few more changes to the structure of the project. Several maven dependencies were removed as they were not actually doing anything useful. The rest of the custom annotation interfaces were also removed as they to were doing nothing. These should be the last of the changes made for the sole purpose of cleaning up the project.">
       <option name="closed" value="true" />
@@ -656,7 +659,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742398310689</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="Added an indicator to the UpgradePanel that shows what level the Tower is.">
+      <option name="closed" value="true" />
+      <created>1742400472455</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1742400472455</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +675,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Made an update to the LootBox zombie. The LootBox zombie will no longer grant money when damaged. The Summoner has also been renamed to the Sorcerer." />
     <MESSAGE value="Reworked the Energizer. The Energizer will now attack an Enemy until that Enemy has been eliminated. The Sorcerer has also been reworked. Instead of using a completely separate thread to spawn Enemies, the Sorcerer now uses the Enemy attack thread. The Bolt Enemy has also been implemented." />
     <MESSAGE value="Fixed the Wave structure in the GameScene class. Also added Waves 25 and 26 to Easy mode." />
     <MESSAGE value="Added a Wave counter to the GameScene class. Also fixed an issue with the Marksman, Gunner, and Pyromancer Towers. These Towers had not previously set their starting health to 0. This would cause them to get instantly eliminated by Soldier Enemies." />
@@ -689,7 +699,8 @@
     <MESSAGE value="Fully implemented the Inventory class into the project. The Inventory class is merely a record that keeps track of the Towers the Player wishes to bring into a round. In the final game, the Player will be able to take five Towers of their choosing with them into a round, regardless of difficulty." />
     <MESSAGE value="Removed an unused import in the GameScene class." />
     <MESSAGE value="Updated the UpgradePanel to now include a health bar, sell button, and exit button. The health bar will update as the Tower is damaged. The sell button allows the player to sell a Tower for half the money that they would have already put into the Tower. The exit button just deselects the Tower." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the UpgradePanel to now include a health bar, sell button, and exit button. The health bar will update as the Tower is damaged. The sell button allows the player to sell a Tower for half the money that they would have already put into the Tower. The exit button just deselects the Tower." />
+    <MESSAGE value="Added an indicator to the UpgradePanel that shows what level the Tower is." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added an indicator to the UpgradePanel that shows what level the Tower is." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

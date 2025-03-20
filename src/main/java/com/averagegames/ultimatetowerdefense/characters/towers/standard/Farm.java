@@ -5,6 +5,9 @@ import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public final class Farm extends Tower {
 
@@ -41,6 +44,18 @@ public final class Farm extends Tower {
         super.placementCost = this.placementCost;
 
         super.placementLimit = this.placementLimit;
+    }
+
+    @Override
+    public void setPosition(@NotNull final Position position) {
+
+        this.getLoadedTower().setX(position.x() - (this.images[super.getLevel()] != null ? Objects.requireNonNull(this.images[super.getLevel()]).getWidth() / 2 : 0));
+        this.getLoadedTower().setY(position.y() - (this.images[super.getLevel()] != null ? Objects.requireNonNull(this.images[super.getLevel()]).getHeight() / 2 : 0));
+    }
+
+    @Override
+    public @NotNull Position getPosition() {
+        return new Position(super.getLoadedTower().getCurrentX() + (this.images[super.getLevel()] != null ? Objects.requireNonNull(this.images[super.getLevel()]).getWidth() / 2 : 0), super.getLoadedTower().getCurrentY() + (this.images[super.getLevel()] != null ? Objects.requireNonNull(this.images[super.getLevel()]).getHeight() / 2 : 0));
     }
 
     @Override

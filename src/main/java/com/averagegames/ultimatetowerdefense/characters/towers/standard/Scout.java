@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 public final class Scout extends Tower {
 
     /**
-     * The {@link Scout}'s {@link Image}s.
+     * The {@link Scout}'s {@link Image}s per {@code level}.
      */
     @Property
     private final Image[] images = {
@@ -44,13 +44,13 @@ public final class Scout extends Tower {
     private final int[] upgradeCosts = {25, 250, 750, 1525, 2575};
 
     /**
-     * The {@code damage} the {@link Scout} can do during an {@code attack}.
+     * The {@code damage} the {@link Scout} can do during an {@code attack} per {@code level}.
      */
     @Property
     private final int[] damages = {1, 1, 1, 2, 3, 4};
 
     /**
-     * The {@link Scout}'s cool down between {@code attacks}.
+     * The {@link Scout}'s cool down between {@code attacks} per {@code level}.
      */
     @Property
     private final int[] coolDowns = {2000, 1750, 1500, 1200, 1000, 500};
@@ -62,7 +62,7 @@ public final class Scout extends Tower {
     private final int startHealth = 100;
 
     /**
-     * The {@link Scout}'s {@code range} radius in pixels.
+     * The {@link Scout}'s {@code range} radius in pixels per {@code level}.
      */
     @Property
     private final double[] radii = {100, 100, 105, 110, 115, 120};

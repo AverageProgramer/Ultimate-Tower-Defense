@@ -256,7 +256,7 @@ public final class UpgradePanel extends Group {
 
         this.healthLabel.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 80);
 
-        this.levelLabel.setTranslateY(y + 60);
+        this.levelLabel.setTranslateY(y + 55);
 
         this.healthBar.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 77.5);
         this.highlight.setTranslateY((y + this.area.getHeight()) - this.healthLabel.getPrefHeight() - 77.5);

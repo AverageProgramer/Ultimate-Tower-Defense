@@ -159,7 +159,7 @@ public class GameScene extends Scene implements Builder {
         });
 
         // A default inventory that can easily be changed.
-        Player.inventory = new Inventory(new Tower[] {new Scout(), new Marksman(), new Gunner(), new Energizer(), new Farm()});
+        Player.inventory = new Inventory(new Tower[] {new Scout(), new Marksman(), new Gunship(), new Energizer(), new Farm()});
     }
 
     @Override
@@ -198,6 +198,8 @@ public class GameScene extends Scene implements Builder {
         CASH_TEXT.setX(50);
         CASH_TEXT.setY(SCREEN.getHeight() + 10 - CASH_TEXT.getLayoutBounds().getHeight());
 
+        CASH_TEXT.setViewOrder(Integer.MIN_VALUE);
+
         HEALTH_TEXT.setText(STR."\{Base.health} HP");
 
         HEALTH_TEXT.setFill(Paint.valueOf("#b60e0e"));
@@ -207,6 +209,8 @@ public class GameScene extends Scene implements Builder {
         HEALTH_TEXT.setX(SCREEN.getWidth() - 60 - HEALTH_TEXT.getLayoutBounds().getWidth());
         HEALTH_TEXT.setY(SCREEN.getHeight() + 20 - HEALTH_TEXT.getLayoutBounds().getHeight());
 
+        HEALTH_TEXT.setViewOrder(Integer.MIN_VALUE);
+
         WAVE_TEXT.setText(STR."Wave \{Player.wave}");
 
         WAVE_TEXT.setFont(Font.font("Courier New", 50));
@@ -214,6 +218,8 @@ public class GameScene extends Scene implements Builder {
 
         WAVE_TEXT.setX(SCREEN.getWidth() - 60 - WAVE_TEXT.getLayoutBounds().getWidth());
         WAVE_TEXT.setY(100);
+
+        WAVE_TEXT.setViewOrder(Integer.MIN_VALUE);
 
         this.parent.getChildren().addAll(CASH_TEXT, HEALTH_TEXT, WAVE_TEXT);
 
@@ -225,11 +231,14 @@ public class GameScene extends Scene implements Builder {
             Button button = new Button(STR."\{Player.inventory.towers()[i].getClass().getSimpleName()}:\n$\{Player.inventory.towers()[i].getPlacementCost()}");
 
             button.setPrefSize(100, 100);
+
             button.setTranslateX(x + ((-50 * (Player.inventory.towers().length - 1)) + (i * 100)));
             button.setTranslateY(y);
 
             button.setFont(Font.font("Courier New"));
             button.setTextAlignment(TextAlignment.CENTER);
+
+            button.setViewOrder(Integer.MIN_VALUE);
 
             int index = i;
 
@@ -303,6 +312,8 @@ public class GameScene extends Scene implements Builder {
             if (this.towerIndex != -1) {
                 if (!this.parent.getChildren().contains(this.tempTower.getLoadedTower())) {
                     this.tempTower.setParent(this.parent);
+
+                    this.tempTower.enableActions(false);
 
                     this.tempTower.place(new Position(event.getX(), event.getY()));
 

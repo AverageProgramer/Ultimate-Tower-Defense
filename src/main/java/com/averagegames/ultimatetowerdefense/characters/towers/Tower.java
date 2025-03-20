@@ -135,6 +135,8 @@ public abstract class Tower {
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
     private int level;
 
+    private boolean enableActions;
+
     /**
      * A {@link Thread} that is responsible for handling all {@link Tower} {@code attacks}.
      */
@@ -165,10 +167,22 @@ public abstract class Tower {
         // Initializes the tower's targeting to 'first' by default.
         this.targeting = Targeting.FIRST;
 
+        // Initializes the boolean that determines whether the tower should perform on event actions to true.
+        this.enableActions = true;
+
         // Initializes the thread that the tower will use to attack.
         this.attackThread = new Thread(() -> {
             // This thread does nothing by default.
         });
+    }
+
+    public void enableActions(final boolean enabled) {
+        this.enableActions = enabled;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean actionsEnable() {
+        return this.enableActions;
     }
 
     /**
@@ -178,9 +192,12 @@ public abstract class Tower {
      */
     public final void heal(@Range(from = 0, to = Integer.MAX_VALUE) final int amount) {
 
-        // Performs the tower's on healed action.
-        // This method is unique to each individual inheritor of the tower class.
-        this.onHeal();
+        if (this.enableActions) {
+
+            // Performs the tower's on healed action.
+            // This method is unique to each individual inheritor of the tower class.
+            this.onHeal();
+        }
 
         // Adds the given amount to the tower's health.
         this.health += amount;
@@ -196,11 +213,14 @@ public abstract class Tower {
      * @param damage the amount to {@code damage} the {@link Tower} by.
      * @since Ultimate Tower Defense 1.0
      */
-    public void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
+    public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
 
-        // Performs the tower's on damaged action.
-        // This method is unique to each individual inheritor of the tower class.
-        this.onDamaged();
+        if (this.enableActions) {
+
+            // Performs the tower's on damaged action.
+            // This method is unique to each individual inheritor of the tower class.
+            this.onDamaged();
+        }
 
         // Removes the given amount from the tower's health.
         this.health -= damage;
@@ -307,9 +327,19 @@ public abstract class Tower {
             return;
         }
 
-        // Performs the tower's spawn action.
-        // This method is unique to each individual inheritor of the tower class.
-        this.onPlace();
+        if (this.enableActions) {
+
+            // Performs the tower's spawn action.
+            // This method is unique to each individual inheritor of the tower class.
+            this.onPlace();
+
+            try {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Placement 1.wav");
+                player.play();
+            } catch (Exception ex) {
+                LOGGER.severe(STR."Exception \{ex} thrown when loading audio file.");
+            }
+        }
 
         // Determines whether the tower's image is null.
         if (this.images[this.level] != null) {
@@ -346,13 +376,6 @@ public abstract class Tower {
         // Adds the tower to the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.add(this);
 
-        try {
-            AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Placement 1.wav");
-            player.play();
-        } catch (Exception ex) {
-            System.out.println("Exception occurred.");
-        }
-
         // Logs that the tower has been placed.
         LOGGER.info(STR."Tower \{this} placed.");
     }
@@ -375,7 +398,8 @@ public abstract class Tower {
      * Deselects the {@link Tower} and makes its {@code range} and {@link UpgradePanel} are visible to the {@link Player}
      * @since Ultimate Tower Defense 1.0
      */
-    public final void select() {
+    @MustBeInvokedByOverriders
+    public void select() {
 
         // Determines whether the tower is already selected.
         if (this.range.isVisible()) {
@@ -405,7 +429,8 @@ public abstract class Tower {
      * Deselects the {@link Tower} and makes its {@code range} and {@link UpgradePanel} are invisible to the {@link Player}
      * @since Ultimate Tower Defense 1.0
      */
-    public final void deselect() {
+    @MustBeInvokedByOverriders
+    public void deselect() {
 
         // Sets the tower's range to be invisible.
         this.range.setVisible(false);
@@ -420,6 +445,7 @@ public abstract class Tower {
      * @return {@code true} if the {@link Tower} is selected, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
+    @SuppressWarnings("unused")
     public final boolean isSelected() {
 
         // Returns whether the tower's range is visible.
@@ -702,9 +728,12 @@ public abstract class Tower {
             return;
         }
 
-        // Performs the tower's death action.
-        // This method is unique to each individual inheritor of the tower class.
-        this.onDeath();
+        if (this.enableActions) {
+
+            // Performs the tower's death action.
+            // This method is unique to each individual inheritor of the tower class.
+            this.onDeath();
+        }
 
         this.parent.getChildren().remove(this.range);
 
