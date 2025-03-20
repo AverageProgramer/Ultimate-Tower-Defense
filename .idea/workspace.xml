@@ -9,26 +9,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Set the Player's cash back to 500 whenever a round is started.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Bonus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Medic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 5.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 6.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Plane 2.wav" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/SkipPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/SkipPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/CircularTranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/CircularTranslationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,49 +81,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.EnemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldFail.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/IdeaProjects/Ultimate-Tower-Defense&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "JUnit.EnemyTest.EnemySpawnShouldFail.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldFail.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.enemySpawnShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.executor": "Run",
+    "JUnit.EnemyTest.invalidDamageShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.invalidParametersShouldThrowAnException.executor": "Run",
+    "JUnit.EnemyTest.invokingEnemyActionMethodsShouldThrowAnException.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "main",
+    "ignore.preview.features.used": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/IdeaProjects/Ultimate-Tower-Defense",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense\src\main\java\com\averagegames\ultimatetowerdefense\enemies\normal" />
@@ -278,14 +262,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00042" summary="Updated the project structure once again. The 'world' package was removed and the 'scenes' and 'maps' packages were relocated. The Enemies, Towers, and Maps classes were all removed as well. The ArrayLists of active enemies and towers can now simply be found in the Enemy and Tower classes respectively. The MapBuilder interface was also removed because it wasn't entirely necessary.">
-      <option name="closed" value="true" />
-      <created>1740109774520</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1740109774520</updated>
     </task>
     <task id="LOCAL-00043" summary="Began implementing Tower attacks. Towers, specifically the Scout, can now be placed wherever the user clicks the screen. Currently, the implemented attack and placement methods are very primitive and will likely be updated continuously in the future.">
       <option name="closed" value="true" />
@@ -671,7 +647,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742438389114</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added.">
+      <option name="closed" value="true" />
+      <created>1742494491079</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1742494491079</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -679,7 +663,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed an issue with the Sorcerer where it would spawn Enemies even after it was eliminated." />
     <MESSAGE value="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue." />
     <MESSAGE value="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave." />
     <MESSAGE value="Game is currently bugged. This commit is just to test whether the bug is a hardware issue." />
@@ -704,7 +687,8 @@
     <MESSAGE value="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character." />
     <MESSAGE value="Fixed a bug that would cause the Gunship to not be removed when eliminated." />
     <MESSAGE value="Set the Player's cash back to 500 whenever a round is started." />
-    <option name="LAST_COMMIT_MESSAGE" value="Set the Player's cash back to 500 whenever a round is started." />
+    <MESSAGE value="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

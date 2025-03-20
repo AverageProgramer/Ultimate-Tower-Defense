@@ -59,6 +59,8 @@ public final class UpgradePanel extends Group {
     public UpgradePanel(@NotNull final Tower tower) {
         this.tower = tower;
 
+        this.totalSpent = tower.getPlacementCost();
+
         this.area = new Rectangle(AREA_WIDTH, AREA_HEIGHT);
 
         this.area.setStroke(Color.BLACK);

@@ -30,8 +30,6 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Iterator;
-
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
 import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
 import static com.averagegames.ultimatetowerdefense.maps.Map.*;
@@ -65,7 +63,7 @@ public class GameScene extends Scene implements Builder {
      * A {@link Constant} representing the starting cash for the {@link Player}.
      */
     @Constant
-    private static final int STARTING_CASH = 500;
+    private static final int STARTING_CASH = 1000000;
 
     /**
      * A {@link Constant} representing the starting wave for the {@link Player}.
