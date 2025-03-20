@@ -205,7 +205,9 @@ public final class Energizer extends Tower {
 
     @Override
     public void upgrade() throws InterruptedException {
-        super.setLevel(super.getLevel() + 1);
+        if (super.getLevel() < 5) {
+            super.setLevel(super.getLevel() + 1);
+        }
 
         super.getLoadedTower().setImage(super.images[super.getLevel()]);
 

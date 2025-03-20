@@ -9,8 +9,26 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Set the Player's cash back to 500 whenever a round is started.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Bonus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Medic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 5.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 6.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Plane 2.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/SkipPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/SkipPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/CircularTranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/CircularTranslationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/animation/TranslationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +47,8 @@
         <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -118,7 +136,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -260,22 +278,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00040" summary="Removed a few additional classes that were deemed inherently useless. These classes include the two interfaces Zombie, and Titan. The Boss interface has also been updated to include the 'special' method. This method can be implemented by certain enemies to use a special attack.">
-      <option name="closed" value="true" />
-      <created>1740072096770</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1740072096770</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Began working on the Tower class. The EventHandler interface was also created and is intended to help read specific events such as button presses or clicks.">
-      <option name="closed" value="true" />
-      <created>1740092684053</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1740092684053</updated>
     </task>
     <task id="LOCAL-00042" summary="Updated the project structure once again. The 'world' package was removed and the 'scenes' and 'maps' packages were relocated. The Enemies, Towers, and Maps classes were all removed as well. The ArrayLists of active enemies and towers can now simply be found in the Enemy and Tower classes respectively. The MapBuilder interface was also removed because it wasn't entirely necessary.">
       <option name="closed" value="true" />
@@ -653,7 +655,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742431656997</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Fixed a bug that would cause the Gunship to not be removed when eliminated.">
+      <option name="closed" value="true" />
+      <created>1742438315311</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1742438315311</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Set the Player's cash back to 500 whenever a round is started.">
+      <option name="closed" value="true" />
+      <created>1742438389114</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1742438389114</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -661,8 +679,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed the Wave structure in the GameScene class. Also added Waves 25 and 26 to Easy mode." />
-    <MESSAGE value="Added a Wave counter to the GameScene class. Also fixed an issue with the Marksman, Gunner, and Pyromancer Towers. These Towers had not previously set their starting health to 0. This would cause them to get instantly eliminated by Soldier Enemies." />
     <MESSAGE value="Fixed an issue with the Sorcerer where it would spawn Enemies even after it was eliminated." />
     <MESSAGE value="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue." />
     <MESSAGE value="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave." />
@@ -686,7 +702,9 @@
     <MESSAGE value="Updated the UpgradePanel to now include a health bar, sell button, and exit button. The health bar will update as the Tower is damaged. The sell button allows the player to sell a Tower for half the money that they would have already put into the Tower. The exit button just deselects the Tower." />
     <MESSAGE value="Added an indicator to the UpgradePanel that shows what level the Tower is." />
     <MESSAGE value="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character." />
+    <MESSAGE value="Fixed a bug that would cause the Gunship to not be removed when eliminated." />
+    <MESSAGE value="Set the Player's cash back to 500 whenever a round is started." />
+    <option name="LAST_COMMIT_MESSAGE" value="Set the Player's cash back to 500 whenever a round is started." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

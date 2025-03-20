@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.util.assets;
 
+import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class AudioPlayer {
     /**
      * A value used to indicate that a {@link Clip} should loop indefinitely.
      */
+    @Constant
     public static final int INDEFINITELY = Clip.LOOP_CONTINUOUSLY;
 
     /**

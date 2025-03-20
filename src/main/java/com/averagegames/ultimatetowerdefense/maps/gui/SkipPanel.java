@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.maps.gui;
 
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -78,7 +79,7 @@ public final class SkipPanel extends Group {
 
         super.getChildren().addAll(this.area, this.yButton, this.nButton, this.text);
 
-        super.setViewOrder(Integer.MIN_VALUE);
+        super.setViewOrder(GameScene.GUI_LAYER);
     }
 
     public void setX(final double x) {

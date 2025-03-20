@@ -68,7 +68,14 @@ public final class Gunner extends Tower {
         for (int i = 0; i < this.bursts[super.getLevel()]; i++) {
             if (enemy.isAlive()) {
                 try {
-                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
+                    AudioPlayer player = new AudioPlayer();
+
+                    if (super.getLevel() < 5) {
+                        player.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
+                    } else {
+                        player.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 5.wav");
+                    }
+
                     player.play();
                 } catch (Exception ex) {
                     System.out.println("Exception occurred");
@@ -87,7 +94,9 @@ public final class Gunner extends Tower {
     public void upgrade() throws InterruptedException {
         Position oldPos = super.getPosition();
 
-        super.setLevel(super.getLevel() + 1);
+        if (super.getLevel() < 5) {
+            super.setLevel(super.getLevel() + 1);
+        }
 
         if (super.getLevel() >= 2) {
             super.setHiddenDetection(true);

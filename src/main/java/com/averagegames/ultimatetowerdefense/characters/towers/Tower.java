@@ -357,7 +357,7 @@ public abstract class Tower {
         // ---------------------------------------------------------------------------------------------------
         this.range.setFill(Paint.valueOf("#3a5bb6"));
         this.range.setOpacity(0.25);
-        this.range.setViewOrder(Integer.MAX_VALUE);
+        this.range.setViewOrder(GameScene.HIGHLIGHT_LAYER);
         this.range.setVisible(false);
         this.loadedTower.setOnMouseClicked(e -> Platform.runLater(this::select));
         this.parent.getChildren().add(this.range);
@@ -402,7 +402,7 @@ public abstract class Tower {
     public void select() {
 
         // Determines whether the tower is already selected.
-        if (this.range.isVisible()) {
+        if (this.isSelected()) {
 
             // Deselects the tower.
             this.deselect();
@@ -445,7 +445,6 @@ public abstract class Tower {
      * @return {@code true} if the {@link Tower} is selected, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
-    @SuppressWarnings("unused")
     public final boolean isSelected() {
 
         // Returns whether the tower's range is visible.

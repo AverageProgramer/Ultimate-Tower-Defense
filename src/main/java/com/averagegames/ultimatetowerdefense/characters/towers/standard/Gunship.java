@@ -3,6 +3,8 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.util.animation.CircularTranslationHandler;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.util.development.Element;
@@ -13,6 +15,8 @@ import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
@@ -45,31 +49,6 @@ public final class Gunship extends Tower {
 
             // The Gunship's level 5 runway image.
             new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipRunway.gif")
-    };
-
-    /**
-     * The {@link Gunship}'s plane {@link Image} per {@code level}.
-     */
-    @Property(unique = true)
-    private final Image[] planeImages = {
-
-            // The Gunship's level 0 plane image.
-            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower0.gif"),
-
-            // The Gunship's level 1 plane image.
-            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower1.gif"),
-
-            // The Gunship's level 2 plane image.
-            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower2.gif"),
-
-            // The Gunship's level 3 plane image.
-            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower3.gif"),
-
-            // The Gunship's level 4 plane image.
-            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower4.gif"),
-
-            // The Gunship's level 5 plane image.
-            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower5.gif")
     };
 
     /**
@@ -130,30 +109,50 @@ public final class Gunship extends Tower {
      * The {@link AudioPlayer} that will be used to play {@code looping} sound effects for the {@link Gunship}.
      */
     @Element
-    private AudioPlayer player;
+    private final AudioPlayer player;
+
+    /**
+     * The {@link Gunship}'s plane {@link Image} per {@code level}.
+     */
+    @Property(unique = true)
+    private final Image[] planeImages = {
+
+            // The Gunship's level 0 plane image.
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower0.gif"),
+
+            // The Gunship's level 1 plane image.
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower1.gif"),
+
+            // The Gunship's level 2 plane image.
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower2.gif"),
+
+            // The Gunship's level 3 plane image.
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower3.gif"),
+
+            // The Gunship's level 4 plane image.
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower4.gif"),
+
+            // The Gunship's level 5 plane image.
+            new Image("file:src/main/resources/com/averagegames/ultimatetowerdefense/images/towers/gunship/GunshipTower5.gif")
+    };
 
     /**
      * The {@link Gunship}'s animation.
      */
     @Element
-    private PathTransition animation;
-
-    /**
-     * The {@link Gunship}'s rotation animation.
-     */
-    @Element
-    private RotateTransition rotation;
+    private CircularTranslationHandler animation;
 
     /**
      * The {@link Gunship}'s plane {@link Element}
      */
     @Element
-    private ImageLoader plane;
+    private final ImageLoader plane;
 
     /**
      * The {@link Gunship}'s flight {@code path}.
      */
-    private Circle flightPath;
+    @Element
+    private final Circle flightPath;
 
     public Gunship() {
         super.images = this.runwayImages;
@@ -178,9 +177,17 @@ public final class Gunship extends Tower {
 
         this.plane.setImage(this.planeImages[0]);
 
-        this.plane.setViewOrder(Integer.MIN_VALUE + 2);
+        this.plane.setViewOrder(GameScene.GUI_LAYER + 1);
 
         this.flightPath = new Circle(this.flightRadius);
+
+        this.flightPath.setOpacity(0.25);
+        this.flightPath.setFill(Color.TRANSPARENT);
+
+        this.flightPath.setStroke(Paint.valueOf("#3a5bb6"));
+        this.flightPath.setStrokeWidth(1);
+
+        this.flightPath.setViewOrder(GameScene.HIGHLIGHT_LAYER);
     }
 
     @Override
@@ -199,6 +206,7 @@ public final class Gunship extends Tower {
     }
 
     @Override
+    @SuppressWarnings("unused")
     protected void onPlace() {
         super.setRadius(this.radii[0]);
 
@@ -212,34 +220,24 @@ public final class Gunship extends Tower {
             Platform.runLater(() -> this.getParent().getChildren().add(this.plane));
         }
 
-        this.animation = new PathTransition();
+        this.animation = new CircularTranslationHandler();
 
         this.animation.setNode(this.plane);
         this.animation.setPath(this.flightPath);
-        this.animation.setInterpolator(Interpolator.LINEAR);
-        this.animation.setCycleCount(Animation.INDEFINITE);
-        this.animation.setAutoReverse(false);
-        this.animation.setRate(1);
-        this.animation.setDuration(Duration.seconds(this.calculateDuration()));
 
-        this.animation.currentTimeProperty().addListener(((observable, oldValue, newValue) -> {
+        this.animation.setSpeed(this.flightSpeeds[super.getLevel()]);
+
+        this.animation.setCycleCount(CircularTranslationHandler.INFINITE);
+
+        this.animation.start();
+
+        this.plane.translateXProperty().addListener(((observable, oldValue, newValue) -> {
             super.getRange().setCenterX(plane.getCurrentX() + (plane.getImage().getWidth() / 2));
-            super.getRange().setCenterY(plane.getCurrentY() + (plane.getImage().getHeight() / 2));
         }));
 
-        this.animation.playFromStart();
-
-        this.rotation = new RotateTransition();
-
-        this.rotation.setNode(this.plane);
-        this.rotation.setToAngle(360);
-        this.rotation.setInterpolator(Interpolator.LINEAR);
-        this.rotation.setCycleCount(Animation.INDEFINITE);
-        this.rotation.setAutoReverse(false);
-        this.rotation.setRate(1);
-        this.rotation.setDuration(Duration.seconds(this.calculateDuration()));
-
-        this.rotation.playFromStart();
+        this.plane.translateYProperty().addListener(((observable, oldValue, newValue) -> {
+            super.getRange().setCenterY(plane.getCurrentY() + (plane.getImage().getHeight() / 2));
+        }));
 
         try {
             this.player.loop(AudioPlayer.INDEFINITELY);
@@ -252,6 +250,7 @@ public final class Gunship extends Tower {
     public void onDeath() {
         if (super.getParent() != null) {
             super.getParent().getChildren().remove(this.plane);
+            super.getParent().getChildren().remove(this.flightPath);
         }
 
         this.player.stop();
@@ -265,7 +264,14 @@ public final class Gunship extends Tower {
         }
 
         try {
-            AudioPlayer effectPlayer = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 3.wav");
+            AudioPlayer effectPlayer = new AudioPlayer();
+
+            if (super.getLevel() < 5) {
+                effectPlayer.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 3.wav");
+            } else {
+                effectPlayer.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 6.wav");
+            }
+
             effectPlayer.play();
         } catch (Exception ex) {
             // The exception does not need to be handled.
@@ -276,24 +282,34 @@ public final class Gunship extends Tower {
 
     @Override
     public void upgrade() throws InterruptedException {
+        if (super.getLevel() >= 5) {
+            return;
+        }
+
         super.setLevel(super.getLevel() + 1);
 
-        if (super.getLevel() >= 4) {
+        if (super.getLevel() == 4) {
             super.setHiddenDetection(true);
         }
 
-        this.plane.setImage(this.planeImages[super.getLevel()]);
+        if (super.getLevel() == 5) {
+            this.animation.setSpeed(this.flightSpeeds[super.getLevel()]);
 
+            player.stop();
+            player.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Plane 2.wav");
+
+            try {
+                player.loop(AudioPlayer.INDEFINITELY);
+            } catch (Exception ex) {
+                // The exception does not need to be handled.
+            }
+        }
+
+        this.plane.setImage(this.planeImages[super.getLevel()]);
         this.plane.setRotate(0);
 
-        this.animation.stop();
-        this.animation.setDuration(Duration.seconds(this.calculateDuration()));
-        this.animation.playFromStart();
-
-        this.rotation.stop();
-        this.rotation.setDuration(Duration.seconds(this.calculateDuration()));
-        this.rotation.playFromStart();
-
         super.setRadius(this.radii[super.getLevel()]);
+
+        this.animation.refresh();
     }
 }

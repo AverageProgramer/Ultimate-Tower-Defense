@@ -174,14 +174,14 @@ public final class UpgradePanel extends Group {
                         player.play();
                     }
                 } catch (Exception e) {
-                    System.out.println("Exception occurred");
+                    // Ignore
                 }
 
                 this.upgradeButton.setText(STR."$\{tower.getUpgradeCosts()[tower.getLevel()]}");
             } else {
                 try {
-                    if (Player.cash >= tower.getUpgradeCosts()[tower.getLevel()]) {
-                        Player.cash -= tower.getUpgradeCosts()[tower.getLevel()];
+                    if (Player.cash >= tower.getUpgradeCosts()[4]) {
+                        Player.cash -= tower.getUpgradeCosts()[4];
                         this.totalSpent += tower.getUpgradeCosts()[tower.getUpgradeCosts().length - 1];
 
                         Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));
@@ -199,7 +199,7 @@ public final class UpgradePanel extends Group {
                         player.play();
                     }
                 } catch (Exception e) {
-                    System.out.println("Exception occurred");
+                    // Ignore
                 }
             }
         });
@@ -221,7 +221,7 @@ public final class UpgradePanel extends Group {
 
         super.getChildren().addAll(this.area, this.upgradeButton, this.targetingButton, this.sellButton, this.escButton, this.healthBar, this.highlight, this.healthLabel, this.levelLabel);
 
-        super.setViewOrder(Integer.MIN_VALUE);
+        super.setViewOrder(GameScene.GUI_LAYER);
     }
 
     public void setX(final double x) {

@@ -2,6 +2,7 @@ package com.averagegames.ultimatetowerdefense.scenes;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
+import com.averagegames.ultimatetowerdefense.characters.towers.Bonus;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.*;
@@ -29,6 +30,8 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
+
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
 import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
 import static com.averagegames.ultimatetowerdefense.maps.Map.*;
@@ -45,6 +48,18 @@ import static com.averagegames.ultimatetowerdefense.util.development.LogManager.
  */
 @SuppressWarnings("all")
 public class GameScene extends Scene implements Builder {
+
+    /**
+     * A {@link Constant} representing the view order of any {@code GUI} assets.
+     */
+    @Constant
+    public static final int GUI_LAYER = Integer.MIN_VALUE;
+
+    /**
+     * A {@link Constant} representing the view order for any assets that are indicators such as range.
+     */
+    @Constant
+    public static final int HIGHLIGHT_LAYER = Integer.MAX_VALUE;
 
     /**
      * A {@link Constant} representing the starting cash for the {@link Player}.
@@ -101,11 +116,6 @@ public class GameScene extends Scene implements Builder {
     private int towerIndex;
 
     /**
-     * A {@link Tower} that will be used to indicate where the {@link Player} would like to place a {@link Tower}.
-     */
-    private Tower tempTower;
-
-    /**
      * A boolean value that will allow for a {@link Wave} to be {@code skipped}.
      */
     private boolean allowSkip;
@@ -159,7 +169,7 @@ public class GameScene extends Scene implements Builder {
         });
 
         // A default inventory that can easily be changed.
-        Player.inventory = new Inventory(new Tower[] {new Scout(), new Marksman(), new Gunship(), new Energizer(), new Farm()});
+        Player.inventory = new Inventory(new Tower[] {new Marksman(), new Gunner(), new Gunship(), new Energizer(), new Farm()});
     }
 
     @Override
@@ -188,8 +198,11 @@ public class GameScene extends Scene implements Builder {
 
     @Override
     public void build(@NotNull final Stage stage) throws Exception {
+
+        // Loads the set map onto the scene.
         loadMap(this.map, this);
 
+        // Sets the
         CASH_TEXT.setText(STR."$\{Player.cash}");
 
         CASH_TEXT.setFill(Paint.valueOf("#3dbe23"));
@@ -198,7 +211,7 @@ public class GameScene extends Scene implements Builder {
         CASH_TEXT.setX(50);
         CASH_TEXT.setY(SCREEN.getHeight() + 10 - CASH_TEXT.getLayoutBounds().getHeight());
 
-        CASH_TEXT.setViewOrder(Integer.MIN_VALUE);
+        CASH_TEXT.setViewOrder(GUI_LAYER);
 
         HEALTH_TEXT.setText(STR."\{Base.health} HP");
 
@@ -209,7 +222,7 @@ public class GameScene extends Scene implements Builder {
         HEALTH_TEXT.setX(SCREEN.getWidth() - 60 - HEALTH_TEXT.getLayoutBounds().getWidth());
         HEALTH_TEXT.setY(SCREEN.getHeight() + 20 - HEALTH_TEXT.getLayoutBounds().getHeight());
 
-        HEALTH_TEXT.setViewOrder(Integer.MIN_VALUE);
+        HEALTH_TEXT.setViewOrder(GUI_LAYER);
 
         WAVE_TEXT.setText(STR."Wave \{Player.wave}");
 
@@ -219,7 +232,7 @@ public class GameScene extends Scene implements Builder {
         WAVE_TEXT.setX(SCREEN.getWidth() - 60 - WAVE_TEXT.getLayoutBounds().getWidth());
         WAVE_TEXT.setY(100);
 
-        WAVE_TEXT.setViewOrder(Integer.MIN_VALUE);
+        WAVE_TEXT.setViewOrder(GUI_LAYER);
 
         this.parent.getChildren().addAll(CASH_TEXT, HEALTH_TEXT, WAVE_TEXT);
 
@@ -238,14 +251,14 @@ public class GameScene extends Scene implements Builder {
             button.setFont(Font.font("Courier New"));
             button.setTextAlignment(TextAlignment.CENTER);
 
-            button.setViewOrder(Integer.MIN_VALUE);
+            button.setViewOrder(GUI_LAYER);
 
             int index = i;
 
             button.setOnAction(event -> {
-                if (this.tempTower != null) {
-                    this.tempTower.eliminate();
-                    this.parent.getChildren().remove(this.tempTower.getLoadedTower());
+                if (this.towerIndex != -1) {
+                    Player.inventory.towers()[this.towerIndex].eliminate();
+                    this.parent.getChildren().remove(Player.inventory.towers()[this.towerIndex].getLoadedTower());
                 }
 
                 LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
@@ -268,9 +281,9 @@ public class GameScene extends Scene implements Builder {
             int cost = tower != null ? tower.getPlacementCost() : -1;
 
             if (tower != null) {
-                if (this.tempTower != null) {
-                    this.tempTower.eliminate();
-                    this.parent.getChildren().remove(this.tempTower.getLoadedTower());
+                if (this.towerIndex != -1) {
+                    Player.inventory.towers()[this.towerIndex].eliminate();
+                    this.parent.getChildren().remove(Player.inventory.towers()[this.towerIndex].getLoadedTower());
                 }
 
                 int amount = 0;
@@ -307,34 +320,34 @@ public class GameScene extends Scene implements Builder {
         });
 
         this.setOnMouseMoved(event -> {
-            this.tempTower = this.towerIndex != -1 ? Player.inventory.towers()[this.towerIndex] : null;
+            Tower previewTower = this.towerIndex != -1 ? Player.inventory.towers()[this.towerIndex] : null;
 
             if (this.towerIndex != -1) {
-                if (!this.parent.getChildren().contains(this.tempTower.getLoadedTower())) {
-                    this.tempTower.setParent(this.parent);
+                if (!this.parent.getChildren().contains(previewTower.getLoadedTower())) {
+                    previewTower.setParent(this.parent);
 
-                    this.tempTower.enableActions(false);
+                    previewTower.enableActions(false);
 
-                    this.tempTower.place(new Position(event.getX(), event.getY()));
+                    previewTower.place(new Position(event.getX(), event.getY()));
 
-                    LIST_OF_ACTIVE_TOWERS.remove(this.tempTower);
+                    LIST_OF_ACTIVE_TOWERS.remove(previewTower);
 
-                    this.tempTower.getLoadedTower().setOpacity(0.75);
-                    this.tempTower.getRange().setVisible(true);
+                    previewTower.getLoadedTower().setOpacity(0.75);
+                    previewTower.getRange().setVisible(true);
                 }
 
-                this.tempTower.setPosition(new Position(event.getX(), event.getY()));
+                previewTower.setPosition(new Position(event.getX(), event.getY()));
 
-                this.tempTower.getRange().setCenterX(event.getX());
-                this.tempTower.getRange().setCenterY(event.getY());
+                previewTower.getRange().setCenterX(event.getX());
+                previewTower.getRange().setCenterY(event.getY());
             }
         });
 
         this.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
-                if (this.tempTower != null) {
-                    this.tempTower.eliminate();
-                    this.parent.getChildren().remove(this.tempTower.getLoadedTower());
+                if (this.towerIndex != -1) {
+                    Player.inventory.towers()[this.towerIndex].eliminate();
+                    this.parent.getChildren().remove(Player.inventory.towers()[this.towerIndex].getLoadedTower());
                 }
 
                 LIST_OF_ACTIVE_TOWERS.forEach(tower -> tower.deselect());
@@ -586,26 +599,21 @@ public class GameScene extends Scene implements Builder {
         for (Tower tower : LIST_OF_ACTIVE_TOWERS) {
 
             // Determines whether the tower is not a farm.
-            if (!(tower instanceof Farm)) {
+            if (!(tower.getClass().isAnnotationPresent(Bonus.class))) {
 
                 // Skips to the next iteration of the loop.
                 continue;
             }
 
-            // Adds a farm bonus to the player's current cash.
-            // For every farm, this bonus will be added to the player's current cash.
-            Player.cash += ((Farm) tower).getBonuses()[tower.getLevel()];
-
-            // A try-catch statement that will allow an audio player to play an audio file.
             try {
 
-                // Creates a new audio player that will play an audio file.
-                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Farm Income 1.wav");
-
-                // Plays the audio file.
-                player.play();
+                // Adds the tower's bonus to the player's current stats.
+                // Stats include everything from cash to base health.
+                tower.getClass().getMethod("bonus").invoke(tower);
             } catch (Exception ex) {
-                // The exception does not need to be handled.
+
+                // Logs the exception at the severe level.
+                LOGGER.severe(STR."Exception \{ex} thrown when trying to call bonus method in class \{tower.getClass()}");
             }
         }
 

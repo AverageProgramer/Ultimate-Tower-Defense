@@ -130,7 +130,9 @@ public final class Scout extends Tower {
     public void upgrade() throws InterruptedException {
         Position oldPos = super.getPosition();
 
-        super.setLevel(super.getLevel() + 1);
+        if (super.getLevel() < 5) {
+            super.setLevel(super.getLevel() + 1);
+        }
 
         if (super.getLevel() >= 2) {
             super.setHiddenDetection(true);
