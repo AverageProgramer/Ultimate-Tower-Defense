@@ -51,7 +51,7 @@ public final class Farm extends Tower {
      * The {@link Farm}'s cash {@code bonuses} per {@code level}.
      */
     @Property(unique = true)
-    private final int[] bonuses = {50, 100, 250, 500, 750, 1500};
+    private final int[] cashBonuses = {50, 100, 250, 500, 750, 1500};
 
     public Farm() {
         super.images = this.images;
@@ -89,7 +89,7 @@ public final class Farm extends Tower {
     public void bonus() {
 
         // Adds a cash bonuses to the player's current cash.
-        Player.cash += this.bonuses[super.getLevel()];
+        Player.cash += this.cashBonuses[super.getLevel()];
 
         // Updates the text displaying the player's current cash to now include the bonus.
         Platform.runLater(() -> GameScene.CASH_TEXT.setText(STR."$\{Player.cash}"));

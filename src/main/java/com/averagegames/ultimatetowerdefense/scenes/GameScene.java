@@ -167,7 +167,7 @@ public class GameScene extends Scene implements Builder {
         });
 
         // A default inventory that can easily be changed.
-        Player.inventory = new Inventory(new Tower[] {new Marksman(), new Gunner(), new Gunship(), new Energizer(), new Farm()});
+        Player.inventory = new Inventory(new Tower[] {new Medic(), new Gunner(), new Gunship(), new Energizer(), new Farm()});
     }
 
     @Override
@@ -200,7 +200,6 @@ public class GameScene extends Scene implements Builder {
         // Loads the set map onto the scene.
         loadMap(this.map, this);
 
-        // Sets the
         CASH_TEXT.setText(STR."$\{Player.cash}");
 
         CASH_TEXT.setFill(Paint.valueOf("#3dbe23"));
