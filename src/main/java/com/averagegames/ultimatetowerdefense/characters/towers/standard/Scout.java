@@ -72,7 +72,7 @@ public final class Scout extends Tower {
      */
     public Scout() {
 
-        // Properly sets the scout's image to the finalized image.
+        // Properly sets the scout's images to the finalized images.
         super.images = this.images;
 
         // Properly sets the scout's placement cost to the finalized placement cost.
@@ -81,27 +81,26 @@ public final class Scout extends Tower {
         // Properly sets the scout's upgrade costs to the finalized costs.
         super.upgradeCosts = this.upgradeCosts;
 
-        // Properly sets the scout's damage per attack to the finalized damage per attack.
+        // Properly sets the scout's damages per attack to the finalized damages per attack.
         super.damages = this.damages;
 
-        // Properly sets the scout's cool down in between attacks.
+        // Properly sets the scout's cool downs in between attacks to the finalized cool downs.
         super.coolDowns = this.coolDowns;
 
         // Properly sets the scout's health to the finalized starting health.
         super.setHealth(this.startHealth);
 
-        // Properly sets the scout's range to have the finalized radius.
+        // Properly sets the scout's range to have the finalized starting radius.
         super.setRadius(this.radii[0]);
     }
 
     /**
      * The {@link Scout}'s uniquely implemented {@code attack}.
      * @param enemy the {@link Enemy} to attack.
-     * @throws InterruptedException when the {@code attack} is {@code interrupted}.
      * @since Ultimate Tower Defense 1.0
      */
     @Override
-    protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
+    protected void attack(@Nullable final Enemy enemy) {
 
         // Determines whether the enemy is null and whether the scout is alive.
         if (enemy == null || !super.isAlive()) {
@@ -127,7 +126,7 @@ public final class Scout extends Tower {
     }
 
     @Override
-    public void upgrade() throws InterruptedException {
+    public void upgrade() {
         Position oldPos = super.getPosition();
 
         if (super.getLevel() < 5) {

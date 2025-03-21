@@ -78,7 +78,7 @@ public final class UpgradePanel extends Group {
         this.healthBar.setArcWidth(AREA_ARC_LENGTH);
         this.healthBar.setArcHeight(AREA_ARC_HEIGHT);
 
-        this.updateHealthBar();
+        this.update();
 
         this.highlight = new Rectangle();
 
@@ -280,7 +280,7 @@ public final class UpgradePanel extends Group {
         return this.area.getHeight();
     }
 
-    public void updateHealthBar() {
+    public void update() {
         if (tower.getHealth() > 50) {
             this.healthBar.setFill(Paint.valueOf("#00ff00"));
         } else if (tower.getHealth() > 25) {

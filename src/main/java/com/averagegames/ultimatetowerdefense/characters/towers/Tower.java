@@ -135,6 +135,9 @@ public abstract class Tower {
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
     private int level;
 
+    /**
+     * A boolean value that determines whether the {@link Tower} should perform its on {@code event} actions.
+     */
     private boolean enableActions;
 
     /**
@@ -176,12 +179,25 @@ public abstract class Tower {
         });
     }
 
+    /**
+     * Sets whether the {@link Tower} should perform its on {@code event} actions to a given boolean value.
+     * @param enabled whether the {@link Tower} should perform its on {@code event} actions.
+     * @since Ultimate Tower Defense 1.0
+     */
     public void enableActions(final boolean enabled) {
+
+        // Sets the boolean value that determines whether the tower should perform its on event actions to the given value.
         this.enableActions = enabled;
     }
 
+    /**
+     * Gets whether the {@link Tower} has its on {@code event} actions enabled.
+     * @return {@code true} if the on {@code event} actions are enabled, {@code false} otherwise.
+     */
     @SuppressWarnings("unused")
-    public boolean actionsEnable() {
+    public boolean actionsEnabled() {
+
+        // Gets the boolean value that determines whether the tower should perform its on event actions and returns it.
         return this.enableActions;
     }
 
@@ -192,6 +208,7 @@ public abstract class Tower {
      */
     public final void heal(@Range(from = 0, to = Integer.MAX_VALUE) final int amount) {
 
+        // Determines whether on event actions have been enabled for the tower.
         if (this.enableActions) {
 
             // Performs the tower's on healed action.
@@ -202,7 +219,8 @@ public abstract class Tower {
         // Adds the given amount to the tower's health.
         this.health += amount;
 
-        Platform.runLater(() -> this.panel.updateHealthBar());
+        // Updates the tower's upgrade to reflect the tower's new health.
+        this.panel.update();
 
         // Logs that the tower has been healed by a given amount.
         LOGGER.info(STR."Tower \{this} health has been increased by \{amount}.");
@@ -215,6 +233,7 @@ public abstract class Tower {
      */
     public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
 
+        // Determines whether on event actions have been enabled for the tower.
         if (this.enableActions) {
 
             // Performs the tower's on damaged action.
@@ -225,7 +244,8 @@ public abstract class Tower {
         // Removes the given amount from the tower's health.
         this.health -= damage;
 
-        Platform.runLater(() -> this.panel.updateHealthBar());
+        // Updates the tower's upgrade to reflect the tower's new health.
+        this.panel.update();
 
         // Logs that the enemy has been damaged by a given amount.
         LOGGER.info(STR."Tower \{this} health has been decreased by \{damage}.");
@@ -327,16 +347,24 @@ public abstract class Tower {
             return;
         }
 
+        // Determines whether on event actions have been enabled for the tower.
         if (this.enableActions) {
 
             // Performs the tower's spawn action.
             // This method is unique to each individual inheritor of the tower class.
             this.onPlace();
 
+            // A try-catch statement that will allow an audio player to play an audio file.
             try {
+
+                // Creates a new audio player that will be used to play an audio file.
                 AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Placement 1.wav");
+
+                // Plays the audio file.
                 player.play();
             } catch (Exception ex) {
+
+                // Logs that an exception has occurred while trying to play the audio file.
                 LOGGER.severe(STR."Exception \{ex} thrown when loading audio file.");
             }
         }
@@ -353,25 +381,35 @@ public abstract class Tower {
         this.range.setCenterX(this.getPosition().x());
         this.range.setCenterY(this.getPosition().y());
 
-        // FOR TESTING ONLY
-        // ---------------------------------------------------------------------------------------------------
+        // Sets the range's fill to a new value.
         this.range.setFill(Paint.valueOf("#3a5bb6"));
-        this.range.setOpacity(0.25);
-        this.range.setViewOrder(GameScene.HIGHLIGHT_LAYER);
-        this.range.setVisible(false);
-        this.loadedTower.setOnMouseClicked(e -> Platform.runLater(this::select));
-        this.parent.getChildren().add(this.range);
-        // ---------------------------------------------------------------------------------------------------
 
-        // Adds the tower to the tower's parent group.
-        this.parent.getChildren().add(this.loadedTower);
+        // Sets the range's opacity to a new value.
+        this.range.setOpacity(0.25);
+
+        // Sets the range's view order to the view order for ranges.
+        this.range.setViewOrder(GameScene.HIGHLIGHT_LAYER);
+
+        // Sets the range's visibility to false.
+        this.range.setVisible(false);
+
+        // Adds the tower's range to the tower's parent group.
+        this.parent.getChildren().add(this.range);
+
+        // Creates a new upgrade panel object that will be used to display that tower's current statistics.
+        this.panel = new UpgradePanel(this);
 
         // Sets the tower's view order to its current y position.
         this.loadedTower.setViewOrder(-this.getPosition().y());
 
-        this.panel = new UpgradePanel(this);
+        // Sets the tower's on mouse clicked event to select the tower.
+        this.loadedTower.setOnMouseClicked(e -> this.select());
 
-        LIST_OF_ACTIVE_TOWERS.forEach(tower -> Platform.runLater(tower::deselect));
+        // Adds the tower to the tower's parent group.
+        this.parent.getChildren().add(this.loadedTower);
+
+        // Deselects every other tower.
+        LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
 
         // Adds the tower to the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.add(this);
@@ -417,10 +455,16 @@ public abstract class Tower {
         // Sets the tower's range to be visible.
         this.range.setVisible(true);
 
+        // Sets the panel's x and y coordinates depending on where the tower is placed.
+        // If the tower is placed on the right half, the upgrade panel appears on the left and if the tower is placed on the left half, the upgrade panel appears on the right.
+
         this.panel.setX(this.getPosition().x() >= GameScene.SCREEN.getWidth() / 2 ? 15 : GameScene.SCREEN.getWidth() - this.panel.getAreaWidth() - 15);
         this.panel.setY(GameScene.SCREEN.getHeight() / 2 - this.panel.getAreaHeight() / 2);
 
+        // Determines whether the tower's parent is not null.
         if (this.parent != null) {
+
+            // Adds the upgrade panel to the tower's parent.
             this.parent.getChildren().add(this.panel);
         }
     }
@@ -435,7 +479,10 @@ public abstract class Tower {
         // Sets the tower's range to be invisible.
         this.range.setVisible(false);
 
+        // Determines whether the tower's parent is not null.
         if (this.parent != null) {
+
+            // Removes the upgrade panel from the tower's parent.
             this.parent.getChildren().remove(this.panel);
         }
     }
@@ -721,12 +768,13 @@ public abstract class Tower {
     public synchronized final void eliminate() {
 
         // Determines whether the tower's parent group is null and whether the tower's parent group contains the tower.
-        if (this.parent == null || !this.parent.getChildren().contains(this.loadedTower)) {
+        if (this.parent == null) {
 
             // Prevents the tower from being removed from a null group and from being eliminated more than once.
             return;
         }
 
+        // Determines whether on event actions have been enabled for the tower.
         if (this.enableActions) {
 
             // Performs the tower's death action.
@@ -734,18 +782,20 @@ public abstract class Tower {
             this.onDeath();
         }
 
+        // Removes the tower's range from the tower's parent.
         this.parent.getChildren().remove(this.range);
 
+        // Removes the upgrade panel from the tower's parent.
         this.parent.getChildren().remove(this.panel);
 
         // Removes the tower from its parent group.
         this.parent.getChildren().remove(this.loadedTower);
 
-        // Stops all attacks the tower may be performing.
-        this.stopAttacking();
-
         // Removes the tower from the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.remove(this);
+
+        // Stops all attacks the tower may be performing.
+        this.stopAttacking();
 
         // Logs that the tower has been eliminated.
         LOGGER.info(STR."Tower \{this} eliminated.");

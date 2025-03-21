@@ -225,7 +225,7 @@ public abstract class Enemy {
         if (this.health <= 0) {
 
             // Removes the enemy from its parent group.
-            Platform.runLater(this::eliminate);
+            this.eliminate();
         }
     }
 
@@ -455,9 +455,12 @@ public abstract class Enemy {
                 // A loop that will iterate through the list containing every active enemy.
                 LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
 
-                    // Allows for nodes to be removed to the group despite the current thread possible not being the JavaFX application thread.
-                    // Eliminates each remaining enemy from their parent groups.
-                    Platform.runLater(() -> enemy.eliminate(false));
+                    if (enemy != this) {
+
+                        // Allows for nodes to be removed to the group despite the current thread possible not being the JavaFX application thread.
+                        // Eliminates each remaining enemy from their parent groups.
+                        Platform.runLater(() -> enemy.eliminate(false));
+                    }
                 });
 
                 // A try-catch statement that will catch any exceptions that occur when playing an audio file.
