@@ -47,6 +47,7 @@ public final class Client implements Runnable {
         }
     }
 
+    @ClientHandler
     public static class Server {
         public Server() {
 

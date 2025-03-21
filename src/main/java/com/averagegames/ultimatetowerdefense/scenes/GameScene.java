@@ -13,6 +13,7 @@ import com.averagegames.ultimatetowerdefense.maps.gui.SkipPanel;
 import com.averagegames.ultimatetowerdefense.player.Inventory;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.player.modes.Easy;
+import com.averagegames.ultimatetowerdefense.scenes.menu.OpeningScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.application.Platform;

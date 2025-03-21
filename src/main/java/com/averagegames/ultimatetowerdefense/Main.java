@@ -3,10 +3,7 @@ package com.averagegames.ultimatetowerdefense;
 import static com.averagegames.ultimatetowerdefense.scenes.Builder.loadBuild;
 import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
 
-import com.averagegames.ultimatetowerdefense.maps.dev.TestMap;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
-
-import com.averagegames.ultimatetowerdefense.scenes.OpeningScene;
+import com.averagegames.ultimatetowerdefense.scenes.menu.OpeningScene;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.stage.Stage;
@@ -22,13 +19,11 @@ public class Main extends Application {
 
     @Override
     public void start(@NotNull final Stage stage) throws Exception {
-        GameScene scene = new GameScene(new Group(), new TestMap());
+        OpeningScene openingScene = new OpeningScene(new Group());
 
-        OpeningScene start = new OpeningScene(new Group());
+        loadBuild(openingScene, stage);
 
-        loadBuild(start, stage);
-
-        LOGGER.info(STR."Scene \{scene} has been loaded successfully onto stage \{stage}.");
+        LOGGER.info(STR."Scene \{openingScene} has been loaded successfully onto stage \{stage}.");
 
         LOGGER.info(STR."Application \{this} started.");
     }

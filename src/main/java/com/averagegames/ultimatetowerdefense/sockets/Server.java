@@ -13,7 +13,9 @@ import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@ClientHandler
 public final class Server implements Runnable {
+
     private final ServerSocket server;
 
     private final LinkedList<ConnectionHandler> connections;
