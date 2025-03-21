@@ -40,7 +40,7 @@ import static com.averagegames.ultimatetowerdefense.util.development.LogManager.
  * The {@link GameScene} class, using the {@link Builder} interface, is a custom-built scene that {@link Map}s can easily be added to and removed from.
  * {@link Player} cash and coins are also managed and altered accordingly within the {@link GameScene} class.
  * @since Ultimate Tower Defense 1.0
- * @see MenuScene
+ * @see OpeningScene
  * @see StoreScene
  * @author AverageProgramer
  */
@@ -167,25 +167,11 @@ public class GameScene extends Scene implements Builder {
         });
 
         // A default inventory that can easily be changed.
-        Player.inventory = new Inventory(new Tower[] {new Medic(), new Gunner(), new Gunship(), new Energizer(), new Farm()});
+        Player.inventory = new Inventory(new Tower[] {new Marksman(), new Gunner(), new Gunship(), new Energizer(), new Farm()});
     }
 
     @Override
     public void pre_build(@NotNull final Stage stage) {
-
-        // Sets the stages title to the title of the game.
-        stage.setTitle("Ultimate Tower Defense");
-
-        // Sets the stage to maximize.
-        stage.setMaximized(true);
-
-        // Sets it so that the stage can't be resized.
-        stage.setResizable(false);
-
-        // Sets the dimensions of the stage to the screen's dimensions.
-
-        stage.setWidth(SCREEN.getWidth());
-        stage.setHeight(SCREEN.getHeight());
 
         // Sets the player's current cash to the global constant representing starting cash.
         Player.cash = STARTING_CASH;
@@ -358,6 +344,10 @@ public class GameScene extends Scene implements Builder {
 
         // Loops the previously set audio file for an indefinite amount of times.
         GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
+
+        // Allows the global audio player to be stopped when the scene is changed without issue.
+        // Stops the global audio player from playing an audio file once the scene is changes.
+        Platform.runLater(() -> stage.sceneProperty().addListener((observableValue, scene, t1) -> GLOBAL_PLAYER.stop()));
 
         // Creates a new thread that will be responsible for spawning the enemies during the game.
         this.spawnThread = new Thread(() -> {

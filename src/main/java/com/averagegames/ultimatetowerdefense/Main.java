@@ -6,6 +6,7 @@ import static com.averagegames.ultimatetowerdefense.util.development.LogManager.
 import com.averagegames.ultimatetowerdefense.maps.dev.TestMap;
 import com.averagegames.ultimatetowerdefense.scenes.GameScene;
 
+import com.averagegames.ultimatetowerdefense.scenes.OpeningScene;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.stage.Stage;
@@ -23,7 +24,9 @@ public class Main extends Application {
     public void start(@NotNull final Stage stage) throws Exception {
         GameScene scene = new GameScene(new Group(), new TestMap());
 
-        loadBuild(scene, stage);
+        OpeningScene start = new OpeningScene(new Group());
+
+        loadBuild(start, stage);
 
         LOGGER.info(STR."Scene \{scene} has been loaded successfully onto stage \{stage}.");
 
