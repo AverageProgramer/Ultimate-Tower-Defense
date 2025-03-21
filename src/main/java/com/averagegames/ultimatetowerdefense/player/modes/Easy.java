@@ -9,10 +9,6 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies
 
 public class Easy {
     public static final Wave WAVE_1 = new Wave(new Enemy[] {
-            new Soldier(),
-            new Soldier(),
-            new Soldier(),
-
             new Normal(),
             new Normal(),
             new Normal(),
