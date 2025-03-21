@@ -671,7 +671,7 @@ public abstract class Enemy {
         }
 
         // Removes the enemy from its parent group.
-        this.parent.getChildren().remove(this.loadedEnemy);
+        Platform.runLater(() -> this.parent.getChildren().remove(this.loadedEnemy));
 
         // Interrupts the threads controlling enemy actions.
         // This will cause an exception to be thrown in both threads which will break out of the loop controlling the enemy.

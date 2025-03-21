@@ -9,13 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" afterDir="false" />
-    </list>
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Cleaned up the code in the Tower and Gunship classes slightly. Also, added comments to the Gunship class." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -264,14 +258,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00044" summary="Added JAVADOC and code comments to the remaining methods within the Tower class.">
-      <option name="closed" value="true" />
-      <created>1740259053463</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1740259053463</updated>
     </task>
     <task id="LOCAL-00045" summary="Added a variety of sound effects to the game. A few methods and constructors have also been removed from the Enemy and Tower classes as well as a few of the inheritors.">
       <option name="closed" value="true" />
@@ -657,7 +643,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742508701668</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Cleaned up the code in the Tower and Gunship classes slightly. Also, added comments to the Gunship class.">
+      <option name="closed" value="true" />
+      <created>1742543189430</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1742543189430</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +659,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave." />
     <MESSAGE value="Game is currently bugged. This commit is just to test whether the bug is a hardware issue." />
     <MESSAGE value="Fixed the previously mentioned bug. The bug had caused random Enemies to move at significantly slower speeds when spawned than they are supposed to. In addition to fixing that bug, the GameScene class has also been set up to now fit any computer screen. Lastly, in addition to fixing the previously mentioned animation bug, all other animation bugs have been fixed. These bugs include: Enemies getting stuck at spawn, Enemies stopping at various Positions along their set Path, and Enemies moving at slightly different speeds." />
     <MESSAGE value="Added a button to skip waves to the GameScene class. This button will replace the old method of pressing the 's' key in order to skip a wave. Additional sound effects have also been added such as the 'Placement 1' sound effect which plays once when a Tower is placed. Lastly, the MilitaryBase Tower has been added to the game. Units have not currently been implemented so the MilitaryBase currently does nothing." />
@@ -690,7 +683,8 @@
     <MESSAGE value="Set the Player's cash back to 500 whenever a round is started." />
     <MESSAGE value="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added." />
     <MESSAGE value="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000." />
+    <MESSAGE value="Cleaned up the code in the Tower and Gunship classes slightly. Also, added comments to the Gunship class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up the code in the Tower and Gunship classes slightly. Also, added comments to the Gunship class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
