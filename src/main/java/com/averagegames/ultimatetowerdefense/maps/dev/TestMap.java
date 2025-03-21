@@ -9,10 +9,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-@Getter
 public final class TestMap implements Map {
 
     /**
