@@ -63,7 +63,7 @@ public class GameScene extends Scene implements Builder {
      * A {@link Constant} representing the starting cash for the {@link Player}.
      */
     @Constant
-    private static final int STARTING_CASH = 500;
+    private static final int STARTING_CASH = 1000000;
 
     /**
      * A {@link Constant} representing the starting wave for the {@link Player}.
@@ -167,7 +167,7 @@ public class GameScene extends Scene implements Builder {
         });
 
         // A default inventory that can easily be changed.
-        Player.inventory = new Inventory(new Tower[] {new Scout(), new Marksman(), new Gunner(), new Energizer(), new Farm()});
+        Player.inventory = new Inventory(new Tower[] {new Marksman(), new Gunner(), new Gunship(), new Energizer(), new Farm()});
     }
 
     @Override

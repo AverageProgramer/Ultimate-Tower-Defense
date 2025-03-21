@@ -9,9 +9,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/gui/UpgradePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
     </list>
@@ -48,12 +47,12 @@
   }
 }</component>
   <component name="GitLabMergeRequestsSettings">{}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/AverageProgramer/Ultimate-Tower-Defense.git&quot;,
-    &quot;accountId&quot;: &quot;8d13437e-efaa-4963-8bf1-31adb5251458&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AverageProgramer/Ultimate-Tower-Defense.git",
+    "accountId": "e85c9853-f406-4a76-813c-a7f7fc9e75b6"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/native/com_averagegames_ultimatetowerdefense_elements_enemies_Enemy.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/native/com_averagegames_ultimatetowerdefense_elements_enemies_Enemy.h" root0="FORCE_HIGHLIGHTING" />
@@ -263,14 +262,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00043" summary="Began implementing Tower attacks. Towers, specifically the Scout, can now be placed wherever the user clicks the screen. Currently, the implemented attack and placement methods are very primitive and will likely be updated continuously in the future.">
-      <option name="closed" value="true" />
-      <created>1740190084971</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1740190084971</updated>
     </task>
     <task id="LOCAL-00044" summary="Added JAVADOC and code comments to the remaining methods within the Tower class.">
       <option name="closed" value="true" />
@@ -656,7 +647,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742494491079</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000.">
+      <option name="closed" value="true" />
+      <created>1742508701667</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1742508701668</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +663,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue." />
     <MESSAGE value="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave." />
     <MESSAGE value="Game is currently bugged. This commit is just to test whether the bug is a hardware issue." />
     <MESSAGE value="Fixed the previously mentioned bug. The bug had caused random Enemies to move at significantly slower speeds when spawned than they are supposed to. In addition to fixing that bug, the GameScene class has also been set up to now fit any computer screen. Lastly, in addition to fixing the previously mentioned animation bug, all other animation bugs have been fixed. These bugs include: Enemies getting stuck at spawn, Enemies stopping at various Positions along their set Path, and Enemies moving at slightly different speeds." />
@@ -689,7 +687,8 @@
     <MESSAGE value="Fixed a bug that would cause the Gunship to not be removed when eliminated." />
     <MESSAGE value="Set the Player's cash back to 500 whenever a round is started." />
     <MESSAGE value="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added." />
+    <MESSAGE value="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

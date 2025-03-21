@@ -171,6 +171,10 @@ public final class UpgradePanel extends Group {
 
                         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Upgrade 1.wav");
                         player.play();
+
+                        this.upgradeButton.setText(STR."$\{tower.getUpgradeCosts()[tower.getLevel()]}");
+
+                        tower.heal(100 - tower.getHealth());
                     } else {
                         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
                         player.play();
@@ -178,8 +182,6 @@ public final class UpgradePanel extends Group {
                 } catch (Exception e) {
                     // Ignore
                 }
-
-                this.upgradeButton.setText(STR."$\{tower.getUpgradeCosts()[tower.getLevel()]}");
             } else if (tower.getLevel() == 4) {
                 try {
                     if (Player.cash >= tower.getUpgradeCosts()[4]) {
@@ -196,6 +198,8 @@ public final class UpgradePanel extends Group {
                         player.play();
 
                         this.upgradeButton.setText("MAX LEVEL");
+
+                        tower.heal(100 - tower.getHealth());
                     } else {
                         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
                         player.play();
