@@ -1,7 +1,9 @@
 package com.averagegames.ultimatetowerdefense;
 
 import static com.averagegames.ultimatetowerdefense.scenes.Builder.loadBuild;
+import static com.averagegames.ultimatetowerdefense.scenes.menu.OpeningScene.SCREEN;
 import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
+import static com.averagegames.ultimatetowerdefense.util.development.LogManager.enableLogging;
 
 import com.averagegames.ultimatetowerdefense.scenes.menu.OpeningScene;
 import javafx.application.Application;
@@ -14,13 +16,22 @@ public class Main extends Application {
 
     @Override
     public void init() throws Exception {
+        enableLogging(false);
+
         LOGGER.info(STR."Application \{this} initalized.");
     }
 
     @Override
     public void start(@NotNull final Stage stage) throws Exception {
-        OpeningScene openingScene = new OpeningScene(new Group());
+        stage.setTitle("Ultimate Tower Defense");
 
+        stage.setMaximized(true);
+        stage.setResizable(false);
+
+        stage.setWidth(SCREEN.getWidth());
+        stage.setHeight(SCREEN.getHeight());
+
+        OpeningScene openingScene = new OpeningScene(new Group());
         loadBuild(openingScene, stage);
 
         LOGGER.info(STR."Scene \{openingScene} has been loaded successfully onto stage \{stage}.");

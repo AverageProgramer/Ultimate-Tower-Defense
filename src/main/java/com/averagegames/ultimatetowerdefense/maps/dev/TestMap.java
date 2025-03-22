@@ -2,7 +2,7 @@ package com.averagegames.ultimatetowerdefense.maps.dev;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.maps.*;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.application.Platform;
 import javafx.scene.Group;

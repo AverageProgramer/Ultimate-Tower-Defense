@@ -39,6 +39,11 @@ public final class Spawner {
     private Path enemyPathing;
 
     /**
+     * A boolean value that determines whether the {@link Spawner} can {@code spawn} an {@link Enemy}.
+     */
+    private boolean enableSpawning;
+
+    /**
      * A default, no args constructor for the {@link Spawner} class.
      * @since Ultimate Tower Defense 1.0
      */
@@ -49,6 +54,9 @@ public final class Spawner {
 
         // Initializes the spawning enemies' pathing to a default, null path.
         this.enemyPathing = null;
+
+        // Initializes the boolean that determines whether the spawner can spawn enemies as true.
+        this.enableSpawning = true;
     }
 
     /**
@@ -58,11 +66,34 @@ public final class Spawner {
      */
     public Spawner(@NotNull final Position spawnPosition) {
 
-        // Calls the spawner's default no-args constructor.
+        // Calls the spawner's default, no-args constructor.
         this();
 
         // Sets the spawner's spawn position to the provided position.
         this.spawnPosition = spawnPosition;
+    }
+
+
+    /**
+     * Sets whether the {@link Spawner} can {@code spawn} an {@link Enemy} to a given boolean value.
+     * @param enabled whether the {@link Spawner} can {@code spawn} and {@link Enemy}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public void enableSpawning(final boolean enabled) {
+
+        // Sets the boolean value that determines whether the spawner can spawn enemies to the given value.
+        this.enableSpawning = enabled;
+    }
+
+    /**
+     * Gets whether the {@link Spawner} has its {@code spawning} enabled.
+     * @return {@code true} if {@code spawning} is enabled, {@code false} otherwise.
+     */
+    @SuppressWarnings("unused")
+    public boolean spawningEnabled() {
+
+        // Gets the boolean value that determines whether the spawner can spawn enemies and returns it.
+        return this.enableSpawning;
     }
 
     /**
@@ -74,9 +105,10 @@ public final class Spawner {
      */
     public void spawn(@NotNull final Enemy enemy, @NotNull final Group group) {
 
-        // TODO: Add enableSpawning method
-        if (Base.health <= 0) {
+        // Determines whether the spawner has spawning enabled.
+        if (!this.enableSpawning) {
 
+            // Prevents any enemies from spawning.
             return;
         }
 

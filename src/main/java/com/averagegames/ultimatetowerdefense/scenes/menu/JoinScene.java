@@ -1,12 +1,13 @@
-package com.averagegames.ultimatetowerdefense.scenes;
+package com.averagegames.ultimatetowerdefense.scenes.menu;
 
+import com.averagegames.ultimatetowerdefense.scenes.Builder;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
-public class StoreScene extends Scene implements Builder {
-    public StoreScene(Parent root) {
+public class JoinScene extends Scene implements Builder {
+    public JoinScene(Parent root) {
         super(root);
     }
 

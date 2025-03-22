@@ -1,13 +1,13 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.EnemySpawnable;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
 
-@Zombie
+@EnemySpawnable
 public final class Slow extends Enemy {
 
     @Property

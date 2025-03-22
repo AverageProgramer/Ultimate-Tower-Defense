@@ -1,8 +1,8 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.EnemySpawnable;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
  * @see Enemy
  * @author AverageProgramer
  */
-@Zombie
+@EnemySpawnable
 public final class Normal extends Enemy {
 
     /**

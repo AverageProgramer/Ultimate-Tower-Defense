@@ -1,6 +1,6 @@
-package com.averagegames.ultimatetowerdefense.maps.gui;
+package com.averagegames.ultimatetowerdefense.scenes.assets;
 
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

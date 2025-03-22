@@ -2,7 +2,7 @@ package com.averagegames.ultimatetowerdefense.scenes.menu;
 
 import com.averagegames.ultimatetowerdefense.maps.dev.TestMap;
 import com.averagegames.ultimatetowerdefense.scenes.Builder;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.application.Platform;
@@ -64,17 +64,6 @@ public final class OpeningScene extends Scene implements Builder {
     }
 
     @Override
-    public void pre_build(@NotNull final Stage stage) throws Exception {
-        stage.setTitle("Ultimate Tower Defense");
-
-        stage.setMaximized(true);
-        stage.setResizable(false);
-
-        stage.setWidth(SCREEN.getWidth());
-        stage.setHeight(SCREEN.getHeight());
-    }
-
-    @Override
     public void build(@NotNull final Stage stage) throws Exception {
         TITLE_TEXT.setFont(Font.font("Courier New", TITLE_FONT_SIZE));
         TITLE_TEXT.setTextAlignment(TextAlignment.CENTER);
@@ -92,6 +81,8 @@ public final class OpeningScene extends Scene implements Builder {
         SINGLEPLAYER_BUTTON.setOnAction(event -> Platform.runLater(() -> {
             GameScene gameScene = new GameScene(new Group(), new TestMap());
 
+            MANAGER.setNextScene(gameScene);
+
             try {
                 Builder.loadBuild(gameScene, stage);
             } catch (Exception ex) {
@@ -107,7 +98,9 @@ public final class OpeningScene extends Scene implements Builder {
         MULTIPLAYER_BUTTON.setTranslateY((SCREEN.getHeight() / 2) - (MULTIPLAYER_BUTTON.getPrefHeight() / 2) + 50);
 
         MULTIPLAYER_BUTTON.setOnAction(event -> Platform.runLater(() -> {
-            LobbyScene lobbyScene = new LobbyScene(new Group());
+            ServerScene lobbyScene = new ServerScene(new Group());
+
+            MANAGER.setNextScene(lobbyScene);
 
             try {
                 Builder.loadBuild(lobbyScene, stage);
@@ -118,10 +111,16 @@ public final class OpeningScene extends Scene implements Builder {
 
         this.parent.getChildren().add(MULTIPLAYER_BUTTON);
 
-        GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/Daybreak OST - SCP Roleplay.wav");
-        GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
+        if (MANAGER.getNextScene() != this) {
+            GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/Daybreak OST - SCP Roleplay.wav");
+            GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
+        }
 
-        Platform.runLater(() -> stage.sceneProperty().addListener((observableValue, scene, t1) -> GLOBAL_PLAYER.stop()));
+        Platform.runLater(() -> stage.sceneProperty().addListener((observableValue, scene, t1) -> {
+            if (t1 instanceof GameScene) {
+                GLOBAL_PLAYER.stop();
+            }
+        }));
     }
 
     @Override

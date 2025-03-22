@@ -1,11 +1,10 @@
-package com.averagegames.ultimatetowerdefense.maps.gui;
+package com.averagegames.ultimatetowerdefense.scenes.assets;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Targeting;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.application.Platform;
 import javafx.scene.Group;

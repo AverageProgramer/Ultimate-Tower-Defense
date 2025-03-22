@@ -1,7 +1,6 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
-import com.averagegames.ultimatetowerdefense.characters.enemies.Titan;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
@@ -11,7 +10,6 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-@Titan
 public class LootBoxTitan extends Enemy {
 
     @Property

@@ -1,8 +1,8 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.EnemySpawnable;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.characters.enemies.Zombie;
 import com.averagegames.ultimatetowerdefense.maps.Path;
 import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.Objects;
 
-@Zombie
+@EnemySpawnable
 public class LootBox extends Enemy {
 
     @Property

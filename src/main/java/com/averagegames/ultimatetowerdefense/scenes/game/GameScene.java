@@ -1,4 +1,4 @@
-package com.averagegames.ultimatetowerdefense.scenes;
+package com.averagegames.ultimatetowerdefense.scenes.game;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
@@ -9,11 +9,13 @@ import com.averagegames.ultimatetowerdefense.characters.towers.standard.*;
 import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Map;
 import com.averagegames.ultimatetowerdefense.maps.Position;
-import com.averagegames.ultimatetowerdefense.maps.gui.SkipPanel;
+import com.averagegames.ultimatetowerdefense.scenes.Builder;
+import com.averagegames.ultimatetowerdefense.scenes.assets.SkipPanel;
 import com.averagegames.ultimatetowerdefense.player.Inventory;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.player.modes.Easy;
 import com.averagegames.ultimatetowerdefense.scenes.menu.OpeningScene;
+import com.averagegames.ultimatetowerdefense.scenes.store.StoreScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import javafx.application.Platform;
@@ -183,8 +185,6 @@ public class GameScene extends Scene implements Builder {
 
     @Override
     public void build(@NotNull final Stage stage) throws Exception {
-
-        // Loads the set map onto the scene.
         loadMap(this.map, this);
 
         CASH_TEXT.setText(STR."$\{Player.cash}");
@@ -498,7 +498,7 @@ public class GameScene extends Scene implements Builder {
         // Sets the stage's scene as this scene.
         stage.setScene(this);
 
-        // Enables the stage for use.
+        // Shows the stage on the player's screen.
         stage.show();
     }
 

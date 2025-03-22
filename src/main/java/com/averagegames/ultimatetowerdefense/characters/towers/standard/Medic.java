@@ -5,7 +5,7 @@ import com.averagegames.ultimatetowerdefense.characters.towers.Bonus;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Position;
-import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.application.Platform;
 import javafx.scene.image.Image;

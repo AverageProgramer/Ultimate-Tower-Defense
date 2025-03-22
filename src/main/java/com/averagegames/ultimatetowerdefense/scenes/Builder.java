@@ -16,6 +16,11 @@ import org.jetbrains.annotations.NotNull;
 public interface Builder {
 
     /**
+     * A {@link SceneManager} that allows an implementation of the {@link Builder} interface to manage {@link Scene}s.
+     */
+    SceneManager MANAGER = new SceneManager();
+
+    /**
      * Builds a new {@code JavaFX} {@link Scene}, unique to each implementation of the {@link Builder} interface, on a given {@link Stage}.
      * @param stage the {@link Stage} to add the {@link Scene} to.
      * @throws Exception when an {@link Exception} occurs.
