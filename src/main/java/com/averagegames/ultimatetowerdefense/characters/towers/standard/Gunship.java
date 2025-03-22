@@ -10,6 +10,7 @@ import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
 import com.averagegames.ultimatetowerdefense.util.development.Element;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
 import org.jetbrains.annotations.Contract;
@@ -270,8 +271,9 @@ public final class Gunship extends Tower {
         // Sets the animation's cycle count to loop and infinite amount of times.
         this.animation.setCycleCount(CircularTranslationHandler.INFINITE);
 
-        // Starts the gunship's animation.
-        this.animation.start();
+        // Allows the gunship's animation to be starting without any issues.
+        // Starts the animation.
+        Platform.runLater(() -> this.animation.start());
 
         // Adds listeners to the plane's translate x and y properties.
         // This will allow the range's position to update while the plane moves around its circular flight path.

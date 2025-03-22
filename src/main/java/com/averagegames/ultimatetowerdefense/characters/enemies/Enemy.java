@@ -447,14 +447,6 @@ public abstract class Enemy {
             // Logs that the enemy has begun moving along its set path.
             LOGGER.info(STR."Enemy \{this} has begun moving along path \{this.pathing}.");
 
-            // Creates a new animation that will control the enemy's movement along a given path.
-            TranslationHandler animation = new TranslationHandler();
-
-            // Sets up the animation, setting the node to control to the enemy's image, and setting the speed to use to the enemy's speed.
-
-            animation.setNode(this.loadedEnemy);
-            animation.setSpeed(this.speed);
-
             // Determines whether the enemy's pathing is null.
             if (this.pathing == null) {
 
@@ -465,11 +457,20 @@ public abstract class Enemy {
             // A loop that will iterate through every position on the given path.
             for (Position position : this.pathing.positions()) {
 
+                // Creates a new animation that will control the enemy's movement along a given path.
+                TranslationHandler animation = new TranslationHandler();
+
+                // Sets up the animation, setting the node to control to the enemy's image, and setting the speed to use to the enemy's speed.
+
+                animation.setNode(this.loadedEnemy);
+                animation.setSpeed(this.speed);
+
                 // Sets the animation's destination to the current position in the loop.
                 animation.setDestination(new Position(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0), position.y() - (this.image != null ? this.image.getHeight() : 0)));
 
+                // Allows the enemy's animation to be started without any issues.
                 // Starts the animation.
-                animation.start();
+                Platform.runLater(() -> animation.start());
 
                 // Logs that the enemy has begun moving to its target destination.
                 LOGGER.info(STR."Enemy \{this} moving to position \{position}.");
