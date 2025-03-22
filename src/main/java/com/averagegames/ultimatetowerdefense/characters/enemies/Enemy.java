@@ -174,6 +174,9 @@ public abstract class Enemy {
         // Initializes the enemy's range to a default circle.
         this.range = new Circle();
 
+        // Initializes the boolean that determines whether the enemy should perform on event actions to true.
+        this.enableActions = true;
+
         // Initializes the threads that the enemy will use to move and attack.
 
         this.movementThread = new Thread(() -> {

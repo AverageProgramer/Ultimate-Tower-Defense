@@ -9,8 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a compiler error with the Pyromancer class.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,12 +46,12 @@
   }
 }</component>
   <component name="GitLabMergeRequestsSettings">{}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/AverageProgramer/Ultimate-Tower-Defense.git&quot;,
-    &quot;accountId&quot;: &quot;e85c9853-f406-4a76-813c-a7f7fc9e75b6&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AverageProgramer/Ultimate-Tower-Defense.git",
+    "accountId": "8d13437e-efaa-4963-8bf1-31adb5251458"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/native/com_averagegames_ultimatetowerdefense_elements_enemies_Enemy.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/native/com_averagegames_ultimatetowerdefense_elements_enemies_Enemy.h" root0="FORCE_HIGHLIGHTING" />
@@ -260,14 +261,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00048" summary="There was a missed compiler error in the previous commit. That is the only change that has been made.">
-      <option name="closed" value="true" />
-      <created>1740522737545</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1740522737545</updated>
     </task>
     <task id="LOCAL-00049" summary="Fixed a bug regarding the 'getTarget' method in the Tower class. Previously, the tower would attempt to target hidden and flying enemies even without having hidden and flying detection capabilities. This would ultimately cause the Tower to get stuck and unable to attack other enemies. The Stealthy zombie has also now been added. It is the first zombie to properly use the hidden Type.">
       <option name="closed" value="true" />
@@ -653,7 +646,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742604420834</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Fixed a compiler error with the Pyromancer class.">
+      <option name="closed" value="true" />
+      <created>1742605347835</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1742605347835</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -661,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented basic Tower upgrades for the Scout, Marksman, Gunner, and Farm Towers. The Images do not currently change and will likely be implemented by the next commit. Every other tower will also likely have their properties set to work with Tower upgrades by the next commit. The SkipPanel class has also been added and allows for easy addition of the skip GUI to the screen at a set position." />
     <MESSAGE value="Fixed a bug with the Energizer that would cause an Exception to be thrown when the Tower would be placed. Also, fully implemented Energizer upgrades. Significantly nerfed the Scout, Marksman, and Gunner Towers." />
     <MESSAGE value="Made a slight GUI change to the UpgradePanel class." />
     <MESSAGE value="Implemented a variety of new images for the Towers. The Scout, Marksman, Farm, and Energizer all now have each of the images for each of their levels. There is currently a bug taking place that causes the entire Application to completely freeze however the code is still running in the background. It is only the GUI that stops updating." />
@@ -686,7 +686,8 @@
     <MESSAGE value="Fixed a bug that would cause an IllegalStateException to be thrown when a Tower eliminates an Enemy." />
     <MESSAGE value="Added the OpeningScene class. The OpeningScene class is meant to be the Scene a Player will visit first when opening the game. The design is not final and will most definitely be changed in the future." />
     <MESSAGE value="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions." />
+    <MESSAGE value="Fixed a compiler error with the Pyromancer class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a compiler error with the Pyromancer class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
