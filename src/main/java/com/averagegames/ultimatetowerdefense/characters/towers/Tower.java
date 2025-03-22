@@ -32,6 +32,7 @@ import static com.averagegames.ultimatetowerdefense.util.development.LogManager.
  * @since Ultimate Tower Defense 1.0
  * @author AverageProgramer
  */
+@SuppressWarnings("all")
 public abstract class Tower {
 
     /**
@@ -55,7 +56,7 @@ public abstract class Tower {
     private final ImageLoader loadedTower;
 
     /**
-     * The {@link Tower}'s {@link Image}.
+     * The {@link Tower}'s {@link Image}s per {@code level}.
      */
     @Nullable
     protected Image[] images;
@@ -92,7 +93,7 @@ public abstract class Tower {
     private int health;
 
     /**
-     * The {@code damage} the {@link Tower} can do during an {@code attack}.
+     * The {@code damage} the {@link Tower} can do during an {@code attack} per {@code level}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
     protected int[] damages;
@@ -124,7 +125,7 @@ public abstract class Tower {
     private boolean flyingDetection;
 
     /**
-     * The {@link Tower}'s cool down in milliseconds between {@code attacks}.
+     * The {@link Tower}'s cool downs in milliseconds between {@code attacks} per {@code level}.
      */
     protected int[] coolDowns;
 
@@ -765,7 +766,7 @@ public abstract class Tower {
      * Removes the {@link Tower} from its parent {@link Group}.
      * @since Ultimate Tower Defense 1.0
      */
-    public synchronized final void eliminate() {
+    public final void eliminate() {
 
         // Determines whether the tower's parent group is null and whether the tower's parent group contains the tower.
         if (this.parent == null) {

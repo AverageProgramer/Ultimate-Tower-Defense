@@ -31,6 +31,7 @@ import static com.averagegames.ultimatetowerdefense.util.development.LogManager.
  * @since Ultimate Tower Defense 1.0
  * @author AverageProgramer
  */
+@SuppressWarnings("all")
 public abstract class Enemy {
 
     /**
@@ -50,6 +51,7 @@ public abstract class Enemy {
      * The {@link Enemy}'s {@link Image} loaded using an {@link ImageLoader}.
      */
     @NotNull
+    @Accessors(makeFinal = true) @Getter
     private final ImageLoader loadedEnemy;
 
     /**
@@ -78,10 +80,10 @@ public abstract class Enemy {
     private int shield;
 
     /**
-     * A boolean that indicates whether the {@link Enemy} is {@code burning}.
+     * The {@code damage} needed to break through the {@link Enemy}'s shield.
      */
-    @Accessors(makeFinal = true) @Getter
-    private boolean burning;
+    @Range(from = 0L, to = Long.MAX_VALUE)
+    protected int shieldBreak;
 
     /**
      * The {@code damage} the {@link Enemy} can do during an {@code attack}.
@@ -89,7 +91,11 @@ public abstract class Enemy {
     @Range(from = 0L, to = Long.MAX_VALUE)
     protected int damage;
 
+    /**
+     * The {@link Enemy}'s {@code range}.
+     */
     @NotNull
+    @Accessors(makeFinal = true) @Getter
     private final Circle range;
 
     /**
@@ -115,9 +121,13 @@ public abstract class Enemy {
     /**
      * The current {@link Position} the {@link Enemy} is at along its {@link Path}.
      */
+    @Range(from = 0L, to = Long.MAX_VALUE)
     @Accessors(makeFinal = true) @Setter @Getter
     private int positionIndex;
 
+    /**
+     * The {@link Enemy}'s cool down in milliseconds between {@code attacks}.
+     */
     @Range(from = 0L, to = Long.MAX_VALUE)
     protected int coolDown;
 
@@ -127,6 +137,11 @@ public abstract class Enemy {
     @Range(from = 0L, to = Long.MAX_VALUE)
     @Accessors(makeFinal = true) @Getter
     protected int income;
+
+    /**
+     * A boolean value that determines whether the {@link Enemy} should perform its on {@code event} actions.
+     */
+    private boolean enableActions;
 
     /**
      * A {@link Thread} that is responsible for handling all {@link Enemy} movement.
@@ -170,15 +185,41 @@ public abstract class Enemy {
     }
 
     /**
+     * Sets whether the {@link Enemy} should perform its on {@code event} actions to a given boolean value.
+     * @param enabled whether the {@link Enemy} should perform its on {@code event} actions.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public void enableActions(final boolean enabled) {
+
+        // Sets the boolean value that determines whether the enemy should perform its on event actions to the given value.
+        this.enableActions = enabled;
+    }
+
+    /**
+     * Gets whether the {@link Enemy} has its on {@code event} actions enabled.
+     * @return {@code true} if the on {@code event} actions are enabled, {@code false} otherwise.
+     */
+    @SuppressWarnings("unused")
+    public boolean actionsEnabled() {
+
+        // Gets the boolean value that determines whether the enemy should perform its on event actions and returns it.
+        return this.enableActions;
+    }
+
+    /**
      * Adds a given amount to the {@link Enemy}'s current {@code health}.
      * @param amount damage the amount to add to the {@link Enemy}'s {@code health}.
      * @since Ultimate Tower Defense 1.0
      */
     public final void heal(@Range(from = 0, to = Integer.MAX_VALUE) final int amount) {
 
-        // Performs the enemy's on healed action.
-        // This method is unique to each individual inheritor of the enemy class.
-        this.onHeal();
+        // Determines whether on event actions have been enabled for the enemy.
+        if (this.enableActions) {
+
+            // Performs the enemy's on healed action.
+            // This method is unique to each individual inheritor of the enemy class.
+            this.onHeal();
+        }
 
         // Adds the given amount to the enemy's health.
         this.health += amount;
@@ -194,14 +235,25 @@ public abstract class Enemy {
      */
     public final void damage(@Range(from = 0, to = Integer.MAX_VALUE) final int damage) {
 
-        // Performs the enemy's on damaged action.
-        // This method is unique to each individual inheritor of the enemy class.
-        this.onDamaged();
+        // Determines whether on event actions have been enabled for the enemy.
+        if (this.enableActions) {
 
-        if (this.shield > 0 && damage < 5) {
-            return;
-        } else if (this.shield > 0) {
-            this.shield -= damage;
+            // Performs the enemy's on damaged action.
+            // This method is unique to each individual inheritor of the enemy class.
+            this.onDamaged();
+        }
+
+        // Determines whether the enemy's shield is greater than 0.
+        if (this.shield > 0) {
+
+            // Determines whether the damage dealt to the enemy is enough to break through the enemy's shield.
+            if (damage >= this.shieldBreak) {
+
+                // Damages the enemy's shield.
+                this.shield -= damage;
+            }
+
+            // Prevents the enemy from losing additional health.
             return;
         }
 
@@ -225,7 +277,7 @@ public abstract class Enemy {
         if (this.health <= 0) {
 
             // Removes the enemy from its parent group.
-            this.eliminate();
+            Platform.runLater(this::eliminate);
         }
     }
 
@@ -316,9 +368,13 @@ public abstract class Enemy {
             return;
         }
 
-        // Performs the enemy's spawn action.
-        // This method is unique to each individual inheritor of the enemy class.
-        this.onSpawn();
+        // Determines whether on event actions have been enabled for the enemy.
+        if (this.enableActions) {
+
+            // Performs the enemy's spawn action.
+            // This method is unique to each individual inheritor of the enemy class.
+            this.onSpawn();
+        }
 
         // Determines whether the enemy's image is null.
         if (this.image != null) {
@@ -327,15 +383,15 @@ public abstract class Enemy {
             this.loadedEnemy.setImage(this.image);
         }
 
-        // Adds the enemy to the enemy's parent group.
-        this.parent.getChildren().add(this.loadedEnemy);
-
         // Sets the enemy's view order to its current y position.
         this.loadedEnemy.setViewOrder(-this.getPosition().y());
 
         // Adds a listener to the enemy's translate y property.
         // This will change the enemy's view order depending on its current y position.
         this.loadedEnemy.translateYProperty().addListener(((observable, oldValue, newValue) -> this.loadedEnemy.setViewOrder(-this.getPosition().y())));
+
+        // Adds the enemy to the enemy's parent group.
+        this.parent.getChildren().add(this.loadedEnemy);
 
         // Adds the enemy to the list containing every active enemy.
         LIST_OF_ACTIVE_ENEMIES.add(this);
@@ -457,21 +513,25 @@ public abstract class Enemy {
 
                     if (enemy != this) {
 
+                        // Disables the enemy's on event actions.
+                        enemy.enableActions(false);
+
                         // Allows for nodes to be removed to the group despite the current thread possible not being the JavaFX application thread.
                         // Eliminates each remaining enemy from their parent groups.
-                        Platform.runLater(() -> enemy.eliminate(false));
+                        Platform.runLater(() -> enemy.eliminate());
                     }
                 });
 
                 // A try-catch statement that will catch any exceptions that occur when playing an audio file.
                 try {
 
+                    // Stops the global audio player from playing an audio file.
                     GameScene.GLOBAL_PLAYER.stop();
 
-                    // Creates a new audio player that will play an audio file.
+                    // Sets the pathname of the global audio player to a new audio file.
                     GameScene.GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - You Lost!.wav");
 
-                    // Plays the previously given audio file.
+                    // Plays the previously set audio file.
                     GameScene.GLOBAL_PLAYER.play();
                 } catch (Exception ex) {
                     // The exception does not need to be handled.
@@ -497,13 +557,24 @@ public abstract class Enemy {
         // This will cause an exception to be thrown which will break out of the loop managing enemy movement.
         this.movementThread.interrupt();
 
+        // Creates a list of positions that will be used to set the enemy's pathing.
         ArrayList<Position> positions = new ArrayList<>();
+
+        // A loop that will iterate through every position in the enemy's reference pathing.
         for (int i = 0; i < Objects.requireNonNull(this.getReferencePathing()).positions().length; i++) {
+
+            // Determines whether the index is less the enemy's current position index.
             if (i < this.getPositionIndex()) {
+
+                // Jumps to the next iteration of the loop.
                 continue;
             }
+
+            // Adds the current position to the list.
             positions.add(this.getReferencePathing().positions()[i]);
         }
+
+        // Sets the enemy's pathing to the positions in the list.
         this.pathing = new Path(positions.toArray(Position[]::new));
     }
 
@@ -650,20 +721,19 @@ public abstract class Enemy {
 
     /**
      * Removes the {@link Enemy} from its parent {@link Group}.
-     * @param doAction whether the {@link Enemy} should perform its on death action.
      * @since Ultimate Tower Defense 1.0
      */
-    public synchronized final void eliminate(final boolean doAction) {
+    public final void eliminate() {
 
         // Determines whether the enemy's parent group is null and whether the enemy was already eliminated from its parent group.
-        if (this.parent == null || !this.parent.getChildren().contains(this.loadedEnemy)) {
+        if (this.parent == null) {
 
             // Prevents the enemy from being removed from a null group and being eliminated more than once.
             return;
         }
 
-        // Determines whether the enemy should perform its on death action.
-        if (doAction) {
+        // Determines whether on event actions have been enabled for the enemy.
+        if (this.enableActions) {
 
             // Performs the enemy's death action.
             // This method is unique to each individual inheritor of the enemy class.
@@ -684,16 +754,6 @@ public abstract class Enemy {
 
         // Logs that the enemy has been eliminated.
         LOGGER.info(STR."Enemy \{this} eliminated.");
-    }
-
-    /**
-     * Removes the {@link Enemy} from its parent {@link Group}.
-     * @since Ultimate Tower Defense 1.0
-     */
-    public final void eliminate() {
-
-        // Eliminates the enemy and sets it so that the enemy will perform its on death action.
-        this.eliminate(true);
     }
 
     /**

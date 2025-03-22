@@ -43,6 +43,8 @@ public class Armored extends Enemy {
         super.speed = this.speed;
 
         super.income = this.income;
+
+        super.shieldBreak = 5;
     }
 
     @Override

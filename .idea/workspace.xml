@@ -10,14 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added the OpeningScene class. The OpeningScene class is meant to be the Scene a Player will visit first when opening the game. The design is not final and will most definitely be changed in the future.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/LobbyScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/menu/LobbyScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/OpeningScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/menu/OpeningScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
