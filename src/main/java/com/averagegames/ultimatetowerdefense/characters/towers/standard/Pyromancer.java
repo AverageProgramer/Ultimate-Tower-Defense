@@ -44,11 +44,6 @@ public final class Pyromancer extends Tower {
             } catch (Exception ex) {
                 System.out.println("Exception occurred");
             }
-
-            // Basic burn damage.
-            if (!enemy.isBurning()) {
-                enemy.damage(1);
-            }
         }
     }
 

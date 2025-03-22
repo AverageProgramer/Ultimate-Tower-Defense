@@ -9,11 +9,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added the OpeningScene class. The OpeningScene class is meant to be the Scene a Player will visit first when opening the game. The design is not final and will most definitely be changed in the future.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,14 +260,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00047" summary="Fully implemented the Marksman and Gunner towers, each being equipped with their own methods of attack. The 'strongest' and 'weakest' targeting modes for towers have also been fully implemented. The AudioPlayer class has also been added, making it much easier to play both sound effects and music.">
-      <option name="closed" value="true" />
-      <created>1740522672243</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1740522672243</updated>
     </task>
     <task id="LOCAL-00048" summary="There was a missed compiler error in the previous commit. That is the only change that has been made.">
       <option name="closed" value="true" />
@@ -656,7 +645,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742587473308</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions.">
+      <option name="closed" value="true" />
+      <created>1742604420834</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1742604420834</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +661,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added a button to skip waves to the GameScene class. This button will replace the old method of pressing the 's' key in order to skip a wave. Additional sound effects have also been added such as the 'Placement 1' sound effect which plays once when a Tower is placed. Lastly, the MilitaryBase Tower has been added to the game. Units have not currently been implemented so the MilitaryBase currently does nothing." />
     <MESSAGE value="Implemented basic Tower upgrades for the Scout, Marksman, Gunner, and Farm Towers. The Images do not currently change and will likely be implemented by the next commit. Every other tower will also likely have their properties set to work with Tower upgrades by the next commit. The SkipPanel class has also been added and allows for easy addition of the skip GUI to the screen at a set position." />
     <MESSAGE value="Fixed a bug with the Energizer that would cause an Exception to be thrown when the Tower would be placed. Also, fully implemented Energizer upgrades. Significantly nerfed the Scout, Marksman, and Gunner Towers." />
     <MESSAGE value="Made a slight GUI change to the UpgradePanel class." />
@@ -689,7 +685,8 @@
     <MESSAGE value="Cleaned up the code in the Tower and Gunship classes slightly. Also, added comments to the Gunship class." />
     <MESSAGE value="Fixed a bug that would cause an IllegalStateException to be thrown when a Tower eliminates an Enemy." />
     <MESSAGE value="Added the OpeningScene class. The OpeningScene class is meant to be the Scene a Player will visit first when opening the game. The design is not final and will most definitely be changed in the future." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the OpeningScene class. The OpeningScene class is meant to be the Scene a Player will visit first when opening the game. The design is not final and will most definitely be changed in the future." />
+    <MESSAGE value="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
