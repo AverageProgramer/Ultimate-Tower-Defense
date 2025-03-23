@@ -4,7 +4,6 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.towers.Bonus;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.characters.towers.legendary.Energizer;
 import com.averagegames.ultimatetowerdefense.characters.towers.standard.*;
 import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Map;
