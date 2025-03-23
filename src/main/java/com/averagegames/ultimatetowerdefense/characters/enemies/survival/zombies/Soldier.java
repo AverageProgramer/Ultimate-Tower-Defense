@@ -5,6 +5,7 @@ import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,7 +76,7 @@ public final class Soldier extends Enemy {
             return;
         }
 
-        super.stopMoving();
+        Platform.runLater(super::stopMoving);
 
         super.updatePathing();
 

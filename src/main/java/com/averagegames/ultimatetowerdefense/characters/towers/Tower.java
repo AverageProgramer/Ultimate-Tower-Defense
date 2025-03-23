@@ -564,7 +564,25 @@ public abstract class Tower {
         if (this.targeting == Targeting.FIRST || this.targeting == Targeting.LAST) {
 
             // Sorts the list containing every active enemy so that the enemies with the greatest position index are at the end of the list.
-            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getPositionIndex));
+            LIST_OF_ACTIVE_ENEMIES.sort(new Comparator<Enemy>() {
+                @Override
+                public int compare(Enemy o1, Enemy o2) {
+
+                    // Determines whether the first enemy's position index is greater than the second enemy's position index.
+                    if (o1.getPositionIndex() > o2.getPositionIndex()) {
+
+                        // Returns a positive integer to indicate that the first enemy's position index is greater than the second enemy's position index.
+                        return 1;
+                    } else if (o1.getPositionIndex() < o2.getPositionIndex()) {
+
+                        // Returns a negative integer to indicate that the first enemy's position index is less than the second enemy's position index.
+                        return -1;
+                    }
+
+                    // Returns 0 to indicate that the enemies' position indexes are equal.
+                    return 0;
+                }
+            });
 
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.
@@ -638,7 +656,25 @@ public abstract class Tower {
         } else {
 
             // Sorts the list containing every active enemy so that the enemies with the greatest health are at the end of the list.
-            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getHealth));
+            LIST_OF_ACTIVE_ENEMIES.sort(new Comparator<Enemy>() {
+                @Override
+                public int compare(Enemy o1, Enemy o2) {
+
+                    // Determines whether the first enemy's health is greater than the second enemy's health.
+                    if (o1.getHealth() > o2.getHealth()) {
+
+                        // Returns a positive integer to indicate that the first enemy's health is greater than the second enemy's health.
+                        return 1;
+                    } else if (o1.getHealth() < o2.getHealth()) {
+
+                        // Returns a negative integer to indicate that the first enemy's health is less than the second enemy's health.
+                        return -1;
+                    }
+
+                    // Returns 0 to indicate that the enemies' healths are equal.
+                    return 0;
+                }
+            });
 
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.

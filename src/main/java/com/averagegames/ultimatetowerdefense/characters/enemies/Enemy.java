@@ -739,7 +739,7 @@ public abstract class Enemy {
         // Determines whether the enemy's parent group is null and whether the enemy was already eliminated from its parent group.
         if (this.parent == null || !this.parent.getChildren().contains(this.loadedEnemy)) {
 
-            // Prevents the enemy from being removed from a null group and being eliminated more than once.
+            // Prevents the enemy from being removed from a null group and from being eliminated more than once.
             return;
         }
 
