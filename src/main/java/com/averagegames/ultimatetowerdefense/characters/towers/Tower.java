@@ -39,7 +39,7 @@ public abstract class Tower {
      * A {@link List} containing every active {@link Tower} in a game.
      */
     @NotNull
-    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());
+    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new LinkedList<>());
 
     /**
      * The {@link Tower}'s parent {@link Group}.

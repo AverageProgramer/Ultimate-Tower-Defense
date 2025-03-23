@@ -77,6 +77,8 @@ public final class Soldier extends Enemy {
 
         super.stopMoving();
 
+        super.updatePathing();
+
         Thread.sleep(750);
 
         for (int i = 0; i < 5; i++) {

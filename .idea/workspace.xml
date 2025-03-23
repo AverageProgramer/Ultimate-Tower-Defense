@@ -9,14 +9,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added the EnemySpawnable annotation. The EnemySpawnable annotation is meant to replace to previous Zombie, Titan, and Boss annotations. Any Enemy annotated with the EnemySpawnable annotation can be spawned by Enemies such as the LootBox or Sorcerer. Also, added an &quot;enableSpawning&quot; method to the Spawner class that allows the spawning to be easily enabled and disabled. Lastly, began working on the scenes for creating a multiplayer server.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug that would cause certain Tower's to change Positions when being upgraded.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/LootBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Soldier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,22 +263,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00051" summary="Implemented the LootBox zombies into the game. LootBox zombies are unique in that when are eliminated, they will spawn a random zombie at their Position. Other iterations of the LootBox zombie include the LootBoxTitan which functions almost identically except that LootBoxTitans will spawn titans at their Position instead of zombies. The Zombie, Titan, and Boss annotations have been added as identifiers to clarify which enemies are zombies, titans, or bosses.">
-      <option name="closed" value="true" />
-      <created>1740748889431</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1740748889431</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Fully implemented the GiantTitan and LootBoxTitan. The LootBoxTitan's 'onDeath' event will spawn another Titan at its location. Enemy implementations will slow down going forward and more work will we be done to finish the Tower class and also add new, more powerful Towers.">
-      <option name="closed" value="true" />
-      <created>1740862280906</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1740862280906</updated>
     </task>
     <task id="LOCAL-00053" summary="Forgot about another compiler error. The error has been fixed.">
       <option name="closed" value="true" />
@@ -659,7 +640,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742658609699</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Fixed a bug that would cause Sorcerer's to instantly jump from one Position to another when spawning Enemies. Also, fixed a bug where LootBox's could spawn more than one Enemy on death.">
+      <option name="closed" value="true" />
+      <created>1742689607205</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1742689607205</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Fixed a bug that would cause certain Tower's to change Positions when being upgraded.">
+      <option name="closed" value="true" />
+      <created>1742689743928</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1742689743928</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,8 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented a variety of new images for the Towers. The Scout, Marksman, Farm, and Energizer all now have each of the images for each of their levels. There is currently a bug taking place that causes the entire Application to completely freeze however the code is still running in the background. It is only the GUI that stops updating." />
-    <MESSAGE value="Implemented a variety of new images for the Towers. The Scout, Marksman, Farm, and Energizer all now have each of the images for each of their levels. Fixed a bug that would cause the GUI to stop updating and NullPointerExceptions to be repeatedly thrown in the JavaFX Application thread." />
     <MESSAGE value="Added the rest of the Gunner's images to the game. Also, fully implemented the upgrades for the Gunner. Started at 'level 3' the Gunner will attack in bursts of 4 instead of 3. At 'level 4' the Gunner will attack in bursts of 5. At 'level 5' the Gunner will attack in bursts of 7. The Gunner's range has also been increased." />
     <MESSAGE value="Remade and cleaned up the GameScene class. The GameScene class was previously just a way to test new game aspects and mechanics. The new GameScene class is more similar to what can be expected in the final game. The Map interface has also been fully implemented. Any classes implemented the map interface can now be easily loaded onto any Scene such as the GameScene class." />
     <MESSAGE value="Reset the Player's cash for the GameScene to 500." />
@@ -692,7 +687,9 @@
     <MESSAGE value="Fixed a compiler error with the Pyromancer class." />
     <MESSAGE value="Fixed a bug that would cause Enemies to not perform their &quot;on event&quot; actions by default." />
     <MESSAGE value="Added the EnemySpawnable annotation. The EnemySpawnable annotation is meant to replace to previous Zombie, Titan, and Boss annotations. Any Enemy annotated with the EnemySpawnable annotation can be spawned by Enemies such as the LootBox or Sorcerer. Also, added an &quot;enableSpawning&quot; method to the Spawner class that allows the spawning to be easily enabled and disabled. Lastly, began working on the scenes for creating a multiplayer server." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the EnemySpawnable annotation. The EnemySpawnable annotation is meant to replace to previous Zombie, Titan, and Boss annotations. Any Enemy annotated with the EnemySpawnable annotation can be spawned by Enemies such as the LootBox or Sorcerer. Also, added an &quot;enableSpawning&quot; method to the Spawner class that allows the spawning to be easily enabled and disabled. Lastly, began working on the scenes for creating a multiplayer server." />
+    <MESSAGE value="Fixed a bug that would cause Sorcerer's to instantly jump from one Position to another when spawning Enemies. Also, fixed a bug where LootBox's could spawn more than one Enemy on death." />
+    <MESSAGE value="Fixed a bug that would cause certain Tower's to change Positions when being upgraded." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that would cause certain Tower's to change Positions when being upgraded." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

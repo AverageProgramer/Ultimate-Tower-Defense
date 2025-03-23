@@ -1,7 +1,5 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.LootBox;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.Sorcerer;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Map;
@@ -40,7 +38,7 @@ public abstract class Enemy {
      * A {@link List} containing every active {@link Enemy} in a game.
      */
     @NotNull
-    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new ArrayList<>());
+    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new LinkedList<>());
 
     /**
      * The {@link Enemy}'s parent {@link Group}.
