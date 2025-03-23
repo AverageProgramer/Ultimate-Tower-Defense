@@ -269,8 +269,8 @@ public abstract class Tower {
 
         // Updates the tower's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedTower.setTranslateX(position.x() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getWidth() / 2 : 0));
-        this.loadedTower.setTranslateY(position.y() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getHeight() : 0));
+        this.loadedTower.setX(position.x() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getWidth() / 2 : 0));
+        this.loadedTower.setY(position.y() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getHeight() : 0));
     }
 
     /**

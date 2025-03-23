@@ -295,8 +295,8 @@ public abstract class Enemy {
 
         // Updates the enemy's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedEnemy.setTranslateX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
-        this.loadedEnemy.setTranslateY(position.y() - (this.image != null ? this.image.getHeight() : 0));
+        this.loadedEnemy.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
+        this.loadedEnemy.setY(position.y() - (this.image != null ? this.image.getHeight() : 0));
     }
 
     /**
