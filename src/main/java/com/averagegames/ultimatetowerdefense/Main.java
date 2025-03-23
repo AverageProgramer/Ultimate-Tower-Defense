@@ -19,7 +19,7 @@ public class Main extends Application {
         enableLogging(false);
 
         for (Thread thread : Thread.getAllStackTraces().keySet()) {
-            Thread.setDefaultUncaughtExceptionHandler(null);
+            thread.setUncaughtExceptionHandler(null);
         }
 
         LOGGER.info(STR."Application \{this} initalized.");

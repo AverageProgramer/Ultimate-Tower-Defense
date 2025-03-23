@@ -9,12 +9,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Removed an unused import in the GameScene class.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Triumph!.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Removed an unused import in the Main class.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,22 +260,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00056" summary="Implemented Tower and Enemy ranges into the game. Towers can no longer continue to attack enemies even when they are halfway across the Player's screen. Enemy ranges, while implemented, do not currently do anything as Enemy attacks have not yet been implemented. New towers and enemy attacks will be implemented in the near future.">
-      <option name="closed" value="true" />
-      <created>1741366683569</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1741366683569</updated>
-    </task>
-    <task id="LOCAL-00057" summary="Once again removed a variety of tools that just wound up doing more harm than good. These tools include the Specific and Prohibited annotations as well as their verification classes, SpecificAnnotation and ProhibitedAnnotation. The verification was causing noticeable levels of lag and has thus been removed.">
-      <option name="closed" value="true" />
-      <created>1741411524238</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1741411524238</updated>
     </task>
     <task id="LOCAL-00058" summary="Fixed a missed compiler error in the module-info file.">
       <option name="closed" value="true" />
@@ -657,7 +637,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742741866881</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="Fixed a bug that would cause Tower's to occasionally throw a NullPointerException.">
+      <option name="closed" value="true" />
+      <created>1742748434560</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1742748434560</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Removed an unused import in the Main class.">
+      <option name="closed" value="true" />
+      <created>1742748603309</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1742748603309</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,8 +661,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Reset the Player's cash for the GameScene to 500." />
-    <MESSAGE value="Added Waves 3 - 27 to the GameScene class." />
     <MESSAGE value="Added a feature that allows the Player to cancel placing a tower if they press ESC." />
     <MESSAGE value="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future." />
     <MESSAGE value="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers." />
@@ -690,7 +684,9 @@
     <MESSAGE value="Fixed a bug that would cause an exception to be thrown when Tower's are searching for a target Enemy." />
     <MESSAGE value="Re-fixed a variety of bugs including LootBox Enemies spawning multiple Enemies on death and random exceptions being thrown while playing the game." />
     <MESSAGE value="Removed an unused import in the GameScene class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed an unused import in the GameScene class." />
+    <MESSAGE value="Fixed a bug that would cause Tower's to occasionally throw a NullPointerException." />
+    <MESSAGE value="Removed an unused import in the Main class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed an unused import in the Main class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
