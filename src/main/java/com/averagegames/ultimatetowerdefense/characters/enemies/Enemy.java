@@ -1,5 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.LootBox;
+import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.Sorcerer;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.maps.Base;
 import com.averagegames.ultimatetowerdefense.maps.Map;
@@ -38,7 +40,7 @@ public abstract class Enemy {
      * A {@link List} containing every active {@link Enemy} in a game.
      */
     @NotNull
-    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new LinkedList<>());
+    public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The {@link Enemy}'s parent {@link Group}.
@@ -293,8 +295,8 @@ public abstract class Enemy {
 
         // Updates the enemy's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedEnemy.setX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
-        this.loadedEnemy.setY(position.y() - (this.image != null ? this.image.getHeight() : 0));
+        this.loadedEnemy.setTranslateX(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0));
+        this.loadedEnemy.setTranslateY(position.y() - (this.image != null ? this.image.getHeight() : 0));
     }
 
     /**
@@ -522,7 +524,7 @@ public abstract class Enemy {
 
                         // Allows for nodes to be removed to the group despite the current thread possible not being the JavaFX application thread.
                         // Eliminates each remaining enemy from their parent groups.
-                        Platform.runLater(() -> enemy.eliminate());
+                        Platform.runLater(enemy::eliminate);
                     }
                 });
 
@@ -560,6 +562,26 @@ public abstract class Enemy {
         // Interrupts the thread responsible for all enemy movement.
         // This will cause an exception to be thrown which will break out of the loop managing enemy movement.
         this.movementThread.interrupt();
+    }
+
+    /**
+     * Updates the {@link Enemy}'s movement to reflect any {@code speed} changes that may have occurred.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void updateMovement() {
+
+        // Stops the enemy's movement.
+        this.stopMoving();
+
+        // Resumes the enemy's movement.
+        this.startMoving();
+    }
+
+    /**
+     * updates the {@link Enemy}'s {@link Path} to begin at the {@link Enemy}'s current {@link Position}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void updatePathing() {
 
         // Creates a list of positions that will be used to set the enemy's pathing.
         ArrayList<Position> positions = new ArrayList<>();
@@ -580,19 +602,6 @@ public abstract class Enemy {
 
         // Sets the enemy's pathing to the positions in the list.
         this.pathing = new Path(positions.toArray(Position[]::new));
-    }
-
-    /**
-     * Updates the {@link Enemy}'s movement to reflect any {@code speed} changes that may have occurred.
-     * @since Ultimate Tower Defense 1.0
-     */
-    public final void updateMovement() {
-
-        // Stops the enemy's movement.
-        this.stopMoving();
-
-        // Resumes the enemy's movement.
-        this.startMoving();
     }
 
     /**
@@ -730,7 +739,7 @@ public abstract class Enemy {
     public final void eliminate() {
 
         // Determines whether the enemy's parent group is null and whether the enemy was already eliminated from its parent group.
-        if (this.parent == null) {
+        if (this.parent == null || !this.parent.getChildren().contains(this.loadedEnemy)) {
 
             // Prevents the enemy from being removed from a null group and being eliminated more than once.
             return;

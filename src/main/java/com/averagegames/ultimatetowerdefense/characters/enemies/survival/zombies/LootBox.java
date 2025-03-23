@@ -56,16 +56,7 @@ public class LootBox extends Enemy {
             System.out.println("Exception occurred");
         }
 
-        ArrayList<Position> positions = new ArrayList<>();
-
-        for (int i = 0; i < Objects.requireNonNull(this.getReferencePathing()).positions().length; i++) {
-            if (i < this.getPositionIndex()) {
-                continue;
-            }
-            positions.add(this.getReferencePathing().positions()[i]);
-        }
-
-        Path path = new Path(positions.toArray(Position[]::new));
+        super.updatePathing();
 
         int enemy = (int) (Math.random() * ((Player.wave >= 20 ? 6 : 5) - 1)) + 1;
 
@@ -88,11 +79,12 @@ public class LootBox extends Enemy {
             return;
         }
 
-        e.setParent(this.getParent());
-        e.setPathing(path);
+        e.setParent(super.getParent());
+        e.setPathing(super.getPathing());
+        e.setPosition(super.getPosition());
         e.setReferencePathing(super.getReferencePathing());
-        e.setPositionIndex(this.getPositionIndex());
-        e.spawn(this.getPosition());
+        e.setPositionIndex(super.getPositionIndex());
+        e.spawn();
         e.startMoving();
     }
 }

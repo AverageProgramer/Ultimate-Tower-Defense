@@ -39,7 +39,7 @@ public abstract class Tower {
      * A {@link List} containing every active {@link Tower} in a game.
      */
     @NotNull
-    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new LinkedList<>());
+    public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * The {@link Tower}'s parent {@link Group}.
@@ -269,8 +269,8 @@ public abstract class Tower {
 
         // Updates the tower's x and y coordinates to the given position's x and y coordinates.
 
-        this.loadedTower.setX(position.x() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getWidth() / 2 : 0));
-        this.loadedTower.setY(position.y() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getHeight() : 0));
+        this.loadedTower.setTranslateX(position.x() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getWidth() / 2 : 0));
+        this.loadedTower.setTranslateY(position.y() - (this.images[this.level] != null ? Objects.requireNonNull(this.images[this.level]).getHeight() : 0));
     }
 
     /**
@@ -768,8 +768,8 @@ public abstract class Tower {
      */
     public final void eliminate() {
 
-        // Determines whether the tower's parent group is null and whether the tower's parent group contains the tower.
-        if (this.parent == null) {
+        // Determines whether the tower's parent group is null and whether the tower was already eliminated from its parent group.
+        if (this.parent == null || !this.parent.getChildren().contains(this.loadedTower)) {
 
             // Prevents the tower from being removed from a null group and from being eliminated more than once.
             return;

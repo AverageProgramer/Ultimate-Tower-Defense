@@ -2,6 +2,7 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombie
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
@@ -64,7 +65,9 @@ public class Sorcerer extends Enemy {
                     break;
                 }
 
-                super.stopMoving();
+                Platform.runLater(super::stopMoving);
+
+                super.updatePathing();
 
                 try {
                     Thread.sleep(1500);
