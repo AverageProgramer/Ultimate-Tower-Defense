@@ -8,6 +8,7 @@ import com.averagegames.ultimatetowerdefense.maps.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -84,7 +85,9 @@ public class LootBox extends Enemy {
         e.setPosition(super.getPosition());
         e.setReferencePathing(super.getReferencePathing());
         e.setPositionIndex(super.getPositionIndex());
-        e.spawn();
-        e.startMoving();
+        Platform.runLater(() -> {
+            e.spawn();
+            e.startMoving();
+        });
     }
 }

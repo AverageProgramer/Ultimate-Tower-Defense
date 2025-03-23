@@ -106,8 +106,10 @@ public class Sorcerer extends Enemy {
                     e.setReferencePathing(super.getReferencePathing());
                     e.setPosition(super.getPosition());
                     e.setPositionIndex(super.getPositionIndex());
-                    Platform.runLater(e::spawn);
-                    e.startMoving();
+                    Platform.runLater(() -> {
+                        e.spawn();
+                        e.startMoving();
+                    });
 
                     try {
                         Thread.sleep(1500);

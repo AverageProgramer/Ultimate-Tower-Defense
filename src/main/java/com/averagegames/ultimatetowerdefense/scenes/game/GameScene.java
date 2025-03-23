@@ -66,7 +66,7 @@ public class GameScene extends Scene implements Builder {
      * A {@link Constant} representing the starting cash for the {@link Player}.
      */
     @Constant
-    private static final int STARTING_CASH = 1000000;
+    private static final int STARTING_CASH = 500;
 
     /**
      * A {@link Constant} representing the starting wave for the {@link Player}.
@@ -170,7 +170,7 @@ public class GameScene extends Scene implements Builder {
         });
 
         // A default inventory that can easily be changed.
-        Player.inventory = new Inventory(new Tower[] {new Scout(), new Marksman(), new Gunner(), new Gunship(), new Farm(), new Energizer()});
+        Player.inventory = new Inventory(new Tower[] {new Scout(), new Marksman(), new Gunner(), new Gunship(), new Farm()});
     }
 
     @Override
@@ -482,6 +482,15 @@ public class GameScene extends Scene implements Builder {
 
             ENEMY_SPAWNER.spawn(Easy.WAVE_26, this.parent);
             this.spawnerWait();
+
+            GLOBAL_PLAYER.stop();
+
+            try {
+                GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Grave Buster.wav");
+                GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
+            } catch (Exception ex) {
+                LOGGER.severe(STR."Exception \{ex} thrown when loading audio file.");
+            }
 
             // Spawns easy mode's 27th wave.
 

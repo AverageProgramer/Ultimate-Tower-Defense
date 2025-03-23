@@ -176,7 +176,9 @@ public abstract class Tower {
 
         // Initializes the thread that the tower will use to attack.
         this.attackThread = new Thread(() -> {
-            // This thread does nothing by default.
+
+            // Sets the thread's default uncaught exception handler to null.
+            Thread.setDefaultUncaughtExceptionHandler(null);
         });
     }
 
@@ -564,25 +566,7 @@ public abstract class Tower {
         if (this.targeting == Targeting.FIRST || this.targeting == Targeting.LAST) {
 
             // Sorts the list containing every active enemy so that the enemies with the greatest position index are at the end of the list.
-            LIST_OF_ACTIVE_ENEMIES.sort(new Comparator<Enemy>() {
-                @Override
-                public int compare(Enemy o1, Enemy o2) {
-
-                    // Determines whether the first enemy's position index is greater than the second enemy's position index.
-                    if (o1.getPositionIndex() > o2.getPositionIndex()) {
-
-                        // Returns a positive integer to indicate that the first enemy's position index is greater than the second enemy's position index.
-                        return 1;
-                    } else if (o1.getPositionIndex() < o2.getPositionIndex()) {
-
-                        // Returns a negative integer to indicate that the first enemy's position index is less than the second enemy's position index.
-                        return -1;
-                    }
-
-                    // Returns 0 to indicate that the enemies' position indexes are equal.
-                    return 0;
-                }
-            });
+            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getPositionIndex));
 
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.
@@ -656,25 +640,7 @@ public abstract class Tower {
         } else {
 
             // Sorts the list containing every active enemy so that the enemies with the greatest health are at the end of the list.
-            LIST_OF_ACTIVE_ENEMIES.sort(new Comparator<Enemy>() {
-                @Override
-                public int compare(Enemy o1, Enemy o2) {
-
-                    // Determines whether the first enemy's health is greater than the second enemy's health.
-                    if (o1.getHealth() > o2.getHealth()) {
-
-                        // Returns a positive integer to indicate that the first enemy's health is greater than the second enemy's health.
-                        return 1;
-                    } else if (o1.getHealth() < o2.getHealth()) {
-
-                        // Returns a negative integer to indicate that the first enemy's health is less than the second enemy's health.
-                        return -1;
-                    }
-
-                    // Returns 0 to indicate that the enemies' healths are equal.
-                    return 0;
-                }
-            });
+            LIST_OF_ACTIVE_ENEMIES.sort(Comparator.comparingInt(Enemy::getHealth));
 
             // Creates a new list of enemies that will not contain any enemies the tower can't attack.
             // This will prevent targeting issues when the tower is trying to find a target enemy.
@@ -716,26 +682,7 @@ public abstract class Tower {
             while (true) {
 
                 // Gets the tower's current target enemy.
-                Enemy target = null;
-
-                // A loop that will iterate until the enemy gets a valid target.
-                while (true) {
-
-                    // A try-catch statement that will prevent any exceptions from occurring while the enemy is getting a target.
-                    try {
-
-                        // Gets the tower's current target.
-                        // A concurrent modification exception may be thrown while finding a target.
-                        target = this.getTarget();
-
-                        // Breaks out of the loop since the enemy would have gotten a valid target.
-                        break;
-                    } catch (ConcurrentModificationException ex) {
-
-                        // Logs that the tower has encountered an error while getting its target.
-                        LOGGER.warning(STR."Tower \{this} has encountered exception \{ex} while searching for a target.");
-                    }
-                }
+                Enemy target = this.getTarget();
 
                 // Determines whether the tower's target is either null or alive.
                 if (target != null && !target.isAlive()) {

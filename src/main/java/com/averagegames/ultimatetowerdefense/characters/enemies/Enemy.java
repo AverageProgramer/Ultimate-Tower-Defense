@@ -180,10 +180,14 @@ public abstract class Enemy {
         // Initializes the threads that the enemy will use to move and attack.
 
         this.movementThread = new Thread(() -> {
-            // This thread does nothing by default.
+
+            // Sets the thread's default uncaught exception handler to null.
+            Thread.setDefaultUncaughtExceptionHandler(null);
         });
         this.attackThread = new Thread(() -> {
-            // This thread does nothing by default.
+
+            // Sets the thread's default uncaught exception handler to null.
+            Thread.setDefaultUncaughtExceptionHandler(null);
         });
     }
 
@@ -752,7 +756,7 @@ public abstract class Enemy {
         }
 
         // Removes the enemy from its parent group.
-        Platform.runLater(() -> this.parent.getChildren().remove(this.loadedEnemy));
+        this.parent.getChildren().remove(this.loadedEnemy);
 
         // Interrupts the threads controlling enemy actions.
         // This will cause an exception to be thrown in both threads which will break out of the loop controlling the enemy.
