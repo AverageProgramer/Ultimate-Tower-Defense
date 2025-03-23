@@ -180,14 +180,10 @@ public abstract class Enemy {
         // Initializes the threads that the enemy will use to move and attack.
 
         this.movementThread = new Thread(() -> {
-
-            // Sets the thread's default uncaught exception handler to null.
-            Thread.setDefaultUncaughtExceptionHandler(null);
+            // This thread does nothing by default.
         });
         this.attackThread = new Thread(() -> {
-
-            // Sets the thread's default uncaught exception handler to null.
-            Thread.setDefaultUncaughtExceptionHandler(null);
+            // This thread does nothing by default.
         });
     }
 
@@ -448,6 +444,9 @@ public abstract class Enemy {
         // Creates a new thread that will handle enemy movement and starts it.
         (this.movementThread = new Thread(() -> {
 
+            // Sets the thread's default uncaught exception handler to null.
+            Thread.setDefaultUncaughtExceptionHandler(null);
+
             // Logs that the enemy has begun moving along its set path.
             LOGGER.info(STR."Enemy \{this} has begun moving along path \{this.pathing}.");
 
@@ -644,6 +643,9 @@ public abstract class Enemy {
 
         // Creates a new thread that will handle enemy attacks and starts it.
         (this.attackThread = new Thread(() -> {
+
+            // Sets the thread's default uncaught exception handler to null.
+            Thread.setDefaultUncaughtExceptionHandler(null);
 
             // Logs that the enemy has begun attacking.
             LOGGER.info(STR."Enemy \{this} has begun to attack.");

@@ -12,11 +12,17 @@ import javafx.stage.Stage;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 public class Main extends Application {
 
     @Override
     public void init() throws Exception {
         enableLogging(false);
+
+        for (Thread thread : Thread.getAllStackTraces().keySet()) {
+            Thread.setDefaultUncaughtExceptionHandler(null);
+        }
 
         LOGGER.info(STR."Application \{this} initalized.");
     }

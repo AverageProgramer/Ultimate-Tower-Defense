@@ -176,9 +176,7 @@ public abstract class Tower {
 
         // Initializes the thread that the tower will use to attack.
         this.attackThread = new Thread(() -> {
-
-            // Sets the thread's default uncaught exception handler to null.
-            Thread.setDefaultUncaughtExceptionHandler(null);
+            // This thread does nothing by default.
         });
     }
 
@@ -674,6 +672,9 @@ public abstract class Tower {
 
         // Creates a new thread that will handle tower attacks and starts it.
         (this.attackThread = new Thread(() -> {
+
+            // Sets the thread's default uncaught exception handler to null.
+            Thread.setDefaultUncaughtExceptionHandler(null);
 
             // Logs that the tower has begun attacking.
             LOGGER.info(STR."Tower \{this} has begun to attack.");

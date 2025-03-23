@@ -494,6 +494,20 @@ public class GameScene extends Scene implements Builder {
             // Spawns easy mode's 27th wave.
 
             ENEMY_SPAWNER.spawn(Easy.WAVE_27, this.parent);
+
+            while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && Base.health > 0);
+
+            if (Base.health > 0) {
+
+                GLOBAL_PLAYER.stop();
+
+                try {
+                    GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Triumph!.wav");
+                    GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
+                } catch (Exception ex) {
+                    LOGGER.severe(STR."Exception \{ex} thrown when loading audio file.");
+                }
+            }
         });
 
         // Starts the thread responsible for handling enemy spawns.
