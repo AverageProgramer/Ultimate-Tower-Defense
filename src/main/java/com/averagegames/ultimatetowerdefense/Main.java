@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-
 public class Main extends Application {
 
     @Override
