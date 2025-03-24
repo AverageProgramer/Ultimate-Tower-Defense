@@ -494,8 +494,7 @@ public class GameScene extends Scene implements Builder {
             // Spawns easy mode's 27th wave.
 
             ENEMY_SPAWNER.spawn(Easy.WAVE_27, this.parent);
-
-            while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && Base.health > 0);
+            this.spawnerWait();
 
             if (Base.health > 0) {
 
@@ -558,9 +557,13 @@ public class GameScene extends Scene implements Builder {
         // Removes the skip panel from the scene's parent group if the player chooses to deny the skip.
         panel.setOnDeny(event -> Platform.runLater(() -> this.parent.getChildren().remove(panel)));
 
-        // Allows the skip panel to be added to the scene's parent group without any issues.
-        // Adds the skip panel to the scene's parent group.
-        Platform.runLater(() -> this.parent.getChildren().add(panel));
+        // Determines whether the player's current wave is less than the total amount of waves.
+        if (Player.wave < 27) {
+
+            // Allows the skip panel to be added to the scene's parent group without any issues.
+            // Adds the skip panel to the scene's parent group.
+            Platform.runLater(() -> this.parent.getChildren().add(panel));
+        }
 
         // Causes the thread to wait until all enemies have been eliminated, the player skips, or the base health reaches 0.
         while (!LIST_OF_ACTIVE_ENEMIES.isEmpty() && !this.allowSkip && Base.health > 0);
