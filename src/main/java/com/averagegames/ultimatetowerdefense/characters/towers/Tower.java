@@ -370,13 +370,6 @@ public abstract class Tower {
             }
         }
 
-        // Determines whether the tower's image is null.
-        if (this.images[this.level] != null) {
-
-            // Loads the tower's image.
-            this.loadedTower.setImage(this.images[this.level]);
-        }
-
         // Sets the range's x and y components to the position of the tower's x and y components.
 
         this.range.setCenterX(this.getPosition().x());
@@ -406,11 +399,21 @@ public abstract class Tower {
         this.panel.setX(this.getPosition().x() >= GameScene.SCREEN.getWidth() / 2 ? 15 : GameScene.SCREEN.getWidth() - this.panel.getAreaWidth() - 15);
         this.panel.setY(GameScene.SCREEN.getHeight() / 2 - this.panel.getAreaHeight() / 2);
 
+        // Sets the upgrade panel's view order to the view order for GUI.
+        this.panel.setViewOrder(GameScene.GUI_LAYER);
+
         // Sets the panel's visibility to false.
         this.panel.setVisible(false);
 
         // Adds the upgrade panel to the tower's parent.
         this.parent.getChildren().add(this.panel);
+
+        // Determines whether the tower's image is null.
+        if (this.images[this.level] != null) {
+
+            // Loads the tower's image.
+            this.loadedTower.setImage(this.images[this.level]);
+        }
 
         // Sets the tower's view order to its current y position.
         this.loadedTower.setViewOrder(-this.getPosition().y());

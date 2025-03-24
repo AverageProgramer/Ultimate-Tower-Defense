@@ -24,6 +24,7 @@ public interface Builder {
      * Builds a new {@code JavaFX} {@link Scene}, unique to each implementation of the {@link Builder} interface, on a given {@link Stage}.
      * @param stage the {@link Stage} to add the {@link Scene} to.
      * @throws Exception when an {@link Exception} occurs.
+     * @since Ultimate Tower Defense 1.0
      * @implSpec Any class implementing the {@link Builder} interface is required to {@code override} this method.
      * @implNote Whenever the {@link Scene} is built, it should be added to the given {@link Stage}.
      */
@@ -34,6 +35,7 @@ public interface Builder {
      * By default, this method does nothing.
      * @param stage a {@link Stage} to use.
      * @throws Exception when an {@link Exception} occurs.
+     * @since Ultimate Tower Defense 1.0
      * @apiNote This method is only called automatically when the static {@link Builder#loadBuild(Builder, Stage)} method is called.
      * @implSpec This method does not need to be overridden in implementations of the {@link Builder} interface.
      */
@@ -46,6 +48,7 @@ public interface Builder {
      * By default, this method does nothing.
      * @param stage a {@link Stage} to use.
      * @throws Exception when an {@link Exception} occurs.
+     * @since Ultimate Tower Defense 1.0
      * @apiNote This method is only called automatically when the static {@link Builder#loadBuild(Builder, Stage)} method is called.
      * @implSpec This method does not need to be overridden in implementations of the {@link Builder} interface.
      */
@@ -73,6 +76,7 @@ public interface Builder {
      * @param toolkit the {@link Builder} responsible for building the {@link Scene}.
      * @param stage the {@link Stage} to add the custom {@link Scene} to.
      * @throws Exception when an {@link Exception} occurs.
+     * @since Ultimate Tower Defense 1.0
      */
     static void loadBuild(@NotNull final Builder toolkit, @NotNull final Stage stage) throws Exception {
 

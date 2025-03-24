@@ -339,6 +339,8 @@ public class GameScene extends Scene implements Builder {
             }
         });
 
+        this.widthProperty().addListener((observable -> this.parent.layout()));
+
         // Sets the path of the global audio player.
         GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - The Horde.wav");
 
@@ -502,7 +504,7 @@ public class GameScene extends Scene implements Builder {
 
                 try {
                     GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - Triumph!.wav");
-                    GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
+                    GLOBAL_PLAYER.play();
                 } catch (Exception ex) {
                     LOGGER.severe(STR."Exception \{ex} thrown when loading audio file.");
                 }

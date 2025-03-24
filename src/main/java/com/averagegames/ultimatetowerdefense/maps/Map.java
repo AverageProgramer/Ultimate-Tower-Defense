@@ -29,6 +29,7 @@ public interface Map {
      * Loads a new {@link Map} on a given {@link Scene}.
      * @param scene the {@link Scene} to add the {@link Scene} to.
      * @throws Exception when an {@link Exception} occurs.
+     * @since Ultimate Tower Defense 1.0
      * @implSpec Any class implementing the {@link Map} interface is required to {@code override} this method.
      * @implNote Whenever the {@link Map} is built, all {@code assets} should be added to the {@link Scene}'s parent.
      */
@@ -39,6 +40,7 @@ public interface Map {
      * By default, this method does nothing.
      * @param scene a {@link Scene} to use.
      * @throws Exception when an {@link Exception} occurs.
+     * @since Ultimate Tower Defense 1.0
      * @apiNote This method is only called automatically when the static {@link Map#loadMap(Map, Scene)} method is called.
      * @implSpec This method does not need to be overridden in implementations of the {@link Map} interface.
      */
@@ -51,6 +53,7 @@ public interface Map {
      * By default, this method does nothing.
      * @param scene a {@link Scene} to use.
      * @throws Exception when an {@link Exception} occurs.
+     * @since Ultimate Tower Defense 1.0
      * @apiNote This method is only called automatically when the static {@link Map#loadMap(Map, Scene)} method is called.
      * @implSpec This method does not need to be overridden in implementations of the {@link Map} interface.
      */
@@ -64,6 +67,7 @@ public interface Map {
      * @param map the {@link Map} to be loaded.
      * @param scene the {@link Scene} to add the custom {@link Map} to.
      * @throws Exception when an {@link Exception} occurs.
+     * @since Ultimate Tower Defense 1.0
      */
     static void loadMap(@NotNull final Map map, @NotNull final Scene scene) throws Exception {
 
