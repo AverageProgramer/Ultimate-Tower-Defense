@@ -444,8 +444,8 @@ public abstract class Enemy {
         // Creates a new thread that will handle enemy movement and starts it.
         (this.movementThread = new Thread(() -> {
 
-            // Sets the thread's default uncaught exception handler to null.
-            Thread.setDefaultUncaughtExceptionHandler(null);
+            // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
+            Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> LOGGER.warning(STR."Exception \{throwable} has occurred while enemy \{this} was moving"));
 
             // Logs that the enemy has begun moving along its set path.
             LOGGER.info(STR."Enemy \{this} has begun moving along path \{this.pathing}.");
@@ -485,8 +485,9 @@ public abstract class Enemy {
                     animation.waitForFinish();
                 } catch (InterruptedException ex) {
 
+                    // Allows the animation to be stopped without any issues.
                     // Stops the animation.
-                    animation.stop();
+                    Platform.runLater(() -> animation.stop());
 
                     // Logs that the enemy's movement has been interrupted and ended.
                     LOGGER.info(STR."Enemy \{this} has stopped moving along path \{this.pathing}.");
@@ -644,8 +645,8 @@ public abstract class Enemy {
         // Creates a new thread that will handle enemy attacks and starts it.
         (this.attackThread = new Thread(() -> {
 
-            // Sets the thread's default uncaught exception handler to null.
-            Thread.setDefaultUncaughtExceptionHandler(null);
+            // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
+            Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> LOGGER.warning(STR."Exception \{throwable} has occurred while enemy \{this} was attacking"));
 
             // Logs that the enemy has begun attacking.
             LOGGER.info(STR."Enemy \{this} has begun to attack.");

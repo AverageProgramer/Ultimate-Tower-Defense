@@ -400,6 +400,18 @@ public abstract class Tower {
         // Creates a new upgrade panel object that will be used to display that tower's current statistics.
         this.panel = new UpgradePanel(this);
 
+        // Sets the panel's x and y coordinates depending on where the tower is placed.
+        // If the tower is placed on the right half, the upgrade panel appears on the left and if the tower is placed on the left half, the upgrade panel appears on the right.
+
+        this.panel.setX(this.getPosition().x() >= GameScene.SCREEN.getWidth() / 2 ? 15 : GameScene.SCREEN.getWidth() - this.panel.getAreaWidth() - 15);
+        this.panel.setY(GameScene.SCREEN.getHeight() / 2 - this.panel.getAreaHeight() / 2);
+
+        // Sets the panel's visibility to false.
+        this.panel.setVisible(false);
+
+        // Adds the upgrade panel to the tower's parent.
+        this.parent.getChildren().add(this.panel);
+
         // Sets the tower's view order to its current y position.
         this.loadedTower.setViewOrder(-this.getPosition().y());
 
@@ -456,18 +468,8 @@ public abstract class Tower {
         // Sets the tower's range to be visible.
         this.range.setVisible(true);
 
-        // Sets the panel's x and y coordinates depending on where the tower is placed.
-        // If the tower is placed on the right half, the upgrade panel appears on the left and if the tower is placed on the left half, the upgrade panel appears on the right.
-
-        this.panel.setX(this.getPosition().x() >= GameScene.SCREEN.getWidth() / 2 ? 15 : GameScene.SCREEN.getWidth() - this.panel.getAreaWidth() - 15);
-        this.panel.setY(GameScene.SCREEN.getHeight() / 2 - this.panel.getAreaHeight() / 2);
-
-        // Determines whether the tower's parent is not null.
-        if (this.parent != null) {
-
-            // Adds the upgrade panel to the tower's parent.
-            this.parent.getChildren().add(this.panel);
-        }
+        // Sets the tower's upgrade panel to be visible
+        this.panel.setVisible(true);
     }
 
     /**
@@ -480,12 +482,8 @@ public abstract class Tower {
         // Sets the tower's range to be invisible.
         this.range.setVisible(false);
 
-        // Determines whether the tower's parent is not null.
-        if (this.parent != null) {
-
-            // Removes the upgrade panel from the tower's parent.
-            this.parent.getChildren().remove(this.panel);
-        }
+        // Sets the tower's upgrade panel to be invisible
+        this.panel.setVisible(false);
     }
 
     /**
@@ -673,8 +671,8 @@ public abstract class Tower {
         // Creates a new thread that will handle tower attacks and starts it.
         (this.attackThread = new Thread(() -> {
 
-            // Sets the thread's default uncaught exception handler to null.
-            Thread.setDefaultUncaughtExceptionHandler(null);
+            // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
+            Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> LOGGER.warning(STR."Exception \{throwable} has occurred while tower \{this} was attacking"));
 
             // Logs that the tower has begun attacking.
             LOGGER.info(STR."Tower \{this} has begun to attack.");

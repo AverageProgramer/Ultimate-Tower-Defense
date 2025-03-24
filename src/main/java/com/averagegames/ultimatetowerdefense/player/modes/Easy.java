@@ -642,8 +642,4 @@ public class Easy {
             new Bolt(),
             new Bolt()
     });
-
-    public static final Wave TEST_WAVE = new Wave(new Enemy[] {
-            new Sorcerer(),
-    });
 }

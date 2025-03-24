@@ -18,10 +18,6 @@ public class Main extends Application {
     public void init() throws Exception {
         enableLogging(false);
 
-        for (Thread thread : Thread.getAllStackTraces().keySet()) {
-            thread.setUncaughtExceptionHandler(null);
-        }
-
         LOGGER.info(STR."Application \{this} initalized.");
     }
 
