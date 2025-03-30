@@ -92,6 +92,8 @@ public final class Scout extends Tower {
 
         // Properly sets the scout's range to have the finalized starting radius.
         super.setRadius(this.radii[0]);
+
+        super.setSpaceLength(20);
     }
 
     /**

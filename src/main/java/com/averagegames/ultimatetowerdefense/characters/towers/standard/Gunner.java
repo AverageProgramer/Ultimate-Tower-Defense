@@ -54,6 +54,7 @@ public final class Gunner extends Tower {
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
         super.setRadius(this.radii[0]);
+        super.setSpaceLength(25);
     }
 
     @Override

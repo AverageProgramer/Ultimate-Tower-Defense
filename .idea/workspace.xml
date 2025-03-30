@@ -9,11 +9,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Removed an unused import in the Main class.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Abnormal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Rapid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/AbormalZombie.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/RapidZombie.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/Builder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/Builder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Insane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Insane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,11 +141,11 @@
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\enemies" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\music" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\medic" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\gunship" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -264,14 +273,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00059" summary="Implemented a basic version of the Energizer. The Energizer, unlike most other Towers, has hidden detection capabilities starting at level 0. The Energizer is also capable of extreme amounts of damage and can easily deal with enemies like the NormalTitan. The current implementation of the Energizer is not final and is subject to change. The GameScene class has also been changed as the Waves that spawn now more accurately reflect what a typical round of the finished game may look like.">
-      <option name="closed" value="true" />
-      <created>1741454983037</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1741454983037</updated>
     </task>
     <task id="LOCAL-00060" summary="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage.">
       <option name="closed" value="true" />
@@ -657,7 +658,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742748809619</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected.">
+      <option name="closed" value="true" />
+      <created>1742838439405</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1742838439405</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +674,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a bug that would cause the 'tempTower' variable to not properly update when other buttons would be clicked. This will allow for the Inventory to be fully implemented to be added in the future." />
     <MESSAGE value="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers." />
     <MESSAGE value="Fully implemented the Inventory class into the project. The Inventory class is merely a record that keeps track of the Towers the Player wishes to bring into a round. In the final game, the Player will be able to take five Towers of their choosing with them into a round, regardless of difficulty." />
     <MESSAGE value="Updated the UpgradePanel to now include a health bar, sell button, and exit button. The health bar will update as the Tower is damaged. The sell button allows the player to sell a Tower for half the money that they would have already put into the Tower. The exit button just deselects the Tower." />
@@ -690,7 +698,8 @@
     <MESSAGE value="Fixed a bug that would cause Tower's to occasionally throw a NullPointerException." />
     <MESSAGE value="Removed an unused import in the Main class." />
     <MESSAGE value="Made a change to the Main class that prevents any uncaught exceptions from crashing the Application. Occasionally, Tower's may throw a NullPointerException. This bug has now been fixed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made a change to the Main class that prevents any uncaught exceptions from crashing the Application. Occasionally, Tower's may throw a NullPointerException. This bug has now been fixed." />
+    <MESSAGE value="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

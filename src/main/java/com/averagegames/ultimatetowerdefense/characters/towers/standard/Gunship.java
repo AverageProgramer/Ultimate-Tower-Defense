@@ -182,6 +182,8 @@ public final class Gunship extends Tower {
         // Properly sets the gunship's health to the finalized starting health.
         super.setHealth(this.startHealth);
 
+        super.setSpaceLength(75);
+
         // Initializes the audio player for looping audio files.
         this.player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Plane 1.wav");
 

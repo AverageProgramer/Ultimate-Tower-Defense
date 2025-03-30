@@ -59,6 +59,7 @@ public final class Farm extends Tower {
         super.placementLimit = this.placementLimit;
         super.upgradeCosts = this.upgradeCosts;
         super.setHealth(100);
+        super.setSpaceLength(40);
     }
 
     @Override

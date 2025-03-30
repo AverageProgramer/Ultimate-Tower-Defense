@@ -14,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -105,6 +106,10 @@ public abstract class Tower {
     @Accessors(makeFinal = true) @Getter
     private final Circle range;
 
+    @NotNull
+    @Accessors(makeFinal = true) @Getter
+    private final Rectangle space;
+
     /**
      * The {@link Tower}'s {@link Targeting}.
      */
@@ -167,6 +172,9 @@ public abstract class Tower {
 
         // Initializes the tower's range to a default circle.
         this.range = new Circle();
+
+        // Initializes the tower's range to a default rectangle.
+        this.space = new Rectangle();
 
         // Initializes the tower's targeting to 'first' by default.
         this.targeting = Targeting.FIRST;
@@ -307,6 +315,15 @@ public abstract class Tower {
         return this.range.getRadius();
     }
 
+    protected final void setSpaceLength(final double length) {
+        this.space.setWidth(length);
+        this.space.setHeight(length);
+    }
+
+    public final double getSpaceLength() {
+        return this.space.getWidth();
+    }
+
     /**
      * Determines whether the {@link Tower} is within the given {@link Circle} at any point.
      * @param range the {@link Circle} to be checked.
@@ -390,6 +407,19 @@ public abstract class Tower {
         // Adds the tower's range to the tower's parent group.
         this.parent.getChildren().add(this.range);
 
+        this.space.setX(this.getPosition().x() - (this.space.getWidth() / 2));
+        this.space.setY(this.getPosition().y() - (this.space.getHeight() / 2));
+
+        this.space.setFill(Paint.valueOf("#c70f0f"));
+
+        this.space.setOpacity(0.25);
+
+        this.space.setViewOrder(GameScene.HIGHLIGHT_LAYER);
+
+        this.space.setVisible(false);
+
+        this.parent.getChildren().add(this.space);
+
         // Creates a new upgrade panel object that will be used to display that tower's current statistics.
         this.panel = new UpgradePanel(this);
 
@@ -468,11 +498,18 @@ public abstract class Tower {
         // Deselects every other active tower.
         LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
 
-        // Sets the tower's range to be visible.
-        this.range.setVisible(true);
+        // Allows the visibility of the tower's range and upgrade panel to be updated without any issues.
+        Platform.runLater(() -> {
 
-        // Sets the tower's upgrade panel to be visible
-        this.panel.setVisible(true);
+            // Sets the tower's range to be visible.
+            this.range.setVisible(true);
+
+            // Sets the tower's space to be visible.
+            this.space.setVisible(true);
+
+            // Sets the tower's upgrade panel to be visible
+            this.panel.setVisible(true);
+        });
     }
 
     /**
@@ -482,11 +519,18 @@ public abstract class Tower {
     @MustBeInvokedByOverriders
     public void deselect() {
 
-        // Sets the tower's range to be invisible.
-        this.range.setVisible(false);
+        // Allows the visibility of the tower's range and upgrade panel to be updated without any issues.
+        Platform.runLater(() -> {
 
-        // Sets the tower's upgrade panel to be invisible
-        this.panel.setVisible(false);
+            // Sets the tower's range to be invisible.
+            this.range.setVisible(false);
+
+            // Sets the tower's space to be invisible.
+            this.space.setVisible(false);
+
+            // Sets the tower's upgrade panel to be invisible
+            this.panel.setVisible(false);
+        });
     }
 
     /**
@@ -768,14 +812,8 @@ public abstract class Tower {
             this.onDeath();
         }
 
-        // Removes the tower's range from the tower's parent.
-        this.parent.getChildren().remove(this.range);
-
-        // Removes the upgrade panel from the tower's parent.
-        this.parent.getChildren().remove(this.panel);
-
-        // Removes the tower from its parent group.
-        this.parent.getChildren().remove(this.loadedTower);
+        // Removes all the tower's components from the tower's parent.
+        this.parent.getChildren().removeAll(this.range, this.space, this.panel, this.loadedTower);
 
         // Removes the tower from the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.remove(this);

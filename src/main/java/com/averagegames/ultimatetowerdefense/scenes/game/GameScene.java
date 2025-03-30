@@ -246,6 +246,8 @@ public class GameScene extends Scene implements Builder {
 
                 LIST_OF_ACTIVE_TOWERS.forEach(Tower::deselect);
 
+                LIST_OF_ACTIVE_TOWERS.forEach(tower -> Platform.runLater(() -> tower.getSpace().setVisible(true)));
+
                 this.towerIndex = index;
             });
 
@@ -282,13 +284,36 @@ public class GameScene extends Scene implements Builder {
 
                     Platform.runLater(() -> {
                         finalTower.setParent(this.parent);
-                        finalTower.place(new Position(event.getX(), event.getY()));
-                        finalTower.select();
-                        finalTower.startAttacking();
-                    });
+                        finalTower.setPosition(new Position(event.getX(), event.getY()));
 
-                    Player.cash -= cost;
-                    CASH_TEXT.setText(STR."$\{Player.cash}");
+                        boolean placeable = true;
+
+                        for (Tower t : LIST_OF_ACTIVE_TOWERS) {
+                            if (t == finalTower) {
+                                continue;
+                            }
+
+                            if (finalTower.getPosition().x() >= t.getSpace().getX() && finalTower.getPosition().x() <= t.getSpace().getX() + t.getSpaceLength() && finalTower.getPosition().y() >= t.getSpace().getY() && finalTower.getPosition().y() <= t.getSpace().getY() + t.getSpaceLength()) {
+                                placeable = false;
+                            }
+                        }
+
+                        if (placeable) {
+                            finalTower.place();
+                            finalTower.select();
+                            finalTower.startAttacking();
+
+                            Player.cash -= cost;
+                            CASH_TEXT.setText(STR."$\{Player.cash}");
+                        } else {
+                            try {
+                                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
+                                player.play();
+                            } catch (Exception ex) {
+                                // Ignore
+                            }
+                        }
+                    });
                 } else {
                     try {
                         AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Error 1.wav");
@@ -317,12 +342,18 @@ public class GameScene extends Scene implements Builder {
 
                     previewTower.getLoadedTower().setOpacity(0.75);
                     previewTower.getRange().setVisible(true);
+                    previewTower.getSpace().setVisible(true);
+
+                    LIST_OF_ACTIVE_TOWERS.forEach(tower -> Platform.runLater(() -> tower.getSpace().setVisible(true)));
                 }
 
                 previewTower.setPosition(new Position(event.getX(), event.getY()));
 
                 previewTower.getRange().setCenterX(event.getX());
                 previewTower.getRange().setCenterY(event.getY());
+
+                previewTower.getSpace().setX(event.getX() - (previewTower.getSpaceLength() / 2));
+                previewTower.getSpace().setY(event.getY() - (previewTower.getSpaceLength() / 2));
             }
         });
 
@@ -338,8 +369,6 @@ public class GameScene extends Scene implements Builder {
                 this.towerIndex = -1;
             }
         });
-
-        this.widthProperty().addListener((observable -> this.parent.layout()));
 
         // Sets the path of the global audio player.
         GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - The Horde.wav");
@@ -608,6 +637,13 @@ public class GameScene extends Scene implements Builder {
             } catch (Exception ex) {
                 // The exception does not need to be handled.
             }
+        }
+
+        // Determines whether the player is on the final wave.
+        if (Player.wave >= 27) {
+
+            // Prevents the player fro receiving a bonus after the game has ended.
+            return;
         }
 
         // A loop that will iterate through the list containing every active tower.

@@ -47,6 +47,7 @@ public final class Marksman extends Tower {
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
         super.setRadius(this.radii[0]);
+        super.setSpaceLength(30);
     }
 
     @Override

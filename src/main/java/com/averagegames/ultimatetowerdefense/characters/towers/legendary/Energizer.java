@@ -136,6 +136,8 @@ public final class Energizer extends Tower {
         // Properly sets the energizer's range to have the finalized radius.
         super.setRadius(this.radii[0]);
 
+        super.setSpaceLength(30);
+
         // Properly sets the boolean that determines whether the energizer should charge to true.
         this.doCharge = true;
 
