@@ -10,19 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Abnormal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Rapid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/AbormalZombie.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/images/enemies/RapidZombie.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/legendary/Energizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Farm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Scout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Insane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Insane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

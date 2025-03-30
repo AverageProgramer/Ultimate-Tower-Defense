@@ -342,7 +342,6 @@ public class GameScene extends Scene implements Builder {
 
                     previewTower.getLoadedTower().setOpacity(0.75);
                     previewTower.getRange().setVisible(true);
-                    previewTower.getSpace().setVisible(true);
 
                     LIST_OF_ACTIVE_TOWERS.forEach(tower -> Platform.runLater(() -> tower.getSpace().setVisible(true)));
                 }
@@ -351,9 +350,6 @@ public class GameScene extends Scene implements Builder {
 
                 previewTower.getRange().setCenterX(event.getX());
                 previewTower.getRange().setCenterY(event.getY());
-
-                previewTower.getSpace().setX(event.getX() - (previewTower.getSpaceLength() / 2));
-                previewTower.getSpace().setY(event.getY() - (previewTower.getSpaceLength() / 2));
             }
         });
 
@@ -603,9 +599,6 @@ public class GameScene extends Scene implements Builder {
         // Removes the skip panel to the scene's parent group.
         Platform.runLater(() -> this.parent.getChildren().remove(panel));
 
-        // Adds a wave to the player's current wave.
-        Player.wave++;
-
         // Sets it so that future waiting will not end immediately.
         this.allowSkip = false;
 
@@ -645,6 +638,9 @@ public class GameScene extends Scene implements Builder {
             // Prevents the player fro receiving a bonus after the game has ended.
             return;
         }
+
+        // Adds a wave to the player's current wave.
+        Player.wave++;
 
         // A loop that will iterate through the list containing every active tower.
         for (Tower tower : LIST_OF_ACTIVE_TOWERS) {
