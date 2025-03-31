@@ -504,9 +504,6 @@ public abstract class Tower {
             // Sets the tower's range to be visible.
             this.range.setVisible(true);
 
-            // Sets the tower's space to be visible.
-            this.space.setVisible(true);
-
             // Sets the tower's upgrade panel to be visible
             this.panel.setVisible(true);
         });
@@ -524,9 +521,6 @@ public abstract class Tower {
 
             // Sets the tower's range to be invisible.
             this.range.setVisible(false);
-
-            // Sets the tower's space to be invisible.
-            this.space.setVisible(false);
 
             // Sets the tower's upgrade panel to be invisible
             this.panel.setVisible(false);

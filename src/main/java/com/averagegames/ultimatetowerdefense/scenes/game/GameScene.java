@@ -324,6 +324,8 @@ public class GameScene extends Scene implements Builder {
                 }
             }
 
+            LIST_OF_ACTIVE_TOWERS.forEach(t -> Platform.runLater(() -> t.getSpace().setVisible(false)));
+
             this.towerIndex = -1;
         });
 
