@@ -360,6 +360,8 @@ public class GameScene extends Scene implements Builder {
                 if (this.towerIndex != -1) {
                     Player.inventory.towers()[this.towerIndex].eliminate();
                     this.parent.getChildren().remove(Player.inventory.towers()[this.towerIndex].getLoadedTower());
+
+                    LIST_OF_ACTIVE_TOWERS.forEach(tower -> Platform.runLater(() -> tower.getSpace().setVisible(false)));
                 }
 
                 LIST_OF_ACTIVE_TOWERS.forEach(tower -> tower.deselect());

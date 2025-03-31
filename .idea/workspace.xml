@@ -9,10 +9,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Changed how the Tower spacing shows up when placing Towers.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,14 +260,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00060" summary="Added the Pyromancer to the game. The Pyromancer is unique in that it has no base damage but can burn Enemies. When an Enemy is burned, it will move slower and take a set amount of damage every second. In the future, when Tower upgrades are implemented, the time an Enemy may remain burned will increase along with the burn damage.">
-      <option name="closed" value="true" />
-      <created>1741470518240</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1741470518240</updated>
     </task>
     <task id="LOCAL-00061" summary="Implemented the most basic version of the final game. Currently, the player is able to do everything that will be available in the final game except tower upgrades. More enemies and towers will be added in the next commit.">
       <option name="closed" value="true" />
@@ -655,7 +645,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742838439405</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="Changed how the Tower spacing shows up when placing Towers.">
+      <option name="closed" value="true" />
+      <created>1743431325300</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1743431325300</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,7 +661,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a bug that caused newly placed Towers to be deselected if placed directly behind other Towers." />
     <MESSAGE value="Fully implemented the Inventory class into the project. The Inventory class is merely a record that keeps track of the Towers the Player wishes to bring into a round. In the final game, the Player will be able to take five Towers of their choosing with them into a round, regardless of difficulty." />
     <MESSAGE value="Updated the UpgradePanel to now include a health bar, sell button, and exit button. The health bar will update as the Tower is damaged. The sell button allows the player to sell a Tower for half the money that they would have already put into the Tower. The exit button just deselects the Tower." />
     <MESSAGE value="Added an indicator to the UpgradePanel that shows what level the Tower is." />
@@ -688,7 +685,8 @@
     <MESSAGE value="Removed an unused import in the Main class." />
     <MESSAGE value="Made a change to the Main class that prevents any uncaught exceptions from crashing the Application. Occasionally, Tower's may throw a NullPointerException. This bug has now been fixed." />
     <MESSAGE value="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected." />
+    <MESSAGE value="Changed how the Tower spacing shows up when placing Towers." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed how the Tower spacing shows up when placing Towers." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
