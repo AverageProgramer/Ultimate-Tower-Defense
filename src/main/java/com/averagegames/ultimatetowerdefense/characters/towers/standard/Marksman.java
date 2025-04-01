@@ -82,5 +82,7 @@ public final class Marksman extends Tower {
         super.getLoadedTower().setImage(super.images[super.getLevel()]);
 
         super.setRadius(this.radii[super.getLevel()]);
+
+        super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
     }
 }
