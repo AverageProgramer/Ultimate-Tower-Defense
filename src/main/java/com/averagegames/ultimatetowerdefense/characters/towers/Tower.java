@@ -9,6 +9,7 @@ import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
+import com.averagegames.ultimatetowerdefense.util.assets.Timer;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -146,10 +147,8 @@ public abstract class Tower {
      */
     private boolean enableActions;
 
-    /**
-     * A {@link Thread} that is responsible for handling all {@link Tower} {@code attacks}.
-     */
-    private Thread attackThread;
+    @NotNull
+    protected final Timer attackTimer;
 
     {
 
@@ -182,10 +181,7 @@ public abstract class Tower {
         // Initializes the boolean that determines whether the tower should perform on event actions to true.
         this.enableActions = true;
 
-        // Initializes the thread that the tower will use to attack.
-        this.attackThread = new Thread(() -> {
-            // This thread does nothing by default.
-        });
+        this.attackTimer = new Timer();
     }
 
     /**
@@ -546,7 +542,7 @@ public abstract class Tower {
     public final boolean isAlive() {
 
         // Returns whether the tower is alive or not.
-        return this.parent != null && this.parent.getChildren().contains(this.loadedTower);
+        return this.parent != null && this.parent.getChildren().contains(this.loadedTower) && this.health > 0;
     }
 
     /**
@@ -706,11 +702,11 @@ public abstract class Tower {
     @SuppressWarnings("all")
     public final void startAttacking() {
 
-        // Interrupts the thread controlling tower attacks so that the new attacks can override the old attacks if there were any.
-        this.attackThread.interrupt();
+        this.attackTimer.stop();
 
-        // Creates a new thread that will handle tower attacks and starts it.
-        (this.attackThread = new Thread(() -> {
+        this.attackTimer.setHandleTime(this.coolDowns[this.level]);
+
+        this.attackTimer.setOnHandle(() -> {
 
             // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
             Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> LOGGER.warning(STR."Exception \{throwable} has occurred while tower \{this} was attacking"));
@@ -718,59 +714,45 @@ public abstract class Tower {
             // Logs that the tower has begun attacking.
             LOGGER.info(STR."Tower \{this} has begun to attack.");
 
-            // A loop that will continuously run until the tower is eliminated.
-            while (true) {
+            // Gets the tower's current target enemy.
+            Enemy target = this.getTarget();
 
-                // Gets the tower's current target enemy.
-                Enemy target = this.getTarget();
+            if (target == null) {
+                this.attackTimer.reset();
+                return;
+            } else {
 
-                // Determines whether the tower's target is either null or alive.
-                if (target != null && !target.isAlive()) {
-
-                    // Jumps to the next iteration of the loop preventing any exceptions from occurring.
-                    continue;
-                }
-
-                // Determines whether the tower's target is null.
-                if (target != null) {
-
-                    // Logs that the tower has found a target.
-                    LOGGER.info(STR."Tower \{this} has successfully targeted enemy \{target}.");
-                }
-
-                // Allows the attack the loop to be broken out of if the tower is eliminated.
-                try {
-
-                    // Attacks the tower's current target enemy.
-                    this.attack(target);
-
-                    // Determines whether the target is null.
-                    if (target != null) {
-
-                        // Causes the current thread to wait for the tower's cool down to end.
-                        Thread.sleep(this.coolDowns[this.level]);
-                    }
-                } catch (InterruptedException ex) {
-
-                    // Determines whether the tower's target is null.
-                    if (target != null) {
-
-                        // Logs that the tower's attack has been interrupted and ended.
-                        LOGGER.info(STR."Tower \{this} has stopped attacking enemy \{target}.");
-                    }
-
-                    // Breaks out of the loop if the current thread is forcefully interrupted.
-                    break;
-                }
-
-                // Determines whether the tower's target is null.
-                if (target != null) {
-
-                    // Logs that the tower has attacked its target.
-                    LOGGER.info(STR."Tower \{this} has successfully attacked enemy \{target}.");
-                }
+                // Logs that the tower has found a target.
+                LOGGER.info(STR."Tower \{this} has successfully targeted enemy \{target}.");
             }
-        })).start();
+
+            // Allows the attack the loop to be broken out of if the tower is eliminated.
+            try {
+
+                // Attacks the tower's current target enemy.
+                this.attack(target);
+            } catch (InterruptedException ex) {
+
+                // Determines whether the tower's target is null.
+                if (target != null) {
+
+                    // Logs that the tower's attack has been interrupted and ended.
+                    LOGGER.info(STR."Tower \{this} has stopped attacking enemy \{target}.");
+                }
+
+                // Stops the timer from continuing if the tower's attack is forcefully interrupted.
+                this.attackTimer.stop();
+            }
+
+            // Determines whether the tower's target is null.
+            if (target != null) {
+
+                // Logs that the tower has attacked its target.
+                LOGGER.info(STR."Tower \{this} has successfully attacked enemy \{target}.");
+            }
+        });
+
+        this.attackTimer.start();
     }
 
     /**
@@ -780,9 +762,7 @@ public abstract class Tower {
      */
     public final void stopAttacking() {
 
-        // Interrupts the thread responsible for all tower attacks.
-        // This will cause an exception to be thrown which will break out of the loop managing tower attacks.
-        this.attackThread.interrupt();
+        this.attackTimer.stop();
     }
 
     /**

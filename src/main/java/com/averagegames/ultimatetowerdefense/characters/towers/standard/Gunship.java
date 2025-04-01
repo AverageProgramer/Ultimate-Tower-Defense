@@ -413,5 +413,8 @@ public final class Gunship extends Tower {
 
         // Refreshes the animation so that the speed changes are registered.
         this.animation.refresh();
+
+        // Updates the gunship's attack timer to use a new cool down between attacks.
+        super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
     }
 }

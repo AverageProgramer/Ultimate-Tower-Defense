@@ -46,6 +46,8 @@ public final class Gunner extends Tower {
     @Property
     private final double[] radii = {125, 130, 130, 140, 150, 160};
 
+    private int shot;
+
     public Gunner() {
         super.images = this.images;
         super.placementCost = this.placementCost;
@@ -59,6 +61,7 @@ public final class Gunner extends Tower {
 
     @Override
     protected void attack(@Nullable final Enemy enemy) throws InterruptedException {
+
         // Determines whether the enemy is null.
         if (enemy == null || !super.isAlive()) {
 
@@ -66,28 +69,38 @@ public final class Gunner extends Tower {
             return;
         }
 
-        for (int i = 0; i < this.bursts[super.getLevel()]; i++) {
-            if (enemy.isAlive()) {
-                try {
-                    AudioPlayer player = new AudioPlayer();
+        if (super.attackTimer.getHandleTime() == super.coolDowns[super.getLevel()]) {
+            super.attackTimer.setHandleTime(this.damageCoolDowns[super.getLevel()]);
+        }
 
-                    if (super.getLevel() < 5) {
-                        player.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
-                    } else {
-                        player.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 5.wav");
-                    }
+        if (this.shot < this.bursts[super.getLevel()]) {
+            try {
+                AudioPlayer player = new AudioPlayer();
 
-                    player.play();
-                } catch (Exception ex) {
-                    System.out.println("Exception occurred");
+                if (super.getLevel() < 5) {
+                    player.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
+                } else {
+                    player.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 5.wav");
                 }
 
-                enemy.damage(super.damages[super.getLevel()]);
-            } else {
-                break;
+                player.play();
+            } catch (Exception ex) {
+                System.out.println("Exception occurred");
             }
 
-            Thread.sleep(this.damageCoolDowns[super.getLevel()]);
+            enemy.damage(super.damages[super.getLevel()]);
+
+            if (!enemy.isAlive()) {
+                this.shot = this.bursts[super.getLevel()];
+            } else {
+                this.shot++;
+            }
+        }
+
+        if (this.shot >= this.bursts[super.getLevel()]) {
+            this.shot = 0;
+
+            super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
         }
     }
 

@@ -425,7 +425,7 @@ public abstract class Enemy {
     public final boolean isAlive() {
 
         // Returns whether the enemy is alive or not.
-        return this.parent != null && this.parent.getChildren().contains(this.loadedEnemy);
+        return this.parent != null && this.parent.getChildren().contains(this.loadedEnemy) && this.health > 0;
     }
 
     /**
