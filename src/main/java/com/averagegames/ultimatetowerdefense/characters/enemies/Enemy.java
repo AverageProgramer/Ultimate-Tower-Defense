@@ -472,6 +472,9 @@ public abstract class Enemy {
                     // Stops new enemies from spawning.
                     Map.ENEMY_SPAWNER.stopSpawning();
 
+                    // Disables all enemy spawning.
+                    Map.ENEMY_SPAWNER.enableSpawning(false);
+
                     // A loop that will iterate through the list containing every active enemy.
                     LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
 
