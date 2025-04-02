@@ -147,6 +147,9 @@ public abstract class Tower {
      */
     private boolean enableActions;
 
+    /**
+     * A {@link Timer} responsible for handling all {@link Tower} {@code attacks}.
+     */
     @NotNull
     protected final Timer attackTimer;
 

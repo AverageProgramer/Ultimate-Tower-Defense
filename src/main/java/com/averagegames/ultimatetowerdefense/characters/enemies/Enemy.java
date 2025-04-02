@@ -9,6 +9,7 @@ import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
 import com.averagegames.ultimatetowerdefense.util.animation.TranslationHandler;
 import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
+import com.averagegames.ultimatetowerdefense.util.assets.Timer;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -144,16 +145,16 @@ public abstract class Enemy {
     private boolean enableActions;
 
     /**
-     * A {@link Thread} that is responsible for handling all {@link Enemy} movement.
+     * A {@link TranslationHandler} responsible for handling all {@link Enemy} {@code movement}.
      */
     @NotNull
-    private Thread movementThread;
+    protected final TranslationHandler animation;
 
     /**
-     * A {@link Thread} that is responsible for handling all {@link Enemy} attacks.
+     * A {@link Timer} responsible for handling all {@link Enemy} {@code attacks}.
      */
     @NotNull
-    private Thread attackThread;
+    protected final Timer attackTimer;
 
     {
 
@@ -177,14 +178,11 @@ public abstract class Enemy {
         // Initializes the boolean that determines whether the enemy should perform on event actions to true.
         this.enableActions = true;
 
-        // Initializes the threads that the enemy will use to move and attack.
+        // Initializes the enemy's animation to a default animation.
+        this.animation = new TranslationHandler();
 
-        this.movementThread = new Thread(() -> {
-            // This thread does nothing by default.
-        });
-        this.attackThread = new Thread(() -> {
-            // This thread does nothing by default.
-        });
+        // Initializes the enemy's attack timer to a default timer.
+        this.attackTimer = new Timer();
     }
 
     /**
@@ -431,139 +429,102 @@ public abstract class Enemy {
     /**
      * Begins moving the {@link Enemy} along a set {@link Path}.
      * The {@link Path} will need to be set prior to calling this method.
-     * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
     @NonBlocking
     @SuppressWarnings("all")
     public final void startMoving() {
 
-        // Interrupts the thread controlling enemy movement so that the new animation can override the old animation if there was one.
-        this.movementThread.interrupt();
+        // Sets up the animation, setting the node to control to the enemy's image, and setting the speed to use to the enemy's speed.
 
-        // Creates a new thread that will handle enemy movement and starts it.
-        (this.movementThread = new Thread(() -> {
+        this.animation.setNode(this.loadedEnemy);
+        this.animation.setSpeed(this.speed);
 
-            // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
-            Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> LOGGER.warning(STR."Exception \{throwable} has occurred while enemy \{this} was moving"));
+        // Sets the animation's destination to the first position on the path.
+        this.animation.setDestination(new Position(this.pathing.positions()[0].x() - (this.image != null ? this.image.getWidth() / 2 : 0), this.pathing.positions()[0].y() - (this.image != null ? this.image.getHeight() : 0)));
 
-            // Logs that the enemy has begun moving along its set path.
-            LOGGER.info(STR."Enemy \{this} has begun moving along path \{this.pathing}.");
+        // Sets the animation's on finished action to properly update the next position the enemy needs to travel to.
+        this.animation.setOnFinished(() -> {
 
-            // Determines whether the enemy's pathing is null.
-            if (this.pathing == null) {
+            // Determines whether the enemy's position index is within the enemy's pathing.
+            if (this.positionIndex < this.pathing.positions().length - 1) {
 
-                // Prevents the enemy from moving along a null path.
-                return;
-            }
+                // Updates the enemy's position index to proplery reflect the enemy's current position.
+                this.positionIndex++;
 
-            // A loop that will iterate through every position on the given path.
-            for (Position position : this.pathing.positions()) {
-
-                // Creates a new animation that will control the enemy's movement along a given path.
-                TranslationHandler animation = new TranslationHandler();
-
-                // Sets up the animation, setting the node to control to the enemy's image, and setting the speed to use to the enemy's speed.
-
-                animation.setNode(this.loadedEnemy);
-                animation.setSpeed(this.speed);
-
-                // Sets the animation's destination to the current position in the loop.
-                animation.setDestination(new Position(position.x() - (this.image != null ? this.image.getWidth() / 2 : 0), position.y() - (this.image != null ? this.image.getHeight() : 0)));
+                // Sets the animation's destination to the next position on the path.
+                this.animation.setDestination(new Position(this.pathing.positions()[this.positionIndex].x() - (this.image != null ? this.image.getWidth() / 2 : 0), this.pathing.positions()[this.positionIndex].y() - (this.image != null ? this.image.getHeight() : 0)));
 
                 // Allows the enemy's animation to be started without any issues.
                 // Starts the animation.
-                Platform.runLater(() -> animation.start());
+                Platform.runLater(() -> this.animation.start());
+            } else {
 
-                // Logs that the enemy has begun moving to its target destination.
-                LOGGER.info(STR."Enemy \{this} moving to position \{position}.");
+                // Damages the base by however much health the enemy has remaining.
+                Base.health -= this.health;
 
-                // Allows the loop to be broken out of if the animation is interrupted.
-                try {
+                // Determines whether the base's health is below 0.
+                if (Base.health <= 0) {
 
-                    // Causes the current thread to wait until the enemy's animation is finished.
-                    animation.waitForFinish();
-                } catch (InterruptedException ex) {
+                    // Sets the base's health to 0.
+                    Base.health = 0;
 
-                    // Allows the animation to be stopped without any issues.
-                    // Stops the animation.
-                    Platform.runLater(() -> animation.stop());
+                    // Stops new enemies from spawning.
+                    Map.ENEMY_SPAWNER.stopSpawning();
 
-                    // Logs that the enemy's movement has been interrupted and ended.
-                    LOGGER.info(STR."Enemy \{this} has stopped moving along path \{this.pathing}.");
+                    // A loop that will iterate through the list containing every active enemy.
+                    LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
 
-                    // Finishes the method if the animation is forcefully interrupted.
-                    // This will most likely only happen when the enemy despawns.
-                    return;
-                }
+                        // Determines whether the enemy is not the current enemy.
+                        if (enemy != this) {
 
-                // Increases the position index to represent the position the enemy is at.
-                this.positionIndex++;
+                            // Disables the enemy's on event actions.
+                            enemy.enableActions(false);
 
-                // Logs that the enemy has reached its target destination.
-                LOGGER.info(STR."Enemy \{this} has successfully reached position \{position}.");
-            }
+                            // Allows for nodes to be removed to the group despite the current thread possible not being the JavaFX application thread.
+                            // Eliminates each remaining enemy from their parent groups.
+                            Platform.runLater(enemy::eliminate);
+                        }
+                    });
 
-            // Damages the base by however much health the enemy has remaining.
-            Base.health -= this.health;
+                    // A try-catch statement that will catch any exceptions that occur when playing an audio file.
+                    try {
 
-            // Determines whether the base's health is below 0.
-            if (Base.health <= 0) {
+                        // Stops the global audio player from playing an audio file.
+                        GameScene.GLOBAL_PLAYER.stop();
 
-                // Sets the base's health to 0.
-                Base.health = 0;
+                        // Sets the pathname of the global audio player to a new audio file.
+                        GameScene.GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - You Lost!.wav");
 
-                // Stops new enemies from spawning.
-                Map.ENEMY_SPAWNER.stopSpawning();
-
-                // A loop that will iterate through the list containing every active enemy.
-                LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
-
-                    if (enemy != this) {
-
-                        // Disables the enemy's on event actions.
-                        enemy.enableActions(false);
-
-                        // Allows for nodes to be removed to the group despite the current thread possible not being the JavaFX application thread.
-                        // Eliminates each remaining enemy from their parent groups.
-                        Platform.runLater(enemy::eliminate);
+                        // Plays the previously set audio file.
+                        GameScene.GLOBAL_PLAYER.play();
+                    } catch (Exception ex) {
+                        // The exception does not need to be handled.
                     }
-                });
-
-                // A try-catch statement that will catch any exceptions that occur when playing an audio file.
-                try {
-
-                    // Stops the global audio player from playing an audio file.
-                    GameScene.GLOBAL_PLAYER.stop();
-
-                    // Sets the pathname of the global audio player to a new audio file.
-                    GameScene.GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST_ - You Lost!.wav");
-
-                    // Plays the previously set audio file.
-                    GameScene.GLOBAL_PLAYER.play();
-                } catch (Exception ex) {
-                    // The exception does not need to be handled.
                 }
+
+                // Updates the in-game text that displays the base's current health.
+                Platform.runLater(() -> GameScene.HEALTH_TEXT.setText(STR."\{Base.health} HP"));
+
+                // Removes the enemy from its parent group now that it has finished its path.
+                Platform.runLater(this::eliminate);
             }
+        });
 
-            // Updates the in-game text that displays the base's current health.
-            Platform.runLater(() -> GameScene.HEALTH_TEXT.setText(STR."\{Base.health} HP"));
-
-            // Removes the enemy from its parent group now that it has finished its path.
-            Platform.runLater(this::eliminate);
-        })).start();
+        // Allows the enemy's animation to be started without any issues.
+        // Starts the animation.
+        Platform.runLater(() -> this.animation.start());
     }
 
     /**
      * Stops moving the {@link Enemy} on its current {@link Path}.
-     * The {@link Enemy}'s movement {@link Thread} will be interrupted when calling this method.
      * @since Ultimate Tower Defense 1.0
      */
     public final void stopMoving() {
 
-        // Interrupts the thread responsible for all enemy movement.
-        // This will cause an exception to be thrown which will break out of the loop managing enemy movement.
-        this.movementThread.interrupt();
+        // Allows the enemy's animation to be stopped without any issues.
+        // Stops the animation.
+        Platform.runLater(() -> this.animation.stop());
     }
 
     /**
@@ -632,18 +593,17 @@ public abstract class Enemy {
 
     /**
      * Allows the {@link Enemy} to attack a {@link Tower} that is in {@code range}.
-     * This method runs using separate {@link Thread}s and does not {@code block} the {@link Thread} in which it was called.
      * @since Ultimate Tower Defense 1.0
      */
     @NonBlocking
     @SuppressWarnings("all")
     public final void startAttacking() {
 
-        // Interrupts the thread controlling enemy attacks so that the new attacks can override the old attacks if there were any.
-        this.attackThread.interrupt();
+        this.attackTimer.stop();
 
-        // Creates a new thread that will handle enemy attacks and starts it.
-        (this.attackThread = new Thread(() -> {
+        this.attackTimer.setHandleTime(this.coolDown);
+
+        this.attackTimer.setOnHandle(() -> {
 
             // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
             Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> LOGGER.warning(STR."Exception \{throwable} has occurred while enemy \{this} was attacking"));
@@ -651,90 +611,54 @@ public abstract class Enemy {
             // Logs that the enemy has begun attacking.
             LOGGER.info(STR."Enemy \{this} has begun to attack.");
 
-            // A loop that will continuously run until the tower is eliminated.
-            while (true) {
+            // Gets the tower's current target enemy.
+            Tower target = this.getTarget();
 
-                // Gets the tower's current target enemy.
-                Tower target = null;
+            // Determines whether the enemy's target is either null or alive.
+            if (target == null) {
+                this.attackTimer.reset();
 
-                // A loop that will iterate until the enemy gets a valid target.
-                while (true) {
+                return;
+            } else {
 
-                    // A try-catch statement that will prevent any exceptions from occurring while the enemy is getting a target.
-                    try {
-
-                        // Gets the enemy's current target.
-                        // A concurrent modification exception may be thrown while finding a target.
-                        target = this.getTarget();
-
-                        // Breaks out of the loop since the enemy would have gotten a valid target.
-                        break;
-                    } catch (ConcurrentModificationException ex) {
-
-                        // Logs that the enemy has encountered an error while getting its target.
-                        LOGGER.warning(STR."Enemy \{this} has encountered exception \{ex} while searching for a target.");
-                    }
-                }
-
-                // Determines whether the enemy's target is either null or alive.
-                if (target != null && !target.isAlive()) {
-
-                    // Jumps to the next iteration of the loop preventing any exceptions from occurring.
-                    continue;
-                }
-
-                // Determines whether the enemy's target is null.
-                if (target != null) {
-
-                    // Logs that the enemy has found a target.
-                    LOGGER.info(STR."Enemy \{this} has successfully targeted tower \{target}.");
-                }
-
-                // Allows the attack the loop to be broken out of if the tower is eliminated.
-                try {
-
-                    // Attacks the enemy's current target tower.
-                    this.attack(target);
-
-                    // Determines whether the target is null.
-                    if (target != null) {
-
-                        // Causes the current thread to wait for the enemy's cool down to end.
-                        Thread.sleep(this.coolDown);
-                    }
-                } catch (InterruptedException ex) {
-
-                    // Determines whether the enemy's target is null.
-                    if (target != null) {
-
-                        // Logs that the enemy's attack has been interrupted and ended.
-                        LOGGER.info(STR."Enemy \{this} has stopped attacking tower \{target}.");
-                    }
-
-                    // Breaks out of the loop if the current thread is forcefully interrupted.
-                    break;
-                }
-
-                // Determines whether the enemy's target is null.
-                if (target != null) {
-
-                    // Logs that the enemy has attacked its target.
-                    LOGGER.info(STR."Enemy \{this} has successfully attacked tower \{target}.");
-                }
+                // Logs that the enemy has found a target.
+                LOGGER.info(STR."Enemy \{this} has successfully targeted tower \{target}.");
             }
-        })).start();
+
+            // Allows the attack the loop to be broken out of if the tower is eliminated.
+            try {
+
+                // Attacks the enemy's current target tower.
+                this.attack(target);
+            } catch (InterruptedException ex) {
+
+                // Determines whether the enemy's target is null.
+                if (target != null) {
+
+                    // Logs that the enemy's attack has been interrupted and ended.
+                    LOGGER.info(STR."Enemy \{this} has stopped attacking tower \{target}.");
+                }
+
+                this.attackTimer.stop();
+            }
+
+            // Determines whether the enemy's target is null.
+            if (target != null) {
+
+                // Logs that the enemy has attacked its target.
+                LOGGER.info(STR."Enemy \{this} has successfully attacked tower \{target}.");
+            }
+        });
+
+        this.attackTimer.start();
     }
 
     /**
      * Stops all attacks the {@link Enemy} may be performing.
-     * The {@link Enemy}'s attacking {@link Thread} will be interrupted when calling this method.
      * @since Ultimate Tower Defense 1.0
      */
     public final void stopAttacking() {
-
-        // Interrupts the thread responsible for all enemy attacks.
-        // This will cause an exception to be thrown which will break out of the loop managing enemy attacks.
-        this.attackThread.interrupt();
+        this.attackTimer.stop();
     }
 
     /**

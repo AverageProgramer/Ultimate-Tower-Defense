@@ -31,6 +31,8 @@ public final class Soldier extends Enemy {
     @Property
     private final int income = 1;
 
+    private int shot = -1;
+
     public Soldier() {
         super.image = this.image;
 
@@ -76,33 +78,47 @@ public final class Soldier extends Enemy {
             return;
         }
 
-        Platform.runLater(super::stopMoving);
-
-        super.updatePathing();
-
-        Thread.sleep(750);
-
-        for (int i = 0; i < 5; i++) {
-            if (!tower.isAlive()) {
-                break;
-            }
-
-            if (super.isAlive()) {
-
-                try {
-                    AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
-                    player.play();
-                } catch (Exception ex) {
-                    System.out.println("Exception occurred");
-                }
-
-                tower.damage(this.damage);
-            }
-
-            Thread.sleep(750);
+        if (super.attackTimer.getHandleTime() == super.coolDown) {
+            super.attackTimer.setHandleTime(750);
         }
 
-        Thread.sleep(750);
+        if (shot == -1) {
+            super.stopMoving();
+
+            super.updatePathing();
+
+            this.shot++;
+
+            return;
+        }
+
+        if (this.shot < 5) {
+            try {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
+
+                player.play();
+            } catch (Exception ex) {
+                System.out.println("Exception occurred");
+            }
+
+            tower.damage(super.damage);
+
+            if (!tower.isAlive()) {
+                this.shot = 5;
+            } else {
+                this.shot++;
+            }
+
+            return;
+        } else if (this.shot == 5) {
+            this.shot++;
+
+            return;
+        }
+
+        this.shot = -1;
+
+        super.attackTimer.setHandleTime(super.coolDown);
 
         super.startMoving();
     }

@@ -95,9 +95,7 @@ public final class Gunner extends Tower {
             } else {
                 this.shot++;
             }
-        }
-
-        if (this.shot >= this.bursts[super.getLevel()]) {
+        } else {
             this.shot = 0;
 
             super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);

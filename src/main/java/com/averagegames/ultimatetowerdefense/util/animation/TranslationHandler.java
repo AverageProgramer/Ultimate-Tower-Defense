@@ -49,6 +49,13 @@ public final class TranslationHandler {
     private Position destination;
 
     /**
+     * The {@link Runnable} action to be performed when the animation is {@code finished}.
+     */
+    @Nullable
+    @Setter @Getter
+    private Runnable onFinished;
+
+    /**
      * A default, no args constructor for the {@link TranslationHandler} class.
      * @since Ultimate Tower Defense 1.0
      */
@@ -113,6 +120,13 @@ public final class TranslationHandler {
 
                 // Notifies the animation so that a thread being blocked by the "waitForFinish" method can continue.
                 this.notify();
+            }
+
+            // Determines whether the animation's on finished action is null.
+            if (this.onFinished != null) {
+
+                // Performs the given action.
+                this.onFinished.run();
             }
         });
 
