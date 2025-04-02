@@ -181,6 +181,7 @@ public abstract class Tower {
         // Initializes the boolean that determines whether the tower should perform on event actions to true.
         this.enableActions = true;
 
+        // Initializes the timer responsible for all tower attacks to a default timer.
         this.attackTimer = new Timer();
     }
 
@@ -702,10 +703,14 @@ public abstract class Tower {
     @SuppressWarnings("all")
     public final void startAttacking() {
 
+        // Stops the tower responsible for tower attacks.
         this.attackTimer.stop();
 
+        // Sets the handle time of the timer to the tower's current cool down between attacks.
         this.attackTimer.setHandleTime(this.coolDowns[this.level]);
 
+        // Sets the action to be performed by the timer.
+        // This action will be performed once for every cool down time that passes.
         this.attackTimer.setOnHandle(() -> {
 
             // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
@@ -717,8 +722,13 @@ public abstract class Tower {
             // Gets the tower's current target enemy.
             Enemy target = this.getTarget();
 
+            // Determines whether the target enemy is null.
             if (target == null) {
+
+                // Resets the timer so that the tower can begin attacking as soon as an enemy is in its range.
                 this.attackTimer.reset();
+
+                // Prevents the timer from waiting for the tower's current cool down.
                 return;
             } else {
 
@@ -752,6 +762,7 @@ public abstract class Tower {
             }
         });
 
+        // Starts the timer responsible for tower attacks.
         this.attackTimer.start();
     }
 
@@ -762,6 +773,7 @@ public abstract class Tower {
      */
     public final void stopAttacking() {
 
+        // Stops the tower responsible for tower attacks.
         this.attackTimer.stop();
     }
 

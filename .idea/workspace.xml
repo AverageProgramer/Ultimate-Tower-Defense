@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Optimized Tower attacks significantly. Now, instead of using separate Threads to attack, they each use their own respective AnimationTimers. The Timer class has been implemented to help with this process. Currently, the Scout, Marksman, Gunner, and Gunship Towers have all been updated to work with the Timer. The Energizer still needs to be updated.">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Marksman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,14 +260,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00062" summary="Implemented the Summoner and Armored zombies into the game. The Summoner zombies have the ability to spawn 5 random Enemies every 15 seconds. The Armored zombies are the first Enemies to use a 'shield'. Shields can only be damaged if enough damage is actually dealt to the Enemy. For example, if an Enemy has 20 base HP and 15 shield, a Tower can only begin to wear down the Shield if the Tower does a minimum of 5 damage. More Towers will be added in the next commit.">
-      <option name="closed" value="true" />
-      <created>1741599272844</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1741599272844</updated>
     </task>
     <task id="LOCAL-00063" summary="Made an update to the LootBox zombie. The LootBox zombie will no longer grant money when damaged. The Summoner has also been renamed to the Sorcerer.">
       <option name="closed" value="true" />
@@ -653,7 +645,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743548644766</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="Optimized Tower attacks significantly. Now, instead of using separate Threads to attack, they each use their own respective AnimationTimers. The Timer class has been implemented to help with this process. Currently, the Scout, Marksman, Gunner, and Gunship Towers have all been updated to work with the Timer. The Energizer still needs to be updated.">
+      <option name="closed" value="true" />
+      <created>1743548675020</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1743548675020</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
