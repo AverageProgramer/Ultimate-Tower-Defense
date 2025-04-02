@@ -706,8 +706,12 @@ public abstract class Tower {
         // Stops the tower responsible for tower attacks.
         this.attackTimer.stop();
 
-        // Sets the handle time of the timer to the tower's current cool down between attacks.
-        this.attackTimer.setHandleTime(this.coolDowns[this.level]);
+        // Determines whether the array of cool downs is null.
+        if (this.coolDowns != null) {
+
+            // Sets the handle time of the timer to the tower's current cool down between attacks.
+            this.attackTimer.setHandleTime(this.coolDowns[this.level]);
+        }
 
         // Sets the action to be performed by the timer.
         // This action will be performed once for every cool down time that passes.

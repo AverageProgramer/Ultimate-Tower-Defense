@@ -9,8 +9,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Optimized Tower attacks significantly. Now, instead of using separate Threads to attack, they each use their own respective AnimationTimers. The Timer class has been implemented to help with this process. Currently, the Scout, Marksman, Gunner, and Gunship Towers have all been updated to work with the Timer. The Energizer still needs to be updated.">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added comments to the Tower class regarding anything added in the previous commit.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,14 +260,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00063" summary="Made an update to the LootBox zombie. The LootBox zombie will no longer grant money when damaged. The Summoner has also been renamed to the Sorcerer.">
-      <option name="closed" value="true" />
-      <created>1741626147893</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1741626147893</updated>
     </task>
     <task id="LOCAL-00064" summary="Reworked the Energizer. The Energizer will now attack an Enemy until that Enemy has been eliminated. The Sorcerer has also been reworked. Instead of using a completely separate thread to spawn Enemies, the Sorcerer now uses the Enemy attack thread. The Bolt Enemy has also been implemented.">
       <option name="closed" value="true" />
@@ -653,7 +645,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743548675020</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="Added comments to the Tower class regarding anything added in the previous commit.">
+      <option name="closed" value="true" />
+      <created>1743559306513</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1743559306513</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -661,7 +661,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated the UpgradePanel to now include a health bar, sell button, and exit button. The health bar will update as the Tower is damaged. The sell button allows the player to sell a Tower for half the money that they would have already put into the Tower. The exit button just deselects the Tower." />
     <MESSAGE value="Added an indicator to the UpgradePanel that shows what level the Tower is." />
     <MESSAGE value="Fully implemented the gameplay mechanics of the Gunship Tower into the game. The Gunship's images and upgrades have both been added however unique sound effects for level 5 have not yet been found and will be added in the future. Also, added the Element annotation. The Element annotation serves as a way to indicate that a field of a character subclass is meant to assist in the visual or sound-based rendering of the character." />
     <MESSAGE value="Fixed a bug that would cause the Gunship to not be removed when eliminated." />
@@ -686,7 +685,8 @@
     <MESSAGE value="Made slight changes in the Tower class regarding the UpgradePanel. Now, whenever a Tower is selected and deselected, the UpgradePanel is not added and removed. Instead, the UpgradePanel is added when the Tower is placed and set to visible when selected and invisible when deselected." />
     <MESSAGE value="Changed how the Tower spacing shows up when placing Towers." />
     <MESSAGE value="Optimized Tower attacks significantly. Now, instead of using separate Threads to attack, they each use their own respective AnimationTimers. The Timer class has been implemented to help with this process. Currently, the Scout, Marksman, Gunner, and Gunship Towers have all been updated to work with the Timer. The Energizer still needs to be updated." />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimized Tower attacks significantly. Now, instead of using separate Threads to attack, they each use their own respective AnimationTimers. The Timer class has been implemented to help with this process. Currently, the Scout, Marksman, Gunner, and Gunship Towers have all been updated to work with the Timer. The Energizer still needs to be updated." />
+    <MESSAGE value="Added comments to the Tower class regarding anything added in the previous commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added comments to the Tower class regarding anything added in the previous commit." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
