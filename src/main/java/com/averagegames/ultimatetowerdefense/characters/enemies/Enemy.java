@@ -615,11 +615,14 @@ public abstract class Enemy {
             Tower target = this.getTarget();
 
             // Determines whether the enemy's target is either null or alive.
-            if (target == null) {
+            if (target == null && !this.getClass().isAnnotationPresent(Summoner.class)) {
+
+                // Resets the timer responsible for handling enemy attacks.
                 this.attackTimer.reset();
 
+                // Prevents the enemy from attacking a null enemy.
                 return;
-            } else {
+            } else if (target != null) {
 
                 // Logs that the enemy has found a target.
                 LOGGER.info(STR."Enemy \{this} has successfully targeted tower \{target}.");
@@ -632,13 +635,14 @@ public abstract class Enemy {
                 this.attack(target);
             } catch (InterruptedException ex) {
 
-                // Determines whether the enemy's target is null.
+                // Determines whether the enemy's target tower is null.
                 if (target != null) {
 
                     // Logs that the enemy's attack has been interrupted and ended.
                     LOGGER.info(STR."Enemy \{this} has stopped attacking tower \{target}.");
                 }
 
+                // Stops the timer responsible for handling enemy attacks.
                 this.attackTimer.stop();
             }
 
@@ -650,6 +654,7 @@ public abstract class Enemy {
             }
         });
 
+        // Starts the timer responsible for handling enemy attacks.
         this.attackTimer.start();
     }
 
@@ -658,6 +663,8 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     public final void stopAttacking() {
+
+        // Stops the timer responsible for handling enemy attacks.
         this.attackTimer.stop();
     }
 

@@ -119,5 +119,7 @@ public final class Gunner extends Tower {
         super.setRadius(this.radii[super.getLevel()]);
 
         super.setPosition(oldPos);
+
+        super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
     }
 }

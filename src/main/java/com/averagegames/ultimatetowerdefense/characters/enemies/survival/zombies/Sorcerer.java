@@ -1,15 +1,17 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
+import com.averagegames.ultimatetowerdefense.characters.enemies.Summoner;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+@Summoner
 public class Sorcerer extends Enemy {
 
     @Property
@@ -33,8 +35,7 @@ public class Sorcerer extends Enemy {
     @Property
     private final int coolDown = 15000;
 
-    @NotNull
-    private Thread spawnThread;
+    private int spawned;
 
     public Sorcerer() {
         super.image = this.image;
@@ -48,93 +49,90 @@ public class Sorcerer extends Enemy {
 
         super.income = this.income;
 
-        spawnThread = new Thread(() -> {
+        super.coolDown = this.coolDown;
 
-        });
+        this.spawned = -2;
     }
 
     @Override
     public void onSpawn() {
-        this.spawnThread = new Thread(() -> {
-            spawning:
+        super.startAttacking();
+    }
 
-            while (true) {
-                try {
-                    Thread.sleep(this.coolDown);
-                } catch (InterruptedException e) {
-                    break;
-                }
+    @Override
+    protected void attack(@Nullable final Tower tower) {
+        if (this.spawned == -2) {
+            this.spawned++;
 
-                Platform.runLater(super::stopMoving);
+            return;
+        }
 
-                super.updatePathing();
+        if (super.attackTimer.getHandleTime() == super.coolDown) {
+            super.attackTimer.setHandleTime(1500);
+        }
 
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
-                    break;
-                }
+        if (this.spawned == -1) {
+            super.stopMoving();
 
-                Enemy[] enemies = new Enemy[5];
+            super.updatePathing();
 
-                for (int i = 0; i < 5; i++) {
-                    int enemy = (int) (Math.random() * ((Player.wave >= 20 ? 7 : 6) - 1)) + 1;
+            this.spawned++;
 
-                    Enemy e = switch (enemy) {
-                        case 1 ->
-                                new Normal();
-                        case 2 ->
-                                new Quick();
-                        case 3 ->
-                                new Slow();
-                        case 4 ->
-                                new Stealthy();
-                        case 5 ->
-                                new LootBox();
-                        case 6 ->
-                                new Armored();
-                        default ->
-                                null;
-                    };
+            return;
+        }
 
-                    if (e == null) {
-                        return;
-                    }
+        if (this.spawned < 5) {
+            int enemy = (int) (Math.random() * ((Player.wave >= 20 ? 7 : 6) - 1)) + 1;
 
-                    e.setParent(super.getParent());
-                    e.setPathing(super.getPathing());
-                    e.setReferencePathing(super.getReferencePathing());
-                    e.setPosition(super.getPosition());
-                    e.setPositionIndex(super.getPositionIndex());
-                    Platform.runLater(() -> {
-                        e.spawn();
-                        e.startMoving();
-                    });
+            Enemy e = switch (enemy) {
+                case 1 ->
+                        new Normal();
+                case 2 ->
+                        new Quick();
+                case 3 ->
+                        new Slow();
+                case 4 ->
+                        new Stealthy();
+                case 5 ->
+                        new LootBox();
+                case 6 ->
+                        new Armored();
+                default ->
+                        null;
+            };
 
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException ex) {
-                        break spawning;
-                    }
-                }
-
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
-                    break;
-                }
-
-                super.startMoving();
+            if (e == null) {
+                return;
             }
-        });
 
-        this.spawnThread.start();
+            e.setParent(super.getParent());
+            e.setPathing(super.getPathing());
+            e.setReferencePathing(super.getReferencePathing());
+            e.setPosition(super.getPosition());
+            e.setPositionIndex(super.getPositionIndex());
+            Platform.runLater(() -> {
+                e.spawn();
+                e.startMoving();
+            });
+
+            this.spawned++;
+
+            return;
+        } else if (this.spawned == 5) {
+            this.spawned++;
+
+            return;
+        }
+
+        this.spawned = -1;
+
+        super.attackTimer.setHandleTime(super.coolDown);
+
+        super.startMoving();
     }
 
     @Override
     protected void onDeath() {
-        this.spawnThread.interrupt();
-
         try {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 1.wav");
             player.play();

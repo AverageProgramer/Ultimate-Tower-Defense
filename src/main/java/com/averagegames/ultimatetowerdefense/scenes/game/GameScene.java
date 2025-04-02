@@ -606,6 +606,13 @@ public class GameScene extends Scene implements Builder {
         // Sets it so that future waiting will not end immediately.
         this.allowSkip = false;
 
+        // Determines whether the base health is greater than or equal to 0.
+        if (Base.health <= 0) {
+
+            // Prevents the game from continuing after the player loses.
+            return;
+        }
+
         // A loop that will iterate through 4 times in order to act as a timer.
         for (int i = 0; i < 4; i++) {
 

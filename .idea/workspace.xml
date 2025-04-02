@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="UltimateTowerDefense:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -9,9 +14,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fully optimized Enemy attacks and movement. Like Tower attacks, Enemy attacks and movement used to be run using separate threads, causing a variety of memory issues and lag. Now, Enemy movement is handled just with the TranslationHandler class and Enemy attacks are handled just with a Timer.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug that would cause Sorcerers and Enemies spawned by Sorcerers would move to the wrong Positions.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Summoner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Sorcerer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/standard/Gunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
     </list>
@@ -32,8 +40,8 @@
         <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="AnnotationType" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -85,7 +93,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "JUnit.EnemyTest.EnemySpawnShouldFail.executor": "Run",
     "JUnit.EnemyTest.enemySpawnShouldFail.executor": "Run",
     "JUnit.EnemyTest.enemySpawnShouldNotThrowAnException.executor": "Run",
@@ -118,7 +126,7 @@
     "node.js.selected.package.stylelint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -263,14 +271,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00066" summary="Added a Wave counter to the GameScene class. Also fixed an issue with the Marksman, Gunner, and Pyromancer Towers. These Towers had not previously set their starting health to 0. This would cause them to get instantly eliminated by Soldier Enemies.">
-      <option name="closed" value="true" />
-      <created>1741799499945</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1741799499945</updated>
     </task>
     <task id="LOCAL-00067" summary="Fixed an issue with the Sorcerer where it would spawn Enemies even after it was eliminated.">
       <option name="closed" value="true" />
@@ -656,7 +656,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743606443053</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="Fixed a bug that would cause Sorcerers and Enemies spawned by Sorcerers would move to the wrong Positions.">
+      <option name="closed" value="true" />
+      <created>1743607587053</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1743607587053</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +672,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a bug that would cause the Gunship to not be removed when eliminated." />
     <MESSAGE value="Set the Player's cash back to 500 whenever a round is started." />
     <MESSAGE value="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added." />
     <MESSAGE value="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000." />
@@ -689,7 +696,8 @@
     <MESSAGE value="Added comments to the Tower class regarding anything added in the previous commit." />
     <MESSAGE value="Fixed a bug that would cause an Exception to be thrown when Farms would be placed." />
     <MESSAGE value="Fully optimized Enemy attacks and movement. Like Tower attacks, Enemy attacks and movement used to be run using separate threads, causing a variety of memory issues and lag. Now, Enemy movement is handled just with the TranslationHandler class and Enemy attacks are handled just with a Timer." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fully optimized Enemy attacks and movement. Like Tower attacks, Enemy attacks and movement used to be run using separate threads, causing a variety of memory issues and lag. Now, Enemy movement is handled just with the TranslationHandler class and Enemy attacks are handled just with a Timer." />
+    <MESSAGE value="Fixed a bug that would cause Sorcerers and Enemies spawned by Sorcerers would move to the wrong Positions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that would cause Sorcerers and Enemies spawned by Sorcerers would move to the wrong Positions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
