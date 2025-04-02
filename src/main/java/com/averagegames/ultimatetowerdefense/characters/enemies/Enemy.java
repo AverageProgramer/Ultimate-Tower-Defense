@@ -446,14 +446,14 @@ public abstract class Enemy {
         // Sets the animation's on finished action to properly update the next position the enemy needs to travel to.
         this.animation.setOnFinished(() -> {
 
-            // Determines whether the enemy's position index is within the enemy's pathing.
-            if (this.positionIndex < this.pathing.positions().length - 1) {
+            // Determines whether the enemy's position index is within the enemy's reference pathing.
+            if (this.positionIndex < this.referencePathing.positions().length - 1) {
 
                 // Updates the enemy's position index to proplery reflect the enemy's current position.
                 this.positionIndex++;
 
                 // Sets the animation's destination to the next position on the path.
-                this.animation.setDestination(new Position(this.pathing.positions()[this.positionIndex].x() - (this.image != null ? this.image.getWidth() / 2 : 0), this.pathing.positions()[this.positionIndex].y() - (this.image != null ? this.image.getHeight() : 0)));
+                this.animation.setDestination(new Position(this.referencePathing.positions()[this.positionIndex].x() - (this.image != null ? this.image.getWidth() / 2 : 0), this.referencePathing.positions()[this.positionIndex].y() - (this.image != null ? this.image.getHeight() : 0)));
 
                 // Allows the enemy's animation to be started without any issues.
                 // Starts the animation.
