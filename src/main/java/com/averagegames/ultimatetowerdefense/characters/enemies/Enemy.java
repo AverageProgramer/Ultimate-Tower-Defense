@@ -617,14 +617,11 @@ public abstract class Enemy {
             // Gets the tower's current target enemy.
             Tower target = this.getTarget();
 
-            // Determines whether the enemy's target is either null or alive.
+            // Determines whether the enemy's target is null or if the enemy is not a summoner.
             if (target == null && !this.getClass().isAnnotationPresent(Summoner.class)) {
 
                 // Resets the timer responsible for handling enemy attacks.
                 this.attackTimer.reset();
-
-                // Prevents the enemy from attacking a null enemy.
-                return;
             } else if (target != null) {
 
                 // Logs that the enemy has found a target.
@@ -649,7 +646,7 @@ public abstract class Enemy {
                 this.attackTimer.stop();
             }
 
-            // Determines whether the enemy's target is null.
+            // Determines whether the enemy's target is not null.
             if (target != null) {
 
                 // Logs that the enemy has attacked its target.

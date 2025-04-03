@@ -71,10 +71,13 @@ public final class Soldier extends Enemy {
     @Override
     public void attack(@Nullable final Tower tower) throws InterruptedException {
 
-        // Determines whether the enemy is null.
         if (tower == null || !super.isAlive()) {
+            if (super.attackTimer.getHandleTime() == 750) {
+                super.attackTimer.setHandleTime(super.coolDown);
 
-            // Prevents the scout from attacking a null enemy.
+                super.startMoving();
+            }
+
             return;
         }
 

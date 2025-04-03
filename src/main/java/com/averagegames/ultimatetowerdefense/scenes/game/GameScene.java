@@ -65,7 +65,7 @@ public class GameScene extends Scene implements Builder {
      * A {@link Constant} representing the starting cash for the {@link Player}.
      */
     @Constant
-    private static final int STARTING_CASH = 500;
+    private static final int STARTING_CASH = 1000000;
 
     /**
      * A {@link Constant} representing the starting wave for the {@link Player}.

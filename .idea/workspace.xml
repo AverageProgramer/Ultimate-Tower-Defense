@@ -14,10 +14,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Optimized how Sorcerers summon Enemies. Sorcerers no longer use a separate thread to spawn enemies and just use the attack Timer within the Enemy class. The game currently only uses two threads, the main JavaFX Application thread, and the spawn thread in the GameScene class.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug where Enemies would continue spawning after the player would lose.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/modes/Easy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Soldier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,14 +269,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00068" summary="Re-fixed the issue regarding the Sorcerer. The previous commit did not actually address the issue.">
-      <option name="closed" value="true" />
-      <created>1741892358648</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1741892358648</updated>
     </task>
     <task id="LOCAL-00069" summary="Implemented the Gunship and Shotgunner Towers into the game. The Shotgunner functions almost identically to every other Tower other than it has a rather slow long cool down but does decent damage. The Gunship is unique as it completes circular paths for an indefinite amount of time and attacks any Enemies that wind up underneath it. The OilRig class has also been added to the game. The OilRig is meant to be the legendary version of the Farm. The OilRig will generate money at a constant rate instead of at the start of every wave.">
       <option name="closed" value="true" />
@@ -660,7 +654,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743632371667</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="Fixed a bug where Enemies would continue spawning after the player would lose.">
+      <option name="closed" value="true" />
+      <created>1743632855171</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1743632855171</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +670,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented the CircularTranslationHandler class. The CircularTranslationHandler class is meant to help with the Gunship's animation. The CircularTranslationHandler essentially combines the PathTransition and RotateTransition into one class. Any Node's using the CircularTranslationHandler as animation handler will move in a manner similar to the Gunship. In other words, as the move around a Circle, they will be rotated. Sound effects for the level 5 Gunner and level 5 Gunship have also been added." />
     <MESSAGE value="Fixed a bug with the UpgradePanel that would allow the Player to continue spending cash even when a Tower was max level. Also increased the Energizer's placement cost from 2500 to 5000." />
     <MESSAGE value="Cleaned up the code in the Tower and Gunship classes slightly. Also, added comments to the Gunship class." />
     <MESSAGE value="Fixed a bug that would cause an IllegalStateException to be thrown when a Tower eliminates an Enemy." />
@@ -693,7 +694,8 @@
     <MESSAGE value="Fully optimized Enemy attacks and movement. Like Tower attacks, Enemy attacks and movement used to be run using separate threads, causing a variety of memory issues and lag. Now, Enemy movement is handled just with the TranslationHandler class and Enemy attacks are handled just with a Timer." />
     <MESSAGE value="Fixed a bug that would cause Sorcerers and Enemies spawned by Sorcerers would move to the wrong Positions." />
     <MESSAGE value="Optimized how Sorcerers summon Enemies. Sorcerers no longer use a separate thread to spawn enemies and just use the attack Timer within the Enemy class. The game currently only uses two threads, the main JavaFX Application thread, and the spawn thread in the GameScene class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimized how Sorcerers summon Enemies. Sorcerers no longer use a separate thread to spawn enemies and just use the attack Timer within the Enemy class. The game currently only uses two threads, the main JavaFX Application thread, and the spawn thread in the GameScene class." />
+    <MESSAGE value="Fixed a bug where Enemies would continue spawning after the player would lose." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug where Enemies would continue spawning after the player would lose." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

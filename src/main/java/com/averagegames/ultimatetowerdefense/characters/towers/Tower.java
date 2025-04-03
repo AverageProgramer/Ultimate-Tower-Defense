@@ -734,9 +734,6 @@ public abstract class Tower {
 
                 // Resets the timer so that the tower can begin attacking as soon as an enemy is in its range.
                 this.attackTimer.reset();
-
-                // Prevents the timer from waiting for the tower's current cool down.
-                return;
             } else {
 
                 // Logs that the tower has found a target.
