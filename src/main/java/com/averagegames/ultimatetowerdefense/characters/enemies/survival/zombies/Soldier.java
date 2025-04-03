@@ -70,8 +70,9 @@ public final class Soldier extends Enemy {
 
     @Override
     public void attack(@Nullable final Tower tower) throws InterruptedException {
+        if (tower == null) {
+            this.shot = -1;
 
-        if (tower == null || !super.isAlive()) {
             if (super.attackTimer.getHandleTime() == 750) {
                 super.attackTimer.setHandleTime(super.coolDown);
 
@@ -81,21 +82,15 @@ public final class Soldier extends Enemy {
             return;
         }
 
-        if (super.attackTimer.getHandleTime() == super.coolDown) {
-            super.attackTimer.setHandleTime(750);
-        }
-
         if (shot == -1) {
             super.stopMoving();
+
+            super.attackTimer.setHandleTime(750);
 
             super.updatePathing();
 
             this.shot++;
-
-            return;
-        }
-
-        if (this.shot < 5) {
+        } else if (this.shot < 5 && this.shot >= 0) {
             try {
                 AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Gunshot 1.wav");
 
@@ -111,18 +106,14 @@ public final class Soldier extends Enemy {
             } else {
                 this.shot++;
             }
-
-            return;
         } else if (this.shot == 5) {
             this.shot++;
+        } else if (this.shot == 6) {
+            this.shot = -1;
 
-            return;
+            super.attackTimer.setHandleTime(super.coolDown);
+
+            super.startMoving();
         }
-
-        this.shot = -1;
-
-        super.attackTimer.setHandleTime(super.coolDown);
-
-        super.startMoving();
     }
 }
