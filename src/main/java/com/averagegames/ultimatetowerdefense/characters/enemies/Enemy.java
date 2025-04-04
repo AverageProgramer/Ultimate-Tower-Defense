@@ -588,9 +588,14 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     private @Nullable Tower getTarget() {
+
+        // Creates a new list of towers that will not contain any enemies the tower can't attack.
+        // This will prevent targeting issues when the enemy is trying to find a target tower.
+
         List<Tower> fixedList = new ArrayList<>(LIST_OF_ACTIVE_TOWERS);
         fixedList.removeIf(tower -> !this.canAttack(tower));
 
+        // Returns a random tower that they enemy can attack.
         return fixedList.isEmpty() ? null : fixedList.get((int) (Math.random() * fixedList.size()));
     }
 
@@ -602,10 +607,14 @@ public abstract class Enemy {
     @SuppressWarnings("all")
     public final void startAttacking() {
 
+        // Stops the timer responsible for enemy attacks.
         this.attackTimer.stop();
 
+        // Sets the handle time of the timer to the enemy's cool down between attacks.
         this.attackTimer.setHandleTime(this.coolDown);
 
+        // Sets the action to be performed by the timer.
+        // This action will be performed once for every cool down time that passes.
         this.attackTimer.setOnHandle(() -> {
 
             // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
@@ -642,7 +651,7 @@ public abstract class Enemy {
                     LOGGER.info(STR."Enemy \{this} has stopped attacking tower \{target}.");
                 }
 
-                // Stops the timer responsible for handling enemy attacks.
+                // Stops the timer from continuing if the enemy's attack is forcefully interrupted.
                 this.attackTimer.stop();
             }
 
@@ -654,7 +663,7 @@ public abstract class Enemy {
             }
         });
 
-        // Starts the timer responsible for handling enemy attacks.
+        // Starts the timer responsible for enemy attacks.
         this.attackTimer.start();
     }
 
@@ -688,6 +697,9 @@ public abstract class Enemy {
             // This method is unique to each individual inheritor of the enemy class.
             this.onDeath();
         }
+
+        // Sets the loaded enemy's image to null.
+        this.loadedEnemy.setImage(null);
 
         // Removes the enemy from its parent group.
         this.parent.getChildren().remove(this.loadedEnemy);

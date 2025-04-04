@@ -706,7 +706,7 @@ public abstract class Tower {
     @SuppressWarnings("all")
     public final void startAttacking() {
 
-        // Stops the tower responsible for tower attacks.
+        // Stops the timer responsible for tower attacks.
         this.attackTimer.stop();
 
         // Determines whether the array of cool downs is null.
@@ -801,6 +801,9 @@ public abstract class Tower {
             // This method is unique to each individual inheritor of the tower class.
             this.onDeath();
         }
+
+        // Sets the loaded tower's image to null.
+        this.loadedTower.setImage(null);
 
         // Removes all the tower's components from the tower's parent.
         this.parent.getChildren().removeAll(this.range, this.space, this.panel, this.loadedTower);
