@@ -4,6 +4,7 @@ import com.averagegames.ultimatetowerdefense.util.development.Constant;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
@@ -31,7 +32,7 @@ public class AudioPlayer {
      * The {@code path} the the audio {@link File}.
      */
     @NotNull
-    @Setter @Getter
+    @Accessors(makeFinal = true) @Setter @Getter
     private String pathname;
 
     /**

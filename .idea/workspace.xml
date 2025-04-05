@@ -14,13 +14,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Made a few changes to the audio that plays during the main part of the game in the GameScene class.">
       <change afterPath="$PROJECT_DIR$/out/artifacts/UltimateTowerDefense_jar/UltimateTowerDefense.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Eye Of The Swarm.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Into The Void.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - They Are Coming....wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Slash 1.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/Timer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,10 +138,10 @@
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\music" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\enemies" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\medic" />
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\gunship" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -270,14 +270,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00073" summary="Implemented basic Tower upgrades for the Scout, Marksman, Gunner, and Farm Towers. The Images do not currently change and will likely be implemented by the next commit. Every other tower will also likely have their properties set to work with Tower upgrades by the next commit. The SkipPanel class has also been added and allows for easy addition of the skip GUI to the screen at a set position.">
-      <option name="closed" value="true" />
-      <created>1742179642772</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1742179642773</updated>
     </task>
     <task id="LOCAL-00074" summary="Fixed a bug with the Energizer that would cause an Exception to be thrown when the Tower would be placed. Also, fully implemented Energizer upgrades. Significantly nerfed the Scout, Marksman, and Gunner Towers.">
       <option name="closed" value="true" />
@@ -663,7 +655,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743858992949</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="Made a few changes to the audio that plays during the main part of the game in the GameScene class.">
+      <option name="closed" value="true" />
+      <created>1743867827814</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1743867827814</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +671,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions." />
     <MESSAGE value="Fixed a compiler error with the Pyromancer class." />
     <MESSAGE value="Fixed a bug that would cause Enemies to not perform their &quot;on event&quot; actions by default." />
     <MESSAGE value="Added the EnemySpawnable annotation. The EnemySpawnable annotation is meant to replace to previous Zombie, Titan, and Boss annotations. Any Enemy annotated with the EnemySpawnable annotation can be spawned by Enemies such as the LootBox or Sorcerer. Also, added an &quot;enableSpawning&quot; method to the Spawner class that allows the spawning to be easily enabled and disabled. Lastly, began working on the scenes for creating a multiplayer server." />
@@ -696,7 +695,8 @@
     <MESSAGE value="Fixed a bug where Soldiers would prematurely begin moving once attacking a Tower." />
     <MESSAGE value="Added commits to the Enemy class' in the startAttacking method." />
     <MESSAGE value="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished." />
+    <MESSAGE value="Made a few changes to the audio that plays during the main part of the game in the GameScene class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made a few changes to the audio that plays during the main part of the game in the GameScene class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

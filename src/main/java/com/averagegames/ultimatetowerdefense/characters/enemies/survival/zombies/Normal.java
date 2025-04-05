@@ -3,9 +3,11 @@ package com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombie
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.EnemySpawnable;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
+import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
 import com.averagegames.ultimatetowerdefense.util.development.Property;
 import javafx.scene.image.Image;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * The {@link Normal} class is the first {@link Enemy} that player's will encounter during a game.
@@ -33,7 +35,13 @@ public final class Normal extends Enemy {
      * The {@code damage} the {@link Normal} can do during an {@code attack}.
      */
     @Property
-    private final int damage = 0;
+    private final int damage = 1;
+
+    @Property
+    private final double radius = 40;
+
+    @Property
+    private final int coolDown = 7500;
 
     /**
      * The {@link Normal}'s speed in pixels per second.
@@ -53,6 +61,8 @@ public final class Normal extends Enemy {
     @Property
     private final int startHealth = 5;
 
+    private int attack;
+
     /**
      * A constructor that properly sets the attributes of a {@link Normal} {@link Enemy}.
      */
@@ -67,6 +77,10 @@ public final class Normal extends Enemy {
         // Properly sets the normal's damage per attack to the finalized damage per attack.
         super.damage = this.damage;
 
+        super.setRadius(this.radius);
+
+        super.coolDown = this.coolDown;
+
         // Properly sets the normal's speed in pixels per second to the finalized speed in pixels per second.
         super.speed = this.speed;
 
@@ -75,6 +89,11 @@ public final class Normal extends Enemy {
 
         // Properly sets the normal's health to the finalized starting health.
         super.setHealth(this.startHealth);
+    }
+
+    @Override
+    protected void onSpawn() {
+        super.startAttacking();
     }
 
     /**
@@ -94,6 +113,40 @@ public final class Normal extends Enemy {
             player.play();
         } catch (Exception ex) {
             // The exception does not need to be handled.
+        }
+    }
+
+    @Override
+    protected void attack(@Nullable final Tower tower) {
+        if (tower == null) {
+            return;
+        }
+
+        if (this.attack == 0) {
+            super.stopMoving();
+            super.updatePathing();
+
+            super.attackTimer.setHandleTime(1000);
+
+            try {
+                AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Slash 1.wav");
+
+                player.play();
+            } catch (Exception ex) {
+                System.out.println("Exception occurred");
+            }
+
+            tower.damage(super.damage);
+
+            this.attack++;
+        } else if (this.attack == 1) {
+            this.attack++;
+        } else {
+            this.attack = 0;
+
+            super.attackTimer.setHandleTime(super.coolDown);
+
+            super.startMoving();
         }
     }
 }

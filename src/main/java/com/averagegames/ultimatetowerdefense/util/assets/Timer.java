@@ -4,7 +4,9 @@ import javafx.animation.AnimationTimer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
 /**
  * The {@link Timer} class is a useful tool for performing certain {@code actions} after a certain amount of time has passed.
@@ -14,25 +16,27 @@ import org.jetbrains.annotations.Nullable;
  * @see AnimationTimer
  * @author AverageProgramer
  */
-@NoArgsConstructor
+@Getter @NoArgsConstructor
 public class Timer extends AnimationTimer {
 
     /**
      * The time in milliseconds between calling the {@link Runnable} action.
      */
-    @Setter @Getter
+    @Range(from = 0L, to = Long.MAX_VALUE)
+    @Accessors(makeFinal = true) @Setter
     private long handleTime;
 
     /**
      * The last time in the {@link Runnable} action was called.
      */
+    @Accessors(makeFinal = true)
     private long lastTimeCalled;
 
     /**
      * The {@link Runnable} action to be performed every given amount of time.
      */
     @Nullable
-    @Setter @Getter
+    @Accessors(makeFinal = true) @Setter
     private Runnable onHandle;
 
     /**
