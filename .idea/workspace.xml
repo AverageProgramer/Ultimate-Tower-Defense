@@ -14,11 +14,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added attacks to the Normal, Quick, and Slow Enemy classes. These attacks are do little damage on only occur when Towers are placed close to the path.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug that would cause Enemy ranges to be oriented incorrectly.">
       <change afterPath="$PROJECT_DIR$/out/artifacts/UltimateTowerDefense_jar/UltimateTowerDefense.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,14 +266,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00075" summary="Made a slight GUI change to the UpgradePanel class.">
-      <option name="closed" value="true" />
-      <created>1742186543486</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1742186543486</updated>
     </task>
     <task id="LOCAL-00076" summary="Implemented a variety of new images for the Towers. The Scout, Marksman, Farm, and Energizer all now have each of the images for each of their levels. Fixed a bug that would cause the GUI to stop updating and NullPointerExceptions to be repeatedly thrown in the JavaFX Application thread.">
       <option name="closed" value="true" />
@@ -661,7 +651,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743896717011</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="Fixed a bug that would cause Enemy ranges to be oriented incorrectly.">
+      <option name="closed" value="true" />
+      <created>1743897222072</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1743897222072</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -669,7 +667,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a bug that would cause Enemies to not perform their &quot;on event&quot; actions by default." />
     <MESSAGE value="Added the EnemySpawnable annotation. The EnemySpawnable annotation is meant to replace to previous Zombie, Titan, and Boss annotations. Any Enemy annotated with the EnemySpawnable annotation can be spawned by Enemies such as the LootBox or Sorcerer. Also, added an &quot;enableSpawning&quot; method to the Spawner class that allows the spawning to be easily enabled and disabled. Lastly, began working on the scenes for creating a multiplayer server." />
     <MESSAGE value="Fixed a bug that would cause Sorcerer's to instantly jump from one Position to another when spawning Enemies. Also, fixed a bug where LootBox's could spawn more than one Enemy on death." />
     <MESSAGE value="Fixed a bug that would cause certain Tower's to change Positions when being upgraded." />
@@ -694,7 +691,8 @@
     <MESSAGE value="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished." />
     <MESSAGE value="Made a few changes to the audio that plays during the main part of the game in the GameScene class." />
     <MESSAGE value="Added attacks to the Normal, Quick, and Slow Enemy classes. These attacks are do little damage on only occur when Towers are placed close to the path." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added attacks to the Normal, Quick, and Slow Enemy classes. These attacks are do little damage on only occur when Towers are placed close to the path." />
+    <MESSAGE value="Fixed a bug that would cause Enemy ranges to be oriented incorrectly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that would cause Enemy ranges to be oriented incorrectly." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

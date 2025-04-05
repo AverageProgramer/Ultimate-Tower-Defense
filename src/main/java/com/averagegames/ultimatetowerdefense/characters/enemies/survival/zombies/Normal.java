@@ -118,7 +118,7 @@ public final class Normal extends Enemy {
 
     @Override
     protected void attack(@Nullable final Tower tower) {
-        if (tower == null) {
+        if (tower == null && this.attack < 1) {
             return;
         }
 
