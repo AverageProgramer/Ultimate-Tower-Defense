@@ -370,8 +370,20 @@ public class GameScene extends Scene implements Builder {
             }
         });
 
+        int song = (int) (Math.random() * 3) + 1;
+
+        String pathname = switch (song) {
+            case 1 ->
+                    "src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - The Horde.wav";
+            case 2 ->
+                    "src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Into The Void.wav";
+            case 3 ->
+                    "src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Eye Of The Swarm.wav";
+            default -> null;
+        };
+
         // Sets the path of the global audio player.
-        GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - The Horde.wav");
+        GLOBAL_PLAYER.setPathname(pathname);
 
         // Loops the previously set audio file for an indefinite amount of times.
         GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
@@ -502,6 +514,15 @@ public class GameScene extends Scene implements Builder {
 
             ENEMY_SPAWNER.spawn(Easy.WAVE_24, this.parent);
             this.spawnerWait();
+
+            GLOBAL_PLAYER.stop();
+
+            try {
+                GLOBAL_PLAYER.setPathname("src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - They Are Coming....wav");
+                GLOBAL_PLAYER.loop(AudioPlayer.INDEFINITELY);
+            } catch (Exception ex) {
+                LOGGER.severe(STR."Exception \{ex} thrown when loading audio file.");
+            }
 
             // Spawns easy mode's 25th wave.
 

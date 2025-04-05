@@ -14,24 +14,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added commits to the Enemy class' in the startAttacking method.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished.">
       <change afterPath="$PROJECT_DIR$/out/artifacts/UltimateTowerDefense_jar/UltimateTowerDefense.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Eye Of The Swarm.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - Into The Void.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/music/(Official) Tower Defense Simulator OST - They Are Coming....wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/dev/TestMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/dev/TestMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Server.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/Timer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Property.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,8 +138,8 @@
       <recent name="C:\Users\User\IdeaProjects\Ultimate Tower Defense" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\enemies" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\music" />
+      <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\enemies" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\medic" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\audio\effects" />
       <recent name="C:\Users\User\IdeaProjects\Ultimate-Tower-Defense\src\main\resources\com\averagegames\ultimatetowerdefense\images\towers\gunship" />
@@ -281,14 +270,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00072" summary="Added a button to skip waves to the GameScene class. This button will replace the old method of pressing the 's' key in order to skip a wave. Additional sound effects have also been added such as the 'Placement 1' sound effect which plays once when a Tower is placed. Lastly, the MilitaryBase Tower has been added to the game. Units have not currently been implemented so the MilitaryBase currently does nothing.">
-      <option name="closed" value="true" />
-      <created>1742133079694</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1742133079695</updated>
     </task>
     <task id="LOCAL-00073" summary="Implemented basic Tower upgrades for the Scout, Marksman, Gunner, and Farm Towers. The Images do not currently change and will likely be implemented by the next commit. Every other tower will also likely have their properties set to work with Tower upgrades by the next commit. The SkipPanel class has also been added and allows for easy addition of the skip GUI to the screen at a set position.">
       <option name="closed" value="true" />
@@ -674,7 +655,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743727799682</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished.">
+      <option name="closed" value="true" />
+      <created>1743858992949</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1743858992949</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -682,7 +671,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added the OpeningScene class. The OpeningScene class is meant to be the Scene a Player will visit first when opening the game. The design is not final and will most definitely be changed in the future." />
     <MESSAGE value="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions." />
     <MESSAGE value="Fixed a compiler error with the Pyromancer class." />
     <MESSAGE value="Fixed a bug that would cause Enemies to not perform their &quot;on event&quot; actions by default." />
@@ -707,7 +695,8 @@
     <MESSAGE value="Fixed a bug where the Soldier Enemies would not continue moving if their target Tower was eliminated while they were attacking it." />
     <MESSAGE value="Fixed a bug where Soldiers would prematurely begin moving once attacking a Tower." />
     <MESSAGE value="Added commits to the Enemy class' in the startAttacking method." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added commits to the Enemy class' in the startAttacking method." />
+    <MESSAGE value="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
