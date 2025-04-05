@@ -14,13 +14,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Made a few changes to the audio that plays during the main part of the game in the GameScene class.">
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added attacks to the Normal, Quick, and Slow Enemy classes. These attacks are do little damage on only occur when Towers are placed close to the path.">
       <change afterPath="$PROJECT_DIR$/out/artifacts/UltimateTowerDefense_jar/UltimateTowerDefense.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Slash 1.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/survival/zombies/Normal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/Timer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,14 +268,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00074" summary="Fixed a bug with the Energizer that would cause an Exception to be thrown when the Tower would be placed. Also, fully implemented Energizer upgrades. Significantly nerfed the Scout, Marksman, and Gunner Towers.">
-      <option name="closed" value="true" />
-      <created>1742186430286</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1742186430286</updated>
     </task>
     <task id="LOCAL-00075" summary="Made a slight GUI change to the UpgradePanel class.">
       <option name="closed" value="true" />
@@ -663,7 +653,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743867827814</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="Added attacks to the Normal, Quick, and Slow Enemy classes. These attacks are do little damage on only occur when Towers are placed close to the path.">
+      <option name="closed" value="true" />
+      <created>1743896717011</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1743896717011</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +669,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a compiler error with the Pyromancer class." />
     <MESSAGE value="Fixed a bug that would cause Enemies to not perform their &quot;on event&quot; actions by default." />
     <MESSAGE value="Added the EnemySpawnable annotation. The EnemySpawnable annotation is meant to replace to previous Zombie, Titan, and Boss annotations. Any Enemy annotated with the EnemySpawnable annotation can be spawned by Enemies such as the LootBox or Sorcerer. Also, added an &quot;enableSpawning&quot; method to the Spawner class that allows the spawning to be easily enabled and disabled. Lastly, began working on the scenes for creating a multiplayer server." />
     <MESSAGE value="Fixed a bug that would cause Sorcerer's to instantly jump from one Position to another when spawning Enemies. Also, fixed a bug where LootBox's could spawn more than one Enemy on death." />
@@ -696,7 +693,8 @@
     <MESSAGE value="Added commits to the Enemy class' in the startAttacking method." />
     <MESSAGE value="Fixed a memory leak that would potentially cause the game to crash. The leak had been caused because the Clips in the AudioPlayer class would not be closed when they were finished." />
     <MESSAGE value="Made a few changes to the audio that plays during the main part of the game in the GameScene class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made a few changes to the audio that plays during the main part of the game in the GameScene class." />
+    <MESSAGE value="Added attacks to the Normal, Quick, and Slow Enemy classes. These attacks are do little damage on only occur when Towers are placed close to the path." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added attacks to the Normal, Quick, and Slow Enemy classes. These attacks are do little damage on only occur when Towers are placed close to the path." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

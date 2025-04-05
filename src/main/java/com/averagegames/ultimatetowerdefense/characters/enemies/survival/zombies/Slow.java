@@ -25,7 +25,7 @@ public final class Slow extends Enemy {
     private final int damage = 3;
 
     @Property
-    private final double radius = 40;
+    private final double radius = 20;
 
     @Property
     private final int coolDown = 7500;

@@ -345,13 +345,13 @@ public abstract class Tower {
      * @return {@code true} if the {@link Tower} is within the {@link Circle}, {@code false} otherwise.
      * @since Ultimate Tower Defense 1.0
      */
-    public final boolean isInRange(@NotNull final Circle range, @NotNull final ImageLoader reference) {
+    public final boolean isInRange(@NotNull final Circle range, @NotNull final Enemy reference) {
 
         // The tower's current position.
         Position currentPos = this.getPosition();
 
         // The circle's current position.
-        Position rangePos = new Position(reference.getCurrentX(), reference.getCurrentY());
+        Position rangePos = new Position(reference.getPosition().x(), reference.getPosition().y());
 
         // The change in x and change in y for between the tower and the circle.
 
