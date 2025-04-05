@@ -11,6 +11,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * The {@link TestMap} class is a {@link Map} used exclusively for {@code development} purposes.
+ * @since Ultimate Tower Defense 1.0
+ * @author AverageProgramer
+ */
 public final class TestMap implements Map {
 
     /**

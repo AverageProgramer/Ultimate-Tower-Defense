@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.sockets;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,6 +14,7 @@ import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@ApiStatus.Internal
 @ClientHandler
 public final class Server implements Runnable {
 

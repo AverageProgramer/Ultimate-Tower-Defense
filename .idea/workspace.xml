@@ -14,11 +14,24 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Fixed a bug where Soldiers would prematurely begin moving once attacking a Tower.">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/UltimateTowerDefense_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
+    <list default="true" id="1e595e61-5d04-4475-b95c-6e3fb7e7bf57" name="Changes" comment="Added commits to the Enemy class' in the startAttacking method.">
+      <change afterPath="$PROJECT_DIR$/out/artifacts/UltimateTowerDefense_jar/UltimateTowerDefense.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/characters/towers/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/dev/TestMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/maps/dev/TestMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/player/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/scenes/game/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/sockets/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/AudioPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/assets/Timer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/averagegames/ultimatetowerdefense/util/development/Property.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +69,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/AverageProgramer/Ultimate-Tower-Defense.git&quot;,
-    &quot;accountId&quot;: &quot;e85c9853-f406-4a76-813c-a7f7fc9e75b6&quot;
+    &quot;accountId&quot;: &quot;8d13437e-efaa-4963-8bf1-31adb5251458&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -126,7 +139,7 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "settings.editor.selected.configurable": "Errors",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -268,14 +281,6 @@
       <workItem from="1711768622183" duration="331000" />
       <workItem from="1711768971541" duration="448000" />
       <workItem from="1711770479595" duration="24000" />
-    </task>
-    <task id="LOCAL-00071" summary="Fixed the previously mentioned bug. The bug had caused random Enemies to move at significantly slower speeds when spawned than they are supposed to. In addition to fixing that bug, the GameScene class has also been set up to now fit any computer screen. Lastly, in addition to fixing the previously mentioned animation bug, all other animation bugs have been fixed. These bugs include: Enemies getting stuck at spawn, Enemies stopping at various Positions along their set Path, and Enemies moving at slightly different speeds.">
-      <option name="closed" value="true" />
-      <created>1742085053821</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1742085053821</updated>
     </task>
     <task id="LOCAL-00072" summary="Added a button to skip waves to the GameScene class. This button will replace the old method of pressing the 's' key in order to skip a wave. Additional sound effects have also been added such as the 'Placement 1' sound effect which plays once when a Tower is placed. Lastly, the MilitaryBase Tower has been added to the game. Units have not currently been implemented so the MilitaryBase currently does nothing.">
       <option name="closed" value="true" />
@@ -661,7 +666,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743682511447</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="Added commits to the Enemy class' in the startAttacking method.">
+      <option name="closed" value="true" />
+      <created>1743727799682</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1743727799682</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -669,7 +682,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a bug that would cause an IllegalStateException to be thrown when a Tower eliminates an Enemy." />
     <MESSAGE value="Added the OpeningScene class. The OpeningScene class is meant to be the Scene a Player will visit first when opening the game. The design is not final and will most definitely be changed in the future." />
     <MESSAGE value="Cleaned up the Enemy class and added additional comments. An enableActions method has also been added to the Enemy class to allow the Enemy's &quot;on event&quot; actions to either be performed or ignored. This is useful for eliminating enemies when the Player Base's health reaches 0 and the remaining Enemies merely need to be removed from the screen, and do not need to perform their &quot;on death&quot; actions." />
     <MESSAGE value="Fixed a compiler error with the Pyromancer class." />
@@ -694,7 +706,8 @@
     <MESSAGE value="Fixed a bug where Enemies would continue spawning after the player would lose." />
     <MESSAGE value="Fixed a bug where the Soldier Enemies would not continue moving if their target Tower was eliminated while they were attacking it." />
     <MESSAGE value="Fixed a bug where Soldiers would prematurely begin moving once attacking a Tower." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug where Soldiers would prematurely begin moving once attacking a Tower." />
+    <MESSAGE value="Added commits to the Enemy class' in the startAttacking method." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added commits to the Enemy class' in the startAttacking method." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

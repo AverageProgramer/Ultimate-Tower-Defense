@@ -1,5 +1,6 @@
 package com.averagegames.ultimatetowerdefense.sockets;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
@@ -8,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+@ApiStatus.Internal
 public final class Client implements Runnable {
 
     private final Socket client;
@@ -47,6 +49,7 @@ public final class Client implements Runnable {
         }
     }
 
+    @ApiStatus.Internal
     @ClientHandler
     public static class Server {
         public Server() {

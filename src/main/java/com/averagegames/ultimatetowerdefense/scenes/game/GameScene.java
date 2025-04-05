@@ -560,7 +560,6 @@ public class GameScene extends Scene implements Builder {
      * @since Ultimate Tower Defense 1.0
      */
     @Blocking
-    @SuppressWarnings("all")
     private void spawnerWait() {
 
         // Creates a new skip panel that will display on the screen.

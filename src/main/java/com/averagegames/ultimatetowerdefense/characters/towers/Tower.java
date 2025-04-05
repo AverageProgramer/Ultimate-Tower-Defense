@@ -193,6 +193,7 @@ public abstract class Tower {
      * @param enabled whether the {@link Tower} should perform its on {@code event} actions.
      * @since Ultimate Tower Defense 1.0
      */
+    @Contract(mutates = "true")
     public void enableActions(final boolean enabled) {
 
         // Sets the boolean value that determines whether the tower should perform its on event actions to the given value.
@@ -203,7 +204,6 @@ public abstract class Tower {
      * Gets whether the {@link Tower} has its on {@code event} actions enabled.
      * @return {@code true} if the on {@code event} actions are enabled, {@code false} otherwise.
      */
-    @SuppressWarnings("unused")
     public boolean actionsEnabled() {
 
         // Gets the boolean value that determines whether the tower should perform its on event actions and returns it.
@@ -272,7 +272,6 @@ public abstract class Tower {
      * @param position the new {@link Position}.
      * @since Ultimate Tower Defense 1.0
      */
-    @SuppressWarnings("unused")
     public void setPosition(@NotNull final Position position) {
 
         // Updates the tower's x and y coordinates to the given position's x and y coordinates.
@@ -315,12 +314,27 @@ public abstract class Tower {
         return this.range.getRadius();
     }
 
-    protected final void setSpaceLength(final double length) {
+    /**
+     * Sets the side length of the {@link Rectangle} representing the {@link Tower}'s {@code space} to a newly given value.
+     * @param length the side length of the {@link Tower}'s {@code space}.
+     * @since Ultimate Tower Defense 1.0
+     */
+    protected final void setSpaceLength(@Range(from = 0, to = Integer.MAX_VALUE) final double length) {
+
+        // Sets the space's side lengths to the given length.
+
         this.space.setWidth(length);
         this.space.setHeight(length);
     }
 
+    /**
+     * Gets the side length of the {@link Rectangle} representing the {@link Tower}'s {@code space}.
+     * @return the side length of the {@link Tower}'s {@code space}.
+     * @since Ultimate Tower Defense 1.0
+     */
     public final double getSpaceLength() {
+
+        // Returns the space's current side length.
         return this.space.getWidth();
     }
 
@@ -398,7 +412,7 @@ public abstract class Tower {
         // Sets the range's opacity to a new value.
         this.range.setOpacity(0.25);
 
-        // Sets the range's view order to the view order for ranges.
+        // Sets the range's view order to the view order for highlights.
         this.range.setViewOrder(GameScene.HIGHLIGHT_LAYER);
 
         // Sets the range's visibility to false.
@@ -407,17 +421,24 @@ public abstract class Tower {
         // Adds the tower's range to the tower's parent group.
         this.parent.getChildren().add(this.range);
 
+        // Sets the space's x and y components to the position of the tower's x and y components.
+
         this.space.setX(this.getPosition().x() - (this.space.getWidth() / 2));
         this.space.setY(this.getPosition().y() - (this.space.getHeight() / 2));
 
+        // Sets the space's fill to a new value.
         this.space.setFill(Paint.valueOf("#c70f0f"));
 
+        // Sets the space's opacity to a new value.
         this.space.setOpacity(0.25);
 
+        // Sets the space's view order to the view order for highlights.
         this.space.setViewOrder(GameScene.HIGHLIGHT_LAYER);
 
+        // Sets the space's visibility to false.
         this.space.setVisible(false);
 
+        // Adds the tower's space to the tower's parent group.
         this.parent.getChildren().add(this.space);
 
         // Creates a new upgrade panel object that will be used to display that tower's current statistics.
@@ -439,10 +460,10 @@ public abstract class Tower {
         this.parent.getChildren().add(this.panel);
 
         // Determines whether the tower's image is null.
-        if (this.images[this.level] != null) {
+        if (this.images[0] != null) {
 
             // Loads the tower's image.
-            this.loadedTower.setImage(this.images[this.level]);
+            this.loadedTower.setImage(this.images[0]);
         }
 
         // Sets the tower's view order to its current y position.
@@ -556,7 +577,6 @@ public abstract class Tower {
      * @since Ultimate Tower Defense 1.0
      */
     @Contract(pure = true)
-    @SuppressWarnings("all")
     private boolean canAttack(@NotNull final Enemy enemy) {
 
         // A switch case that determines what type of enemy the given enemy is.
@@ -703,7 +723,6 @@ public abstract class Tower {
      * @since Ultimate Tower Defense 1.0
      */
     @NonBlocking
-    @SuppressWarnings("all")
     public final void startAttacking() {
 
         // Stops the timer responsible for tower attacks.
@@ -804,6 +823,9 @@ public abstract class Tower {
 
         // Sets the loaded tower's image to null.
         this.loadedTower.setImage(null);
+
+        // Sets the tower's on mouse clicked event to null.
+        this.loadedTower.setOnMouseClicked(null);
 
         // Removes all the tower's components from the tower's parent.
         this.parent.getChildren().removeAll(this.range, this.space, this.panel, this.loadedTower);

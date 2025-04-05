@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -33,6 +34,9 @@ public class AudioPlayer {
     @Setter @Getter
     private String pathname;
 
+    /**
+     * The {@link Clip} that will play the audio {@link File}.
+     */
     @NotNull
     private Clip clip;
 
@@ -67,6 +71,17 @@ public class AudioPlayer {
         Clip clip = AudioSystem.getClip();
         clip.open(audioIn);
 
+        // Adds a line listener to avoid keeping the clip open when the clip has finished.
+        clip.addLineListener(event -> {
+
+            // Determines whether the clip has finished.
+            if (event.getType() == LineEvent.Type.STOP) {
+
+                // Closes the clip.
+                clip.close();
+            }
+        });
+
         // Returns the newly opened clip.
         return clip;
     }
@@ -75,7 +90,7 @@ public class AudioPlayer {
      * Plays an audio {@link File} one time through to completion.
      * @since Ultimate Tower Defense 1.0
      */
-    public void play() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public final void play() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
 
         // Opens a clip using the given path to an audio file.
         this.clip = this.open();
@@ -89,7 +104,7 @@ public class AudioPlayer {
      * @param count the amount of times to loop the audio {@link File}.
      * @since Ultimate Tower Defense 1.0
      */
-    public void loop(final int count) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public final void loop(@Range(from = 0, to = Integer.MAX_VALUE) final int count) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
 
         // Opens a clip using the given path to an audio file.
         this.clip = this.open();
@@ -102,7 +117,7 @@ public class AudioPlayer {
      * Stops playing an audio {@link File} if it has already been started.
      * @since Ultimate Tower Defense 1.0
      */
-    public void stop() {
+    public final void stop() {
 
         // Stops the audio file from playing.
         this.clip.stop();

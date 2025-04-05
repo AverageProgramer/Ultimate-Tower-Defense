@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  * @author AverageProgramer
  */
 @NoArgsConstructor
-public final class Timer extends AnimationTimer {
+public class Timer extends AnimationTimer {
 
     /**
      * The time in milliseconds between calling the {@link Runnable} action.
@@ -45,7 +45,13 @@ public final class Timer extends AnimationTimer {
         this.handleTime = handleTime;
     }
 
-    public void reset() {
+    /**
+     * Resets the {@link Timer} to a time of 0.
+     * @since Ultimate Tower Defense 1.0
+     */
+    public final void reset() {
+
+        // Sets the last time the action was called to 0.
         this.lastTimeCalled = 0;
     }
 
@@ -55,7 +61,7 @@ public final class Timer extends AnimationTimer {
      * @since Ultimate Tower Defense 1.0
      */
     @Override
-    public void handle(final long now) {
+    public final void handle(final long now) {
 
         // Converts the system's current time to milliseconds.
         long currentTimeInMillis = now / 1_000_000;

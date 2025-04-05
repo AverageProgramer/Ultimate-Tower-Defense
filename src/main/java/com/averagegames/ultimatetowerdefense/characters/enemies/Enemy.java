@@ -190,6 +190,7 @@ public abstract class Enemy {
      * @param enabled whether the {@link Enemy} should perform its on {@code event} actions.
      * @since Ultimate Tower Defense 1.0
      */
+    @Contract(mutates = "true")
     public void enableActions(final boolean enabled) {
 
         // Sets the boolean value that determines whether the enemy should perform its on event actions to the given value.
@@ -200,7 +201,6 @@ public abstract class Enemy {
      * Gets whether the {@link Enemy} has its on {@code event} actions enabled.
      * @return {@code true} if the on {@code event} actions are enabled, {@code false} otherwise.
      */
-    @SuppressWarnings("unused")
     public boolean actionsEnabled() {
 
         // Gets the boolean value that determines whether the enemy should perform its on event actions and returns it.
@@ -432,7 +432,6 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     @NonBlocking
-    @SuppressWarnings("all")
     public final void startMoving() {
 
         // Sets up the animation, setting the node to control to the enemy's image, and setting the speed to use to the enemy's speed.
@@ -460,8 +459,12 @@ public abstract class Enemy {
                 Platform.runLater(() -> this.animation.start());
             } else {
 
-                // Damages the base by however much health the enemy has remaining.
-                Base.health -= this.health;
+                // Determines whether the enemy's health is greater than 0.
+                if (this.health > 0) {
+
+                    // Damages the base by however much health the enemy has remaining.
+                    Base.health -= this.health;
+                }
 
                 // Determines whether the base's health is below 0.
                 if (Base.health <= 0) {
@@ -576,6 +579,7 @@ public abstract class Enemy {
      * @param tower the {@link Tower} to {@code attack}.
      * @since Ultimate Tower Defense 1.0
      */
+    @Contract(pure = true)
     private boolean canAttack(@NotNull final Tower tower) {
 
         // Returns whether the given tower is within the enemy's range.
@@ -604,7 +608,6 @@ public abstract class Enemy {
      * @since Ultimate Tower Defense 1.0
      */
     @NonBlocking
-    @SuppressWarnings("all")
     public final void startAttacking() {
 
         // Stops the timer responsible for enemy attacks.
