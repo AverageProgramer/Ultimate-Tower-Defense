@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -16,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
  * @since Ultimate Tower Defense 1.0
  * @author AverageProgramer
  */
+@ApiStatus.Internal
 public final class TestMap implements Map {
 
     /**

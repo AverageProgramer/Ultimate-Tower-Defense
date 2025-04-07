@@ -43,7 +43,7 @@ public class Timer extends AnimationTimer {
      * A constructor that initializes the {@link Timer} with a given {@code handle} time.
      * @param handleTime the time in milliseconds between handling {@link Runnable} actions.
      */
-    public Timer(final long handleTime) {
+    public Timer(@Range(from = 0L, to = Long.MAX_VALUE) final long handleTime) {
 
         // Sets the timer's handle time to the given handle time.
         this.handleTime = handleTime;
