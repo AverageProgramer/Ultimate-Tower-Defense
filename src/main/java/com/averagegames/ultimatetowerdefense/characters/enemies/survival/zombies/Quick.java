@@ -79,7 +79,7 @@ public final class Quick extends Enemy {
             super.stopMoving();
             super.updatePathing();
 
-            super.attackTimer.setHandleTime(1000);
+            super.attackTimer.setHandleTime(500);
 
             try {
                 AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Slash 1.wav");

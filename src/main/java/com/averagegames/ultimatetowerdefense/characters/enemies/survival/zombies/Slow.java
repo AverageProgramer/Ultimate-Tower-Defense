@@ -55,6 +55,11 @@ public final class Slow extends Enemy {
     }
 
     @Override
+    protected void onSpawn() {
+        super.startAttacking();
+    }
+
+    @Override
     public void onDeath() {
         try {
             AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Zombie Death 3.wav");
@@ -74,7 +79,7 @@ public final class Slow extends Enemy {
             super.stopMoving();
             super.updatePathing();
 
-            super.attackTimer.setHandleTime(1000);
+            super.attackTimer.setHandleTime(2000);
 
             try {
                 AudioPlayer player = new AudioPlayer("src/main/resources/com/averagegames/ultimatetowerdefense/audio/effects/Slash 1.wav");
