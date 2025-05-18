@@ -578,7 +578,7 @@ public abstract class Enemy {
     private boolean canAttack(@NotNull final Tower tower) {
 
         // Returns whether the given tower is within the enemy's range.
-        return tower.isInRange(this.range, this.loadedEnemy);
+        return tower.isInRange(this.range, this);
     }
 
     /**
