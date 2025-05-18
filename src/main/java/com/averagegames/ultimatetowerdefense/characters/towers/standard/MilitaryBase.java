@@ -1,9 +1,8 @@
 package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.scene.image.Image;
-import lombok.Getter;
 
 public final class MilitaryBase extends Tower {
 

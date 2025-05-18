@@ -1,7 +1,7 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.LootBox;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.Sorcerer;
+import com.averagegames.ultimatetowerdefense.characters.enemies.zombies.LootBox;
+import com.averagegames.ultimatetowerdefense.characters.enemies.zombies.Sorcerer;
 import com.averagegames.ultimatetowerdefense.player.Player;
 import org.intellij.lang.annotations.Identifier;
 

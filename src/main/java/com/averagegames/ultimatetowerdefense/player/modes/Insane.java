@@ -2,8 +2,8 @@ package com.averagegames.ultimatetowerdefense.player.modes;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.Abnormal;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.Rapid;
+import com.averagegames.ultimatetowerdefense.characters.enemies.zombies.Abnormal;
+import com.averagegames.ultimatetowerdefense.characters.enemies.zombies.Rapid;
 
 public final class Insane {
     public static final Wave WAVE_1 = new Wave(new Enemy[] {

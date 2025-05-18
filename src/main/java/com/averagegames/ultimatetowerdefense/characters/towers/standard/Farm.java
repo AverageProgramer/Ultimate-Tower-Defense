@@ -2,11 +2,11 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Bonus;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.maps.tools.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
@@ -82,7 +82,7 @@ public final class Farm extends Tower {
             super.setLevel(super.getLevel() + 1);
         }
 
-        super.getLoadedTower().setImage(super.images[super.getLevel()]);
+        super.getLoadedTower().setImage(this.images[super.getLevel()]);
 
         super.setPosition(oldPos);
     }

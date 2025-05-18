@@ -1,6 +1,6 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
-import com.averagegames.ultimatetowerdefense.maps.Spawner;
+import com.averagegames.ultimatetowerdefense.maps.tools.Spawner;
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -3,8 +3,8 @@ package com.averagegames.ultimatetowerdefense.characters.towers.legendary;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
 import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -124,9 +124,6 @@ public final class Energizer extends Tower {
         // Properly sets the energizer's upgrade costs to the finalized costs.
         super.upgradeCosts = this.upgradeCosts;
 
-        // Properly sets the energizer's damage per attack to the finalized damage per attack.
-        super.damages = this.damages;
-
         // Properly sets the energizer's cool down in between attacks.
         super.coolDowns = this.coolDowns;
 
@@ -184,9 +181,9 @@ public final class Energizer extends Tower {
                     // Ignore
                 }
 
-                enemy.damage(super.damages[super.getLevel()]);
+                enemy.damage(this.damages[super.getLevel()]);
 
-                this.totalTime += super.coolDowns[super.getLevel()];
+                this.totalTime += this.coolDowns[super.getLevel()];
 
                 if (this.totalTime >= this.attackTimes[super.getLevel()]) {
                     this.doCharge = true;
@@ -200,7 +197,7 @@ public final class Energizer extends Tower {
                     break;
                 }
 
-                Thread.sleep(super.coolDowns[super.getLevel()]);
+                Thread.sleep(this.coolDowns[super.getLevel()]);
             }
         }
     }
@@ -211,7 +208,7 @@ public final class Energizer extends Tower {
             super.setLevel(super.getLevel() + 1);
         }
 
-        super.getLoadedTower().setImage(super.images[super.getLevel()]);
+        super.getLoadedTower().setImage(this.images[super.getLevel()]);
 
         if (super.getLevel() >= 1) {
             super.setHiddenDetection(true);

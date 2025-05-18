@@ -2,8 +2,8 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +43,6 @@ public final class Marksman extends Tower {
         super.images = this.images;
         super.placementCost = this.placementCost;
         super.upgradeCosts = this.upgradeCosts;
-        super.damages = this.damages;
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
         super.setRadius(this.radii[0]);
@@ -79,10 +78,10 @@ public final class Marksman extends Tower {
             super.setHiddenDetection(true);
         }
 
-        super.getLoadedTower().setImage(super.images[super.getLevel()]);
+        super.getLoadedTower().setImage(this.images[super.getLevel()]);
 
         super.setRadius(this.radii[super.getLevel()]);
 
-        super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
+        super.attacks.setHandleTime(this.coolDowns[super.getLevel()]);
     }
 }

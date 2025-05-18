@@ -2,14 +2,13 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.maps.tools.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
-import com.averagegames.ultimatetowerdefense.util.animation.CircularTranslationHandler;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
-import com.averagegames.ultimatetowerdefense.util.development.Element;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.util.CircularTranslationHandler;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.ImageLoader;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
@@ -108,10 +107,9 @@ public final class Gunship extends Tower {
     private final int flightRadius = 130;
 
     /**
-     * The {@link AudioPlayer} that will be used to play {@code looping} sound effects for the {@link Gunship}.
+     * The {@link Gunship}'s plane GUI component.
      */
-    @Element
-    private final AudioPlayer player;
+    private final ImageLoader plane;
 
     /**
      * The {@link Gunship}'s plane {@link Image} per {@code level}.
@@ -141,20 +139,17 @@ public final class Gunship extends Tower {
     /**
      * The {@link Gunship}'s animation.
      */
-    @Element
     private CircularTranslationHandler animation;
-
-    /**
-     * The {@link Gunship}'s plane {@link Element}
-     */
-    @Element
-    private final ImageLoader plane;
 
     /**
      * The {@link Gunship}'s flight {@code path}.
      */
-    @Element
     private final Circle flightPath;
+
+    /**
+     * The {@link AudioPlayer} that will be used to play {@code looping} sound effects for the {@link Gunship}.
+     */
+    private final AudioPlayer player;
 
     /**
      * A constructor that properly sets the attributes of the {@link Gunship} {@link Tower}.
@@ -173,14 +168,11 @@ public final class Gunship extends Tower {
         // Properly sets the gunship's upgrade costs to the finalized costs.
         super.upgradeCosts = this.upgradeCosts;
 
-        // Properly sets the gunship's damages per attack to the finalized damages per attack.
-        super.damages = this.damages;
-
         // Properly sets the gunship's cool downs in between attacks to the finalized cool downs.
         super.coolDowns = this.coolDowns;
 
         // Properly sets the gunship's health to the finalized starting health.
-        super.setHealth(this.startHealth);
+        super.health = this.startHealth;
 
         super.setSpaceLength(75);
 
@@ -353,7 +345,7 @@ public final class Gunship extends Tower {
         }
 
         // Damages the given enemy.
-        enemy.damage(super.damages[super.getLevel()]);
+        enemy.damage(this.damages[super.getLevel()]);
     }
 
     /**
@@ -415,6 +407,6 @@ public final class Gunship extends Tower {
         this.animation.refresh();
 
         // Updates the gunship's attack timer to use a new cool down between attacks.
-        super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
+        super.attacks.setHandleTime(this.coolDowns[super.getLevel()]);
     }
 }

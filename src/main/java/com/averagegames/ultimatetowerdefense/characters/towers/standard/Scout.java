@@ -2,10 +2,10 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.maps.tools.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
@@ -81,9 +81,6 @@ public final class Scout extends Tower {
         // Properly sets the scout's upgrade costs to the finalized costs.
         super.upgradeCosts = this.upgradeCosts;
 
-        // Properly sets the scout's damages per attack to the finalized damages per attack.
-        super.damages = this.damages;
-
         // Properly sets the scout's cool downs in between attacks to the finalized cool downs.
         super.coolDowns = this.coolDowns;
 
@@ -124,7 +121,7 @@ public final class Scout extends Tower {
         }
 
         // Damages the given enemy.
-        enemy.damage(super.damages[super.getLevel()]);
+        enemy.damage(this.damages[super.getLevel()]);
     }
 
     @Override
@@ -139,12 +136,12 @@ public final class Scout extends Tower {
             super.setHiddenDetection(true);
         }
 
-        super.getLoadedTower().setImage(super.images[super.getLevel()]);
+        super.getLoadedTower().setImage(this.images[super.getLevel()]);
 
         super.setRadius(this.radii[super.getLevel()]);
 
         super.setPosition(oldPos);
 
-        super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
+        super.attacks.setHandleTime(this.coolDowns[super.getLevel()]);
     }
 }

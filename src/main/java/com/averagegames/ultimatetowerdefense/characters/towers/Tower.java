@@ -2,14 +2,14 @@ package com.averagegames.ultimatetowerdefense.characters.towers;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Type;
-import com.averagegames.ultimatetowerdefense.maps.Path;
-import com.averagegames.ultimatetowerdefense.maps.Position;
-import com.averagegames.ultimatetowerdefense.scenes.assets.UpgradePanel;
+import com.averagegames.ultimatetowerdefense.maps.tools.Path;
+import com.averagegames.ultimatetowerdefense.maps.tools.Position;
+import com.averagegames.ultimatetowerdefense.gui.UpgradeGUI;
 import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
-import com.averagegames.ultimatetowerdefense.util.assets.Timer;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.ImageLoader;
+import com.averagegames.ultimatetowerdefense.util.Timer;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 import static com.averagegames.ultimatetowerdefense.characters.enemies.Enemy.LIST_OF_ACTIVE_ENEMIES;
-import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
+import static com.averagegames.ultimatetowerdefense.util.LogManager.LOGGER;
 
 /**
  * The {@link Tower} class serves as a {@code super} class to all in-game enemies.
@@ -44,6 +44,43 @@ public abstract class Tower {
     public static final List<@NotNull Tower> LIST_OF_ACTIVE_TOWERS = Collections.synchronizedList(new LinkedList<>());
 
     /**
+     * The {@link Tower}'s {@link Image}s per {@code level}.
+     */
+    @Nullable
+    protected Image[] images;
+
+    /**
+     * The {@link Tower}'s placement {@code cost}.
+     */
+    @Range(from = 0, to = Integer.MAX_VALUE)
+    @Accessors(makeFinal = true) @Getter
+    protected int placementCost;
+
+    /**
+     * The {@link Tower}'s placement {@code limit}.
+     */
+    @Range(from = 0, to = Integer.MAX_VALUE)
+    @Accessors(makeFinal = true) @Getter
+    protected int placementLimit;
+
+    /**
+     * The {@link Tower}'s {@code upgrade} costs per {@code level}.
+     */
+    @Accessors(makeFinal = true) @Getter
+    protected int[] upgradeCosts;
+
+    /**
+     * The {@link Tower}'s cool downs in milliseconds between {@code attacks} per {@code level}.
+     */
+    protected int[] coolDowns;
+
+    /**
+     * The {@link Tower}'s current {@code health}.
+     */
+    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
+    protected int health;
+
+    /**
      * The {@link Tower}'s parent {@link Group}.
      */
     @Nullable
@@ -58,65 +95,18 @@ public abstract class Tower {
     private final ImageLoader loadedTower;
 
     /**
-     * The {@link Tower}'s {@link Image}s per {@code level}.
-     */
-    @Nullable
-    protected Image[] images;
-
-    /**
-     * The {@link Tower}'s placement {@code cost}.
+     * The {@link Tower}'s {@code level}.
      */
     @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Getter
-    protected int placementCost;
-
-    /**
-     * The {@link Tower}'s placement {@code limit}.
-     */
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Getter
-    protected int placementLimit;
-
-    /**
-     * The {@link Tower}'s {@code upgrade} panel.
-     */
-    private UpgradePanel panel;
-
-    /**
-     * The {@link Tower}'s {@code upgrade} costs per {@code level}.
-     */
-    @Accessors(makeFinal = true) @Getter
-    protected int[] upgradeCosts;
-
-    /**
-     * The {@link Tower}'s current {@code health}.
-     */
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
-    private int health;
-
-    /**
-     * The {@code damage} the {@link Tower} can do during an {@code attack} per {@code level}.
-     */
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    protected int[] damages;
-
-    /**
-     * The {@link Tower}'s {@code range}.
-     */
-    @NotNull
-    @Accessors(makeFinal = true) @Getter
-    private final Circle range;
-
-    @NotNull
-    @Accessors(makeFinal = true) @Getter
-    private final Rectangle space;
+    private int level;
 
     /**
      * The {@link Tower}'s {@link Targeting}.
      */
     @NotNull
     @Accessors(makeFinal = true) @Setter @Getter
-    protected Targeting targeting;
+    private Targeting targeting;
 
     /**
      * Whether the {@link Tower} can detect a {@code hidden} {@link Enemy}.
@@ -131,27 +121,31 @@ public abstract class Tower {
     private boolean flyingDetection;
 
     /**
-     * The {@link Tower}'s cool downs in milliseconds between {@code attacks} per {@code level}.
+     * The {@link Tower}'s {@code range}.
      */
-    protected int[] coolDowns;
+    @NotNull
+    @Accessors(makeFinal = true) @Getter
+    private final Circle range;
+
+    @NotNull
+    @Accessors(makeFinal = true) @Getter
+    private final Rectangle space;
 
     /**
-     * The {@link Tower}'s {@code level}.
+     * The {@link Tower}'s {@code upgrade} panel.
      */
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
-    private int level;
-
-    /**
-     * A boolean value that determines whether the {@link Tower} should perform its on {@code event} actions.
-     */
-    private boolean enableActions;
+    private UpgradeGUI upgradeGUI;
 
     /**
      * A {@link Timer} responsible for handling all {@link Tower} {@code attacks}.
      */
     @NotNull
-    protected final Timer attackTimer;
+    protected final Timer attacks;
+
+    /**
+     * A boolean value that determines whether the {@link Tower} should perform its on {@code event} actions.
+     */
+    private boolean enableActions;
 
     {
 
@@ -167,7 +161,7 @@ public abstract class Tower {
         this.placementLimit = Integer.MAX_VALUE;
 
         // Initializes the tower's upgrade panel to a default, null value.
-        this.panel = null;
+        this.upgradeGUI = null;
 
         // Initializes the tower's upgrade costs to a default, empty array.
         this.upgradeCosts = new int[0];
@@ -185,7 +179,7 @@ public abstract class Tower {
         this.enableActions = true;
 
         // Initializes the timer responsible for all tower attacks to a default timer.
-        this.attackTimer = new Timer();
+        this.attacks = new Timer();
     }
 
     /**
@@ -229,7 +223,7 @@ public abstract class Tower {
         this.health += amount;
 
         // Updates the tower's upgrade to reflect the tower's new health.
-        this.panel.update();
+        this.upgradeGUI.update();
 
         // Logs that the tower has been healed by a given amount.
         LOGGER.info(STR."Tower \{this} health has been increased by \{amount}.");
@@ -254,7 +248,7 @@ public abstract class Tower {
         this.health -= damage;
 
         // Updates the tower's upgrade to reflect the tower's new health.
-        this.panel.update();
+        this.upgradeGUI.update();
 
         // Logs that the enemy has been damaged by a given amount.
         LOGGER.info(STR."Tower \{this} health has been decreased by \{damage}.");
@@ -442,22 +436,22 @@ public abstract class Tower {
         this.parent.getChildren().add(this.space);
 
         // Creates a new upgrade panel object that will be used to display that tower's current statistics.
-        this.panel = new UpgradePanel(this);
+        this.upgradeGUI = new UpgradeGUI(this);
 
         // Sets the panel's x and y coordinates depending on where the tower is placed.
         // If the tower is placed on the right half, the upgrade panel appears on the left and if the tower is placed on the left half, the upgrade panel appears on the right.
 
-        this.panel.setX(this.getPosition().x() >= GameScene.SCREEN.getWidth() / 2 ? 15 : GameScene.SCREEN.getWidth() - this.panel.getAreaWidth() - 15);
-        this.panel.setY(GameScene.SCREEN.getHeight() / 2 - this.panel.getAreaHeight() / 2);
+        this.upgradeGUI.setX(this.getPosition().x() >= GameScene.SCREEN.getWidth() / 2 ? 15 : GameScene.SCREEN.getWidth() - this.upgradeGUI.getAreaWidth() - 15);
+        this.upgradeGUI.setY(GameScene.SCREEN.getHeight() / 2 - this.upgradeGUI.getAreaHeight() / 2);
 
         // Sets the upgrade panel's view order to the view order for GUI.
-        this.panel.setViewOrder(GameScene.GUI_LAYER);
+        this.upgradeGUI.setViewOrder(GameScene.GUI_LAYER);
 
         // Sets the panel's visibility to false.
-        this.panel.setVisible(false);
+        this.upgradeGUI.setVisible(false);
 
         // Adds the upgrade panel to the tower's parent.
-        this.parent.getChildren().add(this.panel);
+        this.parent.getChildren().add(this.upgradeGUI);
 
         // Determines whether the tower's image is null.
         if (this.images[0] != null) {
@@ -500,7 +494,7 @@ public abstract class Tower {
     }
 
     /**
-     * Deselects the {@link Tower} and makes its {@code range} and {@link UpgradePanel} are visible to the {@link Player}
+     * Deselects the {@link Tower} and makes its {@code range} and {@link UpgradeGUI} are visible to the {@link Player}
      * @since Ultimate Tower Defense 1.0
      */
     @MustBeInvokedByOverriders
@@ -526,12 +520,12 @@ public abstract class Tower {
             this.range.setVisible(true);
 
             // Sets the tower's upgrade panel to be visible
-            this.panel.setVisible(true);
+            this.upgradeGUI.setVisible(true);
         });
     }
 
     /**
-     * Deselects the {@link Tower} and makes its {@code range} and {@link UpgradePanel} are invisible to the {@link Player}
+     * Deselects the {@link Tower} and makes its {@code range} and {@link UpgradeGUI} are invisible to the {@link Player}
      * @since Ultimate Tower Defense 1.0
      */
     @MustBeInvokedByOverriders
@@ -544,7 +538,7 @@ public abstract class Tower {
             this.range.setVisible(false);
 
             // Sets the tower's upgrade panel to be invisible
-            this.panel.setVisible(false);
+            this.upgradeGUI.setVisible(false);
         });
     }
 
@@ -726,18 +720,18 @@ public abstract class Tower {
     public final void startAttacking() {
 
         // Stops the timer responsible for tower attacks.
-        this.attackTimer.stop();
+        this.attacks.stop();
 
         // Determines whether the array of cool downs is null.
         if (this.coolDowns != null) {
 
             // Sets the handle time of the timer to the tower's current cool down between attacks.
-            this.attackTimer.setHandleTime(this.coolDowns[this.level]);
+            this.attacks.setHandleTime(this.coolDowns[this.level]);
         }
 
         // Sets the action to be performed by the timer.
         // This action will be performed once for every cool down time that passes.
-        this.attackTimer.setOnHandle(() -> {
+        this.attacks.setOnHandle(() -> {
 
             // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
             Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> LOGGER.warning(STR."Exception \{throwable} has occurred while tower \{this} was attacking"));
@@ -752,7 +746,7 @@ public abstract class Tower {
             if (target == null) {
 
                 // Resets the timer so that the tower can begin attacking as soon as an enemy is in its range.
-                this.attackTimer.reset();
+                this.attacks.reset();
             } else {
 
                 // Logs that the tower has found a target.
@@ -774,7 +768,7 @@ public abstract class Tower {
                 }
 
                 // Stops the timer from continuing if the tower's attack is forcefully interrupted.
-                this.attackTimer.stop();
+                this.attacks.stop();
             }
 
             // Determines whether the tower's target is null.
@@ -786,7 +780,7 @@ public abstract class Tower {
         });
 
         // Starts the timer responsible for tower attacks.
-        this.attackTimer.start();
+        this.attacks.start();
     }
 
     /**
@@ -797,7 +791,7 @@ public abstract class Tower {
     public final void stopAttacking() {
 
         // Stops the tower responsible for tower attacks.
-        this.attackTimer.stop();
+        this.attacks.stop();
     }
 
     /**
@@ -828,7 +822,7 @@ public abstract class Tower {
         this.loadedTower.setOnMouseClicked(null);
 
         // Removes all the tower's components from the tower's parent.
-        this.parent.getChildren().removeAll(this.range, this.space, this.panel, this.loadedTower);
+        this.parent.getChildren().removeAll(this.range, this.space, this.upgradeGUI, this.loadedTower);
 
         // Removes the tower from the list containing every active tower.
         LIST_OF_ACTIVE_TOWERS.remove(this);

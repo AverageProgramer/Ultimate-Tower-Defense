@@ -2,8 +2,8 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,7 +29,6 @@ public final class Pyromancer extends Tower {
 
     public Pyromancer() {
         super.images = this.images;
-        super.damages = this.damages;
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
         super.setRadius(this.radius);

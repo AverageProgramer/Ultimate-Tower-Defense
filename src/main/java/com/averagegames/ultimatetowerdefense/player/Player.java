@@ -2,7 +2,7 @@ package com.averagegames.ultimatetowerdefense.player;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.Property;
 
 /**
  * The {@link Player} class serves as a way to encapsulate and represent all game {@code data} that a {@link Player} might have.

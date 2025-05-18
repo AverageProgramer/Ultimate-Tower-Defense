@@ -2,9 +2,9 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.maps.Position;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.maps.tools.Position;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,7 +52,6 @@ public final class Gunner extends Tower {
         super.images = this.images;
         super.placementCost = this.placementCost;
         super.upgradeCosts = this.upgradeCosts;
-        super.damages = this.damages;
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
         super.setRadius(this.radii[0]);
@@ -69,8 +68,8 @@ public final class Gunner extends Tower {
             return;
         }
 
-        if (super.attackTimer.getHandleTime() == super.coolDowns[super.getLevel()]) {
-            super.attackTimer.setHandleTime(this.damageCoolDowns[super.getLevel()]);
+        if (super.attacks.getHandleTime() == super.coolDowns[super.getLevel()]) {
+            super.attacks.setHandleTime(this.damageCoolDowns[super.getLevel()]);
         }
 
         if (this.shot < this.bursts[super.getLevel()]) {
@@ -88,19 +87,19 @@ public final class Gunner extends Tower {
                 System.out.println("Exception occurred");
             }
 
-            enemy.damage(super.damages[super.getLevel()]);
+            enemy.damage(this.damages[super.getLevel()]);
 
             if (!enemy.isAlive()) {
                 this.shot = 0;
 
-                super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
+                super.attacks.setHandleTime(this.coolDowns[super.getLevel()]);
             } else {
                 this.shot++;
             }
         } else {
             this.shot = 0;
 
-            super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
+            super.attacks.setHandleTime(this.coolDowns[super.getLevel()]);
         }
     }
 
@@ -116,12 +115,12 @@ public final class Gunner extends Tower {
             super.setHiddenDetection(true);
         }
 
-        super.getLoadedTower().setImage(super.images[super.getLevel()]);
+        super.getLoadedTower().setImage(this.images[super.getLevel()]);
 
         super.setRadius(this.radii[super.getLevel()]);
 
         super.setPosition(oldPos);
 
-        super.attackTimer.setHandleTime(super.coolDowns[super.getLevel()]);
+        super.attacks.setHandleTime(this.coolDowns[super.getLevel()]);
     }
 }

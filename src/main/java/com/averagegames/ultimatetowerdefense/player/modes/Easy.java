@@ -2,10 +2,10 @@ package com.averagegames.ultimatetowerdefense.player.modes;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.enemies.Wave;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.GiantTitan;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.InvisibleTitan;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.titans.NormalTitan;
-import com.averagegames.ultimatetowerdefense.characters.enemies.survival.zombies.*;
+import com.averagegames.ultimatetowerdefense.characters.enemies.titans.GiantTitan;
+import com.averagegames.ultimatetowerdefense.characters.enemies.titans.InvisibleTitan;
+import com.averagegames.ultimatetowerdefense.characters.enemies.titans.NormalTitan;
+import com.averagegames.ultimatetowerdefense.characters.enemies.zombies.*;
 
 public class Easy {
     public static final Wave WAVE_1 = new Wave(new Enemy[] {

@@ -1,11 +1,11 @@
 package com.averagegames.ultimatetowerdefense;
 
-import static com.averagegames.ultimatetowerdefense.scenes.Builder.loadBuild;
-import static com.averagegames.ultimatetowerdefense.scenes.menu.OpeningScene.SCREEN;
-import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
-import static com.averagegames.ultimatetowerdefense.util.development.LogManager.enableLogging;
+import static com.averagegames.ultimatetowerdefense.scenes.OpeningScene.SCREEN;
+import static com.averagegames.ultimatetowerdefense.util.LogManager.LOGGER;
 
-import com.averagegames.ultimatetowerdefense.scenes.menu.OpeningScene;
+import com.averagegames.ultimatetowerdefense.scenes.tools.SceneBuilder;
+import com.averagegames.ultimatetowerdefense.scenes.OpeningScene;
+import com.averagegames.ultimatetowerdefense.util.LogManager;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.stage.Stage;
@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void init() {
-        enableLogging(false);
+        LogManager.enableLogging(false);
 
         LOGGER.info(STR."Application \{this} initalized.");
     }
@@ -32,7 +32,7 @@ public class Main extends Application {
         stage.setHeight(SCREEN.getHeight());
 
         OpeningScene openingScene = new OpeningScene(new Group());
-        loadBuild(openingScene, stage);
+        SceneBuilder.loadBuild(openingScene, stage);
 
         LOGGER.info(STR."Scene \{openingScene} has been loaded successfully onto stage \{stage}.");
 

@@ -1,15 +1,15 @@
 package com.averagegames.ultimatetowerdefense.characters.enemies;
 
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.maps.Base;
-import com.averagegames.ultimatetowerdefense.maps.Map;
-import com.averagegames.ultimatetowerdefense.maps.Path;
-import com.averagegames.ultimatetowerdefense.maps.Position;
+import com.averagegames.ultimatetowerdefense.maps.tools.Base;
+import com.averagegames.ultimatetowerdefense.maps.tools.MapBuilder;
+import com.averagegames.ultimatetowerdefense.maps.tools.Path;
+import com.averagegames.ultimatetowerdefense.maps.tools.Position;
 import com.averagegames.ultimatetowerdefense.player.Player;
-import com.averagegames.ultimatetowerdefense.scenes.game.GameScene;
-import com.averagegames.ultimatetowerdefense.util.animation.TranslationHandler;
-import com.averagegames.ultimatetowerdefense.util.assets.ImageLoader;
-import com.averagegames.ultimatetowerdefense.util.assets.Timer;
+import com.averagegames.ultimatetowerdefense.scenes.GameScene;
+import com.averagegames.ultimatetowerdefense.util.TranslationHandler;
+import com.averagegames.ultimatetowerdefense.util.ImageLoader;
+import com.averagegames.ultimatetowerdefense.util.Timer;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 import static com.averagegames.ultimatetowerdefense.characters.towers.Tower.LIST_OF_ACTIVE_TOWERS;
-import static com.averagegames.ultimatetowerdefense.util.development.LogManager.LOGGER;
+import static com.averagegames.ultimatetowerdefense.util.LogManager.LOGGER;
 
 /**
  * The {@link Enemy} class serves as a {@code super} class to all in-game enemies.
@@ -42,20 +42,6 @@ public abstract class Enemy {
     public static final List<@NotNull Enemy> LIST_OF_ACTIVE_ENEMIES = Collections.synchronizedList(new LinkedList<>());
 
     /**
-     * The {@link Enemy}'s parent {@link Group}.
-     */
-    @Nullable
-    @Accessors(makeFinal = true) @Setter @Getter
-    private Group parent;
-
-    /**
-     * The {@link Enemy}'s {@link Image} loaded using an {@link ImageLoader}.
-     */
-    @NotNull
-    @Accessors(makeFinal = true) @Getter
-    private final ImageLoader loadedEnemy;
-
-    /**
      * The {@link Enemy}'s {@link Image}.
      */
     @Nullable
@@ -69,28 +55,56 @@ public abstract class Enemy {
     protected Type type;
 
     /**
+     * The {@link Enemy}'s speed in pixels per second.
+     */
+    @Range(from = 0, to = Integer.MAX_VALUE)
+    protected double speed;
+
+    /**
+     * The money the {@code player} will receive when damaging the {@link Enemy}.
+     */
+    @Range(from = 0, to = Integer.MAX_VALUE)
+    @Accessors(makeFinal = true) @Getter
+    protected int income;
+
+    /**
+     * The {@link Enemy}'s cool down in milliseconds between {@code attacks}.
+     */
+    @Range(from = 0, to = Integer.MAX_VALUE)
+    protected int coolDown;
+
+    /**
      * The {@link Enemy}'s current {@code health}.
      */
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
-    private int health;
+    protected int health;
 
     /**
      * The {@link Enemy}'s current shield.
      */
     @Accessors(makeFinal = true) @Setter(AccessLevel.PROTECTED) @Getter
-    private int shield;
+    protected int shield;
 
     /**
      * The {@code damage} needed to break through the {@link Enemy}'s shield.
      */
-    @Range(from = 0L, to = Long.MAX_VALUE)
+    @Range(from = 0, to = Integer.MAX_VALUE)
     protected int shieldBreak;
 
     /**
-     * The {@code damage} the {@link Enemy} can do during an {@code attack}.
+     * The {@link Enemy}'s parent {@link Group}.
      */
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    protected int damage;
+    @Nullable
+    @Accessors(makeFinal = true) @Setter @Getter
+    private Group parent;
+
+    /**
+     * The {@link Enemy}'s {@link Image} loaded using an {@link ImageLoader}.
+     */
+    @NotNull
+    @Accessors(makeFinal = true) @Getter
+    private final ImageLoader loadedEnemy;
+
 
     /**
      * The {@link Enemy}'s {@code range}.
@@ -98,12 +112,6 @@ public abstract class Enemy {
     @NotNull
     @Accessors(makeFinal = true) @Getter
     private final Circle range;
-
-    /**
-     * The {@link Enemy}'s speed in pixels per second.
-     */
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    protected double speed;
 
     /**
      * The current {@link Path} the {@link Enemy} will follow.
@@ -122,27 +130,9 @@ public abstract class Enemy {
     /**
      * The current {@link Position} the {@link Enemy} is at along its {@link Path}.
      */
-    @Range(from = 0L, to = Long.MAX_VALUE)
+    @Range(from = 0, to = Integer.MAX_VALUE)
     @Accessors(makeFinal = true) @Setter @Getter
     private int positionIndex;
-
-    /**
-     * The {@link Enemy}'s cool down in milliseconds between {@code attacks}.
-     */
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    protected int coolDown;
-
-    /**
-     * The money the {@code player} will receive when damaging the {@link Enemy}.
-     */
-    @Range(from = 0L, to = Long.MAX_VALUE)
-    @Accessors(makeFinal = true) @Getter
-    protected int income;
-
-    /**
-     * A boolean value that determines whether the {@link Enemy} should perform its on {@code event} actions.
-     */
-    private boolean enableActions;
 
     /**
      * A {@link TranslationHandler} responsible for handling all {@link Enemy} {@code movement}.
@@ -154,7 +144,12 @@ public abstract class Enemy {
      * A {@link Timer} responsible for handling all {@link Enemy} {@code attacks}.
      */
     @NotNull
-    protected final Timer attackTimer;
+    protected final Timer attacks;
+
+    /**
+     * A boolean value that determines whether the {@link Enemy} should perform its on {@code event} actions.
+     */
+    private boolean enableActions;
 
     {
 
@@ -182,7 +177,7 @@ public abstract class Enemy {
         this.animation = new TranslationHandler();
 
         // Initializes the enemy's attack timer to a default timer.
-        this.attackTimer = new Timer();
+        this.attacks = new Timer();
     }
 
     /**
@@ -473,10 +468,10 @@ public abstract class Enemy {
                     Base.health = 0;
 
                     // Stops new enemies from spawning.
-                    Map.ENEMY_SPAWNER.stopSpawning();
+                    MapBuilder.ENEMY_SPAWNER.stopSpawning();
 
                     // Disables all enemy spawning.
-                    Map.ENEMY_SPAWNER.enableSpawning(false);
+                    MapBuilder.ENEMY_SPAWNER.enableSpawning(false);
 
                     // A loop that will iterate through the list containing every active enemy.
                     LIST_OF_ACTIVE_ENEMIES.forEach(enemy -> {
@@ -611,14 +606,14 @@ public abstract class Enemy {
     public final void startAttacking() {
 
         // Stops the timer responsible for enemy attacks.
-        this.attackTimer.stop();
+        this.attacks.stop();
 
         // Sets the handle time of the timer to the enemy's cool down between attacks.
-        this.attackTimer.setHandleTime(this.coolDown);
+        this.attacks.setHandleTime(this.coolDown);
 
         // Sets the action to be performed by the timer.
         // This action will be performed once for every cool down time that passes.
-        this.attackTimer.setOnHandle(() -> {
+        this.attacks.setOnHandle(() -> {
 
             // Sets the thread's uncaught exception handler to log a warning message when an exception occurs.
             Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> LOGGER.warning(STR."Exception \{throwable} has occurred while enemy \{this} was attacking"));
@@ -633,7 +628,7 @@ public abstract class Enemy {
             if (target == null && !this.getClass().isAnnotationPresent(Summoner.class)) {
 
                 // Resets the timer responsible for handling enemy attacks.
-                this.attackTimer.reset();
+                this.attacks.reset();
             } else if (target != null) {
 
                 // Logs that the enemy has found a target.
@@ -655,7 +650,7 @@ public abstract class Enemy {
                 }
 
                 // Stops the timer from continuing if the enemy's attack is forcefully interrupted.
-                this.attackTimer.stop();
+                this.attacks.stop();
             }
 
             // Determines whether the enemy's target is not null.
@@ -667,7 +662,7 @@ public abstract class Enemy {
         });
 
         // Starts the timer responsible for enemy attacks.
-        this.attackTimer.start();
+        this.attacks.start();
     }
 
     /**
@@ -677,7 +672,7 @@ public abstract class Enemy {
     public final void stopAttacking() {
 
         // Stops the timer responsible for handling enemy attacks.
-        this.attackTimer.stop();
+        this.attacks.stop();
     }
 
     /**

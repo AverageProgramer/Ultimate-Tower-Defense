@@ -2,8 +2,8 @@ package com.averagegames.ultimatetowerdefense.characters.towers.standard;
 
 import com.averagegames.ultimatetowerdefense.characters.enemies.Enemy;
 import com.averagegames.ultimatetowerdefense.characters.towers.Tower;
-import com.averagegames.ultimatetowerdefense.util.assets.AudioPlayer;
-import com.averagegames.ultimatetowerdefense.util.development.Property;
+import com.averagegames.ultimatetowerdefense.util.AudioPlayer;
+import com.averagegames.ultimatetowerdefense.util.Property;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +30,6 @@ public class Shotgunner extends Tower {
     public Shotgunner() {
         super.images = this.images;
         super.placementCost = this.placementCost;
-        super.damages = this.damages;
         super.coolDowns = this.coolDowns;
         super.setHealth(this.startHealth);
         super.setRadius(this.radius);
@@ -46,7 +45,7 @@ public class Shotgunner extends Tower {
                 System.out.println("Exception occurred");
             }
 
-            enemy.damage(super.damages[super.getLevel()]);
+            enemy.damage(this.damages[super.getLevel()]);
         }
     }
 
